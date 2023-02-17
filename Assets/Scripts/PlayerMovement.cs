@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class PlayerMovement : MonoBehaviour
@@ -7,16 +5,39 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float _playerSpeed;
 
     private Rigidbody2D _playerRigidbody;
+    private Animator _playerAnimator;
+    private Vector3 _playerMovement;
     private float _horizontalAxis, _verticalAxis;
     private void Start()
     {
-        _playerRigidbody=GetComponent<Rigidbody2D>();
+        _playerRigidbody = GetComponent<Rigidbody2D>();
+        _playerAnimator = GetComponent<Animator>();
     }
-    void Update()
+    private void Update()
     {
         _horizontalAxis = Input.GetAxis("Horizontal");
         _verticalAxis = Input.GetAxis("Vertical");
-        Vector3 movement = new Vector3(_horizontalAxis, _verticalAxis, 0);
-        _playerRigidbody.MovePosition(transform.position+movement * _playerSpeed * Time.deltaTime);
+        _playerMovement = new Vector3(_horizontalAxis, _verticalAxis, 0);
+
+        UpdateAnimation();
+    }
+    private void UpdateAnimation()
+    {
+        if (_playerMovement != Vector3.zero)
+        {
+            MoveCharacter();
+
+            _playerAnimator.SetFloat("moveX", _horizontalAxis);
+            _playerAnimator.SetFloat("moveY", _verticalAxis);
+            _playerAnimator.SetBool("moving", true);
+        }
+        else
+        {
+            _playerAnimator.SetBool("moving", false);
+        }
+    }
+    private void MoveCharacter()
+    {
+        _playerRigidbody.MovePosition(transform.position + _playerMovement * _playerSpeed * Time.deltaTime);
     }
 }
