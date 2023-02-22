@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -39,5 +40,12 @@ public class PlayerMovement : MonoBehaviour
     private void MoveCharacter()
     {
         _playerRigidbody.MovePosition(transform.position + _playerMovement * _playerSpeed * Time.deltaTime);
+    }
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Teleport"))
+        {
+            SceneManager.LoadScene(3);
+        }
     }
 }
