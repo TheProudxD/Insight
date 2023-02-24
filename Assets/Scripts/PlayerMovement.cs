@@ -1,5 +1,4 @@
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class PlayerMovement : MonoBehaviour
 {
@@ -26,7 +25,7 @@ public class PlayerMovement : MonoBehaviour
     {
         if (_playerMovement != Vector3.zero)
         {
-            MoveCharacter();
+            MoveCharacter(transform.position);
 
             _playerAnimator.SetFloat("moveX", _horizontalAxis);
             _playerAnimator.SetFloat("moveY", _verticalAxis);
@@ -37,15 +36,8 @@ public class PlayerMovement : MonoBehaviour
             _playerAnimator.SetBool("moving", false);
         }
     }
-    private void MoveCharacter()
+    public void MoveCharacter(Vector3 position)
     {
-        _playerRigidbody.MovePosition(transform.position + _playerMovement * _playerSpeed * Time.deltaTime);
-    }
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.CompareTag("Teleport"))
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
-        }
+        _playerRigidbody.MovePosition(position + _playerMovement * _playerSpeed * Time.deltaTime);
     }
 }

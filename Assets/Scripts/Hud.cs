@@ -23,7 +23,7 @@ public class Hud : MonoBehaviour
     {
         SetToPauseMode();
     }
-    
+
     private void EnablePauseMode()
     {
         _isPause = true;

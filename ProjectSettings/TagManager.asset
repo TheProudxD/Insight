@@ -42,9 +42,6 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Grounb
-    uniqueID: 2798538267
-    locked: 0
   - name: Player
     uniqueID: 2591216103
     locked: 0
