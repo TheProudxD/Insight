@@ -4,7 +4,7 @@ public class LevelChanger : MonoBehaviour
 {
     [SerializeField] private PlayerMovement Player;
     [SerializeField] private Animator FadeAnimator;
-    [SerializeField] private Vector3 NewLevelPosition;
+    [SerializeField] private GameObject NewLevelPosition;
     public void FadeToLevel()
     {
         FadeAnimator.SetTrigger("Fade");
@@ -12,6 +12,6 @@ public class LevelChanger : MonoBehaviour
     public void OnFadeComplete()
     {
         FadeAnimator.SetTrigger("Fade");
-        Player.transform.position = NewLevelPosition;
+        Player.transform.position = NewLevelPosition.transform.position;
     }
 }

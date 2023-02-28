@@ -7,9 +7,11 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody2D _playerRigidbody;
     private Animator _playerAnimator;
     private Vector3 _playerMovement;
-    private float _horizontalAxis, _verticalAxis;
+    private float _horizontalAxis, _verticalAxis, _offset;
     private void Start()
     {
+        _offset = 0.6f;
+
         _playerRigidbody = GetComponent<Rigidbody2D>();
         _playerAnimator = GetComponent<Animator>();
     }
@@ -17,8 +19,10 @@ public class PlayerMovement : MonoBehaviour
     {
         _horizontalAxis = Input.GetAxis("Horizontal");
         _verticalAxis = Input.GetAxis("Vertical");
-        _playerMovement = new Vector3(_horizontalAxis, _verticalAxis, 0);
-
+        _playerMovement = new Vector3(_horizontalAxis, _verticalAxis, 0)*_offset;
+    }
+    private void FixedUpdate()
+    {
         UpdateAnimation();
     }
     private void UpdateAnimation()
