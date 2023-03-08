@@ -82,7 +82,7 @@ public class Hud : MonoBehaviour
     public void Exit()
     {
         Application.Quit();
-        Debug.Log("Exit pressed!");
+        Debug.LogWarning("Exit pressed!");
     }
     public void FullScreenToggle()
     {
