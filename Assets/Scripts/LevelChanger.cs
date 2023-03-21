@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class LevelChanger : MonoBehaviour
 {
@@ -11,7 +12,14 @@ public class LevelChanger : MonoBehaviour
     }
     public void OnFadeComplete()
     {
+        int level = PlayerPrefs.GetInt("Level");
         FadeAnimator.SetTrigger("Fade");
-        Player.transform.position = NewLevelPosition.transform.position;
+
+        if (SceneManager.GetActiveScene().name!="Menu" && SceneManager.GetActiveScene().name != "Lobby")
+            PlayerPrefs.SetInt("Level", ++level);
+        else
+            PlayerPrefs.SetInt("Level", 2);
+
+        SceneManager.LoadScene(level);
     }
 }

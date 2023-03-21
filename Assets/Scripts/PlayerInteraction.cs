@@ -9,5 +9,6 @@ public class PlayerInteraction : MonoBehaviour
         {
             _lvlChanger.FadeToLevel();
         }
+
     }
 }
