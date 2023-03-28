@@ -1,9 +1,11 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Hud : MonoBehaviour
 {
+    [SerializeField] private Slider _hpSlider, _manaSlider;
     [SerializeField] private GameObject _settingsWindow, _pauseMenu, _menuUI;
     private bool _isFullScreen, _isPause, _isInMenu;
 
@@ -26,6 +28,15 @@ public class Hud : MonoBehaviour
     private void Update()
     {
         SetToPauseMode();
+
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            DecreaseBar(_hpSlider);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            IncreaseBar(_hpSlider);
+        }
     }
 
     private void EnablePauseMode()
@@ -88,5 +99,25 @@ public class Hud : MonoBehaviour
     {
         _isFullScreen = !_isFullScreen;
         Screen.fullScreen = _isFullScreen;
+    }
+
+    private void DecreaseBar(Slider slider)
+    {
+        if (slider.value > 0)
+        {
+            slider.GetComponentsInChildren<Image>()[1].enabled = true;
+            slider.value -= 10;
+        }
+        else
+        {
+            slider.GetComponentsInChildren<Image>()[1].enabled = false;
+        }
+    }
+    private void IncreaseBar(Slider slider)
+    {
+        if (!slider.GetComponentsInChildren<Image>()[1].enabled)
+            slider.GetComponentsInChildren<Image>()[1].enabled = true;
+        else
+            slider.value += 10;
     }
 }
