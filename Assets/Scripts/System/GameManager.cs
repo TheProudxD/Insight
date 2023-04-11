@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 public class GameManager : MonoBehaviour
@@ -9,17 +10,22 @@ public class GameManager : MonoBehaviour
 
     // https://learn.unity.com/tutorial/2d-roguelike-setup-and-assets?uv=5.x&projectId=5c514a00edbc2a0020694718
     // https://stdpub.com/unity3d/sozdanie-pikselnoj-rpg-s-pomoshhyu-unity-3d?ysclid=lb5870f5ny157448685  
-    public static GameManager instance;
+    public static GameManager Instance;
+    [NonSerialized] public bool IsDoorOpened;
+    [NonSerialized] public int GameLevel;
     private void Awake()
     {
-        if (instance != null)
+        if (Instance != null)
         {
             Destroy(gameObject);
         }
         else
         {
-            instance = this;
+            Instance = this;
             DontDestroyOnLoad(gameObject);
+
+            if (PlayerPrefs.GetInt("Level")<=2)
+                PlayerPrefs.SetInt("Level", 2);
         }
     }
 }
