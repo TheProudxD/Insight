@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Hud : MonoBehaviour
 {
     [SerializeField] private Slider _hpSlider, _manaSlider;
-    [SerializeField] private GameObject _settingsWindow, _pauseMenu, _menuUI;
+    [SerializeField] private GameObject _settingsWindow, _menuUI;
     private bool _isFullScreen, _isPause, _isInMenu;
 
     public static Hud Instance;
@@ -22,7 +22,7 @@ public class Hud : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            _isInMenu=true;
+            _isInMenu = true;
         }
     }
     private void Update()
@@ -43,21 +43,21 @@ public class Hud : MonoBehaviour
     {
         _isPause = true;
         Time.timeScale = 0;
-        if (!_pauseMenu.IsUnityNull()) _pauseMenu.SetActive(_isPause);
+        WindowManager.TryShow(WindowType.Pause);
     }
     private void DisablePauseMode()
     {
         _isPause = false;
         Time.timeScale = 1;
-        if (!_pauseMenu.IsUnityNull()) _pauseMenu.SetActive(_isPause);
+        WindowManager.TryClose(WindowType.Pause);
     }
     private void SetToPauseMode()
     {
-        if (!_isPause && Input.GetKeyDown(KeyCode.Escape) && !_pauseMenu.activeInHierarchy)
+        if (!_isPause && Input.GetKeyDown(KeyCode.Escape))
         {
             EnablePauseMode();
         }
-        else if (_isPause && Input.GetKeyDown(KeyCode.Escape) && _pauseMenu.activeInHierarchy)
+        else if (_isPause && Input.GetKeyDown(KeyCode.Escape))
         {
             DisablePauseMode();
         }
@@ -71,12 +71,12 @@ public class Hud : MonoBehaviour
     {
         _isInMenu = false;
         if (!_menuUI.IsUnityNull()) _menuUI.SetActive(false);
-        if (!_pauseMenu.IsUnityNull()) _pauseMenu.SetActive(false);
+        WindowManager.TryShow(WindowType.Settings);
         _settingsWindow.SetActive(true);
     }
     public void CloseSettingsWindow()
     {
-        if (_isPause && !_pauseMenu.IsUnityNull()) _pauseMenu.SetActive(true);
+        if (_isPause) WindowManager.TryClose(WindowType.Settings);
         _settingsWindow.SetActive(false);
     }
     public void OpenMenu()
@@ -88,7 +88,7 @@ public class Hud : MonoBehaviour
     }
     public void LoadGame()
     {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex+1);
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
     public void Exit()
     {

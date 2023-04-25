@@ -25,8 +25,8 @@ public class PlayerMovement : MonoBehaviour
     }
     private void Update()
     {
-        _horizontalAxis = Input.GetAxis("Horizontal");
-        _verticalAxis = Input.GetAxis("Vertical");
+        _horizontalAxis = Input.GetAxisRaw("Horizontal");
+        _verticalAxis = Input.GetAxisRaw("Vertical");
         _playerMovement = new Vector3(_horizontalAxis, _verticalAxis, 0)*_offset;
         if (Input.GetButtonDown("Attack") && _currentState != PlayerState.Attack)
             StartCoroutine(AttackCo());

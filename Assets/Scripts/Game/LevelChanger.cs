@@ -12,15 +12,15 @@ public class LevelChanger : MonoBehaviour
     public void OnFadeComplete()
     {
         print(FadeAnimator);
-        if (SceneManager.GetActiveScene().name=="Lobby")
+        if (SceneManager.GetActiveScene().name == "Lobby")
             GameManager.Instance.GameLevel = PlayerPrefs.GetInt("Level");
         else
             GameManager.Instance.GameLevel++;
         int level = PlayerPrefs.GetInt("Level");
 
-        if (GameManager.Instance.GameLevel>level)
+        if (GameManager.Instance.GameLevel > level)
             PlayerPrefs.SetInt("Level", GameManager.Instance.GameLevel);
-        
+
         FadeAnimator.SetTrigger("Fade");
 
         SceneManager.LoadScene(GameManager.Instance.GameLevel);
