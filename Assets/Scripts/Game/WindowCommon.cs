@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using UnityEngine.UI;
 
 class WindowCommon : MonoBehaviour
@@ -7,7 +8,7 @@ class WindowCommon : MonoBehaviour
     [SerializeField] private Button _cancelButton;
     public void Close()
     {
-        DestroyImmediate(FindAnyObjectByType<WindowCommon>().gameObject);
+        DestroyImmediate(FindObjectOfType<WindowCommon>());
     }
     public void Show()
     {
