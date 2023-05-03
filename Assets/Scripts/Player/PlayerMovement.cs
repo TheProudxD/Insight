@@ -3,15 +3,17 @@ using UnityEngine;
 
 public enum PlayerState
 {
+    Idle,
     Walk,
     Attack,
-    Interact
+    Interact,
+    Stagger
 }
-
+[RequireComponent(typeof(Rigidbody2D))]
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField, Range(1, 20)] private float _playerSpeed = 5f;
-    private PlayerState _currentState;
+    public PlayerState CurrentState;
     private Rigidbody2D _playerRigidbody;
     private Animator _playerAnimator;
     private Vector3 _playerMovement;
@@ -26,7 +28,7 @@ public class PlayerMovement : MonoBehaviour
     private void Start()
     {
         _offset = 0.6f;
-        _currentState = PlayerState.Walk;
+        CurrentState = PlayerState.Walk;
 
         _playerRigidbody = GetComponent<Rigidbody2D>();
         _playerAnimator = GetComponent<Animator>();
@@ -39,22 +41,22 @@ public class PlayerMovement : MonoBehaviour
         _horizontalAxis = Input.GetAxisRaw(HORIZONTAL_AXIS);
         _verticalAxis = Input.GetAxisRaw(VERTICAL_AXIS);
         _playerMovement = new Vector3(_horizontalAxis, _verticalAxis, 0) * _offset;
-        if (Input.GetButtonDown("Attack") && _currentState != PlayerState.Attack)
+        if (Input.GetButtonDown("Attack") && CurrentState != PlayerState.Attack && CurrentState != PlayerState.Stagger)
             StartCoroutine(AttackCo());
     }
     private void FixedUpdate()
     {
-        if (_currentState == PlayerState.Walk)
+        if (CurrentState == PlayerState.Walk || CurrentState == PlayerState.Idle)
             UpdateAnimation();
     }
     private IEnumerator AttackCo()
     {
         _playerAnimator.SetBool(ATTACKING_STATE, true);
-        _currentState = PlayerState.Attack;
+        CurrentState = PlayerState.Attack;
         yield return null;
         _playerAnimator.SetBool(ATTACKING_STATE, false);
         yield return new WaitForSeconds(0.3f);
-        _currentState = PlayerState.Walk;
+        CurrentState = PlayerState.Walk;
     }
 
     private void UpdateAnimation()
@@ -73,8 +75,16 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void MoveCharacter(Vector3 position)
+    private void MoveCharacter(Vector3 position)
     {
         _playerRigidbody.MovePosition(position + _playerMovement.normalized * _playerSpeed * Time.deltaTime);
+    }
+
+    public IEnumerator KnockCO(float knockTime)
+    {
+        yield return new WaitForSeconds(knockTime);
+        _playerRigidbody.velocity = Vector2.zero;
+        CurrentState = PlayerState.Idle;
+        _playerRigidbody.velocity = Vector2.zero;
     }
 }

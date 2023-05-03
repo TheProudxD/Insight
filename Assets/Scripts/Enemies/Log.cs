@@ -10,7 +10,7 @@ public class Log : Enemy
     private void Start()
     {
         CurrentState = EnemyState.Idle;
-        _rigidbody = GetComponent<Rigidbody2D>();
+        _enemyRigidbody = GetComponent<Rigidbody2D>();
         _homePosition = transform;
         _target = FindObjectOfType<PlayerMovement>().transform;
     }
@@ -20,21 +20,23 @@ public class Log : Enemy
         CheckDistance();
     }
 
+
     private void CheckDistance()
     {
         var distance = Vector3.Distance(_target.position, transform.position);
         if (distance <= _chaseRadius && distance > _attackRadius)
         {
-            if (CurrentState==EnemyState.Idle || CurrentState==EnemyState.Walk && CurrentState != EnemyState.Idle)
+            if (CurrentState is EnemyState.Idle or EnemyState.Walk and not EnemyState.Idle)
             {
                 Vector3 dir = Vector3.MoveTowards(
                     transform.position,
                     _target.position,
                     _moveSpeed * Time.deltaTime);
-                _rigidbody.MovePosition(dir);
+                _enemyRigidbody.MovePosition(dir);
 
                 ChangeState(EnemyState.Walk);
             }
+            
         }
     }
 
