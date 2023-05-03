@@ -7,6 +7,7 @@ public enum PlayerState
     Attack,
     Interact
 }
+
 public class PlayerMovement : MonoBehaviour
 {
     [SerializeField, Range(1, 20)] private float _playerSpeed = 5f;
@@ -30,9 +31,8 @@ public class PlayerMovement : MonoBehaviour
         _playerRigidbody = GetComponent<Rigidbody2D>();
         _playerAnimator = GetComponent<Animator>();
 
-        _playerAnimator.WriteDefaultValues();
-        //_playerAnimator.SetFloat(XMOVE_STATE, 0);
-        //_playerAnimator.SetFloat(YMOVE_STATE, -1);
+        _playerAnimator.SetFloat(XMOVE_STATE, 0);
+        _playerAnimator.SetFloat(YMOVE_STATE, -1);
     }
     private void Update()
     {
@@ -56,6 +56,7 @@ public class PlayerMovement : MonoBehaviour
         yield return new WaitForSeconds(0.3f);
         _currentState = PlayerState.Walk;
     }
+
     private void UpdateAnimation()
     {
         if (_playerMovement != Vector3.zero)
@@ -71,6 +72,7 @@ public class PlayerMovement : MonoBehaviour
             _playerAnimator.SetBool(MOVING_STATE, false);
         }
     }
+
     public void MoveCharacter(Vector3 position)
     {
         _playerRigidbody.MovePosition(position + _playerMovement.normalized * _playerSpeed * Time.deltaTime);

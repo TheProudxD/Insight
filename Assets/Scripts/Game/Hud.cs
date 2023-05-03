@@ -7,9 +7,9 @@ public class Hud : MonoBehaviour
 {
     [SerializeField] private Slider _hpSlider, _manaSlider;
     [SerializeField] private GameObject _settingsWindow, _menuUI;
-    private bool _isFullScreen, _isPause, _isInMenu;
-
+    private bool _isFullScreen, _isPause;
     public static Hud Instance;
+
     private void Awake()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
@@ -22,9 +22,9 @@ public class Hud : MonoBehaviour
         {
             Instance = this;
             DontDestroyOnLoad(gameObject);
-            _isInMenu = true;
         }
     }
+
     private void Update()
     {
         SetToPauseMode();
@@ -45,12 +45,14 @@ public class Hud : MonoBehaviour
         Time.timeScale = 0;
         WindowManager.TryShow(WindowType.Pause);
     }
+
     private void DisablePauseMode()
     {
         _isPause = false;
         Time.timeScale = 1;
         WindowManager.TryClose(WindowType.Pause);
     }
+
     private void SetToPauseMode()
     {
         if (!_isPause && Input.GetKeyDown(KeyCode.Escape))
@@ -67,29 +69,32 @@ public class Hud : MonoBehaviour
         DisablePauseMode();
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
+
     public void OpenSettingsWindow()
     {
-        _isInMenu = false;
         if (!_menuUI.IsUnityNull()) _menuUI.SetActive(false);
         WindowManager.TryShow(WindowType.Settings);
         _settingsWindow.SetActive(true);
     }
+
     public void CloseSettingsWindow()
     {
         if (_isPause) WindowManager.TryClose(WindowType.Settings);
         _settingsWindow.SetActive(false);
     }
+
     public void OpenMenu()
     {
-        _isInMenu = true;
         if (!_menuUI.IsUnityNull()) _menuUI.SetActive(false);
         DisablePauseMode();
         SceneManager.LoadScene(0);
     }
+
     public void LoadGame()
     {
         SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
     }
+
     public void Exit()
     {
         Application.Quit();
@@ -113,6 +118,7 @@ public class Hud : MonoBehaviour
             slider.GetComponentsInChildren<Image>()[1].enabled = false;
         }
     }
+
     private void IncreaseBar(Slider slider)
     {
         if (!slider.GetComponentsInChildren<Image>()[1].enabled)

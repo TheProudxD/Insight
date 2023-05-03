@@ -5,21 +5,23 @@ public class LevelChanger : MonoBehaviour
 {
     [SerializeField] private PlayerMovement Player;
     [SerializeField] private Animator FadeAnimator;
+
+    private const string LOBBY = "Lobby";
+    private const string LEVEL = "Level";
     public void FadeToLevel()
     {
         FadeAnimator.SetTrigger("Fade");
     }
     public void OnFadeComplete()
     {
-        print(FadeAnimator);
-        if (SceneManager.GetActiveScene().name == "Lobby")
-            GameManager.Instance.GameLevel = PlayerPrefs.GetInt("Level");
+        if (SceneManager.GetActiveScene().name == LOBBY)
+            GameManager.Instance.GameLevel = PlayerPrefs.GetInt(LEVEL);
         else
             GameManager.Instance.GameLevel++;
-        int level = PlayerPrefs.GetInt("Level");
 
+        int level = PlayerPrefs.GetInt(LEVEL);
         if (GameManager.Instance.GameLevel > level)
-            PlayerPrefs.SetInt("Level", GameManager.Instance.GameLevel);
+            PlayerPrefs.SetInt(LEVEL, GameManager.Instance.GameLevel);
 
         FadeAnimator.SetTrigger("Fade");
 
