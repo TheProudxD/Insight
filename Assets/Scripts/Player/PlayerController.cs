@@ -10,7 +10,7 @@ public enum PlayerState
     Stagger
 }
 [RequireComponent(typeof(Rigidbody2D))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField, Range(1, 20)] private float _playerSpeed = 5f;
     public PlayerState CurrentState;
@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
     private const string YMOVE_STATE = "moveY";
     private const string ATTACKING_STATE = "attacking";
     private const string MOVING_STATE = "moving";
+
     private void Start()
     {
         _offset = 0.6f;

@@ -3,7 +3,7 @@ using UnityEngine.SceneManagement;
 
 public class LevelChanger : MonoBehaviour
 {
-    [SerializeField] private PlayerMovement Player;
+    [SerializeField] private PlayerController Player;
     [SerializeField] private Animator FadeAnimator;
 
     private const string LOBBY = "Lobby";

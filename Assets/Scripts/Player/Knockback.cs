@@ -15,7 +15,7 @@ public class Knockback : MonoBehaviour
             enemy.CurrentState = EnemyState.Stagger;
             StartCoroutine(enemy.KnockCO(_knockTime));
         }
-        else if (collision.TryGetComponent(out PlayerMovement player))
+        else if (collision.TryGetComponent(out PlayerController player))
         {
             MoveEntity(player);
             player.CurrentState = PlayerState.Stagger;

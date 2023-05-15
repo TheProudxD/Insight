@@ -507,23 +507,23 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Wood_0: 693251265
-      Wood_1: 1701356334
-      Wood_10: 1674088300
-      Wood_11: -315114048
-      Wood_12: -850385442
-      Wood_13: 1916527249
-      Wood_14: -1208289818
       Wood_15: 2093621755
+      Wood_2: -1396678352
+      Wood_6: 1883123027
+      Wood_4: -1166833884
+      Wood_12: -850385442
+      Wood_14: -1208289818
+      Wood_5: 1985595857
+      Wood_13: 1916527249
+      Wood_8: 1011198184
       Wood_16: 1972254226
       Wood_17: 84734195
-      Wood_2: -1396678352
-      Wood_3: 1109312389
-      Wood_4: -1166833884
-      Wood_5: 1985595857
-      Wood_6: 1883123027
+      Wood_10: 1674088300
+      Wood_11: -315114048
+      Wood_0: 693251265
       Wood_7: 1560946912
-      Wood_8: 1011198184
+      Wood_1: 1701356334
+      Wood_3: 1109312389
       Wood_9: 739511833
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0

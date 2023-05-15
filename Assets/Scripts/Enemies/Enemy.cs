@@ -1,13 +1,13 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
+
 public enum EnemyState
 {
     Idle,
     Walk,
     Attack,
     Stagger
-} 
+}
 
 [RequireComponent(typeof(Rigidbody2D))]
 public class Enemy : MonoBehaviour
@@ -18,6 +18,10 @@ public class Enemy : MonoBehaviour
     [SerializeField] protected string _enemyName;
     [SerializeField] protected int _baseAttack;
     [SerializeField] protected float _moveSpeed;
+    protected const string XMOVE_STATE = "moveX";
+    protected const string YMOVE_STATE = "moveY";
+    protected const string WAKEUP_STATE = "wakeUp";
+
     public IEnumerator KnockCO(float knockTime)
     {
         yield return new WaitForSeconds(knockTime);
