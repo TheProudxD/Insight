@@ -1,16 +1,23 @@
+using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class LevelChanger : MonoBehaviour
 {
     [SerializeField] private PlayerController Player;
     [SerializeField] private Animator FadeAnimator;
-
+    [SerializeField] private Image _loadImage;
+    private bool isLoadPause;
     private const string LOBBY = "Lobby";
     private const string LEVEL = "Level";
     public void FadeToLevel()
     {
-        FadeAnimator.SetTrigger("Fade");
+        StartCoroutine(LoadingTimer());
+    }
+    private void Update()
+    {
+        
     }
     public void OnFadeComplete()
     {
@@ -28,5 +35,12 @@ public class LevelChanger : MonoBehaviour
         SceneManager.LoadScene(GameManager.Instance.GameLevel);
 
         PlayerPrefs.Save();
+    }
+    private IEnumerator LoadingTimer()
+    {
+        _loadImage.fillAmount =1;
+        yield return new WaitForSeconds(2);
+        _loadImage.fillAmount = 0;
+        FadeAnimator.SetTrigger("Fade");
     }
 }

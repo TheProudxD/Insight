@@ -213,10 +213,10 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Idle-Sheet_1: -1479438079
       Idle-Sheet_0: -867546077
-      Idle-Sheet_3: -916030440
+      Idle-Sheet_1: -1479438079
       Idle-Sheet_2: 277462766
+      Idle-Sheet_3: -916030440
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

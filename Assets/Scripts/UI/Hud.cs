@@ -7,67 +7,26 @@ public class Hud : MonoBehaviour
 {
     [SerializeField] private Slider _hpSlider, _manaSlider;
     [SerializeField] private GameObject _settingsWindow, _menuUI;
-    private bool _isFullScreen, _isPause;
-    public static Hud Instance;
+    private bool _isFullScreen;
 
     private void Awake()
     {
         if (SceneManager.GetActiveScene().buildIndex == 0)
-            return;
-        if (Instance != null)
-        {
-            Destroy(gameObject);
-        }
+            gameObject.SetActive(false);
         else
-        {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
-        }
+            gameObject.SetActive(true);
     }
 
     private void Update()
     {
-        SetToPauseMode();
-
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            DecreaseBar(_hpSlider);
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            IncreaseBar(_hpSlider);
-        }
-    }
-
-    private void EnablePauseMode()
-    {
-        _isPause = true;
-        Time.timeScale = 0;
-        WindowManager.TryShow(WindowType.Pause);
-    }
-
-    private void DisablePauseMode()
-    {
-        _isPause = false;
-        Time.timeScale = 1;
-        WindowManager.TryClose(WindowType.Pause);
-    }
-
-    private void SetToPauseMode()
-    {
-        if (!_isPause && Input.GetKeyDown(KeyCode.Escape))
-        {
-            EnablePauseMode();
-        }
-        else if (_isPause && Input.GetKeyDown(KeyCode.Escape))
-        {
-            DisablePauseMode();
-        }
-    }
-    public void RestartGame()
-    {
-        DisablePauseMode();
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        //if (Input.GetKeyDown(KeyCode.Backspace))
+        //{
+        //    DecreaseBar(_hpSlider);
+        //}
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    IncreaseBar(_hpSlider);
+        //}
     }
 
     public void OpenSettingsWindow()
@@ -79,14 +38,13 @@ public class Hud : MonoBehaviour
 
     public void CloseSettingsWindow()
     {
-        if (_isPause) WindowManager.TryClose(WindowType.Settings);
+        if (WindowManager.IsPause) WindowManager.TryClose(WindowType.Settings);
         _settingsWindow.SetActive(false);
     }
 
     public void OpenMenu()
     {
         if (!_menuUI.IsUnityNull()) _menuUI.SetActive(false);
-        DisablePauseMode();
         SceneManager.LoadScene(0);
     }
 

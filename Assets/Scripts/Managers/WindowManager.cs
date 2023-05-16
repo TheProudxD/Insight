@@ -9,6 +9,7 @@ public enum WindowType
 public class WindowManager : MonoBehaviour
 {
     private static Dictionary<WindowType, WindowCommon> _allWindows = new Dictionary<WindowType, WindowCommon>();
+    public static bool IsPause;
 
     private void Awake()
     {
@@ -35,6 +36,7 @@ public class WindowManager : MonoBehaviour
     {
         if (_allWindows.ContainsKey(windowType))
         {
+            //print(_allWindows[windowType].name);
             _allWindows[windowType].Close();
             _allWindows.Remove(windowType);
         }

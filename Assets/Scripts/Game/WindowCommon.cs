@@ -6,7 +6,7 @@ class WindowCommon : MonoBehaviour
     [SerializeField] private Button _okButton;
     [SerializeField] private Button _cancelButton;
 
-    public void Close()=> DestroyImmediate(FindObjectOfType<WindowCommon>());
+    public void Close() => Destroy(gameObject);
 
     public void Show()=> gameObject.SetActive(true);
 }

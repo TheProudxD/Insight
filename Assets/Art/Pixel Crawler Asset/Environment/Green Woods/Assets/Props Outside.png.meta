@@ -1620,77 +1620,77 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Props Outside_36: -1405279112
-      Props Outside_30: 1922540297
+      Props Outside_0: 531749685
+      Props Outside_1: -1758671141
+      Props Outside_10: -1846495396
+      Props Outside_11: 521026107
+      Props Outside_12: -631792760
+      Props Outside_13: -1209860345
+      Props Outside_14: 746892467
+      Props Outside_15: -1952564414
+      Props Outside_16: -1013989589
+      Props Outside_17: -1021837378
+      Props Outside_18: 112840387
+      Props Outside_19: -818527855
+      Props Outside_2: 1649697820
+      Props Outside_20: -514026988
+      Props Outside_21: 1235980152
       Props Outside_22: 1442043277
       Props Outside_23: -478685239
-      Props Outside_39: 313476984
-      Props Outside_65: -1684064900
-      Props Outside_12: -631792760
-      Props Outside_32: 2095308351
-      Props Outside_25: -991090035
-      Props Outside_28: 2106823523
-      Props Outside_46: -642351254
-      Props Outside_14: 746892467
-      Props Outside_41: 455590893
-      Props Outside_49: 1877711049
-      Props Outside_7: -520772967
-      Props Outside_17: -1021837378
-      Props Outside_56: 96990972
-      Props Outside_27: -1911764914
-      Props Outside_1: -1758671141
-      Props Outside_3: -771277491
-      Props Outside_70: 1871565855
-      Props Outside_45: 966170599
-      Props Outside_51: 674895594
-      Props Outside_59: -1028402395
-      Props Outside_57: 639933216
-      Props Outside_19: -818527855
-      Props Outside_40: 918625938
-      Props Outside_67: -1183868362
-      Props Outside_54: 1036773856
-      Props Outside_21: 1235980152
-      Props Outside_29: -831335843
-      Props Outside_5: -1902085291
-      Props Outside_68: 769302908
-      Props Outside_50: 1412526924
-      Props Outside_60: 1992001617
-      Props Outside_55: -581575293
       Props Outside_24: -552235140
-      Props Outside_48: -621194411
-      Props Outside_35: -1747050611
-      Props Outside_61: -1850651670
-      Props Outside_53: 2096178968
-      Props Outside_10: -1846495396
+      Props Outside_25: -991090035
       Props Outside_26: -1154863919
-      Props Outside_15: -1952564414
-      Props Outside_42: 1541872437
-      Props Outside_0: 531749685
-      Props Outside_13: -1209860345
-      Props Outside_38: -1917322832
-      Props Outside_20: -514026988
-      Props Outside_63: 615678474
-      Props Outside_2: 1649697820
-      Props Outside_62: -2099396999
-      Props Outside_66: 919578194
-      Props Outside_18: 112840387
-      Props Outside_69: 1751923212
-      Props Outside_58: 1152599235
-      Props Outside_64: 952893664
-      Props Outside_34: 1091027528
-      Props Outside_33: -367148408
-      Props Outside_44: -1891269247
-      Props Outside_9: 513790169
+      Props Outside_27: -1911764914
+      Props Outside_28: 2106823523
+      Props Outside_29: -831335843
+      Props Outside_3: -771277491
+      Props Outside_30: 1922540297
       Props Outside_31: 2058219341
-      Props Outside_11: 521026107
-      Props Outside_16: -1013989589
-      Props Outside_52: 376602397
-      Props Outside_4: -1860044697
-      Props Outside_8: -2054930301
-      Props Outside_43: 785880704
-      Props Outside_47: 889416843
+      Props Outside_32: 2095308351
+      Props Outside_33: -367148408
+      Props Outside_34: 1091027528
+      Props Outside_35: -1747050611
+      Props Outside_36: -1405279112
       Props Outside_37: 1074095905
+      Props Outside_38: -1917322832
+      Props Outside_39: 313476984
+      Props Outside_4: -1860044697
+      Props Outside_40: 918625938
+      Props Outside_41: 455590893
+      Props Outside_42: 1541872437
+      Props Outside_43: 785880704
+      Props Outside_44: -1891269247
+      Props Outside_45: 966170599
+      Props Outside_46: -642351254
+      Props Outside_47: 889416843
+      Props Outside_48: -621194411
+      Props Outside_49: 1877711049
+      Props Outside_5: -1902085291
+      Props Outside_50: 1412526924
+      Props Outside_51: 674895594
+      Props Outside_52: 376602397
+      Props Outside_53: 2096178968
+      Props Outside_54: 1036773856
+      Props Outside_55: -581575293
+      Props Outside_56: 96990972
+      Props Outside_57: 639933216
+      Props Outside_58: 1152599235
+      Props Outside_59: -1028402395
       Props Outside_6: -1415457722
+      Props Outside_60: 1992001617
+      Props Outside_61: -1850651670
+      Props Outside_62: -2099396999
+      Props Outside_63: 615678474
+      Props Outside_64: 952893664
+      Props Outside_65: -1684064900
+      Props Outside_66: 919578194
+      Props Outside_67: -1183868362
+      Props Outside_68: 769302908
+      Props Outside_69: 1751923212
+      Props Outside_7: -520772967
+      Props Outside_70: 1871565855
+      Props Outside_8: -2054930301
+      Props Outside_9: 513790169
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
