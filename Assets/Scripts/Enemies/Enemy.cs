@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
 
     public IEnumerator KnockCO(float knockTime)
     {
+        CurrentState = EnemyState.Stagger;
         yield return new WaitForSeconds(knockTime);
         _enemyRigidbody.velocity = Vector2.zero;
         CurrentState = EnemyState.Idle;

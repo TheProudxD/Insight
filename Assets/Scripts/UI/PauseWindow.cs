@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-class PauseWindow: WindowCommon
+class PauseWindow : WindowCommon
 {
     private void Update()
     {

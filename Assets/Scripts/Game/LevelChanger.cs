@@ -8,8 +8,8 @@ public class LevelChanger : MonoBehaviour
     [SerializeField] private PlayerController Player;
     [SerializeField] private Animator FadeAnimator;
     [SerializeField] private Image _loadingBar;
-    private const string LOBBY = "Lobby";
-    private const string LEVEL = "Level";
+    private const string LOBBY_LOCATION = "Lobby";
+    private const string LEVEL_LOCATION = "Level";
     public void StopTransition()
     {
         StopAllCoroutines();
@@ -21,20 +21,9 @@ public class LevelChanger : MonoBehaviour
     }
     public void OnFadeComplete()
     {
-        if (SceneManager.GetActiveScene().name == LOBBY)
-            GameManager.Instance.GameLevel = PlayerPrefs.GetInt(LEVEL);
-        else
-            GameManager.Instance.GameLevel++;
-
-        int level = PlayerPrefs.GetInt(LEVEL);
-        if (GameManager.Instance.GameLevel > level)
-            PlayerPrefs.SetInt(LEVEL, GameManager.Instance.GameLevel);
-
+        SaveData();
         FadeAnimator.SetTrigger("Fade");
-
         SceneManager.LoadScene(GameManager.Instance.GameLevel);
-
-        PlayerPrefs.Save();
     }
     private IEnumerator LoadingTimer()
     {
@@ -45,5 +34,18 @@ public class LevelChanger : MonoBehaviour
         }
         FadeAnimator.SetTrigger("Fade");
         _loadingBar.fillAmount = 0f;
+    }
+    private void SaveData()
+    {
+        if (SceneManager.GetActiveScene().name == LOBBY_LOCATION)
+            GameManager.Instance.GameLevel = PlayerPrefs.GetInt(LEVEL_LOCATION);
+        else
+            GameManager.Instance.GameLevel++;
+
+        int level = PlayerPrefs.GetInt(LEVEL_LOCATION);
+        if (GameManager.Instance.GameLevel > level)
+            PlayerPrefs.SetInt(LEVEL_LOCATION, GameManager.Instance.GameLevel);
+
+        PlayerPrefs.Save();
     }
 }

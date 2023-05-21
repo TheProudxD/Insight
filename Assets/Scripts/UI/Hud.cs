@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class Hud : MonoBehaviour
 {
     [SerializeField] private Slider _hpSlider, _manaSlider;
-    [SerializeField] private GameObject _settingsWindow, _menuUI;
+    [SerializeField] private GameObject _menuUI;
     private bool _isFullScreen;
 
     private void Awake()
@@ -27,19 +27,6 @@ public class Hud : MonoBehaviour
         //{
         //    IncreaseBar(_hpSlider);
         //}
-    }
-
-    public void OpenSettingsWindow()
-    {
-        if (!_menuUI.IsUnityNull()) _menuUI.SetActive(false);
-        WindowManager.TryShow(WindowType.Settings);
-        _settingsWindow.SetActive(true);
-    }
-
-    public void CloseSettingsWindow()
-    {
-        if (WindowManager.IsPause) WindowManager.TryClose(WindowType.Settings);
-        _settingsWindow.SetActive(false);
     }
 
     public void OpenMenu()
