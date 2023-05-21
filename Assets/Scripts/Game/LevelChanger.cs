@@ -7,17 +7,17 @@ public class LevelChanger : MonoBehaviour
 {
     [SerializeField] private PlayerController Player;
     [SerializeField] private Animator FadeAnimator;
-    [SerializeField] private Image _loadImage;
-    private bool isLoadPause;
+    [SerializeField] private Image _loadingBar;
     private const string LOBBY = "Lobby";
     private const string LEVEL = "Level";
-    public void FadeToLevel()
+    public void StopTransition()
+    {
+        StopAllCoroutines();
+        _loadingBar.fillAmount = 0f;
+    }
+    public void Transition()
     {
         StartCoroutine(LoadingTimer());
-    }
-    private void Update()
-    {
-        
     }
     public void OnFadeComplete()
     {
@@ -38,9 +38,12 @@ public class LevelChanger : MonoBehaviour
     }
     private IEnumerator LoadingTimer()
     {
-        _loadImage.fillAmount =1;
-        yield return new WaitForSeconds(2);
-        _loadImage.fillAmount = 0;
+        while (_loadingBar.fillAmount < 1f)
+        {
+            _loadingBar.fillAmount += 0.1f;
+            yield return new WaitForSecondsRealtime(0.15f);
+        }
         FadeAnimator.SetTrigger("Fade");
+        _loadingBar.fillAmount = 0f;
     }
 }

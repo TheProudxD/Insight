@@ -7,8 +7,14 @@ public class PlayerInteraction : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Teleport"))
         {
-            _lvlChanger.FadeToLevel();
+            _lvlChanger.Transition();
         }
-
+    }
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.CompareTag("Teleport"))
+        {
+            _lvlChanger.StopTransition();
+        }
     }
 }
