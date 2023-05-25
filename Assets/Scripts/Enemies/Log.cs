@@ -14,11 +14,12 @@ public class Log : Enemy
         _logAnimator = GetComponent<Animator>();
         _target = FindObjectOfType<PlayerController>().transform;
         _homePosition = transform;
+        _health = _maxHealth.InititialValue;
     }
 
-    private void Start()
+    private new void Start()
     {
-        CurrentState = EnemyState.Idle;
+        base.Start();
     }
 
     private void FixedUpdate()

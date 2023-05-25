@@ -215,8 +215,7 @@ PrefabInstance:
       propertyPath: m_IsTrigger
       value: 1
       objectReference: {fileID: 0}
-    m_RemovedComponents:
-    - {fileID: 5518825071074345950, guid: 137537f91438149458497bd50ff9aa34, type: 3}
+    m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents:
@@ -2104,8 +2103,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100835e75b91fac439b2f22eda658a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrust: 5
+  _thrust: 2
   _knockTime: 0.2
+  _damage: 1
 --- !u!1 &469327202
 GameObject:
   m_ObjectHideFlags: 0
@@ -13625,8 +13625,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100835e75b91fac439b2f22eda658a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrust: 5
+  _thrust: 2
   _knockTime: 0.2
+  _damage: 1
 --- !u!1 &1091746713
 GameObject:
   m_ObjectHideFlags: 0
@@ -15370,8 +15371,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CurrentState: 0
+  _health: 0
+  _maxHealth: {fileID: 11400000, guid: 9e990481c915c764cb6dcd761a1577cf, type: 2}
   _enemyRigidbody: {fileID: 0}
-  _health: 2
   _enemyName: Mr. Log *Sanya1337*
   _baseAttack: 1
   _moveSpeed: 1.2
@@ -15434,6 +15436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _thrust: 5
   _knockTime: 0.1
+  _damage: 1
 --- !u!1 &1948601558 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2456884960003284675, guid: 137537f91438149458497bd50ff9aa34, type: 3}
@@ -15451,8 +15454,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100835e75b91fac439b2f22eda658a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrust: 5
+  _thrust: 2
   _knockTime: 0.2
+  _damage: 1
 --- !u!1 &2058246476 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 6238892488405346872, guid: 137537f91438149458497bd50ff9aa34, type: 3}
@@ -15470,5 +15474,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100835e75b91fac439b2f22eda658a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrust: 5
+  _thrust: 2
   _knockTime: 0.2
+  _damage: 1
