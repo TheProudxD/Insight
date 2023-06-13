@@ -3,25 +3,22 @@ using UnityEngine.Audio;
 
 class SettingsWindow : WindowCommon
 {
-    [SerializeField] private GameObject _settingsWindow;
-    public AudioMixer _music;
-    public void OpenSettingsWindow()
-    {
-        WindowManager.TryShow(WindowType.Settings);
-        _settingsWindow.SetActive(true);
-    }
+    private bool _isFullScreen;
+    [SerializeField] private AudioMixer _music;
 
-    public void CloseSettingsWindow()
-    {
-        if (WindowManager.IsPause) WindowManager.TryClose(WindowType.Settings);
-        _settingsWindow.SetActive(false);
-    }
     public void AudioVolume(float sliderValue)
     {
         _music.SetFloat("masterVolume", sliderValue);
     }
-    public void Quality(int q)
+
+    public void ChangeQuality(int q)
     {
         QualitySettings.SetQualityLevel(q);
+    }
+
+    public void FullScreenToggle()
+    {
+        _isFullScreen = !_isFullScreen;
+        Screen.fullScreen = _isFullScreen;
     }
 }

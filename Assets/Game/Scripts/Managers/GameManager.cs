@@ -4,7 +4,6 @@ using UnityEngine;
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
-    public Transform WindowCanvas;
     [NonSerialized] public bool IsDoorOpened;
     [NonSerialized] public int GameLevel;
 

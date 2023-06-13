@@ -61,7 +61,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -145,7 +145,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -528,7 +528,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
@@ -569,9 +569,11 @@ GameObject:
   - component: {fileID: 6053575375548267355}
   - component: {fileID: 9115126931435195041}
   - component: {fileID: 1109736434427424925}
-  - component: {fileID: 859697073036862197}
   - component: {fileID: 1437124776207483451}
+  - component: {fileID: 859697073036862197}
   - component: {fileID: 5518825071074345950}
+  - component: {fileID: 8794370517401437629}
+  - component: {fileID: 7696137166542938749}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -729,20 +731,6 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 4
---- !u!114 &859697073036862197
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8009199201838384755}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8c75e5d50ad61847bd7f0ca704603e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _playerSpeed: 5
-  CurrentState: 0
 --- !u!95 &1437124776207483451
 Animator:
   serializedVersion: 5
@@ -763,6 +751,19 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &859697073036862197
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009199201838384755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c75e5d50ad61847bd7f0ca704603e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &5518825071074345950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -776,6 +777,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _lvlChanger: {fileID: 0}
+--- !u!114 &8794370517401437629
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009199201838384755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fb490a528fa07842bc5649b9cb9b5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &7696137166542938749
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009199201838384755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc4d0ebaa03853c4c8bb4e2d23b41110, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerSpeed: 5
+  _isJoystickMovement: 1
 --- !u!1 &8235823234777146293
 GameObject:
   m_ObjectHideFlags: 0
@@ -837,7 +864,7 @@ PolygonCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}

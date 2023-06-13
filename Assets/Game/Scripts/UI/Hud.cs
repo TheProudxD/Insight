@@ -1,54 +1,22 @@
-using Unity.VisualScripting;
+using System.Reflection;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class Hud : MonoBehaviour
 {
     [SerializeField] private Slider _hpSlider, _manaSlider;
-    [SerializeField] private GameObject _menuUI;
-    private bool _isFullScreen;
-
-    private void Awake()
-    {
-        if (SceneManager.GetActiveScene().buildIndex == 0)
-            gameObject.SetActive(false);
-        else
-            gameObject.SetActive(true);
-    }
+    [SerializeField] private PlayerAnimation _playerAnimation;
 
     private void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.Backspace))
-        //{
-        //    DecreaseBar(_hpSlider);
-        //}
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    IncreaseBar(_hpSlider);
-        //}
-    }
-
-    public void OpenMenu()
-    {
-        if (!_menuUI.IsUnityNull()) _menuUI.SetActive(false);
-        SceneManager.LoadScene(0);
-    }
-
-    public void LoadGame()
-    {
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex + 1);
-    }
-
-    public void Exit()
-    {
-        Application.Quit();
-        Debug.LogWarning("Exit pressed!");
-    }
-    public void FullScreenToggle()
-    {
-        _isFullScreen = !_isFullScreen;
-        Screen.fullScreen = _isFullScreen;
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            DecreaseBar(_hpSlider);
+        }
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            IncreaseBar(_hpSlider);
+        }
     }
 
     private void DecreaseBar(Slider slider)
@@ -70,5 +38,34 @@ public class Hud : MonoBehaviour
             slider.GetComponentsInChildren<Image>()[1].enabled = true;
         else
             slider.value += 10;
+    }
+    
+    public void Attack()
+    {
+        StartCoroutine(_playerAnimation.AttackCo());
+    }
+    
+    public void TakeFirstWeapon()
+    {
+        print(MethodInfo.GetCurrentMethod().Name);
+    }
+
+    public void TakeSecondWeapon()
+    {
+        print(MethodInfo.GetCurrentMethod().Name);
+    }
+
+    public void UseFirstPotion()
+    {
+        print(MethodInfo.GetCurrentMethod().Name);
+    }
+
+    public void UseSecondPotion()
+    {
+        print(MethodInfo.GetCurrentMethod().Name);
+    }
+    public void UseThirdPotion()
+    {
+        print(MethodInfo.GetCurrentMethod().Name);
     }
 }

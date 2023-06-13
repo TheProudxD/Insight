@@ -2960,6 +2960,7 @@ GameObject:
   - component: {fileID: 4508372742794931568}
   - component: {fileID: 3240680870420245386}
   - component: {fileID: 2821327667055516875}
+  - component: {fileID: 4216061099012119044}
   m_Layer: 0
   m_Name: Settings
   m_TagString: Untagged
@@ -3006,7 +3007,7 @@ Canvas:
   m_GameObject: {fileID: 3658228985045443784}
   m_Enabled: 1
   serializedVersion: 3
-  m_RenderMode: 2
+  m_RenderMode: 1
   m_Camera: {fileID: 0}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
@@ -3014,6 +3015,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -3036,6 +3038,19 @@ MonoBehaviour:
   m_BlockingMask:
     serializedVersion: 2
     m_Bits: 4294967295
+--- !u!114 &4216061099012119044
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3658228985045443784}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1258901377efef64787e9c0688eb9c26, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _music: {fileID: 0}
 --- !u!1 &3691454925115222863
 GameObject:
   m_ObjectHideFlags: 0
