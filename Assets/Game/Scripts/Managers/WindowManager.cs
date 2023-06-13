@@ -11,8 +11,7 @@ public enum WindowType
 
 public class WindowManager : MonoBehaviour
 {
-    private SettingsWindow _settingsWindow;
-    private Dictionary<WindowType, WindowCommon> _allWindows = new Dictionary<WindowType, WindowCommon>();
+    private readonly Dictionary<WindowType, WindowCommon> _allWindows = new Dictionary<WindowType, WindowCommon>();
     
     private void Awake()
     {
