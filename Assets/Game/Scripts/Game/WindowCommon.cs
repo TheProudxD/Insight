@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 
-class WindowCommon : MonoBehaviour
+public class WindowCommon : MonoBehaviour
 {
-    public void Close() => Destroy(gameObject);
+    public void Close() => gameObject.SetActive(false);
 
     public void Show() => gameObject.SetActive(true);
 }

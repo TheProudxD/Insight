@@ -9,6 +9,7 @@ public class Hud : MonoBehaviour
 
     private void Update()
     {
+        /*
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
             DecreaseBar(_hpSlider);
@@ -17,10 +18,12 @@ public class Hud : MonoBehaviour
         {
             IncreaseBar(_hpSlider);
         }
+        */
     }
 
     private void DecreaseBar(Slider slider)
     {
+        if (slider is null) return;
         if (slider.value > 0)
         {
             slider.GetComponentsInChildren<Image>()[1].enabled = true;
@@ -34,6 +37,7 @@ public class Hud : MonoBehaviour
 
     private void IncreaseBar(Slider slider)
     {
+        if (slider is null) return;
         if (!slider.GetComponentsInChildren<Image>()[1].enabled)
             slider.GetComponentsInChildren<Image>()[1].enabled = true;
         else
@@ -47,25 +51,25 @@ public class Hud : MonoBehaviour
     
     public void TakeFirstWeapon()
     {
-        print(MethodInfo.GetCurrentMethod().Name);
+        print(MethodBase.GetCurrentMethod().Name);
     }
 
     public void TakeSecondWeapon()
     {
-        print(MethodInfo.GetCurrentMethod().Name);
+        print(MethodBase.GetCurrentMethod().Name);
     }
 
     public void UseFirstPotion()
     {
-        print(MethodInfo.GetCurrentMethod().Name);
+        print(MethodBase.GetCurrentMethod().Name);
     }
 
     public void UseSecondPotion()
     {
-        print(MethodInfo.GetCurrentMethod().Name);
+        print(MethodBase.GetCurrentMethod().Name);
     }
     public void UseThirdPotion()
     {
-        print(MethodInfo.GetCurrentMethod().Name);
+        print(MethodBase.GetCurrentMethod().Name);
     }
 }

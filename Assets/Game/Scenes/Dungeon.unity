@@ -240,6 +240,17 @@ Camera:
   m_CorrespondingSourceObject: {fileID: 7010494758664965742, guid: 137537f91438149458497bd50ff9aa34, type: 3}
   m_PrefabInstance: {fileID: 48808100}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &48808102 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8794370517401437629, guid: 137537f91438149458497bd50ff9aa34, type: 3}
+  m_PrefabInstance: {fileID: 48808100}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 816502957}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fb490a528fa07842bc5649b9cb9b5c8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &282197140
 GameObject:
   m_ObjectHideFlags: 0
@@ -2191,6 +2202,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4500970560530711371, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
+      propertyPath: _playerAnimation
+      value: 
+      objectReference: {fileID: 48808102}
     - target: {fileID: 6652220780652119259, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
       propertyPath: m_Name
       value: Canvas Game

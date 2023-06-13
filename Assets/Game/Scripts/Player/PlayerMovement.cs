@@ -6,7 +6,7 @@ public class PlayerMovement : MonoBehaviour
     private const string VERTICAL_AXIS = "Vertical";
 
     [SerializeField, Range(1, 20)] private float _playerSpeed = 5f;
-    [SerializeField] private bool _isJoystickMovement = false;
+    private bool _isJoystickMovement = false;
     private Joystick _joystick;
     private Rigidbody2D _playerRigidbody;
     private Vector3 _playerMovement;

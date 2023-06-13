@@ -11,8 +11,9 @@ public enum WindowType
 
 public class WindowManager : MonoBehaviour
 {
-    private static Dictionary<WindowType, WindowCommon> _allWindows = new Dictionary<WindowType, WindowCommon>();
-
+    private SettingsWindow _settingsWindow;
+    private Dictionary<WindowType, WindowCommon> _allWindows = new Dictionary<WindowType, WindowCommon>();
+    
     private void Awake()
     {
         _allWindows.Clear();
@@ -28,29 +29,29 @@ public class WindowManager : MonoBehaviour
         TryShow(WindowType.Inventory);
     }
 
-    public static void Create(WindowType windowType)
+    public void OpenExitWindow()
     {
-        WindowCommon windowObject = AssetManager.GetWindowPrefab(windowType.ToString()).GetComponent<WindowCommon>();
-        _allWindows.Add(windowType, windowObject);
-
-        switch (windowType)
-        {
-            case WindowType.Pause:
-                windowObject.GetComponent<PauseWindow>().Show();
-                break;
-            case WindowType.Settings:
-                windowObject.GetComponent<SettingsWindow>().Show();
-                break;
-            default:
-                break;
-        }
+        TryShow(WindowType.Exit);
     }
 
-    public static void TryShow(WindowType windowType)
+    public void OpenPauseWindow()
+    {
+        TryShow(WindowType.Pause);
+    }
+
+    public WindowCommon Create(WindowType windowType)
+    {
+        WindowCommon windowObject = AssetManager.GetWindowPrefab(windowType.ToString()).GetComponent<WindowCommon>();
+        return windowObject;
+    }
+
+    public void TryShow(WindowType windowType)
     {
         if (!_allWindows.ContainsKey(windowType))
         {
-            Create(windowType);
+            WindowCommon window = Create(windowType);
+            _allWindows[windowType] = window;
+            window.Show();
         }
         else
         {
@@ -58,11 +59,12 @@ public class WindowManager : MonoBehaviour
         }
     }
 
-    public static void TryClose(WindowType windowType)
+    public void TryClose(WindowType windowType)
     {
         if (_allWindows.ContainsKey(windowType))
         {
             _allWindows[windowType].Close();
+            Destroy(_allWindows[windowType]);
             _allWindows.Remove(windowType);
         }
         else

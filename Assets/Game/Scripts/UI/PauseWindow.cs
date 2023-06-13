@@ -9,14 +9,15 @@ class PauseWindow : WindowCommon
     private void EnablePauseMode()
     {
         Time.timeScale = 0;
-        WindowManager.TryShow(WindowType.Pause);
+        //WindowManager.TryShow(WindowType.Pause);
     }
 
     private void DisablePauseMode()
     {
         Time.timeScale = 1;
-        WindowManager.TryClose(WindowType.Pause);
+        //WindowManager.TryClose(WindowType.Pause);
     }
+
     //private void SetToPauseMode()
     //{
     //    if (!WindowManager.IsPause && Input.GetKeyDown(KeyCode.Escape))
