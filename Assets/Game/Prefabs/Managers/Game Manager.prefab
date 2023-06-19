@@ -45,8 +45,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a637774ddeffb88448964ec6d313c9fa, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _GameOverSignal: {fileID: 11400000, guid: f0ae6cfeb5a0d0947a4a97d66352fe05, type: 2}
-  _fadeGameOver: {fileID: 0}
+  _gameOverSignal: {fileID: 11400000, guid: f0ae6cfeb5a0d0947a4a97d66352fe05, type: 2}
 --- !u!114 &3837998601526713956
 MonoBehaviour:
   m_ObjectHideFlags: 0

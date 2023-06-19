@@ -4,11 +4,11 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] private Signal _gameOverSignal;
     public static GameManager Instance;
-
     private const string LOBBY_LOCATION = "Lobby";
     private const string LEVEL_DATA = "Level";
+
+    [SerializeField] private Signal _gameOverSignal;
 
     [NonSerialized] public bool IsDoorOpened;
     [NonSerialized] public int GameLevel;

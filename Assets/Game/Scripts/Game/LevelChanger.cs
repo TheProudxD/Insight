@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class LevelChanger : MonoBehaviour
 {
+    private const string CONDITION_TO_NEW_LEVEL = "FadeNewLevel";
     [SerializeField] private Animator FadeAnimator;
     [SerializeField] private Image _loadingBar;
 
@@ -22,7 +23,7 @@ public class LevelChanger : MonoBehaviour
     public void OnFadeComplete()
     {
         GameManager.Instance.SaveData();
-        FadeAnimator.SetTrigger("FadeNewLevel");
+        FadeAnimator.SetTrigger(CONDITION_TO_NEW_LEVEL);
         SceneManager.LoadScene(GameManager.Instance.GameLevel);
     }
 
@@ -33,7 +34,7 @@ public class LevelChanger : MonoBehaviour
             _loadingBar.fillAmount += 0.1f;
             yield return new WaitForSecondsRealtime(0.15f);
         }
-        FadeAnimator.SetTrigger("FadeNewLevel");
+        FadeAnimator.SetTrigger(CONDITION_TO_NEW_LEVEL);
         _loadingBar.fillAmount = 0f;
     }
 

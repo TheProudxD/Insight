@@ -30,7 +30,8 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
-        if (Input.GetButtonDown("Attack") && CurrentState != PlayerState.Attack && CurrentState != PlayerState.Stagger)
+        if (Input.GetButtonDown("Attack") && 
+            CurrentState != PlayerState.Attack && CurrentState != PlayerState.Stagger)
             StartCoroutine(_playerAnimation.AttackCo());
     }
 
