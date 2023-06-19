@@ -14,7 +14,7 @@ public class LevelChanger : MonoBehaviour
         _loadingBar.fillAmount = 0f;
     }
 
-    public void Transition()
+    public void StartTransition()
     {
         StartCoroutine(LoadingTimer());
     }
@@ -22,7 +22,7 @@ public class LevelChanger : MonoBehaviour
     public void OnFadeComplete()
     {
         GameManager.Instance.SaveData();
-        FadeAnimator.SetTrigger("Fade");
+        FadeAnimator.SetTrigger("FadeNewLevel");
         SceneManager.LoadScene(GameManager.Instance.GameLevel);
     }
 
@@ -33,15 +33,20 @@ public class LevelChanger : MonoBehaviour
             _loadingBar.fillAmount += 0.1f;
             yield return new WaitForSecondsRealtime(0.15f);
         }
-        FadeAnimator.SetTrigger("Fade");
+        FadeAnimator.SetTrigger("FadeNewLevel");
         _loadingBar.fillAmount = 0f;
+    }
+
+    public void FadeGameOver()
+    {
+        FadeAnimator.SetTrigger("FadeGameOver");
     }
 
     private void OnCollisionEnter2D(Collision2D collision)
     {
         if (collision.gameObject.TryGetComponent(out PlayerController player))
         {
-            Transition();
+            StartTransition();
         }
     }
 

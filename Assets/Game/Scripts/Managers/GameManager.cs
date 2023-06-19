@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
+    [SerializeField] private Signal _gameOverSignal;
     public static GameManager Instance;
 
     private const string LOBBY_LOCATION = "Lobby";
@@ -31,6 +32,12 @@ public class GameManager : MonoBehaviour
     public void StartGame()
     {
         SceneManager.LoadScene(LOBBY_LOCATION);
+    }
+
+    public System.Collections.IEnumerator GameOver()
+    {
+        yield return new WaitForSeconds(3);
+        _gameOverSignal.Raise();
     }
 
     public void SaveData()

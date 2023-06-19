@@ -52,6 +52,10 @@ public class PlayerController : MonoBehaviour
     {
         _currentHealth.RuntimeValue -= damage;
         print(_currentHealth.RuntimeValue);
+        if (_currentHealth.RuntimeValue <= 0)
+        {
+            StartCoroutine(GameManager.Instance.GameOver());
+        }
     }
 
     public System.Collections.IEnumerator KnockCO(float knockTime, float _damage)
