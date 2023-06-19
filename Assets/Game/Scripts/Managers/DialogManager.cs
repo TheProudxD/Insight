@@ -14,7 +14,7 @@ public class DialogManager : MonoBehaviour
         _dialogText = _dialogBox.GetComponentInChildren<TextMeshProUGUI>();
     }
 
-    void Update()
+    private void Update()
     {
         if (_playerInRange && _dialogBox!=null)
         {

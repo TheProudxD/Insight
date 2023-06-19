@@ -18,6 +18,7 @@ public class WindowManager : MonoBehaviour
         _allWindows.Clear();
     }
 
+    #region openners
     public void OpenSettingsWindow()
     {
         TryShow(WindowType.Settings);
@@ -37,6 +38,7 @@ public class WindowManager : MonoBehaviour
     {
         TryShow(WindowType.Pause);
     }
+    #endregion
 
     public WindowCommon Create(WindowType windowType)
     {
