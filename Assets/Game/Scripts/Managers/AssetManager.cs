@@ -9,6 +9,7 @@ public class AssetManager : MonoBehaviour
         GameObject window = Instantiate(windowGO, windowGO.transform.position, Quaternion.identity);
         return window;
     }
+
     public static GameObject GetDialogBoxPrefab()
     {
         return GetWindowPrefab("Dialog Box");

@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -6,18 +5,31 @@ using UnityEngine;
 public class Signal : ScriptableObject
 {
     private List<SignalListener> listeners = new List<SignalListener>();
-    private void Raise()
+
+    public void Raise()
     {
-        for (int i = listeners.Count-1; i >=0; i++)
+        for (int i = listeners.Count - 1; i >= 0; i--)
         {
-            listeners[i].OnSingleRaised();
+            if (listeners[i] != null)
+                listeners[i].OnSingleRaised();
         }
     }
-    public void RegisterListener( SignalListener listener)
+
+    public void Raise(float amount)
+    {
+        for (int i = listeners.Count - 1; i >= 0; i--)
+        {
+            if (listeners[i] != null)
+                listeners[i].OnSingleRaised(amount);
+        }
+    }
+
+    public void RegisterListener(SignalListener listener)
     {
         listeners.Add(listener);
     }
-    public void DeRegisterListener( SignalListener listener)
+
+    public void DeRegisterListener(SignalListener listener)
     {
         listeners.Remove(listener);
     }

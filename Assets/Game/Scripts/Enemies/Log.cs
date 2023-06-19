@@ -14,7 +14,6 @@ public class Log : Enemy
         _logAnimator = GetComponent<Animator>();
         _target = FindObjectOfType<PlayerController>().transform;
         _homePosition = transform;
-        _health = _maxHealth.InititialValue;
     }
 
     private new void Start()

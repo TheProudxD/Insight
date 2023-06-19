@@ -7,27 +7,23 @@ public class Hud : MonoBehaviour
     [SerializeField] private Slider _hpSlider, _manaSlider;
     [SerializeField] private PlayerAnimation _playerAnimation;
 
-    private void Update()
+    public void DecreaseHPBar(float amount)
     {
-        /*
-        if (Input.GetKeyDown(KeyCode.Backspace))
-        {
-            DecreaseBar(_hpSlider);
-        }
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            IncreaseBar(_hpSlider);
-        }
-        */
+        DecreaseBar(_hpSlider, amount);
     }
 
-    private void DecreaseBar(Slider slider)
+    public void DecreaseManaBar(float amount)
+    {
+        DecreaseBar(_manaSlider, amount);
+    }
+
+    private void DecreaseBar(Slider slider, float amount)
     {
         if (slider is null) return;
         if (slider.value > 0)
         {
             slider.GetComponentsInChildren<Image>()[1].enabled = true;
-            slider.value -= 10;
+            slider.value -= amount;
         }
         else
         {

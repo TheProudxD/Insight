@@ -16,8 +16,11 @@ public class Knockback : MonoBehaviour
         }
         else if (collision.TryGetComponent(out PlayerController player))
         {
-            MoveEntity(player);
-            StartCoroutine(player.GetComponent<PlayerMovement>().KnockCO(_knockTime));
+            if (PlayerController.CurrentState != PlayerState.Stagger)
+            {
+                MoveEntity(player);
+                StartCoroutine(player.KnockCO(_knockTime, _damage));
+            }
         }
     }
 

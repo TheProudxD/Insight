@@ -9,7 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 7e4c5783b2d7c6f47a9afba98cd159b0, type: 3}
-  m_Name: Player Position
+  m_Script: {fileID: 11500000, guid: 4fe96a97703fbc34e833789b37e5c280, type: 3}
+  m_Name: PlayerHealthAmount
   m_EditorClassIdentifier: 
-  PlayerPosition: {x: 43, y: 4, z: 0}
+  InititialValue: 10
+  RuntimeValue: -13

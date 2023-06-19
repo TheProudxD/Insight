@@ -4,9 +4,9 @@ public class PlayerMovement : MonoBehaviour
 {
     private const string HORIZONTAL_AXIS = "Horizontal";
     private const string VERTICAL_AXIS = "Vertical";
+    private const bool _isJoystickMovement = false;
 
     [SerializeField, Range(1, 20)] private float _playerSpeed = 5f;
-    private bool _isJoystickMovement = false;
     private Joystick _joystick;
     private Rigidbody2D _playerRigidbody;
     private Vector3 _playerMovement;
@@ -15,6 +15,8 @@ public class PlayerMovement : MonoBehaviour
     public Vector3 PlayerMovementVector => _playerMovement;
     public float HorizontalAxis => _horizontalAxis;
     public float VerticalAxis => _verticalAxis;
+
+    public Rigidbody2D PlayerRigidbody => _playerRigidbody;
 
     private void Start()
     {
@@ -42,15 +44,6 @@ public class PlayerMovement : MonoBehaviour
 
     public void MoveCharacter(Vector3 position)
     {
-        _playerRigidbody.MovePosition(position + _playerMovement.normalized * _playerSpeed * Time.deltaTime);
-    }
-
-    public IEnumerator KnockCO(float knockTime)
-    {
-        PlayerController.CurrentState = PlayerState.Stagger;
-        yield return new WaitForSeconds(knockTime);
-        _playerRigidbody.velocity = Vector2.zero;
-        PlayerController.CurrentState = PlayerState.Idle;
-        _playerRigidbody.velocity = Vector2.zero;
+        PlayerRigidbody.MovePosition(position + _playerSpeed * Time.deltaTime * _playerMovement.normalized);
     }
 }

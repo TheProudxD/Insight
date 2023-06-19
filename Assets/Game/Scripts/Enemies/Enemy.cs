@@ -16,17 +16,17 @@ public class Enemy : MonoBehaviour
     public EnemyState CurrentState;
     [SerializeField] protected float _health;
     [SerializeField] protected FloatValue _maxHealth;
-    [SerializeField] protected Rigidbody2D _enemyRigidbody;
     [SerializeField] protected string _enemyName;
     [SerializeField] protected int _baseAttack;
     [SerializeField] protected float _moveSpeed;
+    protected Rigidbody2D _enemyRigidbody;
     protected const string XMOVE_STATE = "moveX";
     protected const string YMOVE_STATE = "moveY";
     protected const string WAKEUP_STATE = "wakeUp";
 
     protected void Start()
     {
-        _health = _maxHealth.InititialValue;
+        _health = _maxHealth.RuntimeValue;
         CurrentState = EnemyState.Idle;
     }
     public IEnumerator KnockCO(float knockTime)
