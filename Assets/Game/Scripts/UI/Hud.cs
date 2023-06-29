@@ -4,15 +4,29 @@ using UnityEngine.UI;
 
 public class Hud : MonoBehaviour
 {
+    [SerializeField] private Button _attackButton;
+    [SerializeField] private Button _changeWeaponButton;
+    [SerializeField] private Button _useFirstPotionButton, _useSecondPotionButton, _useThirdPotionButton;
+
     [SerializeField] private Slider _hpSlider, _manaSlider;
     [SerializeField] private PlayerAnimation _playerAnimation;
 
-    public void DecreaseHPBar(float amount)
+    private void Awake()
+    {
+        _attackButton.onClick.AddListener(Attack);
+        _changeWeaponButton.onClick.AddListener(ChangeWeapon);
+        
+        _useFirstPotionButton.onClick.AddListener(UseFirstPotion);
+        _useSecondPotionButton.onClick.AddListener(UseSecondPotion);
+        _useThirdPotionButton.onClick.AddListener(UseThirdPotion);
+    }
+
+    private void DecreaseHPBar(float amount)
     {
         DecreaseBar(_hpSlider, amount);
     }
 
-    public void DecreaseManaBar(float amount)
+    private void DecreaseManaBar(float amount)
     {
         DecreaseBar(_manaSlider, amount);
     }
@@ -34,37 +48,44 @@ public class Hud : MonoBehaviour
     private void IncreaseBar(Slider slider)
     {
         if (slider is null) return;
+        
         if (!slider.GetComponentsInChildren<Image>()[1].enabled)
             slider.GetComponentsInChildren<Image>()[1].enabled = true;
         else
             slider.value += 10;
     }
     
-    public void Attack()
+    private void Attack()
     {
         StartCoroutine(_playerAnimation.AttackCo());
     }
     
-    public void TakeFirstWeapon()
+    private void ChangeWeapon()
+    {
+        print(MethodBase.GetCurrentMethod().Name);
+    }
+    
+    private void TakeFirstWeapon()
     {
         print(MethodBase.GetCurrentMethod().Name);
     }
 
-    public void TakeSecondWeapon()
+    private void TakeSecondWeapon()
     {
         print(MethodBase.GetCurrentMethod().Name);
     }
 
-    public void UseFirstPotion()
+    private void UseFirstPotion()
     {
         print(MethodBase.GetCurrentMethod().Name);
     }
 
-    public void UseSecondPotion()
+    private void UseSecondPotion()
     {
         print(MethodBase.GetCurrentMethod().Name);
     }
-    public void UseThirdPotion()
+    
+    private void UseThirdPotion()
     {
         print(MethodBase.GetCurrentMethod().Name);
     }

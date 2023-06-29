@@ -9560,17 +9560,6 @@ Animator:
   m_CorrespondingSourceObject: {fileID: 8602117089446597419, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
   m_PrefabInstance: {fileID: 1565192451}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &902435040 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 859697073036862197, guid: 137537f91438149458497bd50ff9aa34, type: 3}
-  m_PrefabInstance: {fileID: 3423860767304011104}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c8c75e5d50ad61847bd7f0ca704603e6, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &927504200 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 41855928748630109, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
@@ -10547,10 +10536,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4282534915829828215, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
-      propertyPath: Player
-      value: 
-      objectReference: {fileID: 902435040}
     - target: {fileID: 4500970560530711371, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
       propertyPath: _playerAnimation
       value: 
@@ -10565,7 +10550,7 @@ PrefabInstance:
       objectReference: {fileID: 1576653080}
     - target: {fileID: 6652220780652119259, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
       propertyPath: m_Name
-      value: Hud
+      value: UI
       objectReference: {fileID: 0}
     - target: {fileID: 7036488150074391240, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
       propertyPath: m_AnchorMax.x
