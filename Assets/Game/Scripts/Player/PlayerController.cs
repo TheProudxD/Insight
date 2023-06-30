@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
 
 public enum PlayerState
@@ -19,8 +19,8 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private FloatValue _currentHealth;
     [SerializeField] private Signal _healthSignal;
-    private PlayerMovement _playerMovement;
     private PlayerAnimation _playerAnimation;
+    private PlayerMovement _playerMovement;
 
     private void Awake()
     {
@@ -28,23 +28,24 @@ public class PlayerController : MonoBehaviour
         _playerAnimation = GetComponent<PlayerAnimation>();
     }
 
-    private void Update()
-    {
-        if (Input.GetButtonDown("Attack") && 
-            CurrentState != PlayerState.Attack && CurrentState != PlayerState.Stagger)
-            StartCoroutine(_playerAnimation.AttackCo());
-    }
-
     private void Start()
     {
         CurrentState = PlayerState.Walk;
+    }
+
+    private void Update()
+    {
+        if (Input.GetButtonDown("Attack") &&
+            CurrentState != PlayerState.Attack && CurrentState != PlayerState.Stagger)
+            StartCoroutine(_playerAnimation.AttackCo());
     }
 
     private void FixedUpdate()
     {
         if (CurrentState is PlayerState.Walk || CurrentState is PlayerState.Idle)
         {
-            _playerAnimation.UpdateAnimation(_playerMovement.PlayerMovementVector, _playerMovement.HorizontalAxis, _playerMovement.VerticalAxis);
+            _playerAnimation.UpdateAnimation(_playerMovement.PlayerMovementVector, _playerMovement.HorizontalAxis,
+                _playerMovement.VerticalAxis);
             _playerMovement.MoveCharacter(transform.position);
         }
     }
@@ -53,13 +54,10 @@ public class PlayerController : MonoBehaviour
     {
         _currentHealth.RuntimeValue -= damage;
         print(_currentHealth.RuntimeValue);
-        if (_currentHealth.RuntimeValue <= 0)
-        {
-            StartCoroutine(GameManager.Instance.GameOver());
-        }
+        if (_currentHealth.RuntimeValue <= 0) StartCoroutine(GameManager.Instance.GameOver());
     }
 
-    public System.Collections.IEnumerator KnockCO(float knockTime, float _damage)
+    public IEnumerator KnockCO(float knockTime, float _damage)
     {
         _healthSignal.Raise(_damage);
         if (_currentHealth.RuntimeValue > 0)

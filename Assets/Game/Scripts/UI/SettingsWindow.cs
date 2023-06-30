@@ -1,10 +1,10 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 
-class SettingsWindow : WindowCommon
+internal class SettingsWindow : WindowCommon
 {
-    private bool _isFullScreen;
     [SerializeField] private AudioMixer _music;
+    private bool _isFullScreen;
 
     public void AudioVolume(float sliderValue)
     {

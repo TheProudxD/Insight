@@ -3,9 +3,9 @@ using UnityEngine;
 
 public class DialogManager : MonoBehaviour
 {
+    [SerializeField] private string _dialog;
     private GameObject _dialogBox;
     private TextMeshProUGUI _dialogText;
-    [SerializeField] private string _dialog;
     private bool _playerInRange;
 
     private void Awake()
@@ -16,7 +16,7 @@ public class DialogManager : MonoBehaviour
 
     private void Update()
     {
-        if (_playerInRange && _dialogBox!=null)
+        if (_playerInRange && _dialogBox != null)
         {
             _dialogBox.SetActive(true);
             _dialogText.text = _dialog;

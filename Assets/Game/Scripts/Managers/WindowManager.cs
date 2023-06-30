@@ -11,14 +11,49 @@ public enum WindowType
 
 public class WindowManager : MonoBehaviour
 {
-    private readonly Dictionary<WindowType, WindowCommon> _allWindows = new Dictionary<WindowType, WindowCommon>();
-    
+    private readonly Dictionary<WindowType, WindowCommon> _allWindows = new();
+
     private void Awake()
     {
         _allWindows.Clear();
     }
 
+    public WindowCommon Create(WindowType windowType)
+    {
+        var windowObject = AssetManager.GetWindowPrefab(windowType.ToString()).GetComponent<WindowCommon>();
+        return windowObject;
+    }
+
+    public void TryShow(WindowType windowType)
+    {
+        if (!_allWindows.ContainsKey(windowType))
+        {
+            var window = Create(windowType);
+            _allWindows[windowType] = window;
+            window.Show();
+        }
+        else
+        {
+            print("РћС‚РєСЂС‹С‚РёРµ СѓР¶Рµ РѕС‚РєСЂС‹С‚РѕРіРѕ РѕРєРЅР°.");
+        }
+    }
+
+    public void TryClose(WindowType windowType)
+    {
+        if (_allWindows.ContainsKey(windowType))
+        {
+            _allWindows[windowType].Close();
+            Destroy(_allWindows[windowType]);
+            _allWindows.Remove(windowType);
+        }
+        else
+        {
+            print("Р—Р°РєСЂС‹С‚РёРµ СѓР¶Рµ Р·Р°РєСЂС‹С‚РѕРіРѕ РѕРєРЅР°.");
+        }
+    }
+
     #region openners
+
     public void OpenSettingsWindow()
     {
         TryShow(WindowType.Settings);
@@ -38,39 +73,6 @@ public class WindowManager : MonoBehaviour
     {
         TryShow(WindowType.Pause);
     }
+
     #endregion
-
-    public WindowCommon Create(WindowType windowType)
-    {
-        WindowCommon windowObject = AssetManager.GetWindowPrefab(windowType.ToString()).GetComponent<WindowCommon>();
-        return windowObject;
-    }
-
-    public void TryShow(WindowType windowType)
-    {
-        if (!_allWindows.ContainsKey(windowType))
-        {
-            WindowCommon window = Create(windowType);
-            _allWindows[windowType] = window;
-            window.Show();
-        }
-        else
-        {
-            print("Открытие уже открытого окна.");
-        }
-    }
-
-    public void TryClose(WindowType windowType)
-    {
-        if (_allWindows.ContainsKey(windowType))
-        {
-            _allWindows[windowType].Close();
-            Destroy(_allWindows[windowType]);
-            _allWindows.Remove(windowType);
-        }
-        else
-        {
-            print("Закрытие уже закрытого окна.");
-        }
-    }
 }

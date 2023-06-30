@@ -1,16 +1,21 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/FloatValue", fileName = "FloatValue")]
 public class FloatValue : ScriptableObject, ISerializationCallbackReceiver
 {
-    public float InititialValue;
+    [FormerlySerializedAs("InititialValue")]
+    public float _inititialValue;
+
     [NonSerialized] public float RuntimeValue;
 
     public void OnAfterDeserialize()
     {
-        RuntimeValue = InititialValue;
+        RuntimeValue = _inititialValue;
     }
 
-    public void OnBeforeSerialize() { }
+    public void OnBeforeSerialize()
+    {
+    }
 }

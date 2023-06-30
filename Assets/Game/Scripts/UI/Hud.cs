@@ -15,7 +15,7 @@ public class Hud : MonoBehaviour
     {
         _attackButton.onClick.AddListener(Attack);
         _changeWeaponButton.onClick.AddListener(ChangeWeapon);
-        
+
         _useFirstPotionButton.onClick.AddListener(UseFirstPotion);
         _useSecondPotionButton.onClick.AddListener(UseSecondPotion);
         _useThirdPotionButton.onClick.AddListener(UseThirdPotion);
@@ -48,23 +48,23 @@ public class Hud : MonoBehaviour
     private void IncreaseBar(Slider slider)
     {
         if (slider is null) return;
-        
+
         if (!slider.GetComponentsInChildren<Image>()[1].enabled)
             slider.GetComponentsInChildren<Image>()[1].enabled = true;
         else
             slider.value += 10;
     }
-    
+
     private void Attack()
     {
         StartCoroutine(_playerAnimation.AttackCo());
     }
-    
+
     private void ChangeWeapon()
     {
         print(MethodBase.GetCurrentMethod().Name);
     }
-    
+
     private void TakeFirstWeapon()
     {
         print(MethodBase.GetCurrentMethod().Name);
@@ -84,7 +84,7 @@ public class Hud : MonoBehaviour
     {
         print(MethodBase.GetCurrentMethod().Name);
     }
-    
+
     private void UseThirdPotion()
     {
         print(MethodBase.GetCurrentMethod().Name);

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
-class PauseWindow : WindowCommon
+
+internal class PauseWindow : WindowCommon
 {
     //private void Update()
     //{
@@ -30,4 +31,3 @@ class PauseWindow : WindowCommon
     //    }
     //}
 }
-

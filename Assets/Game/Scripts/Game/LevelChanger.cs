@@ -1,13 +1,27 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class LevelChanger : MonoBehaviour
 {
-    private const string CONDITION_TO_NEW_LEVEL = "FadeNewLevel";
-    [SerializeField] private Animator FadeAnimator;
+    private const string ConditionToNewLevel = "FadeNewLevel";
+
+    [FormerlySerializedAs("FadeAnimator")] [SerializeField]
+    private Animator _fadeAnimator;
+
     [SerializeField] private Image _loadingBar;
+
+    private void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out PlayerController player)) StartTransition();
+    }
+
+    private void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.gameObject.TryGetComponent(out PlayerController player)) StopTransition();
+    }
 
     public void StopTransition()
     {
@@ -23,7 +37,7 @@ public class LevelChanger : MonoBehaviour
     public void OnFadeComplete()
     {
         GameManager.Instance.SaveData();
-        FadeAnimator.SetTrigger(CONDITION_TO_NEW_LEVEL);
+        _fadeAnimator.SetTrigger(ConditionToNewLevel);
         SceneManager.LoadScene(GameManager.Instance.GameLevel);
     }
 
@@ -34,28 +48,13 @@ public class LevelChanger : MonoBehaviour
             _loadingBar.fillAmount += 0.1f;
             yield return new WaitForSecondsRealtime(0.15f);
         }
-        FadeAnimator.SetTrigger(CONDITION_TO_NEW_LEVEL);
+
+        _fadeAnimator.SetTrigger(ConditionToNewLevel);
         _loadingBar.fillAmount = 0f;
     }
 
     public void FadeGameOver()
     {
-        FadeAnimator.SetTrigger("FadeGameOver");
-    }
-
-    private void OnCollisionEnter2D(Collision2D collision)
-    {
-        if (collision.gameObject.TryGetComponent(out PlayerController player))
-        {
-            StartTransition();
-        }
-    }
-
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.TryGetComponent(out PlayerController player))
-        {
-            StopTransition();
-        }
+        _fadeAnimator.SetTrigger("FadeGameOver");
     }
 }

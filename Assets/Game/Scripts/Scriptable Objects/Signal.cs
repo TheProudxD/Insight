@@ -4,33 +4,29 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Signal")]
 public class Signal : ScriptableObject
 {
-    private List<SignalListener> listeners = new List<SignalListener>();
+    private readonly List<SignalListener> _listeners = new();
 
     public void Raise()
     {
-        for (int i = listeners.Count - 1; i >= 0; i--)
-        {
-            if (listeners[i] != null)
-                listeners[i].OnSingleRaised();
-        }
+        for (var i = _listeners.Count - 1; i >= 0; i--)
+            if (_listeners[i] != null)
+                _listeners[i].OnSingleRaised();
     }
 
     public void Raise(float amount)
     {
-        for (int i = listeners.Count - 1; i >= 0; i--)
-        {
-            if (listeners[i] != null)
-                listeners[i].OnSingleRaised(amount);
-        }
+        for (var i = _listeners.Count - 1; i >= 0; i--)
+            if (_listeners[i] != null)
+                _listeners[i].OnSingleRaised(amount);
     }
 
     public void RegisterListener(SignalListener listener)
     {
-        listeners.Add(listener);
+        _listeners.Add(listener);
     }
 
     public void DeRegisterListener(SignalListener listener)
     {
-        listeners.Remove(listener);
+        _listeners.Remove(listener);
     }
 }

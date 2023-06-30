@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-class ExitWindow : WindowCommon
+internal class ExitWindow : WindowCommon
 {
     public void Exit()
     {
