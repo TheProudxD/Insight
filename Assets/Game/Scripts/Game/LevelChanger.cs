@@ -1,4 +1,5 @@
 using System.Collections;
+using Game.Scripts.Storage;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
@@ -36,9 +37,9 @@ public class LevelChanger : MonoBehaviour
 
     public void OnFadeComplete()
     {
-        GameManager.Instance.SaveData();
+        StorageService.SaveLevelData();
         _fadeAnimator.SetTrigger(ConditionToNewLevel);
-        SceneManager.LoadScene(GameManager.Instance.GameLevel);
+        SceneManager.LoadScene(StorageService.GameLevel);
     }
 
     private IEnumerator LoadingTimer()
