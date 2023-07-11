@@ -9329,6 +9329,7 @@ GameObject:
   - component: {fileID: 383715191}
   - component: {fileID: 383715190}
   - component: {fileID: 383715194}
+  - component: {fileID: 383715195}
   m_Layer: 0
   m_Name: House Dialog
   m_TagString: Untagged
@@ -9436,6 +9437,37 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dialog: This is my lovely house.
+--- !u!114 &383715195
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 383715189}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2510bee70ccf464a97049a2c1f2f11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _signal: {fileID: 11400000, guid: 3c716f24b5afe534e970756c4f66757d, type: 2}
+  _signalEvent:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 2758604542294058170, guid: 4e0f44d89a4bc924fb8f86319e1a3cbb, type: 3}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  _signalEventInt:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &614981857
 GameObject:
   m_ObjectHideFlags: 0

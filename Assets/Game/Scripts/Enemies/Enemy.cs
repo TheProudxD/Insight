@@ -10,17 +10,20 @@ public enum EnemyState
 }
 
 [RequireComponent(typeof(Rigidbody2D))]
-public class Enemy : MonoBehaviour
+public abstract class Enemy : MonoBehaviour
 {
     protected const string XMOVE_STATE = "moveX";
     protected const string YMOVE_STATE = "moveY";
     protected const string WAKEUP_STATE = "wakeUp";
+    
     public EnemyState CurrentState;
+    
     [SerializeField] protected float _health;
     [SerializeField] protected FloatValue _maxHealth;
     [SerializeField] protected string _enemyName;
     [SerializeField] protected int _baseAttack;
     [SerializeField] protected float _moveSpeed;
+    
     protected Rigidbody2D _enemyRigidbody;
 
     protected void Start()
@@ -41,5 +44,10 @@ public class Enemy : MonoBehaviour
     {
         _health -= damage;
         if (_health <= 0) gameObject.SetActive(false);
+    }
+    
+    protected void ChangeState(EnemyState newState)
+    {
+        CurrentState = newState;
     }
 }

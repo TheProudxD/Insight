@@ -57,9 +57,9 @@ public class PlayerController : MonoBehaviour
         if (_currentHealth.RuntimeValue <= 0) StartCoroutine(GameManager.Instance.GameOver());
     }
 
-    public IEnumerator KnockCO(float knockTime, float _damage)
+    public IEnumerator KnockCO(float knockTime, float damage)
     {
-        _healthSignal.Raise(_damage);
+        _healthSignal.Raise(damage);
         if (_currentHealth.RuntimeValue > 0)
         {
             _healthSignal.Raise();

@@ -1,32 +1,26 @@
 using TMPro;
 using UnityEngine;
 
-public class DialogManager : MonoBehaviour
+public class DialogManager : Interactable
 {
     [SerializeField] private string _dialog;
     private GameObject _dialogBox;
-    private TextMeshProUGUI _dialogText;
-    private bool _playerInRange;
+    private TextMeshProUGUI _dialogUI;
 
     private void Awake()
     {
         _dialogBox = AssetManager.GetDialogBoxPrefab();
-        _dialogText = _dialogBox.GetComponentInChildren<TextMeshProUGUI>();
-    }
-
-    private void Update()
-    {
-        if (_playerInRange && _dialogBox != null)
-        {
-            _dialogBox.SetActive(true);
-            _dialogText.text = _dialog;
-        }
+        _dialogUI = _dialogBox.GetComponentInChildren<TextMeshProUGUI>();
+        _dialogUI.text = _dialog;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player"))
+        {
+            _dialogBox.SetActive(true);
             _playerInRange = true;
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)

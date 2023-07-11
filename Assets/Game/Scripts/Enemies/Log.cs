@@ -4,7 +4,6 @@ public class Log : Enemy
 {
     private readonly float _attackRadius = 1.5f;
     private readonly float _chaseRadius = 4;
-    private Transform _homePosition;
     private Animator _logAnimator;
     private Transform _target;
 
@@ -13,12 +12,6 @@ public class Log : Enemy
         _enemyRigidbody = GetComponent<Rigidbody2D>();
         _logAnimator = GetComponent<Animator>();
         _target = FindObjectOfType<PlayerController>().transform;
-        _homePosition = transform;
-    }
-
-    private new void Start()
-    {
-        base.Start();
     }
 
     private void FixedUpdate()
@@ -41,13 +34,13 @@ public class Log : Enemy
         {
             if (CurrentState is EnemyState.Idle or EnemyState.Walk and not EnemyState.Idle)
             {
-                var targetDirecton = Vector3.MoveTowards(
+                var targetDirection = Vector3.MoveTowards(
                     transform.position,
                     _target.position,
                     _moveSpeed * Time.deltaTime);
-                _enemyRigidbody.MovePosition(targetDirecton);
+                _enemyRigidbody.MovePosition(targetDirection);
 
-                ChangeAnimation(targetDirecton - transform.position);
+                ChangeAnimation(targetDirection - transform.position);
                 _logAnimator.SetBool(WAKEUP_STATE, true);
 
                 ChangeState(EnemyState.Walk);
@@ -71,10 +64,5 @@ public class Log : Enemy
             SetAnimationFloat(direction.x > 0 ? Vector2.right : Vector2.left);
         else
             SetAnimationFloat(direction.y > 0 ? Vector2.up : Vector2.down);
-    }
-
-    private void ChangeState(EnemyState newState)
-    {
-        if (CurrentState != newState) CurrentState = newState;
     }
 }
