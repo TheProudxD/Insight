@@ -26,6 +26,9 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
+        if (PlayerController.CurrentState == PlayerState.Interact)
+            return;
+        
         if (_isJoystickMovement)
         {
             HorizontalAxis = _joystick.Horizontal;

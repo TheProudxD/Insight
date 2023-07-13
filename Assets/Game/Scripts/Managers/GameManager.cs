@@ -1,4 +1,3 @@
-using System;
 using System.Collections;
 using Game.Scripts.Storage;
 using UnityEngine;
@@ -10,8 +9,6 @@ public class GameManager : MonoBehaviour
     public static GameManager Instance;
 
     [SerializeField] private Signal _gameOverSignal;
-
-    [NonSerialized] public bool IsDoorOpened;
 
     private void Awake()
     {

@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
 
     private void Update()
     {
+        if (CurrentState == PlayerState.Interact)
+            return;
+        
         if (Input.GetButtonDown("Attack") &&
             CurrentState != PlayerState.Attack && CurrentState != PlayerState.Stagger)
             StartCoroutine(_playerAnimation.AttackCo());
@@ -71,4 +74,5 @@ public class PlayerController : MonoBehaviour
             _playerMovement.PlayerRigidbody.velocity = Vector2.zero;
         }
     }
+
 }

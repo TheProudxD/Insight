@@ -9,7 +9,6 @@ public class GateOpener : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            GameManager.Instance.IsDoorOpened = true;
             _closedGate.SetActive(false);
             _openedGate.SetActive(true);
         }
