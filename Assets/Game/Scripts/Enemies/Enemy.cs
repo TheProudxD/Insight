@@ -1,5 +1,7 @@
+using System;
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public enum EnemyState
 {
@@ -12,23 +14,24 @@ public enum EnemyState
 [RequireComponent(typeof(Rigidbody2D))]
 public abstract class Enemy : MonoBehaviour
 {
-    protected const string XMOVE_STATE = "moveX";
-    protected const string YMOVE_STATE = "moveY";
+    protected const string X_MOVE_STATE = "moveX";
+    protected const string Y_MOVE_STATE = "moveY";
     protected const string WAKEUP_STATE = "wakeUp";
     
-    public EnemyState CurrentState;
+    [FormerlySerializedAs("_maxHealth")] [SerializeField] protected FloatValue MaxHealth;
+    [FormerlySerializedAs("_enemyName")] [SerializeField] protected string EnemyName;
+    [FormerlySerializedAs("_baseAttack")] [SerializeField] protected int BaseAttack;
+    [FormerlySerializedAs("_moveSpeed")] [SerializeField] protected float MoveSpeed;
     
-    [SerializeField] protected float _health;
-    [SerializeField] protected FloatValue _maxHealth;
-    [SerializeField] protected string _enemyName;
-    [SerializeField] protected int _baseAttack;
-    [SerializeField] protected float _moveSpeed;
-    
-    protected Rigidbody2D _enemyRigidbody;
+    protected Rigidbody2D EnemyRigidbody;
+    protected EnemyState CurrentState { get; private set; }
+    private float _health;
 
     protected void Start()
     {
-        _health = _maxHealth.RuntimeValue;
+        if (MaxHealth is null)
+            throw new Exception(nameof(MaxHealth));
+        _health = MaxHealth.RuntimeValue;
         CurrentState = EnemyState.Idle;
     }
 
@@ -36,7 +39,7 @@ public abstract class Enemy : MonoBehaviour
     {
         CurrentState = EnemyState.Stagger;
         yield return new WaitForSeconds(knockTime);
-        _enemyRigidbody.velocity = Vector2.zero;
+        EnemyRigidbody.velocity = Vector2.zero;
         CurrentState = EnemyState.Idle;
     }
 
