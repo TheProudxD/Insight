@@ -11,8 +11,7 @@ public class PlayerAnimation : MonoBehaviour
     private const string RECEIVE_ITEM_STATE = "receive item";
 
     private Animator _playerAnimator;
-    //private static readonly int Property = Animator.StringToHash("receive item");
-    
+
     private void Awake()
     {
         _playerAnimator = GetComponent<Animator>();
@@ -40,7 +39,7 @@ public class PlayerAnimation : MonoBehaviour
 
     public void SetReceiveItemAnimation(bool value)
     {
-        _playerAnimator.SetBool(RECEIVE_ITEM_STATE,value);
+        _playerAnimator.SetBool(RECEIVE_ITEM_STATE, value);
     }
 
     public IEnumerator AttackCo()

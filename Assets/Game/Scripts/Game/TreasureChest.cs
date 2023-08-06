@@ -2,24 +2,22 @@ using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class TreasureChest: Interactable
+public class TreasureChest : Interactable
 {
     [SerializeField] private Inventory _playerInventory;
-    [FormerlySerializedAs("_raisedItem")] [SerializeField] private Signal _raiseItem;
     [SerializeField] private Item _content;
-    private bool _isOpen;
+    [FormerlySerializedAs("_raisedItem"), SerializeField] private Signal _raiseItem;
+
+    private bool _opened;
     private Animator _animator;
 
-    private void Start()
-    {
-        _animator = GetComponent<Animator>();
-    }
+    private void Start() => _animator = GetComponent<Animator>();
 
     private void Update()
     {
         if (!_playerInRange) return;
-        
-        if (!_isOpen)
+
+        if (!_opened)
         {
             OpenChest();
         }
@@ -27,8 +25,8 @@ public class TreasureChest: Interactable
 
     private async void OpenChest()
     {
-        _animator.SetBool("opened",true);
-        _isOpen = true;
+        _animator.SetBool("opened", true);
+        _opened = true;
         await Task.Delay(1000);
         _dialogUI.SetText(_content.ItemDescription);
         _dialogBox.SetActive(true);
@@ -44,18 +42,18 @@ public class TreasureChest: Interactable
         _dialogBox.SetActive(false);
         _raiseItem.Raise();
     }
-    
-    private void OnTriggerEnter2D(Collider2D other)
+
+    protected override void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !other.isTrigger && !_isOpen)
+        if (other.CompareTag("Player") && !other.isTrigger && !_opened)
         {
             _playerInRange = true;
         }
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    protected override void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player")&& !other.isTrigger&& !_isOpen)
+        if (other.CompareTag("Player") && !other.isTrigger && !_opened)
         {
             _playerInRange = false;
         }

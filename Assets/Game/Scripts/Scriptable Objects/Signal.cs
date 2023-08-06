@@ -10,14 +10,14 @@ public class Signal : ScriptableObject
     {
         for (var i = _listeners.Count - 1; i >= 0; i--)
             if (_listeners[i] != null)
-                _listeners[i].OnSingleRaised();
+                _listeners[i]?.OnSingleRaised();
     }
 
     public void Raise(float amount)
     {
         for (var i = _listeners.Count - 1; i >= 0; i--)
             if (_listeners[i] != null)
-                _listeners[i].OnSingleRaised(amount);
+                _listeners[i]?.OnSingleRaised(amount);
     }
 
     public void RegisterListener(SignalListener listener)
