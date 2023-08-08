@@ -32,10 +32,10 @@ public class TreasureChest : Interactable
         yield return new WaitForSeconds(1);
         DialogUI.SetText(_content.ItemDescription);
         DialogBox.SetActive(true);
-        
+
         _playerInventory.AddItem(_content);
         _playerInventory.CurrentItem = _content;
-        
+
         _raiseItem.Raise();
         yield return new WaitUntil(() => Input.anyKey);
         ChestOpened();

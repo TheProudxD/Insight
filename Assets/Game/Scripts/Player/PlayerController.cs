@@ -10,13 +10,17 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private FloatValue _currentHealth;
     [SerializeField] private Signal _healthSignal;
+
     private PlayerAnimation _playerAnimation;
     private PlayerMovement _playerMovement;
+    private float _timeBeforeLastAttackCounter;
+    private readonly float _timeBeforeLastAttack = 0.5f;
 
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
         _playerAnimation = GetComponent<PlayerAnimation>();
+        _timeBeforeLastAttackCounter = _timeBeforeLastAttack;
     }
 
     private void Start()
@@ -28,18 +32,29 @@ public class PlayerController : MonoBehaviour
     {
         if (CurrentState == PlayerState.Interact)
             return;
-        
-        if (Input.GetButtonDown("Attack") &&
-            CurrentState != PlayerState.Attack && CurrentState != PlayerState.Stagger)
+
+        if (_timeBeforeLastAttackCounter < _timeBeforeLastAttack)
+        {
+            _timeBeforeLastAttackCounter += Time.deltaTime;
+        }
+    }
+
+    public void TryAttack()
+    {
+        if (CurrentState != PlayerState.Attack &&
+            CurrentState != PlayerState.Stagger &&
+            _timeBeforeLastAttackCounter >= _timeBeforeLastAttack)
+        {
             StartCoroutine(_playerAnimation.AttackCo());
+            _timeBeforeLastAttackCounter = 0;
+        }
     }
 
     private void FixedUpdate()
     {
-        if (CurrentState is PlayerState.Walk || CurrentState is PlayerState.Idle)
+        if (CurrentState is PlayerState.Walk or PlayerState.Idle)
         {
-            _playerAnimation.UpdateAnimation(_playerMovement.PlayerMovementVector, _playerMovement.HorizontalAxis,
-                _playerMovement.VerticalAxis);
+            _playerAnimation.UpdateAnimation(_playerMovement.PlayerMovementVector);
             _playerMovement.MoveCharacter(transform.position);
         }
     }
@@ -48,10 +63,11 @@ public class PlayerController : MonoBehaviour
     {
         _currentHealth.RuntimeValue -= damage;
         print(_currentHealth.RuntimeValue);
-        if (_currentHealth.RuntimeValue <= 0) StartCoroutine(GameManager.Instance.GameOver());
+        if (_currentHealth.RuntimeValue <= 0)
+            StartCoroutine(GameManager.Instance.GameOver());
     }
 
-    public IEnumerator KnockCO(float knockTime, float damage)
+    public IEnumerator KnockCoroutine(float knockTime, float damage)
     {
         _healthSignal.Raise(damage);
         if (_currentHealth.RuntimeValue > 0)
@@ -60,10 +76,8 @@ public class PlayerController : MonoBehaviour
 
             CurrentState = PlayerState.Stagger;
             yield return new WaitForSeconds(knockTime);
-            _playerMovement.PlayerRigidbody.velocity = Vector2.zero;
             CurrentState = PlayerState.Idle;
             _playerMovement.PlayerRigidbody.velocity = Vector2.zero;
         }
     }
-
 }

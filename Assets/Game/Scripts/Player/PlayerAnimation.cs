@@ -1,11 +1,10 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using UnityEngine;
 
 public class PlayerAnimation : MonoBehaviour
 {
-    private const string XMOVE_STATE = "moveX";
-    private const string YMOVE_STATE = "moveY";
+    private const string X_MOVE_STATE = "moveX";
+    private const string Y_MOVE_STATE = "moveY";
     private const string ATTACKING_STATE = "attacking";
     private const string MOVING_STATE = "moving";
     private const string RECEIVE_ITEM_STATE = "receive item";
@@ -19,22 +18,30 @@ public class PlayerAnimation : MonoBehaviour
 
     private void Start()
     {
-        _playerAnimator.SetFloat(XMOVE_STATE, 0);
-        _playerAnimator.SetFloat(YMOVE_STATE, -1);
+        _playerAnimator.SetFloat(X_MOVE_STATE, 0);
+        _playerAnimator.SetFloat(Y_MOVE_STATE, -1);
     }
 
-    public void UpdateAnimation(Vector3 playerMovement, float horizontalAxis, float verticalAxis)
+    public void UpdateAnimation(Vector3 playerMovement)
     {
-        if (playerMovement != Vector3.zero)
+        if (playerMovement == Vector3.zero)
         {
-            _playerAnimator.SetFloat(XMOVE_STATE, horizontalAxis);
-            _playerAnimator.SetFloat(YMOVE_STATE, verticalAxis);
-            _playerAnimator.SetBool(MOVING_STATE, true);
+            _playerAnimator.SetBool(MOVING_STATE, false);
+            return;
+        }
+
+        if (Mathf.Abs(playerMovement.x) > Mathf.Abs(playerMovement.y))
+        {
+            _playerAnimator.SetFloat(X_MOVE_STATE, playerMovement.x * (1 / Mathf.Abs(playerMovement.x)));
+            _playerAnimator.SetFloat(Y_MOVE_STATE, 0);
         }
         else
         {
-            _playerAnimator.SetBool(MOVING_STATE, false);
+            _playerAnimator.SetFloat(X_MOVE_STATE, 0);
+            _playerAnimator.SetFloat(Y_MOVE_STATE, playerMovement.y * (1 / Mathf.Abs(playerMovement.y)));
         }
+
+        _playerAnimator.SetBool(MOVING_STATE, true);
     }
 
     public void SetReceiveItemAnimation(bool value)

@@ -9,10 +9,12 @@ public class Hud : MonoBehaviour
     [SerializeField] private Button _useFirstPotionButton, _useSecondPotionButton, _useThirdPotionButton;
 
     [SerializeField] private Slider _hpSlider, _manaSlider;
-    [SerializeField] private PlayerAnimation _playerAnimation;
+    [SerializeField] private PlayerController _player;
 
     private void Awake()
     {
+        if (_player == null) Debug.LogError(nameof(_player));
+        
         _attackButton.onClick.AddListener(Attack);
         _changeWeaponButton.onClick.AddListener(ChangeWeapon);
 
@@ -57,7 +59,7 @@ public class Hud : MonoBehaviour
 
     private void Attack()
     {
-        StartCoroutine(_playerAnimation.AttackCo());
+        _player.TryAttack();
     }
 
     private void ChangeWeapon()

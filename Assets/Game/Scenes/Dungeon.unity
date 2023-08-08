@@ -131,6 +131,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 149256541713121498, guid: 137537f91438149458497bd50ff9aa34, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEventInt.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -205,11 +209,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8472774620252804705, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 61.13
+      value: 43.12
       objectReference: {fileID: 0}
     - target: {fileID: 8472774620252804705, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -10.68
+      value: -1.64
       objectReference: {fileID: 0}
     - target: {fileID: 8472774620252804705, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1946,6 +1950,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4500970560530711371, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
+      propertyPath: _player
+      value: 
+      objectReference: {fileID: 1920840944}
     - target: {fileID: 4500970560530711371, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
       propertyPath: _playerAnimation
       value: 
@@ -15402,7 +15410,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Context: {fileID: 11400000, guid: 81b035d109415974bb1d74f65c52c66d, type: 2}
   _doorType: 0
-  _opened: 0
   _inventory: {fileID: 11400000, guid: c48b402cc15736e4a829538661d9cbe6, type: 2}
   _map: {fileID: 883881949}
 --- !u!1001 &1722422498
@@ -15466,6 +15473,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1bbe822d027e0684fb89467b0b6a0f1e, type: 3}
+--- !u!114 &1920840944 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 859697073036862197, guid: 137537f91438149458497bd50ff9aa34, type: 3}
+  m_PrefabInstance: {fileID: 48808100}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c8c75e5d50ad61847bd7f0ca704603e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2079539496
 GameObject:
   m_ObjectHideFlags: 0
@@ -15531,11 +15549,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8439809925388799801, guid: 25549be4be3959e4da482adc24be7068, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 61.13
+      value: 43.12
       objectReference: {fileID: 0}
     - target: {fileID: 8439809925388799801, guid: 25549be4be3959e4da482adc24be7068, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -10.68
+      value: -1.64
       objectReference: {fileID: 0}
     - target: {fileID: 8439809925388799801, guid: 25549be4be3959e4da482adc24be7068, type: 3}
       propertyPath: m_LocalPosition.z
@@ -15630,6 +15648,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Dynamic Log
       objectReference: {fileID: 0}
+    - target: {fileID: 6231422567762838360, guid: 13632fd9a984a1a47926e50005f4b0a5, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8909068300085641725, guid: 13632fd9a984a1a47926e50005f4b0a5, type: 3}
       propertyPath: _waypoints.Array.data[0]
       value: 
@@ -15651,6 +15673,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 428325949}
     m_Modifications:
+    - target: {fileID: 678425191077805552, guid: 03bbd214da0162342870e0082735b01a, type: 3}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1198906920}
+    - target: {fileID: 5461170972561725023, guid: 03bbd214da0162342870e0082735b01a, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5461170972561725023, guid: 03bbd214da0162342870e0082735b01a, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8234452926868499496, guid: 03bbd214da0162342870e0082735b01a, type: 3}
       propertyPath: m_Name
       value: Static Log
@@ -15699,6 +15733,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 8757637488552342859, guid: 03bbd214da0162342870e0082735b01a, type: 3}
+      propertyPath: m_Value
+      value: 0.052
+      objectReference: {fileID: 0}
+    - target: {fileID: 8757637488552342859, guid: 03bbd214da0162342870e0082735b01a, type: 3}
+      propertyPath: m_MaxValue
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 9134907469416325736, guid: 03bbd214da0162342870e0082735b01a, type: 3}
+      propertyPath: _maxHealth
+      value: 
+      objectReference: {fileID: 11400000, guid: 9e990481c915c764cb6dcd761a1577cf, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

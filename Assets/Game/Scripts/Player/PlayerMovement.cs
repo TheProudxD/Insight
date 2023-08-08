@@ -4,19 +4,16 @@ public class PlayerMovement : MonoBehaviour
 {
     private const string HORIZONTAL_AXIS = "Horizontal";
     private const string VERTICAL_AXIS = "Vertical";
-    private const bool _isJoystickMovement = false;
+    private const bool IS_JOYSTICK_MOVEMENT = false;
 
-    [SerializeField] [Range(1, 20)] private float _playerSpeed = 5f;
-    private readonly float _offset = 0.6f;
+    [SerializeField, Range(1, 20)] private float _playerSpeed = 5f;
+    public Vector3 PlayerMovementVector => _playerMovement;
+    public Rigidbody2D PlayerRigidbody { get; private set; }
+
     private Joystick _joystick;
     private Vector3 _playerMovement;
-
-    public Vector3 PlayerMovementVector => _playerMovement;
-    public float HorizontalAxis { get; private set; }
-
-    public float VerticalAxis { get; private set; }
-
-    public Rigidbody2D PlayerRigidbody { get; private set; }
+    private float _horizontalAxis;
+    private float _verticalAxis;
 
     private void Start()
     {
@@ -28,19 +25,21 @@ public class PlayerMovement : MonoBehaviour
     {
         if (PlayerController.CurrentState == PlayerState.Interact)
             return;
-        
-        if (_isJoystickMovement)
+
+        if (IS_JOYSTICK_MOVEMENT)
         {
-            HorizontalAxis = _joystick.Horizontal;
-            VerticalAxis = _joystick.Vertical;
+            _horizontalAxis = _joystick.Horizontal;
+            _verticalAxis = _joystick.Vertical;
             _joystick.gameObject.SetActive(true);
         }
+        else
+        {
+            _horizontalAxis = Input.GetAxisRaw(HORIZONTAL_AXIS);
+            _verticalAxis = Input.GetAxisRaw(VERTICAL_AXIS);
+            _joystick.gameObject.SetActive(false);
+        }
 
-        HorizontalAxis = Input.GetAxisRaw(HORIZONTAL_AXIS);
-        VerticalAxis = Input.GetAxisRaw(VERTICAL_AXIS);
-        _joystick.gameObject.SetActive(false);
-
-        _playerMovement = new Vector3(HorizontalAxis, VerticalAxis, 0) * _offset;
+        _playerMovement = new Vector3(_horizontalAxis, _verticalAxis, 0);
     }
 
     public void MoveCharacter(Vector3 position)
