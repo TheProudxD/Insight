@@ -1,26 +1,29 @@
 using TMPro;
 using UnityEngine;
 
-
-public abstract class Interactable: MonoBehaviour
+public abstract class Interactable : MonoBehaviour
 {
     [SerializeField] protected Signal Context;
-    protected bool _playerInRange;
-    protected GameObject _dialogBox;
-    protected TextMeshProUGUI _dialogUI;
+
+    protected bool PlayerInRange;
+    protected GameObject DialogBox;
+    protected TextMeshProUGUI DialogUI;
 
     private void Awake()
     {
-        _dialogBox = AssetManager.GetDialogBoxPrefab();
-        _dialogUI = _dialogBox.GetComponentInChildren<TextMeshProUGUI>();
+        if (!AssetManager.DialogAlreadySpawned)
+        {
+            DialogBox = AssetManager.GetDialogBoxPrefab();
+            DialogUI = DialogBox.GetComponentInChildren<TextMeshProUGUI>();
+        }
     }
-    
+
     protected virtual void OnTriggerEnter2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
             Context.Raise();
-            _playerInRange = true;
+            PlayerInRange = true;
         }
     }
 
@@ -29,7 +32,7 @@ public abstract class Interactable: MonoBehaviour
         if (other.CompareTag("Player") && !other.isTrigger)
         {
             Context.Raise();
-            _playerInRange = false;
+            PlayerInRange = false;
         }
     }
 }

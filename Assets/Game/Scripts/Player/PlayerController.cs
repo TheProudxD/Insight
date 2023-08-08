@@ -1,15 +1,6 @@
 using System.Collections;
 using UnityEngine;
 
-public enum PlayerState
-{
-    Idle,
-    Walk,
-    Attack,
-    Interact,
-    Stagger
-}
-
 [RequireComponent(typeof(PlayerAnimation))]
 [RequireComponent(typeof(PlayerMovement))]
 [RequireComponent(typeof(Rigidbody2D))]

@@ -4,17 +4,6 @@ public class Log : Enemy
 {
     [SerializeField] protected float _attackRadius = 1.5f;
     [SerializeField] protected float _chaseRadius = 4;
-    
-    private Animator _logAnimator;
-    protected Transform Target;
-
-    private void Awake()
-    {
-        EnemyRigidbody = GetComponent<Rigidbody2D>();
-        _logAnimator = GetComponent<Animator>();
-        Target = FindObjectOfType<PlayerController>().transform;
-        _logAnimator.SetBool(WAKEUP_STATE, true);
-    }
 
     private void FixedUpdate()
     {
@@ -55,12 +44,12 @@ public class Log : Enemy
 
     public void SetWakeupAnimation(bool enabled)
     {
-        _logAnimator.SetBool(WAKEUP_STATE, enabled);
+        Animator.SetBool(WAKEUP_STATE, enabled);
     }
     private void SetAnimationFloat(Vector2 direction)
     {
-        _logAnimator.SetFloat(X_MOVE_STATE, direction.x);
-        _logAnimator.SetFloat(Y_MOVE_STATE, direction.y);
+        Animator.SetFloat(X_MOVE_STATE, direction.x);
+        Animator.SetFloat(Y_MOVE_STATE, direction.y);
     }
 
     protected void Move(Vector2 direction)

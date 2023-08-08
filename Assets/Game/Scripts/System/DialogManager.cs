@@ -8,9 +8,9 @@ public class DialogManager : Interactable
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-            _dialogUI.text = _dialog;
-            _dialogBox.SetActive(true);
-            _playerInRange = true;
+            DialogUI.text = _dialog;
+            DialogBox.SetActive(true);
+            PlayerInRange = true;
         }
     }
 
@@ -18,8 +18,8 @@ public class DialogManager : Interactable
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {
-            _playerInRange = false;
-            _dialogBox.SetActive(false);
+            PlayerInRange = false;
+            DialogBox.SetActive(false);
         }
     }
 }

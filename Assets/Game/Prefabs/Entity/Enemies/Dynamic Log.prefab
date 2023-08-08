@@ -30,7 +30,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6231422567762838360}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 43.64, y: -8.83, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
@@ -240,12 +240,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd4f86101a32ae448bdb8530abb65a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentState: 0
-  _health: 0
-  _maxHealth: {fileID: 0}
-  _enemyName: 
-  _baseAttack: 0
-  _moveSpeed: 0
+  MaxHealth: {fileID: 11400000, guid: 9e990481c915c764cb6dcd761a1577cf, type: 2}
+  EnemyName: 
+  BaseAttack: 1
+  MoveSpeed: 2
+  _attackRadius: 1.5
+  _chaseRadius: 4
+  _waypoints:
+  - {fileID: 0}
+  - {fileID: 0}
 --- !u!114 &3878598730540321433
 MonoBehaviour:
   m_ObjectHideFlags: 0

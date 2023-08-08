@@ -1,12 +1,19 @@
+using System;
+using System.Linq;
+using Unity.VisualScripting;
 using UnityEngine;
-
+using System.Collections.Generic;
 public class PatrolLog : Log
 {
-    [SerializeField] private Transform[] _waypoints;
+    [SerializeField] private List<Transform> _waypoints;
     private Transform CurrentPoint => _waypoints[_currentPointIndex];
     private int _currentPointIndex;
     private readonly float _roundingDistance = 0.1f;
-
+    protected new void Awake()
+    {
+        base.Awake();
+        _waypoints.ForEach(x => x.parent = null);
+    }
     protected override void CheckDistance()
     {
         var distance = Vector3.Distance(Target.position, transform.position);
@@ -42,7 +49,7 @@ public class PatrolLog : Log
 
     private void ChangeWaypointIndex()
     {
-        if (_currentPointIndex >= _waypoints.Length - 1)
+        if (_currentPointIndex >= _waypoints.Count - 1)
         {
             _currentPointIndex = 0;
         }

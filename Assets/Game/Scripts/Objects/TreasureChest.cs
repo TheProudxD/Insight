@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -6,7 +6,9 @@ public class TreasureChest : Interactable
 {
     [SerializeField] private Inventory _playerInventory;
     [SerializeField] private Item _content;
-    [FormerlySerializedAs("_raisedItem"), SerializeField] private Signal _raiseItem;
+
+    [FormerlySerializedAs("_raisedItem"), SerializeField]
+    private Signal _raiseItem;
 
     private bool _opened;
     private Animator _animator;
@@ -15,31 +17,33 @@ public class TreasureChest : Interactable
 
     private void Update()
     {
-        if (!_playerInRange) return;
+        if (!PlayerInRange) return;
 
         if (!_opened)
         {
-            OpenChest();
+            StartCoroutine(OpenChest());
         }
     }
 
-    private async void OpenChest()
+    private IEnumerator OpenChest()
     {
         _animator.SetBool("opened", true);
         _opened = true;
-        await Task.Delay(1000);
-        _dialogUI.SetText(_content.ItemDescription);
-        _dialogBox.SetActive(true);
+        yield return new WaitForSeconds(1);
+        DialogUI.SetText(_content.ItemDescription);
+        DialogBox.SetActive(true);
+        
         _playerInventory.AddItem(_content);
         _playerInventory.CurrentItem = _content;
+        
         _raiseItem.Raise();
-        await Task.Delay(2000);
+        yield return new WaitUntil(() => Input.anyKey);
         ChestOpened();
     }
 
     private void ChestOpened()
     {
-        _dialogBox.SetActive(false);
+        DialogBox.SetActive(false);
         _raiseItem.Raise();
     }
 
@@ -47,7 +51,7 @@ public class TreasureChest : Interactable
     {
         if (other.CompareTag("Player") && !other.isTrigger && !_opened)
         {
-            _playerInRange = true;
+            PlayerInRange = true;
         }
     }
 
@@ -55,7 +59,7 @@ public class TreasureChest : Interactable
     {
         if (other.CompareTag("Player") && !other.isTrigger && !_opened)
         {
-            _playerInRange = false;
+            PlayerInRange = false;
         }
     }
 }

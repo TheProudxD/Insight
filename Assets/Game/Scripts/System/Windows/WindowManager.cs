@@ -1,14 +1,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum WindowType
-{
-    Pause,
-    Settings,
-    Inventory,
-    Exit
-}
-
 public class WindowManager : MonoBehaviour
 {
     private readonly Dictionary<WindowType, WindowCommon> _allWindows = new();

@@ -34,7 +34,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &4206958101748183978
 SpriteRenderer:
@@ -121,9 +121,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 397b89a6ef6c7f345914a2b18d49a19d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Context: {fileID: 11400000, guid: 81b035d109415974bb1d74f65c52c66d, type: 2}
   _playerInventory: {fileID: 11400000, guid: c48b402cc15736e4a829538661d9cbe6, type: 2}
-  _raiseItem: {fileID: 11400000, guid: e95e889591e2e2748b6f269151ddfba6, type: 2}
   _content: {fileID: 11400000, guid: 003b83d7a8b86fe46b136b3ca021064b, type: 2}
+  _raiseItem: {fileID: 11400000, guid: e95e889591e2e2748b6f269151ddfba6, type: 2}
 --- !u!61 &2366172639739106122
 BoxCollider2D:
   m_ObjectHideFlags: 0
