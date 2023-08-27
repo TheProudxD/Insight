@@ -14,13 +14,13 @@ public class PlayerController : MonoBehaviour
     private PlayerAnimation _playerAnimation;
     private PlayerMovement _playerMovement;
     private float _timeBeforeLastAttackCounter;
-    private readonly float _timeBeforeLastAttack = 0.5f;
+    private readonly float _attackCooldown = 0.4f;
 
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
         _playerAnimation = GetComponent<PlayerAnimation>();
-        _timeBeforeLastAttackCounter = _timeBeforeLastAttack;
+        _timeBeforeLastAttackCounter = _attackCooldown;
     }
 
     private void Start()
@@ -33,7 +33,7 @@ public class PlayerController : MonoBehaviour
         if (CurrentState == PlayerState.Interact)
             return;
 
-        if (_timeBeforeLastAttackCounter < _timeBeforeLastAttack)
+        if (_timeBeforeLastAttackCounter < _attackCooldown)
         {
             _timeBeforeLastAttackCounter += Time.deltaTime;
         }
@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     {
         if (CurrentState != PlayerState.Attack &&
             CurrentState != PlayerState.Stagger &&
-            _timeBeforeLastAttackCounter >= _timeBeforeLastAttack)
+            _timeBeforeLastAttackCounter >= _attackCooldown)
         {
             StartCoroutine(_playerAnimation.AttackCo());
             _timeBeforeLastAttackCounter = 0;

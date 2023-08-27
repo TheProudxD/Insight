@@ -1,11 +1,13 @@
 using System;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
 {
     [SerializeField] private FloatValue _maxHealth;
     [SerializeField] private Slider _healthBar;
+    [SerializeField] private Animator _deathAnimator;
     private float _health;
 
     private void Start()
@@ -29,7 +31,9 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
-        // sound + effects
+        // sound
+        _deathAnimator.gameObject.transform.position=gameObject.transform.position;
+        _deathAnimator.SetTrigger("death");
         _healthBar.gameObject.SetActive(false);
         gameObject.SetActive(false);
     }

@@ -42,9 +42,9 @@ public class Log : Enemy
         }
     }
 
-    public void SetWakeupAnimation(bool enabled)
+    public void SetWakeupAnimation(bool enable)
     {
-        Animator.SetBool(WAKEUP_STATE, enabled);
+        Animator.SetBool(WAKEUP_STATE, enable);
     }
     private void SetAnimationFloat(Vector2 direction)
     {
