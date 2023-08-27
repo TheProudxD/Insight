@@ -14,13 +14,11 @@ public class Knockback : MonoBehaviour
             enemy.GetComponent<EnemyHealth>().TakeDamage(_damage);
             StartCoroutine(enemy.KnockCoroutine(_knockTime));
         }
-        else if (collision.TryGetComponent(out PlayerController player))
+        else if (collision.TryGetComponent(out PlayerController player) &&
+                 PlayerController.CurrentState != PlayerState.Stagger)
         {
-            if (PlayerController.CurrentState != PlayerState.Stagger)
-            {
-                MoveEntity(player);
-                StartCoroutine(player.KnockCoroutine(_knockTime, _damage));
-            }
+            MoveEntity(player);
+            StartCoroutine(player.KnockCoroutine(_knockTime, _damage));
         }
     }
 

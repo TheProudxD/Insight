@@ -1,3 +1,4 @@
+using System;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.UI;
@@ -14,7 +15,7 @@ public class Hud : MonoBehaviour
     private void Awake()
     {
         if (_player == null) Debug.LogError(nameof(_player));
-        
+
         _attackButton.onClick.AddListener(Attack);
         _changeWeaponButton.onClick.AddListener(ChangeWeapon);
 
@@ -23,19 +24,19 @@ public class Hud : MonoBehaviour
         _useThirdPotionButton.onClick.AddListener(UseThirdPotion);
     }
 
-    private void DecreaseHPBar(float amount)
+    public void ChangeHealthBarAmount(float amount)
     {
         DecreaseBar(_hpSlider, amount);
     }
 
-    private void DecreaseManaBar(float amount)
+    private void ChangeManaBarAmount(float amount)
     {
         DecreaseBar(_manaSlider, amount);
     }
 
     private void DecreaseBar(Slider slider, float amount)
     {
-        if (slider is null) return;
+        if (slider is null) throw new NullReferenceException(nameof(slider));
         if (slider.value > 0)
         {
             slider.GetComponentsInChildren<Image>()[1].enabled = true;

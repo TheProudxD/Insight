@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerAnimation))]
 [RequireComponent(typeof(PlayerMovement))]
@@ -10,17 +11,21 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private FloatValue _currentHealth;
     [SerializeField] private Signal _healthSignal;
+    [SerializeField] private Slider _healthBar;
 
     private PlayerAnimation _playerAnimation;
     private PlayerMovement _playerMovement;
     private float _timeBeforeLastAttackCounter;
-    private readonly float _attackCooldown = 0.4f;
+    private float MaxHealth => 9;
+    private float _attackCooldown = 0.4f;
 
     private void Awake()
     {
         _playerMovement = GetComponent<PlayerMovement>();
         _playerAnimation = GetComponent<PlayerAnimation>();
         _timeBeforeLastAttackCounter = _attackCooldown;
+        _healthBar.maxValue = MaxHealth;
+        _healthBar.value = _currentHealth.RuntimeValue;
     }
 
     private void Start()
@@ -39,7 +44,7 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    public void TryAttack()
+    public bool TryAttack()
     {
         if (CurrentState != PlayerState.Attack &&
             CurrentState != PlayerState.Stagger &&
@@ -47,7 +52,9 @@ public class PlayerController : MonoBehaviour
         {
             StartCoroutine(_playerAnimation.AttackCo());
             _timeBeforeLastAttackCounter = 0;
+            return true;
         }
+        return false;
     }
 
     private void FixedUpdate()
@@ -67,9 +74,20 @@ public class PlayerController : MonoBehaviour
             StartCoroutine(GameManager.Instance.GameOver());
     }
 
+    public bool TryIncreaseHealth(float amount)
+    {
+        _healthSignal.Raise(-amount);
+        if (_currentHealth.RuntimeValue == MaxHealth) return false;
+        _currentHealth.RuntimeValue += amount;
+        _currentHealth.RuntimeValue = Mathf.Clamp(_currentHealth.RuntimeValue, 0, MaxHealth);
+        print(_currentHealth.RuntimeValue);
+        return true;
+    }
+
     public IEnumerator KnockCoroutine(float knockTime, float damage)
     {
         _healthSignal.Raise(damage);
+        TakeDamage(damage);
         if (_currentHealth.RuntimeValue > 0)
         {
             _healthSignal.Raise();

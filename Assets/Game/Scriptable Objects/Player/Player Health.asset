@@ -10,7 +10,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4fe96a97703fbc34e833789b37e5c280, type: 3}
-  m_Name: PlayerHealthAmount
+  m_Name: Player Health
   m_EditorClassIdentifier: 
-  InititialValue: 10
-  RuntimeValue: -13
+  InitialValue: 9

@@ -390,9 +390,9 @@ MonoBehaviour:
   m_HandleRect: {fileID: 0}
   m_Direction: 0
   m_MinValue: 0
-  m_MaxValue: 3
+  m_MaxValue: 2
   m_WholeNumbers: 1
-  m_Value: 2
+  m_Value: 0
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -657,7 +657,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _thrust: 10
   _knockTime: 0.15
-  _damage: 1
+  _damage: 2
 --- !u!114 &9134907469416325736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -670,8 +670,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9437df11c1ee4829a80496d639943c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: {fileID: 11400000, guid: dcbbbc11376b9624f86a4f142dcd9e69, type: 2}
+  _maxHealth: {fileID: 11400000, guid: 9e990481c915c764cb6dcd761a1577cf, type: 2}
   _healthBar: {fileID: 8757637488552342859}
+  _deathAnimator: {fileID: 0}
 --- !u!1 &9025178968102888185
 GameObject:
   m_ObjectHideFlags: 0

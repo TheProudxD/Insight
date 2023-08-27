@@ -13,8 +13,8 @@ public class PlayerInteraction : MonoBehaviour
 
     public void RaiseItem()
     {
-        if (Inventory.CurrentItem==null) return;
-        
+        if (Inventory.CurrentItem == null) return;
+
         if (PlayerController.CurrentState != PlayerState.Interact)
         {
             _playerAnimation.SetReceiveItemAnimation(true);

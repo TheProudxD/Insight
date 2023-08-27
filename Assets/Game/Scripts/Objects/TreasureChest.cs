@@ -1,4 +1,5 @@
 using System.Collections;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -30,6 +31,7 @@ public class TreasureChest : Interactable
         _animator.SetBool("opened", true);
         _opened = true;
         yield return new WaitForSeconds(1);
+        Context.Raise();
         DialogUI.SetText(_content.ItemDescription);
         DialogBox.SetActive(true);
 
@@ -52,6 +54,7 @@ public class TreasureChest : Interactable
         if (other.CompareTag("Player") && !other.isTrigger && !_opened)
         {
             PlayerInRange = true;
+            Context.Raise();
         }
     }
 

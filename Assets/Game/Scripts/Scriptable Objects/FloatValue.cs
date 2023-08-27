@@ -5,14 +5,13 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(menuName = "ScriptableObjects/FloatValue", fileName = "FloatValue")]
 public class FloatValue : ScriptableObject, ISerializationCallbackReceiver
 {
-    [FormerlySerializedAs("InititialValue")]
-    public float _inititialValue;
+    [FormerlySerializedAs("_inititialValue")] [Range(0,9)] public float InitialValue;
 
     [NonSerialized] public float RuntimeValue;
 
     public void OnAfterDeserialize()
     {
-        RuntimeValue = _inititialValue;
+        RuntimeValue = InitialValue;
     }
 
     public void OnBeforeSerialize()
