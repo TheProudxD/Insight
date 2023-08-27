@@ -6,8 +6,9 @@ using UnityEngine.Serialization;
 public class Inventory : ScriptableObject
 {
    public Item CurrentItem;
-   public List<Item> Items = new List<Item>();
+   private List<Item> _items;
    [FormerlySerializedAs("NumberOfKey")] public int NumberOfKeys;
+   public int NumberOfCoins;
 
    public void AddItem(Item itemToAdd)
    {
@@ -19,9 +20,9 @@ public class Inventory : ScriptableObject
       }
       else
       {
-         if (!Items.Contains(itemToAdd))
+         if (!_items.Contains(itemToAdd))
          {
-            Items.Add(itemToAdd);
+            _items.Add(itemToAdd);
          }
       }
    }
