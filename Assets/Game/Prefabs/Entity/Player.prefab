@@ -837,6 +837,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _currentHealth: {fileID: 11400000, guid: dcbbbc11376b9624f86a4f142dcd9e69, type: 2}
   _healthSignal: {fileID: 11400000, guid: 203f710f23c395740a70137675857d21, type: 2}
+  _playerHitSignal: {fileID: 11400000, guid: e1bbe0cf26eebed4d98948c11fef725c, type: 2}
+  _healthBar: {fileID: 0}
 --- !u!114 &5518825071074345950
 MonoBehaviour:
   m_ObjectHideFlags: 0

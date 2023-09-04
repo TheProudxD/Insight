@@ -11,6 +11,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField] private FloatValue _currentHealth;
     [SerializeField] private Signal _healthSignal;
+    [SerializeField] private Signal _playerHitSignal;
     [SerializeField] private Slider _healthBar;
 
     private PlayerAnimation _playerAnimation;
@@ -87,7 +88,9 @@ public class PlayerController : MonoBehaviour
     public IEnumerator KnockCoroutine(float knockTime, float damage)
     {
         _healthSignal.Raise(damage);
+        _playerHitSignal.Raise();
         TakeDamage(damage);
+        
         if (_currentHealth.RuntimeValue > 0)
         {
             _healthSignal.Raise();
