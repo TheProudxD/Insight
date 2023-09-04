@@ -5,9 +5,9 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(menuName = "ScriptableObjects/FloatValue", fileName = "FloatValue")]
 public class FloatValue : ScriptableObject, ISerializationCallbackReceiver
 {
-    [FormerlySerializedAs("_inititialValue")] [Range(0,9)] public float InitialValue;
+    [field: SerializeField,Range(0,9)] public float InitialValue { get; private set; }
 
-    [NonSerialized] public float RuntimeValue;
+    [HideInInspector] public float RuntimeValue;
 
     public void OnAfterDeserialize()
     {

@@ -49,6 +49,7 @@ public class Door : Interactable
         if (other.CompareTag("Player") && !other.isTrigger)
         {
             PlayerInRange = false;
+            Context.Raise();
         }
     }
 }
