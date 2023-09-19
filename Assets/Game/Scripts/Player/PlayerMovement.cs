@@ -42,8 +42,6 @@ public class PlayerMovement : MonoBehaviour
         _playerMovement = new Vector3(_horizontalAxis, _verticalAxis, 0);
     }
 
-    public void MoveCharacter(Vector3 position)
-    {
+    public void MoveCharacter(Vector3 position) =>
         PlayerRigidbody.MovePosition(position + _playerSpeed * Time.deltaTime * _playerMovement.normalized);
-    }
 }

@@ -10,19 +10,18 @@ public class Door : Interactable
 
     private void Update()
     {
-        if (PlayerInRange)
-        {
-            if (_doorType is DoorType.Key && _inventory.NumberOfKeys > 0)
-            {
-                StartCoroutine(OpenRoutine());
-            }
-        }
+        if (!PlayerInRange) return;
+        if (_doorType is not DoorType.Key || _inventory.NumberOfKeys <= 0) return;
+        Context.Raise();
+        Open();
     }
+
+    public void Open() => StartCoroutine(OpenRoutine());
 
     private IEnumerator OpenRoutine()
     {
         yield return new WaitForSeconds(1.5f);
-        Context.Raise();
+        
         for (int x = 11; x < 13; x++)
         {
             for (int y = -7; y < -4; y++)
@@ -44,7 +43,7 @@ public class Door : Interactable
         }
     }
 
-    protected virtual void OnTriggerExit2D(Collider2D other)
+    protected override void OnTriggerExit2D(Collider2D other)
     {
         if (other.CompareTag("Player") && !other.isTrigger)
         {

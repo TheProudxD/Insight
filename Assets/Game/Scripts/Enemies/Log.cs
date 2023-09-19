@@ -1,27 +1,29 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
+using UnityEngine.Serialization;
 
 public class Log : Enemy
 {
-    [SerializeField] protected float _attackRadius = 1.5f;
-    [SerializeField] protected float _chaseRadius = 4;
+    [FormerlySerializedAs("_attackRadius")] [SerializeField]
+    protected float AttackRadius = 1.5f;
 
-    private void FixedUpdate()
-    {
-        CheckDistance();
-    }
+    [FormerlySerializedAs("_chaseRadius")] [SerializeField]
+    protected float ChaseRadius = 4;
+
+    private void FixedUpdate() => CheckDistance();
 
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, _chaseRadius);
+        Gizmos.DrawWireSphere(transform.position, ChaseRadius);
         Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, _attackRadius);
+        Gizmos.DrawWireSphere(transform.position, AttackRadius);
     }
 
     protected virtual void CheckDistance()
     {
         var distance = Vector3.Distance(Target.position, transform.position);
-        if (distance <= _chaseRadius && distance > _attackRadius)
+        if (distance <= ChaseRadius && distance > AttackRadius)
         {
             if (CurrentState is EnemyState.Idle or EnemyState.Walk and not EnemyState.Idle)
             {
@@ -36,16 +38,17 @@ public class Log : Enemy
                 ChangeState(EnemyState.Walk);
             }
         }
-        else if (distance > _chaseRadius)
+        else if (distance > ChaseRadius)
         {
             SetWakeupAnimation(false);
         }
     }
 
-    public void SetWakeupAnimation(bool enable)
+    protected void SetWakeupAnimation(bool enable)
     {
         Animator.SetBool(WAKEUP_STATE, enable);
     }
+
     private void SetAnimationFloat(Vector2 direction)
     {
         Animator.SetFloat(X_MOVE_STATE, direction.x);
@@ -56,7 +59,7 @@ public class Log : Enemy
     {
         EnemyRigidbody.MovePosition(direction);
     }
-    
+
     protected void ChangeAnimation(Vector2 direction)
     {
         if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))

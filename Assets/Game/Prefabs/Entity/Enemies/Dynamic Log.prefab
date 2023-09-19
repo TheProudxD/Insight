@@ -641,8 +641,8 @@ MonoBehaviour:
   EnemyName: 
   BaseAttack: 1
   MoveSpeed: 2
-  _attackRadius: 1.5
-  _chaseRadius: 4
+  AttackRadius: 1.5
+  ChaseRadius: 4
   _waypoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -658,7 +658,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100835e75b91fac439b2f22eda658a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrust: 10
+  _thrust: 2
   _knockTime: 0.15
   _damage: 1
 --- !u!114 &4873682833966098629

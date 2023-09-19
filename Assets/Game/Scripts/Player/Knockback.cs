@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Debug = System.Diagnostics.Debug;
 
 public class Knockback : MonoBehaviour
 {
@@ -29,5 +31,13 @@ public class Knockback : MonoBehaviour
         Vector2 difference = entityRB.transform.position - transform.position;
         difference = difference.normalized * _thrust;
         entityRB.AddForce(difference, ForceMode2D.Impulse);
+    }
+
+    private void Start()
+    {
+    }
+
+    private void Update()
+    {
     }
 }

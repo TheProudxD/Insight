@@ -17,7 +17,7 @@ public class PatrolLog : Log
     protected override void CheckDistance()
     {
         var distance = Vector3.Distance(Target.position, transform.position);
-        if (distance <= _chaseRadius && distance > _attackRadius)
+        if (distance <= ChaseRadius && distance > AttackRadius)
         {
             if (CurrentState is EnemyState.Idle or EnemyState.Walk and not EnemyState.Idle)
             {
@@ -31,7 +31,7 @@ public class PatrolLog : Log
                 ChangeState(EnemyState.Walk);
             }
         }
-        else if (distance > _chaseRadius)
+        else if (distance > ChaseRadius)
         {
             if (Vector3.Distance(transform.position, CurrentPoint.position) > _roundingDistance)
             {

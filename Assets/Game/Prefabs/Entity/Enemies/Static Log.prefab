@@ -596,8 +596,8 @@ MonoBehaviour:
   EnemyName: Mr. Log
   BaseAttack: 1
   MoveSpeed: 1.2
-  _attackRadius: 1.5
-  _chaseRadius: 4
+  AttackRadius: 1.5
+  ChaseRadius: 4
 --- !u!61 &2514312627041346846
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -655,7 +655,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100835e75b91fac439b2f22eda658a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrust: 10
+  _thrust: 6
   _knockTime: 0.15
   _damage: 2
 --- !u!114 &9134907469416325736

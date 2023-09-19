@@ -27,10 +27,6 @@ public class PlayerController : MonoBehaviour
         _timeBeforeLastAttackCounter = _attackCooldown;
         _healthBar.maxValue = MaxHealth;
         _healthBar.value = _currentHealth.RuntimeValue;
-    }
-
-    private void Start()
-    {
         CurrentState = PlayerState.Walk;
     }
 
@@ -94,8 +90,8 @@ public class PlayerController : MonoBehaviour
         if (_currentHealth.RuntimeValue > 0)
         {
             _healthSignal.Raise();
-
-            CurrentState = PlayerState.Stagger;
+            
+            CurrentState = PlayerState.Idle;
             yield return new WaitForSeconds(knockTime);
             CurrentState = PlayerState.Idle;
             _playerMovement.PlayerRigidbody.velocity = Vector2.zero;

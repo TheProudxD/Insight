@@ -5,7 +5,7 @@ using UnityEngine.Serialization;
 [CreateAssetMenu(menuName = "ScriptableObjects/BoolValue", fileName = "BoolValue")]
 public class BoolValue : ScriptableObject, ISerializationCallbackReceiver
 {
-    [field: SerializeField] public bool InitialValue { get; private set; }
+    [field: SerializeField] private bool InitialValue { get; set; }
 
     [HideInInspector] public bool RuntimeValue;
 

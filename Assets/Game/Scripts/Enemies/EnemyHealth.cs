@@ -1,6 +1,5 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class EnemyHealth : MonoBehaviour
@@ -31,6 +30,7 @@ public class EnemyHealth : MonoBehaviour
 
     private void Die()
     {
+        // Loot
         // sound
         _deathAnimator.gameObject.transform.position=gameObject.transform.position;
         _deathAnimator.SetTrigger("death");
