@@ -1,7 +1,7 @@
-using Objects.Powerups;
+using Player;
 using UnityEngine;
 
-namespace Game.Scripts.Objects
+namespace Objects.Powerups
 {
     public class Coin : Powerup
     {

@@ -1,6 +1,6 @@
-namespace Game.Scripts.Storage
+namespace StorageService
 {
-    internal class StorageData
+    public class StorageData
     {
         public int Level;
         public int AmountSoftResources { get; set; }

@@ -1,8 +1,11 @@
-public enum PlayerState
+namespace Player
 {
-    Idle,
-    Walk,
-    Attack,
-    Interact,
-    Stagger
+    public enum PlayerState
+    {
+        Idle,
+        Walk,
+        Attack,
+        Interact,
+        Stagger
+    }
 }

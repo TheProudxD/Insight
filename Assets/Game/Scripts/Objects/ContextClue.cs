@@ -1,11 +1,14 @@
 using UnityEngine;
 
-public class ContextClue : MonoBehaviour
+namespace Objects
 {
-    [SerializeField] private GameObject _context;
-
-    public void ChangeContext()
+    public class ContextClue : MonoBehaviour
     {
-        _context.SetActive(!_context.activeSelf);
+        [SerializeField] private GameObject _context;
+
+        public void ChangeContext()
+        {
+            _context.SetActive(!_context.activeSelf);
+        }
     }
 }

@@ -2,34 +2,34 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class GameManager : MonoBehaviour
+namespace Managers
 {
-    private const string LOBBY_LOCATION = "Lobby";
-    public static GameManager Instance;
-
-    [SerializeField] private Signal _gameOverSignal;
-
-    private void Awake()
+    public class GameManager : MonoBehaviour
     {
-        if (Instance != null)
+        private const string LOBBY_LOCATION = "Lobby";
+        public static GameManager Instance;
+
+        [SerializeField] private Signal _gameOverSignal;
+
+        private void Awake()
         {
-            Destroy(gameObject);
+            if (Instance != null)
+            {
+                Destroy(gameObject);
+            }
+            else
+            {
+                Instance = this;
+                DontDestroyOnLoad(gameObject);
+            }
         }
-        else
+
+        public void StartGame() => SceneManager.LoadScene(LOBBY_LOCATION);
+
+        public IEnumerator GameOver()
         {
-            Instance = this;
-            DontDestroyOnLoad(gameObject);
+            yield return new WaitForSeconds(1.5f);
+            _gameOverSignal.Raise();
         }
-    }
-
-    public void StartGame()
-    {
-        SceneManager.LoadScene(LOBBY_LOCATION);
-    }
-
-    public IEnumerator GameOver()
-    {
-        yield return new WaitForSeconds(1.5f);
-        _gameOverSignal.Raise();
     }
 }

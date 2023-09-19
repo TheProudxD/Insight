@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Game.Scripts.Enemies
+namespace Enemies
 {
     public class TurretEnemy : Log
     {
@@ -30,15 +30,15 @@ namespace Game.Scripts.Enemies
                     if (!_canFire) return;
                     var delta = Target.transform.position - transform.position;
                     var currentProjectile = Instantiate(_projectile, transform.position, Quaternion.identity);
-                    currentProjectile.Launch(delta, BaseAttack);
+                    currentProjectile.Launch(delta);
                     _canFire = false;
-                    SetWakeupAnimation(true);
+                    SetAnimationBool(AnimationConst.wakeUp, true);
                     ChangeState(EnemyState.Walk);
                 }
             }
             else if (distance > ChaseRadius)
             {
-                SetWakeupAnimation(false);
+                SetAnimationBool(AnimationConst.wakeUp, false);
             }
         }
     }

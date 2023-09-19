@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace Game.Scripts.InGame_Resources
+namespace ResourceService
 {
     public class ResourcesFeature
     {

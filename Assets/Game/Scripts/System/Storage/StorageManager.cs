@@ -2,9 +2,9 @@ using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-namespace Game.Scripts.Storage
+namespace StorageService
 {
-    public class StorageService : MonoBehaviour
+    public class StorageManager : MonoBehaviour
     {
         private const string LEVEL_DATA_KEY = "LevelData";
         private const string LOBBY_LOCATION = "Lobby";
@@ -14,7 +14,7 @@ namespace Game.Scripts.Storage
         private void Awake()
         {
             _storageService = new JsonToFileStorageService();
-            
+
             if (GetCurrentLevel() <= 2)
                 SetLevel(2);
         }
@@ -38,7 +38,7 @@ namespace Game.Scripts.Storage
             };
             _storageService.Save(LEVEL_DATA_KEY, d, b => { print("Level data saved successfully!"); });
         }
-        
+
         public static void SaveLevelData()
         {
             if (SceneManager.GetActiveScene().name == LOBBY_LOCATION)
@@ -51,8 +51,8 @@ namespace Game.Scripts.Storage
             {
                 GameLevel++;
             }
-            
-            SetLevel(GameLevel > GetCurrentLevel()? GameLevel: GetCurrentLevel());
+
+            SetLevel(GameLevel > GetCurrentLevel() ? GameLevel : GetCurrentLevel());
         }
     }
 }

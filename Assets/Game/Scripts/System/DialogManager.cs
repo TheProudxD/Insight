@@ -1,25 +1,29 @@
+using Objects;
 using UnityEngine;
 
-public class DialogManager : Interactable
+namespace Managers
 {
-    [SerializeField] private string _dialog;
-
-    protected override void OnTriggerEnter2D(Collider2D other)
+    public class DialogManager : Interactable
     {
-        if (other.CompareTag("Player") && !other.isTrigger)
+        [SerializeField] private string _dialog;
+
+        protected override void OnTriggerEnter2D(Collider2D other)
         {
-            DialogUI.text = _dialog;
-            DialogBox.SetActive(true);
-            PlayerInRange = true;
+            if (other.CompareTag("Player") && !other.isTrigger)
+            {
+                DialogUI.text = _dialog;
+                DialogBox.SetActive(true);
+                PlayerInRange = true;
+            }
         }
-    }
 
-    protected override void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && !other.isTrigger)
+        protected override void OnTriggerExit2D(Collider2D other)
         {
-            PlayerInRange = false;
-            DialogBox.SetActive(false);
+            if (other.CompareTag("Player") && !other.isTrigger)
+            {
+                PlayerInRange = false;
+                DialogBox.SetActive(false);
+            }
         }
     }
 }

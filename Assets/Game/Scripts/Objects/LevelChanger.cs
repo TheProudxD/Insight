@@ -1,61 +1,61 @@
 using System.Collections;
-using Game.Scripts.Storage;
+using Player;
+using StorageService;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
 
-public class LevelChanger : MonoBehaviour
+namespace Objects
 {
-    private const string ConditionToNewLevel = "FadeNewLevel";
-
-    [FormerlySerializedAs("FadeAnimator")] [SerializeField]
-    private Animator _fadeAnimator;
-
-    [SerializeField] private Image _loadingBar;
-
-    private void OnCollisionEnter2D(Collision2D collision)
+    public class LevelChanger : MonoBehaviour
     {
-        if (collision.gameObject.TryGetComponent(out PlayerController player)) StartTransition();
-    }
+        private const string ConditionToNewLevel = "FadeNewLevel";
 
-    private void OnCollisionExit2D(Collision2D collision)
-    {
-        if (collision.gameObject.TryGetComponent(out PlayerController player)) StopTransition();
-    }
+        [FormerlySerializedAs("FadeAnimator")] [SerializeField]
+        private Animator _fadeAnimator;
 
-    public void StopTransition()
-    {
-        StopAllCoroutines();
-        _loadingBar.fillAmount = 0f;
-    }
+        [SerializeField] private Image _loadingBar;
 
-    public void StartTransition()
-    {
-        StartCoroutine(LoadingTimer());
-    }
-
-    public void OnFadeComplete()
-    {
-        StorageService.SaveLevelData();
-        _fadeAnimator.SetTrigger(ConditionToNewLevel);
-        SceneManager.LoadScene(StorageService.GameLevel);
-    }
-
-    private IEnumerator LoadingTimer()
-    {
-        while (_loadingBar.fillAmount < 1f)
+        private void OnCollisionEnter2D(Collision2D collision)
         {
-            _loadingBar.fillAmount += 0.1f;
-            yield return new WaitForSecondsRealtime(0.15f);
+            if (collision.gameObject.TryGetComponent(out PlayerController player)) 
+                StartTransition();
         }
 
-        _fadeAnimator.SetTrigger(ConditionToNewLevel);
-        _loadingBar.fillAmount = 0f;
-    }
+        private void OnCollisionExit2D(Collision2D collision)
+        {
+            if (collision.gameObject.TryGetComponent(out PlayerController player)) 
+                StopTransition();
+        }
 
-    public void FadeGameOver()
-    {
-        _fadeAnimator.SetTrigger("FadeGameOver");
+        private void StopTransition()
+        {
+            StopAllCoroutines();
+            _loadingBar.fillAmount = 0f;
+        }
+
+        private void StartTransition() => StartCoroutine(LoadingTimer());
+
+        private IEnumerator LoadingTimer()
+        {
+            while (_loadingBar.fillAmount < 1f)
+            {
+                _loadingBar.fillAmount += 0.1f;
+                yield return new WaitForSecondsRealtime(0.15f);
+            }
+
+            _fadeAnimator.SetTrigger(ConditionToNewLevel);
+            _loadingBar.fillAmount = 0f;
+        }
+
+        public void OnFadeComplete()
+        {
+            StorageManager.SaveLevelData();
+            _fadeAnimator.SetTrigger(ConditionToNewLevel);
+            SceneManager.LoadScene(StorageManager.GameLevel);
+        }
+
+        public void FadeGameOver() => _fadeAnimator.SetTrigger("FadeGameOver");
     }
 }

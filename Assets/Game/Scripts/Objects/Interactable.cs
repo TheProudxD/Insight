@@ -1,38 +1,42 @@
+using Managers;
 using TMPro;
 using UnityEngine;
 
-public abstract class Interactable : MonoBehaviour
+namespace Objects
 {
-    [SerializeField] protected Signal Context;
-
-    protected bool PlayerInRange;
-    protected GameObject DialogBox;
-    protected TextMeshProUGUI DialogUI;
-
-    private void Awake()
+    public abstract class Interactable : MonoBehaviour
     {
-        if (!AssetManager.DialogAlreadySpawned)
+        [SerializeField] protected Signal Context;
+
+        protected bool PlayerInRange;
+        protected GameObject DialogBox;
+        protected TextMeshProUGUI DialogUI;
+
+        private void Awake()
         {
-            DialogBox = AssetManager.GetDialogBoxPrefab();
-            DialogUI = DialogBox.GetComponentInChildren<TextMeshProUGUI>();
+            if (!AssetManager.DialogAlreadySpawned)
+            {
+                DialogBox = AssetManager.GetDialogBoxPrefab();
+                DialogUI = DialogBox.GetComponentInChildren<TextMeshProUGUI>();
+            }
         }
-    }
 
-    protected virtual void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && !other.isTrigger)
+        protected virtual void OnTriggerEnter2D(Collider2D other)
         {
-            Context.Raise();
-            PlayerInRange = true;
+            if (other.CompareTag("Player") && !other.isTrigger)
+            {
+                Context.Raise();
+                PlayerInRange = true;
+            }
         }
-    }
 
-    protected virtual void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && !other.isTrigger)
+        protected virtual void OnTriggerExit2D(Collider2D other)
         {
-            Context.Raise();
-            PlayerInRange = false;
+            if (other.CompareTag("Player") && !other.isTrigger)
+            {
+                Context.Raise();
+                PlayerInRange = false;
+            }
         }
     }
 }

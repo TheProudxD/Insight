@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using Managers;
 using UnityEngine;
 
 [CreateAssetMenu(menuName = "ScriptableObjects/Signal")]

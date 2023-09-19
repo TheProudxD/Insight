@@ -1,5 +1,8 @@
-public enum ResourceType
+namespace ResourceService
 {
-    SoftCurrency,
-    HardCurrency
+    public enum ResourceType
+    {
+        SoftCurrency,
+        HardCurrency
+    }
 }

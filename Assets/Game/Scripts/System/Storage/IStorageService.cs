@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Scripts.Storage
+namespace StorageService
 {
     public interface IStorageService
     {

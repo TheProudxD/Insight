@@ -1,6 +1,6 @@
 using System;
 
-namespace Game.Scripts.InGame_Resources
+namespace ResourceService
 {
     public class Resource : IResource<int>
     {

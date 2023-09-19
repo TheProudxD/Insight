@@ -1,29 +1,20 @@
 using UnityEngine;
 using UnityEngine.Events;
 
-public class SignalListener : MonoBehaviour
+namespace Managers
 {
-    [SerializeField] private Signal _signal;
-    [SerializeField] private UnityEvent _signalEvent;
-    [SerializeField] private UnityEvent<float> _signalEventInt;
-
-    private void OnEnable()
+    public class SignalListener : MonoBehaviour
     {
-        _signal.RegisterListener(this);
-    }
+        [SerializeField] private Signal _signal;
+        [SerializeField] private UnityEvent _signalEvent;
+        [SerializeField] private UnityEvent<float> _signalEventInt;
 
-    private void OnDisable()
-    {
-        _signal.DeRegisterListener(this);
-    }
+        private void OnEnable() => _signal.RegisterListener(this);
 
-    public void OnSingleRaised()
-    {
-        _signalEvent.Invoke();
-    }
+        private void OnDisable() => _signal.DeRegisterListener(this);
 
-    public void OnSingleRaised(float amount)
-    {
-        _signalEventInt.Invoke(amount);
+        public void OnSingleRaised() => _signalEvent.Invoke();
+
+        public void OnSingleRaised(float amount) => _signalEventInt.Invoke(amount);
     }
 }

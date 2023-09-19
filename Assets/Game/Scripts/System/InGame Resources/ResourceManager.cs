@@ -1,7 +1,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Game.Scripts.InGame_Resources
+namespace ResourceService
 {
     public class ResourceManager : MonoBehaviour
     {

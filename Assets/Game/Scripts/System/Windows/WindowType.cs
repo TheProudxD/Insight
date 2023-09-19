@@ -1,7 +1,10 @@
-public enum WindowType
+namespace Managers
 {
-    Pause,
-    Settings,
-    Inventory,
-    Exit
+    public enum WindowType
+    {
+        Pause,
+        Settings,
+        Inventory,
+        Exit
+    }
 }

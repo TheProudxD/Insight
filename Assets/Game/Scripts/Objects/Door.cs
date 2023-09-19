@@ -2,53 +2,56 @@ using System.Collections;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
-public class Door : Interactable
+namespace Objects
 {
-    [SerializeField] private DoorType _doorType;
-    [SerializeField] private Inventory _inventory;
-    [SerializeField] private Tilemap _map;
-
-    private void Update()
+    public class Door : Interactable
     {
-        if (!PlayerInRange) return;
-        if (_doorType is not DoorType.Key || _inventory.NumberOfKeys <= 0) return;
-        Context.Raise();
-        Open();
-    }
+        [SerializeField] private DoorType _doorType;
+        [SerializeField] private Inventory _inventory;
+        [SerializeField] private Tilemap _map;
 
-    public void Open() => StartCoroutine(OpenRoutine());
-
-    private IEnumerator OpenRoutine()
-    {
-        yield return new WaitForSeconds(1.5f);
-        
-        for (int x = 11; x < 13; x++)
+        private void Update()
         {
-            for (int y = -7; y < -4; y++)
+            if (!PlayerInRange) return;
+            if (_doorType is not DoorType.Key || _inventory.NumberOfKeys <= 0) return;
+            Context.Raise();
+            Open();
+        }
+
+        public void Open() => StartCoroutine(OpenRoutine());
+
+        private IEnumerator OpenRoutine()
+        {
+            yield return new WaitForSeconds(1.5f);
+
+            for (int x = 11; x < 13; x++)
             {
-                _map.SetTile(new Vector3Int(x, y, 0), null);
+                for (int y = -7; y < -4; y++)
+                {
+                    _map.SetTile(new Vector3Int(x, y, 0), null);
+                }
+            }
+
+            _inventory.NumberOfKeys--;
+            Destroy(gameObject);
+        }
+
+        protected override void OnTriggerEnter2D(Collider2D other)
+        {
+            if (other.CompareTag("Player") && !other.isTrigger)
+            {
+                PlayerInRange = true;
+                Context.Raise();
             }
         }
 
-        _inventory.NumberOfKeys--;
-        Destroy(gameObject);
-    }
-
-    protected override void OnTriggerEnter2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && !other.isTrigger)
+        protected override void OnTriggerExit2D(Collider2D other)
         {
-            PlayerInRange = true;
-            Context.Raise();
-        }
-    }
-
-    protected override void OnTriggerExit2D(Collider2D other)
-    {
-        if (other.CompareTag("Player") && !other.isTrigger)
-        {
-            PlayerInRange = false;
-            Context.Raise();
+            if (other.CompareTag("Player") && !other.isTrigger)
+            {
+                PlayerInRange = false;
+                Context.Raise();
+            }
         }
     }
 }

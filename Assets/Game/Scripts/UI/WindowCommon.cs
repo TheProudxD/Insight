@@ -1,14 +1,17 @@
 ﻿using UnityEngine;
 
-public class WindowCommon : MonoBehaviour
+namespace UI
 {
-    public void Close()
+    public class WindowCommon : MonoBehaviour
     {
-        gameObject.SetActive(false);
-    }
+        public void Close()
+        {
+            gameObject.SetActive(false);
+        }
 
-    public void Show()
-    {
-        gameObject.SetActive(true);
+        public void Show()
+        {
+            gameObject.SetActive(true);
+        }
     }
 }

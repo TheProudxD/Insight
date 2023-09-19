@@ -2,7 +2,7 @@ using System;
 using System.IO;
 using UnityEngine;
 
-namespace Game.Scripts.Storage
+namespace StorageService
 {
     public class JsonToFileStorageService: IStorageService
     {

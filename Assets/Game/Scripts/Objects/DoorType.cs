@@ -1,6 +1,9 @@
-public enum DoorType
+namespace Objects
 {
-    Key,
-    Enemy,
-    Button
+    public enum DoorType
+    {
+        Key,
+        Enemy,
+        Button
+    }
 }

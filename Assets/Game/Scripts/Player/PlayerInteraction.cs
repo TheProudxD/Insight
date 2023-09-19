@@ -1,32 +1,35 @@
 using UnityEngine;
 
-public class PlayerInteraction : MonoBehaviour
+namespace Player
 {
-    public Inventory Inventory;
-    public SpriteRenderer ReceivedItemSprite;
-    private PlayerAnimation _playerAnimation;
-
-    private void Awake()
+    public class PlayerInteraction : MonoBehaviour
     {
-        _playerAnimation = GetComponent<PlayerAnimation>();
-    }
+        public Inventory Inventory;
+        public SpriteRenderer ReceivedItemSprite;
+        private PlayerAnimation _playerAnimation;
 
-    public void RaiseItem()
-    {
-        if (Inventory.CurrentItem == null) return;
-
-        if (PlayerController.CurrentState != PlayerState.Interact)
+        private void Awake()
         {
-            _playerAnimation.SetReceiveItemAnimation(true);
-            PlayerController.CurrentState = PlayerState.Interact;
-            ReceivedItemSprite.sprite = Inventory.CurrentItem.ItemSprite;
+            _playerAnimation = GetComponent<PlayerAnimation>();
         }
-        else
+
+        public void RaiseItem()
         {
-            _playerAnimation.SetReceiveItemAnimation(false);
-            PlayerController.CurrentState = PlayerState.Idle;
-            ReceivedItemSprite.sprite = null;
-            Inventory.CurrentItem = null;
+            if (Inventory.CurrentItem == null) return;
+
+            if (PlayerController.CurrentState != PlayerState.Interact)
+            {
+                _playerAnimation.SetReceiveItemAnimation(true);
+                PlayerController.CurrentState = PlayerState.Interact;
+                ReceivedItemSprite.sprite = Inventory.CurrentItem.ItemSprite;
+            }
+            else
+            {
+                _playerAnimation.SetReceiveItemAnimation(false);
+                PlayerController.CurrentState = PlayerState.Idle;
+                ReceivedItemSprite.sprite = null;
+                Inventory.CurrentItem = null;
+            }
         }
     }
 }

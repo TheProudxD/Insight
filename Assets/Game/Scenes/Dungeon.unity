@@ -16319,7 +16319,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 685336869857196403, guid: 7db878a31e02a424fbe7826ddad16c51, type: 3}
       propertyPath: ChaseRadius
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 685336869857196403, guid: 7db878a31e02a424fbe7826ddad16c51, type: 3}
       propertyPath: _projectile

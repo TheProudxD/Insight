@@ -1,7 +1,6 @@
-using System;
 using UnityEngine;
 
-namespace Game.Scripts.InGame_Resources
+namespace ResourceService
 {
     public class ResourceGiver : MonoBehaviour
     {

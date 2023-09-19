@@ -2,69 +2,58 @@
 using UnityEngine;
 using UnityEngine.Serialization;
 
-public class Log : Enemy
+namespace Enemies
 {
-    [FormerlySerializedAs("_attackRadius")] [SerializeField]
-    protected float AttackRadius = 1.5f;
-
-    [FormerlySerializedAs("_chaseRadius")] [SerializeField]
-    protected float ChaseRadius = 4;
-
-    private void FixedUpdate() => CheckDistance();
-
-    private void OnDrawGizmos()
+    public class Log : Enemy
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, ChaseRadius);
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, AttackRadius);
-    }
+        [FormerlySerializedAs("_attackRadius")] [SerializeField]
+        protected float AttackRadius = 1.5f;
 
-    protected virtual void CheckDistance()
-    {
-        var distance = Vector3.Distance(Target.position, transform.position);
-        if (distance <= ChaseRadius && distance > AttackRadius)
+        [FormerlySerializedAs("_chaseRadius")] [SerializeField]
+        protected float ChaseRadius = 4;
+
+        private void FixedUpdate() => CheckDistance();
+
+        private void OnDrawGizmos()
         {
-            if (CurrentState is EnemyState.Idle or EnemyState.Walk and not EnemyState.Idle)
-            {
-                var targetDirection = Vector3.MoveTowards(
-                    transform.position,
-                    Target.position,
-                    MoveSpeed * Time.deltaTime);
-                EnemyRigidbody.MovePosition(targetDirection);
+            Gizmos.color = Color.yellow;
+            Gizmos.DrawWireSphere(transform.position, ChaseRadius);
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireSphere(transform.position, AttackRadius);
+        }
 
-                ChangeAnimation(targetDirection - transform.position);
-                SetWakeupAnimation(true);
-                ChangeState(EnemyState.Walk);
+        protected virtual void CheckDistance()
+        {
+            var distance = Vector3.Distance(Target.position, transform.position);
+            if (distance <= ChaseRadius && distance > AttackRadius)
+            {
+                if (CurrentState is EnemyState.Idle or EnemyState.Walk and not EnemyState.Idle)
+                {
+                    var targetDirection = Vector3.MoveTowards(
+                        transform.position,
+                        Target.position,
+                        MoveSpeed * Time.deltaTime);
+                    EnemyRigidbody.MovePosition(targetDirection);
+
+                    ChangeAnimation(targetDirection - transform.position);
+                    SetAnimationBool(AnimationConst.wakeUp, true);
+                    ChangeState(EnemyState.Walk);
+                }
+            }
+            else if (distance > ChaseRadius)
+            {
+                SetAnimationBool(AnimationConst.wakeUp, false);
             }
         }
-        else if (distance > ChaseRadius)
+
+        protected void Move(Vector2 direction) => EnemyRigidbody.MovePosition(direction);
+
+        protected void ChangeAnimation(Vector2 direction)
         {
-            SetWakeupAnimation(false);
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+                MoveAnimation(direction.x > 0 ? Vector2.right : Vector2.left);
+            else
+                MoveAnimation(direction.y > 0 ? Vector2.up : Vector2.down);
         }
-    }
-
-    protected void SetWakeupAnimation(bool enable)
-    {
-        Animator.SetBool(WAKEUP_STATE, enable);
-    }
-
-    private void SetAnimationFloat(Vector2 direction)
-    {
-        Animator.SetFloat(X_MOVE_STATE, direction.x);
-        Animator.SetFloat(Y_MOVE_STATE, direction.y);
-    }
-
-    protected void Move(Vector2 direction)
-    {
-        EnemyRigidbody.MovePosition(direction);
-    }
-
-    protected void ChangeAnimation(Vector2 direction)
-    {
-        if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
-            SetAnimationFloat(direction.x > 0 ? Vector2.right : Vector2.left);
-        else
-            SetAnimationFloat(direction.y > 0 ? Vector2.up : Vector2.down);
     }
 }

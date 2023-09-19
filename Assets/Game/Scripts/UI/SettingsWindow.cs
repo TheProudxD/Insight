@@ -1,24 +1,27 @@
 ﻿using UnityEngine;
 using UnityEngine.Audio;
 
-internal class SettingsWindow : WindowCommon
+namespace UI
 {
-    [SerializeField] private AudioMixer _music;
-    private bool _isFullScreen;
-
-    public void AudioVolume(float sliderValue)
+    public class SettingsWindow : WindowCommon
     {
-        _music.SetFloat("masterVolume", sliderValue);
-    }
+        [SerializeField] private AudioMixer _music;
+        private bool _isFullScreen;
 
-    public void ChangeQuality(int q)
-    {
-        QualitySettings.SetQualityLevel(q);
-    }
+        public void AudioVolume(float sliderValue)
+        {
+            _music.SetFloat("masterVolume", sliderValue);
+        }
 
-    public void FullScreenToggle()
-    {
-        _isFullScreen = !_isFullScreen;
-        Screen.fullScreen = _isFullScreen;
+        public void ChangeQuality(int q)
+        {
+            QualitySettings.SetQualityLevel(q);
+        }
+
+        public void FullScreenToggle()
+        {
+            _isFullScreen = !_isFullScreen;
+            Screen.fullScreen = _isFullScreen;
+        }
     }
 }

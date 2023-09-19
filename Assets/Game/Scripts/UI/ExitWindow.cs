@@ -1,10 +1,13 @@
 ﻿using UnityEngine;
 
-internal class ExitWindow : WindowCommon
+namespace UI
 {
-    public void Exit()
+    internal class ExitWindow : WindowCommon
     {
-        Application.Quit();
-        Debug.LogWarning("Exit pressed!");
+        public void Exit()
+        {
+            Application.Quit();
+            Debug.LogWarning("Exit pressed!");
+        }
     }
 }

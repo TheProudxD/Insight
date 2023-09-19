@@ -1,95 +1,99 @@
 using System;
 using System.Reflection;
+using Player;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Hud : MonoBehaviour
+namespace UI
 {
-    [SerializeField] private Button _attackButton;
-    [SerializeField] private Button _changeWeaponButton;
-    [SerializeField] private Button _useFirstPotionButton, _useSecondPotionButton, _useThirdPotionButton;
-
-    [SerializeField] private Slider _hpSlider, _manaSlider;
-    [SerializeField] private PlayerController _player;
-
-    private void Awake()
+    public class Hud : MonoBehaviour
     {
-        if (_player == null) Debug.LogError(nameof(_player));
+        [SerializeField] private Button _attackButton;
+        [SerializeField] private Button _changeWeaponButton;
+        [SerializeField] private Button _useFirstPotionButton, _useSecondPotionButton, _useThirdPotionButton;
 
-        _attackButton.onClick.AddListener(Attack);
-        _changeWeaponButton.onClick.AddListener(ChangeWeapon);
+        [SerializeField] private Slider _hpSlider, _manaSlider;
+        [SerializeField] private PlayerController _player;
 
-        _useFirstPotionButton.onClick.AddListener(UseFirstPotion);
-        _useSecondPotionButton.onClick.AddListener(UseSecondPotion);
-        _useThirdPotionButton.onClick.AddListener(UseThirdPotion);
-    }
-
-    public void ChangeHealthBarAmount(float amount)
-    {
-        DecreaseBar(_hpSlider, amount);
-    }
-
-    private void ChangeManaBarAmount(float amount)
-    {
-        DecreaseBar(_manaSlider, amount);
-    }
-
-    private void DecreaseBar(Slider slider, float amount)
-    {
-        if (slider is null) throw new NullReferenceException(nameof(slider));
-        if (slider.value > 0)
+        private void Awake()
         {
-            slider.GetComponentsInChildren<Image>()[1].enabled = true;
-            slider.value -= amount;
+            if (_player == null) Debug.LogError(nameof(_player));
+
+            _attackButton.onClick.AddListener(Attack);
+            _changeWeaponButton.onClick.AddListener(ChangeWeapon);
+
+            _useFirstPotionButton.onClick.AddListener(UseFirstPotion);
+            _useSecondPotionButton.onClick.AddListener(UseSecondPotion);
+            _useThirdPotionButton.onClick.AddListener(UseThirdPotion);
         }
-        else
+
+        public void ChangeHealthBarAmount(float amount)
         {
-            slider.GetComponentsInChildren<Image>()[1].enabled = false;
+            DecreaseBar(_hpSlider, amount);
         }
-    }
 
-    private void IncreaseBar(Slider slider)
-    {
-        if (slider is null) return;
+        private void ChangeManaBarAmount(float amount)
+        {
+            DecreaseBar(_manaSlider, amount);
+        }
 
-        if (!slider.GetComponentsInChildren<Image>()[1].enabled)
-            slider.GetComponentsInChildren<Image>()[1].enabled = true;
-        else
-            slider.value += 10;
-    }
+        private void DecreaseBar(Slider slider, float amount)
+        {
+            if (slider is null) throw new NullReferenceException(nameof(slider));
+            if (slider.value > 0)
+            {
+                slider.GetComponentsInChildren<Image>()[1].enabled = true;
+                slider.value -= amount;
+            }
+            else
+            {
+                slider.GetComponentsInChildren<Image>()[1].enabled = false;
+            }
+        }
 
-    private void Attack()
-    {
-        _player.TryAttack();
-    }
+        private void IncreaseBar(Slider slider)
+        {
+            if (slider is null) return;
 
-    private void ChangeWeapon()
-    {
-        print(MethodBase.GetCurrentMethod().Name);
-    }
+            if (!slider.GetComponentsInChildren<Image>()[1].enabled)
+                slider.GetComponentsInChildren<Image>()[1].enabled = true;
+            else
+                slider.value += 10;
+        }
 
-    private void TakeFirstWeapon()
-    {
-        print(MethodBase.GetCurrentMethod().Name);
-    }
+        private void Attack()
+        {
+            _player.TryAttack();
+        }
 
-    private void TakeSecondWeapon()
-    {
-        print(MethodBase.GetCurrentMethod().Name);
-    }
+        private void ChangeWeapon()
+        {
+            print(MethodBase.GetCurrentMethod().Name);
+        }
 
-    private void UseFirstPotion()
-    {
-        print(MethodBase.GetCurrentMethod().Name);
-    }
+        private void TakeFirstWeapon()
+        {
+            print(MethodBase.GetCurrentMethod().Name);
+        }
 
-    private void UseSecondPotion()
-    {
-        print(MethodBase.GetCurrentMethod().Name);
-    }
+        private void TakeSecondWeapon()
+        {
+            print(MethodBase.GetCurrentMethod().Name);
+        }
 
-    private void UseThirdPotion()
-    {
-        print(MethodBase.GetCurrentMethod().Name);
+        private void UseFirstPotion()
+        {
+            print(MethodBase.GetCurrentMethod().Name);
+        }
+
+        private void UseSecondPotion()
+        {
+            print(MethodBase.GetCurrentMethod().Name);
+        }
+
+        private void UseThirdPotion()
+        {
+            print(MethodBase.GetCurrentMethod().Name);
+        }
     }
 }

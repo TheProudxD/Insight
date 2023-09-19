@@ -1,7 +1,10 @@
-public enum EnemyState
+namespace Enemies
 {
-    Idle,
-    Walk,
-    Attack,
-    Stagger
+    public enum EnemyState
+    {
+        Idle,
+        Walk,
+        Attack,
+        Stagger
+    }
 }

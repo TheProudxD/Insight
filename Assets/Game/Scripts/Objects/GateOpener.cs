@@ -1,16 +1,19 @@
 using UnityEngine;
 
-public class GateOpener : MonoBehaviour
+namespace Objects
 {
-    [SerializeField] private GameObject _closedGate;
-    [SerializeField] private GameObject _openedGate;
-
-    private void OnTriggerEnter2D(Collider2D collision)
+    public class GateOpener : MonoBehaviour
     {
-        if (collision.CompareTag("Player"))
+        [SerializeField] private GameObject _closedGate;
+        [SerializeField] private GameObject _openedGate;
+
+        private void OnTriggerEnter2D(Collider2D collision)
         {
-            _closedGate.SetActive(false);
-            _openedGate.SetActive(true);
+            if (collision.CompareTag("Player"))
+            {
+                _closedGate.SetActive(false);
+                _openedGate.SetActive(true);
+            }
         }
     }
 }
