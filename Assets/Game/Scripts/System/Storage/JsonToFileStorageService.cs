@@ -24,7 +24,14 @@ namespace StorageService
                 
             callback?.Invoke(data);
         }
-        
-        private string BuildPath(string key) => Path.Combine(Application.persistentDataPath, key);
+
+        private string BuildPath(string key) {
+            var path = Path.Combine(Application.persistentDataPath, key);
+            if (!File.Exists(path))
+            {
+                File.Create(path, 10);
+            }
+            return path;
+        }
     }
 }
