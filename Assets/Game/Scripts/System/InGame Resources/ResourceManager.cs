@@ -1,20 +1,25 @@
 using StorageService;
 using System.Linq;
 using UnityEngine;
+using Zenject;
 
 namespace ResourceService
 {
     public class ResourceManager : MonoBehaviour
     {
+        [Inject] private StorageManager _storageManager;
         private ResourcesFeature _resourcesFeature;
 
         public static ResourceManager Instance;
         private void Awake()
         {
+            if (Instance != null)
+                return;
             Instance = this;
+            DontDestroyOnLoad(this);
 
-            var resSoft = new Resource(ResourceType.SoftCurrency, StorageManager.GetSoftCurrency());
-            var resHard = new Resource(ResourceType.HardCurrency, StorageManager.GetHardCurrency());
+            var resSoft = new Resource(ResourceType.SoftCurrency, _storageManager.GetSoftCurrency());
+            var resHard = new Resource(ResourceType.HardCurrency, _storageManager.GetHardCurrency());
 
             var resources = new[] { resHard, resSoft };
             _resourcesFeature = new ResourcesFeature(resources);
@@ -36,6 +41,8 @@ namespace ResourceService
 
         private void OnDestroy()
         {
+            if (_resourcesFeature is null)
+                return;
             _resourcesFeature.ResourceChanged -= OnResourceChanged;
         }
 

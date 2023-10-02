@@ -5,11 +5,13 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.Serialization;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Objects
 {
     public class LevelChanger : MonoBehaviour
     {
+        [Inject] private StorageManager _storageManager;
         private const string ConditionToNewLevel = "FadeNewLevel";
 
         [FormerlySerializedAs("FadeAnimator")] [SerializeField]
@@ -51,7 +53,7 @@ namespace Objects
 
         public void OnFadeComplete()
         {
-            StorageManager.SaveLevelData();
+            _storageManager.SaveLevelData();
             _fadeAnimator.SetTrigger(ConditionToNewLevel);
             SceneManager.LoadScene(StorageManager.GameLevel);
         }

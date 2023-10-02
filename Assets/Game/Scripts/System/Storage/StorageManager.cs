@@ -1,55 +1,55 @@
 using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace StorageService
 {
-    public class StorageManager : MonoBehaviour
+    public class StorageManager 
     {
         private const string GAME_DATA_KEY = "AllData";
         //private const string SOFT_CURRENCY_DATA_KEY = "SoftCurrency";
         //private const string HARD_CURRENCY_DATA_KEY = "HardCurrency";
         private const string LOBBY_LOCATION = "Lobby";
-        private static IStorageService _storageService;
+        private IStorageService _storageService;
         private static StorageData storageData;
         public static int GameLevel { get; private set; }
-
-        private void Awake()
+        public StorageManager(IStorageService storageService)
         {
-            _storageService = new JsonToFileStorageService();
+            _storageService = storageService;
             storageData = new StorageData();
             if (GetCurrentLevel() < 2)
                 SetLevel(2);
         }
 
-        private static int GetCurrentLevel()
+        private int GetCurrentLevel()
         {
             int value = default;
             _storageService?.Load<StorageData>(GAME_DATA_KEY, data =>
             {
-                print($"Level data loaded successfully!");
+                Print($"Level data loaded successfully!");
                 if (data is not null) value = data.Level;
             });
             return value;
         }
 
-        private static void SetLevel(int level)
+        private void SetLevel(int level)
         {
             storageData.Level = level;
-            _storageService.Save(GAME_DATA_KEY, storageData, b => print("Level data saved successfully!" ));
+            _storageService.Save(GAME_DATA_KEY, storageData, b => Print("Level data saved successfully!" ));
         }
-        public static void SaveSoftCurrency(int amount)
+        public void SaveSoftCurrency(int amount)
         {
             storageData.AmountSoftResources = amount;
-            _storageService.Save(GAME_DATA_KEY, storageData, b => print("Soft Currency saved successfully!"));
+            _storageService.Save(GAME_DATA_KEY, storageData, b => Print("Soft Currency saved successfully!"));
         }
-        public static void SaveHardCurrency(int amount)
+        public void SaveHardCurrency(int amount)
         {
             storageData.AmountHardResources = amount;
-            _storageService.Save(GAME_DATA_KEY, storageData, b => print("Hard Currency saved successfully!"));
+            _storageService.Save(GAME_DATA_KEY, storageData, b => Print("Hard Currency saved successfully!"));
         }
 
-        public static void SaveLevelData()
+        public void SaveLevelData()
         {
             if (SceneManager.GetActiveScene().name == LOBBY_LOCATION)
             {
@@ -66,7 +66,7 @@ namespace StorageService
             SetLevel(GameLevel > GetCurrentLevel() ? GameLevel : GetCurrentLevel());
         }
 
-        public static int GetSoftCurrency()
+        public int GetSoftCurrency()
         {
             int value = default;
             _storageService?.Load<StorageData>(GAME_DATA_KEY, data =>
@@ -78,7 +78,7 @@ namespace StorageService
             return value;
         }
 
-        public static int GetHardCurrency()
+        public int GetHardCurrency()
         {
             int value = default;
             _storageService?.Load<StorageData>(GAME_DATA_KEY, data =>
@@ -89,5 +89,7 @@ namespace StorageService
             });
             return value;
         }
+
+        public static void Print(string str) => Debug.Log(str);
     }
 }

@@ -3,6 +3,7 @@ using System.Reflection;
 using Player;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace UI
 {
@@ -14,9 +15,11 @@ namespace UI
 
         [SerializeField] private Slider _hpSlider, _manaSlider;
         [SerializeField] private PlayerController _player;
+        [Inject] private Camera _uiCamera;
 
         private void Awake()
         {
+            GetComponent<Canvas>().worldCamera = _uiCamera;
             if (_player == null) Debug.LogError(nameof(_player));
 
             _attackButton.onClick.AddListener(Attack);
