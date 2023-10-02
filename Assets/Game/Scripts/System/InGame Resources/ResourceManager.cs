@@ -1,3 +1,4 @@
+using StorageService;
 using System.Linq;
 using UnityEngine;
 
@@ -11,9 +12,9 @@ namespace ResourceService
         private void Awake()
         {
             Instance = this;
-            
-            var resSoft = new Resource(ResourceType.SoftCurrency, 100);
-            var resHard = new Resource(ResourceType.HardCurrency, 5);
+
+            var resSoft = new Resource(ResourceType.SoftCurrency, StorageManager.GetSoftCurrency());
+            var resHard = new Resource(ResourceType.HardCurrency, StorageManager.GetHardCurrency());
 
             var resources = new[] { resHard, resSoft };
             _resourcesFeature = new ResourcesFeature(resources);
@@ -23,6 +24,14 @@ namespace ResourceService
             {
                 print($"Created: Resource {type} = {_resourcesFeature.GetResourceValue(type)}");
             }
+        }
+
+        private void Start()
+        {
+            /*
+            StorageManager.SaveSoftCurrency(100);
+            StorageManager.SaveHardCurrency(10);
+            */
         }
 
         private void OnDestroy()

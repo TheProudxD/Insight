@@ -13,7 +13,6 @@ namespace StorageService
             using var fileStream = new StreamWriter(path);
             fileStream.Write(json);
             callback?.Invoke(true);
-            Debug.Log(Application.persistentDataPath);
         }
         
         public void Load<T>(string key, Action<T> callback)
@@ -22,7 +21,6 @@ namespace StorageService
             using var fileStream = new StreamReader(path);
             var json = fileStream.ReadToEnd();
             var data = JsonUtility.FromJson<T>(json);
-                
             callback?.Invoke(data);
         }
 
@@ -30,7 +28,8 @@ namespace StorageService
             var path = Path.Combine(Application.persistentDataPath, key);
             if (!File.Exists(path))
             {
-                File.Create(path);
+                var file = File.Create(path);
+                file.Close();
             }
             return path;
         }

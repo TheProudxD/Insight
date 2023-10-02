@@ -16,7 +16,7 @@ namespace ResourceService
             
             foreach (var resource in resources)
             {
-                resource.Changed += delegate(int oldValue, int newValue)
+                resource.Changed += (int oldValue, int newValue)=>
                 {
                     ResourceChanged?.Invoke(resource.Type, oldValue, newValue);
                 };
@@ -25,14 +25,16 @@ namespace ResourceService
 
         public void AddResource(ResourceType type, int value)
         {
-            if (value < 0) throw new ArgumentException("Value cannot be negative");
+            if (value < 0) 
+                throw new ArgumentException("Value cannot be negative");
             var resource = _resources[type];
             resource.Amount += value;
         }
 
         public void SpendResource(ResourceType type, int value)
         {
-            if (value < 0) throw new ArgumentException("Value cannot be negative");
+            if (value < 0) 
+                throw new ArgumentException("Value cannot be negative");
             var resource = _resources[type];
             resource.Amount -= value;
         }
