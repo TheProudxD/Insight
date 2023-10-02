@@ -13,6 +13,7 @@ namespace StorageService
             using var fileStream = new StreamWriter(path);
             fileStream.Write(json);
             callback?.Invoke(true);
+            Debug.Log(Application.persistentDataPath);
         }
         
         public void Load<T>(string key, Action<T> callback)
@@ -29,7 +30,7 @@ namespace StorageService
             var path = Path.Combine(Application.persistentDataPath, key);
             if (!File.Exists(path))
             {
-                File.Create(path, 10);
+                File.Create(path);
             }
             return path;
         }
