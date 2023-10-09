@@ -13,6 +13,8 @@ public class LoadingFilesLoader : ILoadingOperation
 
     public async UniTask Load(Action<float> onProcess)
     {
-        _storageManager.SaveLevelData();
+        onProcess?.Invoke(0.5f);
+        await _storageManager.LoadFiles();
+        onProcess?.Invoke(1f);
     }
 }

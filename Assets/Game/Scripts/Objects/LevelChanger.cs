@@ -55,7 +55,7 @@ namespace Objects
         {
             _storageManager.SaveLevelData();
             _fadeAnimator.SetTrigger(ConditionToNewLevel);
-            SceneManager.LoadScene(StorageManager.GameLevel);
+            SceneManager.LoadScene(_storageManager.GetCurrentLevel());
         }
 
         public void FadeGameOver() => _fadeAnimator.SetTrigger("FadeGameOver");

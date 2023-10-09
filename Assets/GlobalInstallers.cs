@@ -12,9 +12,18 @@ public class GlobalInstallers : MonoInstaller
         DontDestroyOnLoad(camera);
         Container.Bind<Camera>().FromInstance(camera).AsSingle();
         Container.Bind<StorageManager>().AsSingle();
-        Container.BindInterfacesTo<JsonToFileStorageService>().AsSingle();
         Container.BindInterfacesTo<GameSceneLoader>().AsTransient();
         Container.Bind<LoadingScreenLoader>().AsSingle();
         Container.BindInterfacesTo<LoadingFilesLoader>().AsSingle();
+        ReadFiles();
+    }
+
+    private void ReadFiles()
+    {
+        Container.Bind<JsonToFileStorageService>().AsSingle();
+        Container.Bind<string>().FromInstance(@"http://game.ispu.ru/insight");
+        Container
+            .BindInterfacesTo<ServerJsonToFileStorageService>()
+            .AsSingle();
     }
 }

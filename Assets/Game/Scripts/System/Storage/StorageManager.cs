@@ -1,7 +1,7 @@
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Zenject;
 
 namespace StorageService
 {
@@ -12,8 +12,8 @@ namespace StorageService
         //private const string HARD_CURRENCY_DATA_KEY = "HardCurrency";
         private const string LOBBY_LOCATION = "Lobby";
         private IStorageService _storageService;
-        private static StorageData storageData;
-        public static int GameLevel { get; private set; }
+        private StorageData storageData;
+
         public StorageManager(IStorageService storageService)
         {
             _storageService = storageService;
@@ -22,15 +22,16 @@ namespace StorageService
                 SetLevel(2);
         }
 
-        private int GetCurrentLevel()
+        public async Task LoadFiles()
         {
-            int value = default;
-            _storageService?.Load<StorageData>(GAME_DATA_KEY, data =>
+            await _storageService?.Load<StorageData>(GAME_DATA_KEY, data =>
             {
-                Print($"Level data loaded successfully!");
-                if (data is not null) value = data.Level;
+                Print($"All data loaded successfully!");
+                if (data is not null)
+                    storageData = data;
+                else
+                    throw new Exception("File is not found");
             });
-            return value;
         }
 
         private void SetLevel(int level)
@@ -50,45 +51,24 @@ namespace StorageService
         }
 
         public void SaveLevelData()
-        {
+        {                
+            var currentLevel = GetCurrentLevel();
             if (SceneManager.GetActiveScene().name == LOBBY_LOCATION)
             {
-                var currentLevel = GetCurrentLevel();
                 if (currentLevel < 0) 
                     throw new Exception("Кто поставил отрицательный уровень??");
-                GameLevel = currentLevel;
             }
             else
-            {
-                GameLevel++;
-            }
+                currentLevel++;
 
-            SetLevel(GameLevel > GetCurrentLevel() ? GameLevel : GetCurrentLevel());
+            SetLevel(currentLevel);
         }
 
-        public int GetSoftCurrency()
-        {
-            int value = default;
-            _storageService?.Load<StorageData>(GAME_DATA_KEY, data =>
-            {
-                //print($"Soft currency loaded successfully!");
-                if (data is not null) 
-                    value = data.AmountSoftResources;
-            });
-            return value;
-        }
+        public int GetCurrentLevel() => storageData.Level;
 
-        public int GetHardCurrency()
-        {
-            int value = default;
-            _storageService?.Load<StorageData>(GAME_DATA_KEY, data =>
-            {
-                //print($"Hard currency loaded successfully!");
-                if (data is not null) 
-                    value = data.AmountHardResources;
-            });
-            return value;
-        }
+        public int GetSoftCurrency() => storageData.AmountSoftResources;
+
+        public int GetHardCurrency() => storageData.AmountHardResources;
 
         public static void Print(string str) => Debug.Log(str);
     }
