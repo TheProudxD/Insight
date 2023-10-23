@@ -11,6 +11,7 @@ namespace ResourceService
         private ResourcesFeature _resourcesFeature;
 
         public static ResourceManager Instance;
+
         private void Awake()
         {
             if (Instance != null)
@@ -25,10 +26,12 @@ namespace ResourceService
             _resourcesFeature = new ResourcesFeature(resources);
             _resourcesFeature.ResourceChanged += OnResourceChanged;
 
+            /*
             foreach (var type in resources.Select(v=>v.Type))
             {
                 print($"Created: Resource {type} = {_resourcesFeature.GetResourceValue(type)}");
             }
+            */
         }
 
         private void Start()
@@ -46,15 +49,13 @@ namespace ResourceService
             _resourcesFeature.ResourceChanged -= OnResourceChanged;
         }
 
-        public void AddRandom(ResourceType resourceType)
+        public void Add(ResourceType resourceType, int rAmount)
         {
-            var rAmount = Random.Range(0, 100);
             _resourcesFeature.AddResource(resourceType, rAmount);
         }
 
-        private void SpendRandom(ResourceType resourceType)
+        private void Spend(ResourceType resourceType, int rAmount)
         {
-            var rAmount = Random.Range(0, 100);
             _resourcesFeature.SpendResource(resourceType, rAmount);
         }
 

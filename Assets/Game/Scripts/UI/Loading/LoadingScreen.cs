@@ -54,17 +54,14 @@ public class LoadingScreen : MonoBehaviour
 
     private void ResetFill()
     {
-        Debug.Log("ResetFill");
         _slider.value = 0;
         _targetProgress = 0;
     }
 
     private IEnumerator UpdateSlider()
     {
-        Debug.Log("Slider is updating");
         while (_canvas.enabled)
         {
-            Debug.Log(_targetProgress);
             if (_slider.value < _targetProgress)
                 _slider.value += Time.deltaTime * _speedBar;
             yield return null;

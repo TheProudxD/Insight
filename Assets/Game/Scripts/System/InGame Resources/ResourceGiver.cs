@@ -8,7 +8,7 @@ namespace ResourceService
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            ResourceManager.Instance.AddRandom(_resourceType);
+            //ResourceManager.Instance.AddRandom(_resourceType);
             Destroy(gameObject);
         }
     }

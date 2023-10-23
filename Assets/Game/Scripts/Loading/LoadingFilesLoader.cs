@@ -1,4 +1,6 @@
+using Assets.Game.Scripts.System;
 using Cysharp.Threading.Tasks;
+using ResourceService;
 using StorageService;
 using System;
 using System.Collections;
@@ -7,14 +9,22 @@ using UnityEngine;
 
 public class LoadingFilesLoader : ILoadingOperation
 {
-    private StorageManager _storageManager;
-    public LoadingFilesLoader(StorageManager storageManager) => _storageManager = storageManager;
+    private readonly StorageManager _storageManager;
+    private readonly ServerDynamicStorageService _dynamicDataLoader;
+
+    public LoadingFilesLoader(StorageManager storageManager, ServerDynamicStorageService dynamicDataLoader)
+    {
+        _storageManager = storageManager;
+        _dynamicDataLoader = dynamicDataLoader;
+    }
+
     public string Description => "Loading files from server...";
 
     public async UniTask Load(Action<float> onProcess)
     {
         onProcess?.Invoke(0.5f);
         await _storageManager.LoadFiles();
+        await _dynamicDataLoader.Load<ResourceManager>("alldata");
         onProcess?.Invoke(1f);
     }
 }

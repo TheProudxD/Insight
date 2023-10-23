@@ -10,7 +10,7 @@ public static class FileExtensions
         var path = Path.Combine(Application.persistentDataPath, key);
         if (!File.Exists(path))
         {
-            using (var file = File.Create(path)) ;
+            using var file = File.Create(path);
         }
         return path;
     }

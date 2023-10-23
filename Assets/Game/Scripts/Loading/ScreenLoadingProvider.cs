@@ -14,7 +14,6 @@ public class LoadingScreenLoader : AssetLoader
 
     private void Unload()
     {
-        Debug.Log("UnLoad");
         if (_cachedObject == null)
             return;
         _cachedObject.SetActive(false);

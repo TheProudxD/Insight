@@ -1,3 +1,4 @@
+using Assets.Game.Scripts.System;
 using StorageService;
 using System.Collections;
 using System.Collections.Generic;
@@ -12,9 +13,9 @@ public class GlobalInstallers : MonoInstaller
         DontDestroyOnLoad(camera);
         Container.Bind<Camera>().FromInstance(camera).AsSingle();
         Container.Bind<StorageManager>().AsSingle();
+        Container.BindInterfacesTo<LoadingFilesLoader>().AsSingle();
         Container.BindInterfacesTo<GameSceneLoader>().AsTransient();
         Container.Bind<LoadingScreenLoader>().AsSingle();
-        Container.BindInterfacesTo<LoadingFilesLoader>().AsSingle();
         ReadFiles();
     }
 
@@ -25,5 +26,6 @@ public class GlobalInstallers : MonoInstaller
         Container
             .BindInterfacesTo<ServerJsonToFileStorageService>()
             .AsSingle();
+        Container.BindInterfacesAndSelfTo<ServerDynamicStorageService>().AsSingle();
     }
 }

@@ -9,11 +9,8 @@ using UnityEngine;
 public class ServerJsonToFileStorageService : IStorageService
 {
     private readonly string _url;
-    public ServerJsonToFileStorageService(string url)
-    {
-        Debug.Log(url);
-        this._url = url;
-    }
+
+    public ServerJsonToFileStorageService(string url) => _url = url;
 
     public async Task Load<T>(string key, Action<T> callback)
     {
@@ -21,7 +18,6 @@ public class ServerJsonToFileStorageService : IStorageService
         {
             using (WebClient wc = new WebClient())
             {
-                var path = FileExtensions.BuildPath(key);
                 var jsonFile = await wc.DownloadStringTaskAsync(_url + @"/" + key);
                 var data = JsonUtility.FromJson<T>(jsonFile);
                 Debug.Log(data.ToString());
@@ -34,6 +30,7 @@ public class ServerJsonToFileStorageService : IStorageService
         }
     }
 
+
     public async void Save(string key, object data, Action<bool> callback = null)
     {
         try
@@ -41,12 +38,8 @@ public class ServerJsonToFileStorageService : IStorageService
             using (WebClient wc = new WebClient())
             {
                 var path = FileExtensions.BuildPath(key);
-                await wc.UploadFileTaskAsync (
-                   // Param1 = Link of file
-                   new System.Uri(_url + @"/" + key),
-                   // Param2 = Path to save
-                   path
-               );
+                var iri = new Uri(_url + @"/" + key);
+                await wc.UploadFileTaskAsync(iri, path);
             }
         }
         catch (Exception exception)

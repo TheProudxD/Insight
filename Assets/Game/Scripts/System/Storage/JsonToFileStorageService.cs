@@ -15,7 +15,7 @@ namespace StorageService
             fileStream.Write(json);
             callback?.Invoke(true);
         }
-        
+
         public async Task Load<T>(string key, Action<T> callback)
         {
             string path = FileExtensions.BuildPath(key);
