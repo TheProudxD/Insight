@@ -11,7 +11,7 @@ namespace Objects
 {
     public class LevelChanger : MonoBehaviour
     {
-        [Inject] private StorageManager _storageManager;
+        [Inject] private DataManager _dataManager;
         private const string ConditionToNewLevel = "FadeNewLevel";
 
         [FormerlySerializedAs("FadeAnimator")] [SerializeField]
@@ -53,9 +53,9 @@ namespace Objects
 
         public void OnFadeComplete()
         {
-            _storageManager.SaveLevelData();
+            _dataManager.SaveLevelData();
             _fadeAnimator.SetTrigger(ConditionToNewLevel);
-            SceneManager.LoadScene(_storageManager.GetCurrentLevel());
+            SceneManager.LoadScene(_dataManager.GetCurrentLevel());
         }
 
         public void FadeGameOver() => _fadeAnimator.SetTrigger("FadeGameOver");

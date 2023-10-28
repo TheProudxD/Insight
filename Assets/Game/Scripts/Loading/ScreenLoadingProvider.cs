@@ -1,7 +1,6 @@
-using System.Collections.Generic;
-using UnityEngine;
 using UnityEngine.AddressableAssets;
 using Cysharp.Threading.Tasks;
+
 public class LoadingScreenLoader : AssetLoader
 {
     public async UniTask LoadAndDestroy(ILoadingOperation[] loadingOperations)
@@ -14,10 +13,10 @@ public class LoadingScreenLoader : AssetLoader
 
     private void Unload()
     {
-        if (_cachedObject == null)
+        if (CachedObject == null)
             return;
-        _cachedObject.SetActive(false);
-        Addressables.ReleaseInstance(_cachedObject);
-        _cachedObject = null;
+        CachedObject.SetActive(false);
+        Addressables.ReleaseInstance(CachedObject);
+        CachedObject = null;
     }
 }

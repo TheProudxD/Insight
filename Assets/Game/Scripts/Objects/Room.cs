@@ -12,7 +12,7 @@ public class Room : MonoBehaviour
 
     private void Awake()
     {
-        for (var i=0; i< transform.childCount; i++)
+        for (var i = 0; i < transform.childCount; i++)
         {
             _objects.Add(transform.GetChild(i).gameObject);
         }
@@ -21,30 +21,38 @@ public class Room : MonoBehaviour
         _objects = GetAllExceptEnemies(_objects).ToList();
         _objects.ForEach(x => x.SetActive(false));
     }
-    private IEnumerable<Enemy> GetOnlyEnemies(IEnumerable<GameObject> objects) => objects.Where(g => !g.IsUnityNull() && g.TryGetComponent(out Enemy enemy)).Select(x => x.GetComponent<Enemy>());
-    private IEnumerable<GameObject> GetAllExceptEnemies(IEnumerable<GameObject> objects) => objects.Where(g => !g.IsUnityNull() && !g.TryGetComponent(out Enemy enemy)).Select(x => x);
+
+    private IEnumerable<Enemy> GetOnlyEnemies(IEnumerable<GameObject> objects) => objects
+        .Where(g => !g.IsUnityNull() && g.TryGetComponent(out Enemy enemy)).Select(x => x.GetComponent<Enemy>());
+
+    private IEnumerable<GameObject> GetAllExceptEnemies(IEnumerable<GameObject> objects) =>
+        objects.Where(g => !g.IsUnityNull() && !g.TryGetComponent(out Enemy enemy)).Select(x => x);
+
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
             foreach (var enemy in _enemies)
             {
-                ChangeActivation(enemy,true); 
+                ChangeActivation(enemy, true);
             }
+
             foreach (var @object in _objects)
             {
-                ChangeActivation(@object, true); 
+                ChangeActivation(@object, true);
             }
         }
     }
+
     protected virtual void OnTriggerExit2D(Collider2D collision)
     {
         if (collision.CompareTag("Player") && !collision.isTrigger)
         {
             foreach (var enemy in _enemies)
             {
-                ChangeActivation(enemy,false);
+                ChangeActivation(enemy, false);
             }
+
             foreach (var @object in _objects)
             {
                 ChangeActivation(@object, false);

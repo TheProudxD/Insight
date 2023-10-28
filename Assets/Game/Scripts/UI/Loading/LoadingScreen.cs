@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using JetBrains.Annotations;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -17,8 +18,9 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] private float _speedBar;
     private Camera _uiCamera;
     private float _targetProgress;
-    public async UniTask Load(ILoadingOperation[] queue)
+    public async UniTask Load([NotNull] ILoadingOperation[] queue)
     {
+        if (queue == null) throw new ArgumentNullException(nameof(queue));
         DontDestroyOnLoad(this);
         _canvas.worldCamera = _uiCamera;
         _canvas.enabled = true;
