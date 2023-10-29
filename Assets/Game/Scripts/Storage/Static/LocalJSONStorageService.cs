@@ -1,28 +1,28 @@
 using System;
 using System.IO;
-using Utils;
+using Tools;
 using System.Threading.Tasks;
 using UnityEngine;
 
 namespace StorageService
 {
-    public sealed class LocalJSONStorageService : IStorageService
+    public sealed class LocalJSONStorageService : IStaticStorageService
     {
         public void Save(string key, object data, Action<bool> callback = null)
         {
-            var path = Extensions.BuildPath(key);
+            var path = Utils.BuildPath(key);
             var json = JsonUtility.ToJson(data);
             using var fileStream = new StreamWriter(path);
             fileStream.Write(json);
             callback?.Invoke(true);
         }
 
-        public Task Load(string key, Action<JSONData> callback)
+        public Task Load(string key, Action<StaticData> callback)
         {
-            var path = Extensions.BuildPath(key);
+            var path = Utils.BuildPath(key);
             using var fileStream = new StreamReader(path);
             var json = fileStream.ReadToEnd();
-            var data = JsonUtility.FromJson<JSONData>(json);
+            var data = JsonUtility.FromJson<StaticData>(json);
             callback?.Invoke(data);
             return Task.CompletedTask;
         }

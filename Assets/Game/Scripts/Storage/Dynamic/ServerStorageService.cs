@@ -1,17 +1,16 @@
 ﻿using SimpleJSON;
-using StorageService;
 using System;
 using System.Net;
 using System.Threading.Tasks;
 using UnityEngine;
 
-namespace Assets.Game.Scripts.System
+namespace StorageService
 {
-    public class DatabaseTransferService : ITransferService
+    public class ServerStorageService : IDynamicStorageService
     {
         private readonly string _url;
 
-        public DatabaseTransferService(string url) => _url = url;
+        public ServerStorageService(string url) => _url = url;
 
         public async Task Load(string key, Action<DynamicData> callback = null)
         {
@@ -42,6 +41,7 @@ namespace Assets.Game.Scripts.System
 
         public void Save(string key, object data, Action<bool> callback = null)
         {
+            Debug.Log("Saved to the server..");
             //throw new NotImplementedException();
         }
     }

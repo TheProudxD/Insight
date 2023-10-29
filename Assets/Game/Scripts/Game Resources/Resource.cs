@@ -21,7 +21,8 @@ namespace ResourceService
             {
                 var oldValue = _amount;
                 _amount = value;
-                if (oldValue != _amount) Changed?.Invoke(oldValue, _amount);
+                if (oldValue != _amount) 
+                    Changed?.Invoke(oldValue, _amount);
             }
         }
     }

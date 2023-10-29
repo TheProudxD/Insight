@@ -14,13 +14,16 @@ namespace ResourceService
 
         public ResourceManager()
         {
-            var resSoft = new Resource(ResourceType.SoftCurrency);
-            var resHard = new Resource(ResourceType.HardCurrency);
+            Resource[] resources =
+            {
+                new(ResourceType.SoftCurrency),
+                new(ResourceType.HardCurrency)
+            };
 
-            var resources = new[] { resHard, resSoft };
             _resources = resources.ToDictionary(r => r.Type);
-            ResourceChanged += OnResourceChanged;
 
+            ResourceChanged += OnResourceChanged;
+            
             foreach (var resource in resources)
             {
                 resource.Changed += (oldValue, newValue) =>

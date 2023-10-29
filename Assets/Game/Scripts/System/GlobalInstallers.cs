@@ -1,4 +1,4 @@
-using Assets.Game.Scripts.System;
+using Game.Scripts.Storage;
 using StorageService;
 using ResourceService;
 using UnityEngine;
@@ -11,9 +11,9 @@ public class GlobalInstallers : MonoInstaller
         var camera = FindObjectOfType<Camera>();
         DontDestroyOnLoad(camera);
         Container.Bind<Camera>().FromInstance(camera).AsSingle();
-        Container.Bind<DataManager>().ToSelf().AsSingle();
+
         Loading();
-        Container.Bind<ResourceManager>().AsSingle();
+        Data();
         Storage();
     }
 
@@ -23,12 +23,20 @@ public class GlobalInstallers : MonoInstaller
         Container.BindInterfacesTo<GameSceneLoader>().AsTransient();
         Container.Bind<LoadingScreenLoader>().AsSingle();
     }
-    
+
+    private void Data()
+    {
+        Container.Bind<DataManager>().ToSelf().AsSingle();
+        Container.Bind<ResourceManager>().AsSingle();
+        Container.Bind<LevelManager>().AsSingle();
+    }
+
     private void Storage()
     {
-        Container.Bind<string>().FromInstance($"http://game.ispu.ru/insight");
+        Container.Bind<string>().FromInstance("http://game.ispu.ru/insight");
         Container.BindInterfacesTo<LocalJSONStorageService>().AsSingle();
+        Container.BindInterfacesTo<ServerStorageService>().AsSingle();
         //Container.BindInterfacesTo<ServerJSONStorageService>().AsSingle();
-        Container.BindInterfacesTo<DatabaseTransferService>().AsSingle();
+        //Container.BindInterfacesTo<DatabaseStorageService>().AsSingle();
     }
 }

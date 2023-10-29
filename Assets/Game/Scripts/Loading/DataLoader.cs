@@ -5,30 +5,47 @@ using UnityEngine;
 
 public class DataLoader : ILoadingOperation
 {
-    private readonly IStorageService _storageService;
-    private readonly ITransferService _transferService;
+    private readonly IStaticStorageService _staticStorageService;
+    private readonly IDynamicStorageService _dynamicStorageService;
     private readonly DataManager _dataManager;
 
-    public DataLoader(DataManager dataManager, IStorageService storageService, ITransferService transferService)
+    public DataLoader(DataManager dataManager, IStaticStorageService staticStorageService,
+        IDynamicStorageService dynamicStorageService)
     {
         _dataManager = dataManager;
-        _storageService = storageService;
-        _transferService = transferService;
+        _staticStorageService = staticStorageService;
+        _dynamicStorageService = dynamicStorageService;
     }
 
-    public string Description => "Loading files from server...";
+    public string Description => "Loading data...";
 
     public async UniTask Load(Action<float> onProcess)
     {
-        onProcess?.Invoke(0.5f);
-        
-        await _storageService.Load(DataManager.JSON_DATA_KEY, data =>
+        onProcess?.Invoke(0f);
+
+        await _staticStorageService.Load(DataManager.STATIC_DATA_KEY, data =>
         {
             if (data is not null)
             {
-                //Debug.Log("AllData loaded successfully!");
+                //Debug.Log("Static data loaded successfully!");
                 Debug.Log(data.ToString());
-                _dataManager.GetData(data);
+                _dataManager.SetData(data);
+            }
+            else
+            {
+                throw new Exception("File is not found");
+            }
+        });
+        
+        onProcess?.Invoke(0.5f);
+        
+        await _dynamicStorageService.Load(DataManager.DYNAMIC_DATA_KEY, data =>
+        {
+            if (data is not null)
+            {
+                //Debug.Log("Dynamic data loaded successfully!");
+                Debug.Log(data.ToString());
+                _dataManager.SetData(data);
             }
             else
             {
@@ -36,19 +53,6 @@ public class DataLoader : ILoadingOperation
             }
         });
 
-        await _transferService.Load(DataManager.DATABASE_DATA_KEY, data =>
-        {
-            if (data is not null)
-            {
-                //Debug.Log("AllData loaded successfully!");
-                Debug.Log(data.ToString());
-                _dataManager.GetData(data);
-            }
-            else
-            {
-                throw new Exception("File is not found");
-            }
-        });
         onProcess?.Invoke(1f);
     }
 }

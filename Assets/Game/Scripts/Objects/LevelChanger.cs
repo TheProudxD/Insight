@@ -21,13 +21,13 @@ namespace Objects
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out PlayerController player)) 
+            if (collision.gameObject.TryGetComponent(out PlayerController player))
                 StartTransition();
         }
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out PlayerController player)) 
+            if (collision.gameObject.TryGetComponent(out PlayerController player))
                 StopTransition();
         }
 
@@ -53,7 +53,7 @@ namespace Objects
 
         public void OnFadeComplete()
         {
-            _dataManager.SaveLevelData();
+            _dataManager.SetLevel(_dataManager.GetCurrentLevel() + 1);
             _fadeAnimator.SetTrigger(ConditionToNewLevel);
             SceneManager.LoadScene(_dataManager.GetCurrentLevel());
         }

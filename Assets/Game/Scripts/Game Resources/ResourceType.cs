@@ -2,7 +2,7 @@ namespace ResourceService
 {
     public enum ResourceType
     {
-        SoftCurrency,
-        HardCurrency
+        SoftCurrency, // Gold
+        HardCurrency // Crystal
     }
 }

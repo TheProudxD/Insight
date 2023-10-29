@@ -18,9 +18,11 @@ public class LoadingScreen : MonoBehaviour
     [SerializeField] private float _speedBar;
     private Camera _uiCamera;
     private float _targetProgress;
-    public async UniTask Load([NotNull] ILoadingOperation[] queue)
+
+    public async UniTask Load(ILoadingOperation[] queue)
     {
-        if (queue == null) throw new ArgumentNullException(nameof(queue));
+        if (queue == null)
+            throw new ArgumentNullException(nameof(queue));
         DontDestroyOnLoad(this);
         _canvas.worldCamera = _uiCamera;
         _canvas.enabled = true;
@@ -46,7 +48,8 @@ public class LoadingScreen : MonoBehaviour
         {
             await UniTask.Yield();
         }
-        await UniTask.Delay(TimeSpan.FromSeconds(0.15f));
+
+        //await UniTask.Delay(TimeSpan.FromSeconds(0.15f));
     }
 
     private void OnProgress(float value)

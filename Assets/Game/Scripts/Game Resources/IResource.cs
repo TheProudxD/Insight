@@ -2,7 +2,7 @@ using System;
 
 namespace ResourceService
 {
-    public interface IResource<T>
+    public interface IResource<out T>
     {
         ResourceType Type { get; }
         T Amount { get; }
