@@ -12,7 +12,7 @@ namespace Managers
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.TryGetComponent(out Enemy enemy) && collision.isTrigger)
+            if (collision.TryGetComponent(out Enemy enemy))
             {
                 MoveEntity(enemy);
                 enemy.GetComponent<EnemyHealth>().TakeDamage(_damage);

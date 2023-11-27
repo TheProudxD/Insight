@@ -59,14 +59,36 @@ namespace Player
         
         public bool TrySecondAttack()
         {
-            if (!IsCanAttack()) return false;
-            
-            var arrow = Instantiate(_playerProjectile, transform.position, Quaternion.identity);
-            arrow.Setup(Vector2.left, Vector3.zero);
+            if (!IsCanAttack()) 
+                return false;
+
+            var playerPos = _playerMovement.PlayerMovementVector;
+
+            if (playerPos.sqrMagnitude != 0)
+            {
+                ArrowSpawn(playerPos);
+            }
+            else
+            {
+                ArrowSpawn(_playerMovement.PlayerDirectionVector);
+            }
+           
             StartCoroutine(_playerAnimation.BowAttackCo());
             _timeBeforeLastAttackCounter = 0;
             return true;
         }
+
+        private void ArrowSpawn(Vector3 position)
+        {
+            var arrow = Instantiate(_playerProjectile, transform.position, Quaternion.identity);
+
+            var directionZ = Mathf.Atan2(position.y, position.x) * Mathf.Rad2Deg;
+            var direction = new Vector3(0, 0, directionZ);
+            arrow.Setup(position, direction);
+
+            Destroy(arrow, 10);
+        }
+
 
         private void FixedUpdate()
         {

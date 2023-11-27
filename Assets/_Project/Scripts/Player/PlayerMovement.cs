@@ -9,6 +9,7 @@ namespace Player
         private const bool IS_JOYSTICK_MOVEMENT = false;
 
         [SerializeField, Range(1, 20)] private float _playerSpeed = 5f;
+        public Vector3 PlayerDirectionVector { get; private set; } = Vector3.down;
         public Vector3 PlayerMovementVector => _playerMovement;
         public Rigidbody2D PlayerRigidbody { get; private set; }
 
@@ -43,7 +44,17 @@ namespace Player
                 _joystick.gameObject.SetActive(false);
             }
 
+            GetDirection();
+
             _playerMovement = new Vector3(_horizontalAxis, _verticalAxis, 0);
+        }
+        
+        private void GetDirection()
+        {
+            if (_horizontalAxis != 0)
+                PlayerDirectionVector = _horizontalAxis > 0 ? Vector2.right : Vector2.left;
+            else if (_verticalAxis != 0)
+                PlayerDirectionVector = _verticalAxis > 0 ? Vector2.up : Vector2.down;
         }
 
         public void MoveCharacter(Vector3 position) =>

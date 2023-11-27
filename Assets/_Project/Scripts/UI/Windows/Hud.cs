@@ -19,8 +19,13 @@ namespace UI
 
         private void Awake()
         {
+            if (_player == null)
+            {
+                Debug.LogError(nameof(_player));
+                return;
+            }
+
             GetComponent<Canvas>().worldCamera = _uiCamera;
-            if (_player == null) Debug.LogError(nameof(_player));
 
             _attackButton.onClick.AddListener(Attack);
             _changeWeaponButton.onClick.AddListener(ChangeWeapon);
@@ -71,7 +76,7 @@ namespace UI
 
         private void ChangeWeapon()
         {
-            print(MethodBase.GetCurrentMethod().Name);
+            _player.TrySecondAttack();
         }
 
         private void TakeFirstWeapon()
