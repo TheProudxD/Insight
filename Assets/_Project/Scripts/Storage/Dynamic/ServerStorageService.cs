@@ -28,9 +28,9 @@ namespace StorageService
                 {
                     AmountHardResources = data["user"]["hardcurrency"],
                     AmountSoftResources = data["user"]["softcurrency"],
-                    //CurrentLevel = data["user"]["level"]
+                    CurrentLevel = data["user"]["level"],
                 };
-
+                
                 callback?.Invoke(dynamicData);
             }
             catch (Exception exception)

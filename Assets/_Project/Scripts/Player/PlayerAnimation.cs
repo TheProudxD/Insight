@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using Unity.Mathematics;
 using UnityEngine;
 
 namespace Player
@@ -45,12 +46,21 @@ namespace Player
 
         public void SetReceiveItemAnimation(bool value) => _playerAnimator.SetBool(RECEIVE_ITEM_STATE, value);
 
-        public IEnumerator AttackCo()
+        public IEnumerator SwordAttackCo()
         {
             _playerAnimator.SetBool(ATTACKING_STATE, true);
             PlayerController.CurrentState = PlayerState.Attack;
             yield return null;
             _playerAnimator.SetBool(ATTACKING_STATE, false);
+            yield return new WaitForSeconds(0.3f);
+            if (PlayerController.CurrentState != PlayerState.Interact)
+                PlayerController.CurrentState = PlayerState.Walk;
+        }
+        
+        public IEnumerator BowAttackCo()
+        {
+            PlayerController.CurrentState = PlayerState.Attack;
+            yield return null;
             yield return new WaitForSeconds(0.3f);
             if (PlayerController.CurrentState != PlayerState.Interact)
                 PlayerController.CurrentState = PlayerState.Walk;

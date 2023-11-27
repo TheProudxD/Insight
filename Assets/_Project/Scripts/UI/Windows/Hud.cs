@@ -66,7 +66,7 @@ namespace UI
 
         private void Attack()
         {
-            _player.TryAttack();
+            _player.TryFirstAttack();
         }
 
         private void ChangeWeapon()

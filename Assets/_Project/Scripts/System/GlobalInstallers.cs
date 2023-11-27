@@ -45,6 +45,5 @@ public class GlobalInstallers : MonoInstaller
         Container.BindInterfacesTo<LocalJSONStorageService>().AsSingle();
         Container.BindInterfacesTo<ServerStorageService>().AsSingle();
         //Container.BindInterfacesTo<ServerJSONStorageService>().AsSingle();
-        //Container.BindInterfacesTo<DatabaseStorageService>().AsSingle();
     }
 }

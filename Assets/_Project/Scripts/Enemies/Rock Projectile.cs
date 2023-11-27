@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Enemies
 {
-    public class RockProjectile : Projectile
+    public class RockProjectile : Objects.Projectile
     {
     }
 }

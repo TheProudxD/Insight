@@ -16,6 +16,7 @@ namespace Player
         [SerializeField] private Signal _healthSignal;
         [SerializeField] private Signal _playerHitSignal;
         [SerializeField] private Slider _healthBar;
+        [SerializeField] private PlayerProjectile _playerProjectile;
 
         private PlayerAnimation _playerAnimation;
         private PlayerMovement _playerMovement;
@@ -44,18 +45,27 @@ namespace Player
             }
         }
 
-        public bool TryAttack()
+        private bool IsCanAttack() => CurrentState != PlayerState.Attack &&
+                                      CurrentState != PlayerState.Stagger &&
+                                      _timeBeforeLastAttackCounter >= _attackCooldown;
+        public bool TryFirstAttack()
         {
-            if (CurrentState != PlayerState.Attack &&
-                CurrentState != PlayerState.Stagger &&
-                _timeBeforeLastAttackCounter >= _attackCooldown)
-            {
-                StartCoroutine(_playerAnimation.AttackCo());
-                _timeBeforeLastAttackCounter = 0;
-                return true;
-            }
-
-            return false;
+            if (!IsCanAttack()) return false;
+            
+            StartCoroutine(_playerAnimation.SwordAttackCo());
+            _timeBeforeLastAttackCounter = 0;
+            return true;
+        }
+        
+        public bool TrySecondAttack()
+        {
+            if (!IsCanAttack()) return false;
+            
+            var arrow = Instantiate(_playerProjectile, transform.position, Quaternion.identity);
+            arrow.Setup(Vector2.left, Vector3.zero);
+            StartCoroutine(_playerAnimation.BowAttackCo());
+            _timeBeforeLastAttackCounter = 0;
+            return true;
         }
 
         private void FixedUpdate()
