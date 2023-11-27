@@ -4,6 +4,7 @@ using StorageService;
 using ResourceService;
 using UnityEngine;
 using Zenject;
+using Tools;
 
 public class GlobalInstallers : MonoInstaller
 {
@@ -42,8 +43,7 @@ public class GlobalInstallers : MonoInstaller
     private void Storage()
     {
         Container.Bind<string>().FromInstance("http://game.ispu.ru/insight");
-        Container.BindInterfacesTo<LocalJSONStorageService>().AsSingle();
+        Container.BindInterfacesTo<ServerJSONStorageService>().AsSingle();
         Container.BindInterfacesTo<ServerStorageService>().AsSingle();
-        //Container.BindInterfacesTo<ServerJSONStorageService>().AsSingle();
     }
 }

@@ -1,6 +1,10 @@
+using Assets._Project.Scripts.Storage.Static;
 using Cysharp.Threading.Tasks;
 using StorageService;
 using System;
+using System.IO;
+using System.Net;
+using Tools;
 using UnityEngine;
 
 public class DataLoader : ILoadingOperation
@@ -23,7 +27,24 @@ public class DataLoader : ILoadingOperation
     {
         onProcess?.Invoke(0f);
 
-        await _staticStorageService.Load(DataManager.STATIC_DATA_KEY, data =>
+        /*
+        var localPath = Utils.BuildPath(DataManager.SYSTEM_DATA_KEY);
+        if (File.Exists(localPath))
+        {
+            var localJsonFile = File.ReadAllText(localPath);
+            var systemData = JsonUtility.FromJson<SystemData>(localJsonFile);
+        }
+        else
+        {
+            using var wc = new WebClient();
+            var value = await wc.DownloadStringTaskAsync("http://game.ispu.ru/insight" + $"/api.php?action={DataManager.SYSTEM_DATA_KEY}");
+        }
+        Debug.LogWarning(systemData);
+
+        */
+        onProcess?.Invoke(0.25f);
+
+        await _staticStorageService.Download(DataManager.STATIC_DATA_KEY, data =>
         {
             if (data is not null)
             {
@@ -39,7 +60,7 @@ public class DataLoader : ILoadingOperation
         
         onProcess?.Invoke(0.5f);
         
-        await _dynamicStorageService.Load(DataManager.DYNAMIC_DATA_KEY, data =>
+        await _dynamicStorageService.Download(DataManager.DYNAMIC_DATA_KEY, data =>
         {
             if (data is not null)
             {

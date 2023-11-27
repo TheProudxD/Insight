@@ -12,7 +12,7 @@ namespace StorageService
 
         public ServerStorageService(string url) => _url = url;
 
-        public async Task Load(string key, Action<DynamicData> callback = null)
+        public async Task Download(string key, Action<DynamicData> callback = null)
         {
             using var wc = new WebClient();
             try
@@ -39,7 +39,7 @@ namespace StorageService
             }
         }
 
-        public void Save(string key, object data, Action<bool> callback = null)
+        public void Upload(string key, object data, Action<bool> callback = null)
         {
             Debug.Log("Saved to the server..");
             //throw new NotImplementedException();

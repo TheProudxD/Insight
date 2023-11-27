@@ -6,6 +6,7 @@ namespace StorageService
 {
     public class DataManager
     {
+        public const string SYSTEM_DATA_KEY = "system";
         public const string STATIC_DATA_KEY = "AllData";
         public const string DYNAMIC_DATA_KEY = "alldata";
 
@@ -29,7 +30,7 @@ namespace StorageService
         public void SetLevel(int level)
         {
             _levelManager.SetCurrentLevel(level);
-            _dynamicStorageService.Save(DYNAMIC_DATA_KEY, _dynamicData, b => Print("Level saved successfully!"));
+            _dynamicStorageService.Upload(DYNAMIC_DATA_KEY, _dynamicData, b => Print("Level saved successfully!"));
         }
 
         public void SetSoftCurrency(int amount)
@@ -47,27 +48,27 @@ namespace StorageService
         private void SaveSoftCurrency()
         {
             _dynamicData.AmountSoftResources = GetSoftCurrencyAmount();
-            _dynamicStorageService.Save(DYNAMIC_DATA_KEY, _dynamicData,
+            _dynamicStorageService.Upload(DYNAMIC_DATA_KEY, _dynamicData,
                 b => Print("Soft Currency saved successfully!"));
         }
 
         private void SetMaxLevel(int maxLevel)
         {
             _staticData.MaxLevel = maxLevel;
-            _staticStorageService.Save(STATIC_DATA_KEY, _staticData, b => Print("Current Level saved successfully!"));
+            _staticStorageService.Upload(STATIC_DATA_KEY, _staticData, b => Print("Max Level saved successfully!"));
         }
 
         private void SaveHardCurrency()
         {
             _dynamicData.AmountHardResources = GetHardCurrencyAmount();
-            _dynamicStorageService.Save(DYNAMIC_DATA_KEY, _dynamicData,
+            _dynamicStorageService.Upload(DYNAMIC_DATA_KEY, _dynamicData,
                 b => Print("Hard Currency saved successfully!"));
         }
 
         private void SaveCurrentLevel()
         {
             _dynamicData.CurrentLevel = _levelManager.CurrentLevel;
-            _dynamicStorageService.Save(DYNAMIC_DATA_KEY, _dynamicData,
+            _dynamicStorageService.Upload(DYNAMIC_DATA_KEY, _dynamicData,
                 b => Print("Current Level saved successfully!"));
         }
 

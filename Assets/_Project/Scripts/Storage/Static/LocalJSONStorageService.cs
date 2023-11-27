@@ -8,7 +8,7 @@ namespace StorageService
 {
     public sealed class LocalJSONStorageService : IStaticStorageService
     {
-        public void Save(string key, object data, Action<bool> callback = null)
+        public void Upload(string key, object data, Action<bool> callback = null)
         {
             var path = Utils.BuildPath(key);
             var json = JsonUtility.ToJson(data);
@@ -17,7 +17,7 @@ namespace StorageService
             callback?.Invoke(true);
         }
 
-        public Task Load(string key, Action<StaticData> callback)
+        public Task Download(string key, Action<StaticData> callback)
         {
             var path = Utils.BuildPath(key);
             using var fileStream = new StreamReader(path);
