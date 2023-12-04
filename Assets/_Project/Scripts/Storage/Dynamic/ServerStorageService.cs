@@ -1,5 +1,7 @@
-﻿using SimpleJSON;
+﻿using Assets._Project.Scripts.Storage.Static;
+using SimpleJSON;
 using System;
+using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
 using UnityEngine;
@@ -12,26 +14,44 @@ namespace StorageService
 
         public ServerStorageService(string url) => _url = url;
 
-        public async Task Download(string key, Action<DynamicData> callback = null)
+        public async Task Download(string n, Action<DynamicData> callback = null)
+        {
+            var param = new Dictionary<string, string>();
+            param.Add("action", "alldata");
+            param.Add("playerid", SystemData.Instance.UID.ToString());
+            var data = SendQuary(param, (data)=> 
+            { 
+                if (callback!=null)
+                    callback(new DynamicData
+                        {
+                            AmountHardResources = data["user"]["HardCurrency"],
+                            AmountSoftResources = data["user"]["SoftCurrency"],
+                            CurrentLevel = data["user"]["lvl"],
+                        });
+               
+            });
+        }
+
+         public async Task SendQuary(Dictionary<string, string> @params, Action<JSONNode> callback = null)
         {
             using var wc = new WebClient();
             try
             {
-                var json = await wc.DownloadStringTaskAsync(_url + $"/api.php?action={key}");
+                var result = "";
+                foreach (var item in @params)
+                {
+                    result += item.Key + "=" + item.Value + "&";
+                }
+
+                var path = _url + $"/api.php?{result}";
+                var json = await wc.DownloadStringTaskAsync(path);
 
                 var data = JSONNode.Parse(json);
 
                 if (data is null)
                     throw new NullReferenceException("JSON string is null");
 
-                var dynamicData = new DynamicData
-                {
-                    AmountHardResources = data["user"]["hardcurrency"],
-                    AmountSoftResources = data["user"]["softcurrency"],
-                    CurrentLevel = data["user"]["level"],
-                };
-                
-                callback?.Invoke(dynamicData);
+                callback?.Invoke(data);
             }
             catch (Exception exception)
             {

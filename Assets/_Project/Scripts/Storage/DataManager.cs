@@ -6,7 +6,7 @@ namespace StorageService
 {
     public class DataManager
     {
-        public const string SYSTEM_DATA_KEY = "system";
+        public const string SYSTEM_DATA_KEY = "registry";
         public const string STATIC_DATA_KEY = "AllData";
         public const string DYNAMIC_DATA_KEY = "alldata";
 

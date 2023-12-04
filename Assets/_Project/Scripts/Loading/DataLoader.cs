@@ -1,9 +1,11 @@
 using Assets._Project.Scripts.Storage.Static;
 using Cysharp.Threading.Tasks;
+using SimpleJSON;
 using StorageService;
 using System;
 using System.IO;
 using System.Net;
+using System.Threading.Tasks;
 using Tools;
 using UnityEngine;
 
@@ -23,27 +25,38 @@ public class DataLoader : ILoadingOperation
 
     public string Description => "Loading data...";
 
+    private async Task GetSystemData()
+    {
+        var localPath = Path.Combine(Application.persistentDataPath, DataManager.SYSTEM_DATA_KEY);
+
+        if (!File.Exists(localPath))
+        {
+            using var wc = new WebClient();
+            var path = "http://game.ispu.ru/insight" + $"/api.php?action={DataManager.SYSTEM_DATA_KEY}";
+            var value = await wc.DownloadStringTaskAsync(path);
+            var systemData = new SystemData();
+            var json = JSONNode.Parse(value);
+            systemData.UID = int.Parse(json["uid"]);
+            File.WriteAllText(localPath, JsonUtility.ToJson(systemData));
+        }
+        else
+        {
+            var localJsonFile = File.ReadAllText(localPath);
+            JsonUtility.FromJson<SystemData>(localJsonFile);
+        }
+
+        await Task.CompletedTask;
+    }
+
     public async UniTask Load(Action<float> onProcess)
     {
         onProcess?.Invoke(0f);
 
-        /*
-        var localPath = Utils.BuildPath(DataManager.SYSTEM_DATA_KEY);
-        if (File.Exists(localPath))
-        {
-            var localJsonFile = File.ReadAllText(localPath);
-            var systemData = JsonUtility.FromJson<SystemData>(localJsonFile);
-        }
-        else
-        {
-            using var wc = new WebClient();
-            var value = await wc.DownloadStringTaskAsync("http://game.ispu.ru/insight" + $"/api.php?action={DataManager.SYSTEM_DATA_KEY}");
-        }
-        Debug.LogWarning(systemData);
+        await GetSystemData();
 
-        */
         onProcess?.Invoke(0.25f);
 
+        //Debug.LogWarning(SystemData.Instance?.UID);
         await _staticStorageService.Download(DataManager.STATIC_DATA_KEY, data =>
         {
             if (data is not null)
