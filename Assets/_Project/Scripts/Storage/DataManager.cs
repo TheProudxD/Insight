@@ -6,16 +6,16 @@ namespace StorageService
 {
     public class DataManager
     {
-        public const string SYSTEM_DATA_KEY = "registry";
-        public const string STATIC_DATA_KEY = "AllData";
-        public const string DYNAMIC_DATA_KEY = "alldata";
+        public const string PLAYER_DATA_KEY = "registry";
+        public const string MAX_LEVEL_DATA_KEY = "maxleveldata";
+        public const string DYNAMIC_DATA_KEY = "userdata";
 
         private readonly IStaticStorageService _staticStorageService;
         private readonly IDynamicStorageService _dynamicStorageService;
         private readonly ResourceManager _resourceManager;
         private readonly LevelManager _levelManager;
 
-        private StaticData _staticData;
+        private StaticPlayerData _staticPlayerData;
         private DynamicData _dynamicData;
 
         public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService,
@@ -54,8 +54,8 @@ namespace StorageService
 
         private void SetMaxLevel(int maxLevel)
         {
-            _staticData.MaxLevel = maxLevel;
-            _staticStorageService.Upload(STATIC_DATA_KEY, _staticData, b => Print("Max Level saved successfully!"));
+            _staticPlayerData.MaxLevel = maxLevel;
+            _staticStorageService.Upload(MAX_LEVEL_DATA_KEY, _staticPlayerData, b => Print("Max Level saved successfully!"));
         }
 
         private void SaveHardCurrency()
@@ -74,13 +74,13 @@ namespace StorageService
 
         public int GetCurrentLevel() => _levelManager.GetCurrentLevel();
 
-        public int GetMaxLevel() => _staticData.MaxLevel;
+        public int GetMaxLevel() => _staticPlayerData.MaxLevel;
 
         public int GetSoftCurrencyAmount() => _resourceManager.GetResourceValue(ResourceType.SoftCurrency);
 
         public int GetHardCurrencyAmount() => _resourceManager.GetResourceValue(ResourceType.HardCurrency);
 
-        public void SetData(StaticData data) => _staticData = data;
+        public void SetData(StaticPlayerData playerData) => _staticPlayerData = playerData;
 
         public void SetData(DynamicData data) => _dynamicData = data;
     }

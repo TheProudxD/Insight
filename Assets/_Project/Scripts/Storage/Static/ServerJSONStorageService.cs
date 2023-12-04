@@ -29,26 +29,31 @@ namespace StorageService
             }
         }
 
-        public async Task Download(string key, Action<StaticData> callback)
+        public async Task Download(string key, Action<StaticPlayerData> callback)
         {
             try
             {
-                using var wc = new WebClient();    
-                
-                var serverJsonFile = await wc.DownloadStringTaskAsync(_url + "/" + key);
-                var serverData = JsonUtility.FromJson<StaticData>(serverJsonFile);
+                using var wc = new WebClient();
 
-                if (Utils.ExistLocalDataJSON())
+                var serverJsonFile = await wc.DownloadStringTaskAsync(_url + "/" + key);
+                var serverData = JsonUtility.FromJson<StaticPlayerData>(serverJsonFile);
+                var localPath = Utils.BuildPath(DataManager.MAX_LEVEL_DATA_KEY);
+
+                if (!File.Exists(localPath))
                 {
-                    var localPath = Utils.BuildPath(DataManager.STATIC_DATA_KEY);
-                    var localJsonFile = File.ReadAllText(localPath);
-                    var localData = JsonUtility.FromJson<StaticData>(localJsonFile);
-                    if (localData.GetHashCode() != serverData.GetHashCode())
+                    var localJsonFile = await File.ReadAllTextAsync(localPath);
+                    var localData = JsonUtility.FromJson<StaticPlayerData>(localJsonFile);
+                    if ( localData.GetHashCode() != serverData.GetHashCode())
                     {
-                        File.WriteAllText(localPath, serverJsonFile);
+                        await File.WriteAllTextAsync(localPath, serverJsonFile);
                     }
-                    callback?.Invoke(serverData);
                 }
+                else if (File.Exists(localPath))
+                {
+                    await File.WriteAllTextAsync(localPath, serverJsonFile);
+                }
+                
+                callback?.Invoke(serverData);
             }
             catch (Exception exception)
             {

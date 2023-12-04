@@ -1,6 +1,8 @@
 using System;
 using System.Reflection;
+using Assets._Project.Scripts.Storage.Static;
 using Player;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -15,6 +17,7 @@ namespace UI
 
         [SerializeField] private Slider _hpSlider, _manaSlider;
         [SerializeField] private PlayerController _player;
+        [SerializeField] private TextMeshProUGUI _playerNickname;
         [Inject] private Camera _uiCamera;
 
         private void Awake()
@@ -33,6 +36,8 @@ namespace UI
             _useFirstPotionButton.onClick.AddListener(UseFirstPotion);
             _useSecondPotionButton.onClick.AddListener(UseSecondPotion);
             _useThirdPotionButton.onClick.AddListener(UseThirdPotion);
+
+            _playerNickname.text = SystemPlayerData.Instance.Name;
         }
 
         public void ChangeHealthBarAmount(float amount)

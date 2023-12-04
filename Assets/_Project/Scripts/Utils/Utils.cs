@@ -1,5 +1,6 @@
-using StorageService;
 using System.IO;
+using System.Linq;
+using System.Reflection;
 using UnityEngine;
 
 namespace Tools
@@ -8,7 +9,8 @@ namespace Tools
     {
         public static string BuildPath(string key)
         {
-            var path = Path.Combine(Application.persistentDataPath, key); // C:\Users\<user>\AppData\LocalLow\<company name>\Insight\key
+            // C:\Users\<user>\AppData\LocalLow\<company name>\Insight\key
+            var path = Path.Combine(Application.persistentDataPath, key); 
 
             if (!File.Exists(path))
             {
@@ -17,27 +19,13 @@ namespace Tools
 
             return path;
         }
-        
-        public static bool ExistLocalDataJSON()
-        {
-            var path = Path.Combine(Application.persistentDataPath, DataManager.STATIC_DATA_KEY); // C:\Users\<user>\AppData\LocalLow\<company name>\Insight\key
-            return File.Exists(path);
-        } 
-        
-        public static bool ExistSystemDataJSON()
-        {
-            var path = Path.Combine(Application.persistentDataPath, DataManager.SYSTEM_DATA_KEY); // C:\Users\<user>\AppData\LocalLow\<company name>\Insight\System
-            return File.Exists(path);
-        }
 
         public static string GiveAllFields<T>(this T obj)
         {
-            var str = "";
-            foreach (var field in typeof(T).GetFields())
-                str += field.Name+ ": " + field.GetValue(obj)+ "/";
-            return str;
+            return typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance).Aggregate("",
+                (current, field) => current + field.Name + ": " + field.GetValue(obj) + " ");
         }
-        
+
         public static void Print(string str) => Debug.Log(str);
     }
 }

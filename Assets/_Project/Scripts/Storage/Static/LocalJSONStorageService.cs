@@ -17,12 +17,12 @@ namespace StorageService
             callback?.Invoke(true);
         }
 
-        public Task Download(string key, Action<StaticData> callback)
+        public Task Download(string key, Action<StaticPlayerData> callback)
         {
             var path = Utils.BuildPath(key);
             using var fileStream = new StreamReader(path);
             var json = fileStream.ReadToEnd();
-            var data = JsonUtility.FromJson<StaticData>(json);
+            var data = JsonUtility.FromJson<StaticPlayerData>(json);
             callback?.Invoke(data);
             return Task.CompletedTask;
         }

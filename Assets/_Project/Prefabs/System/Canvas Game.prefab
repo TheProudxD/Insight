@@ -2317,6 +2317,7 @@ MonoBehaviour:
   _hpSlider: {fileID: 6772260136372188844}
   _manaSlider: {fileID: 363471761360576428}
   _player: {fileID: 0}
+  _playerNickname: {fileID: 6774130078479436455}
 --- !u!1 &6968344189699645346
 GameObject:
   m_ObjectHideFlags: 0

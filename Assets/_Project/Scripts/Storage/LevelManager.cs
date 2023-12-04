@@ -19,7 +19,7 @@ namespace Game.Scripts.Storage
             switch (CurrentLevel)
             {
                 case < 0:
-                    throw new InvalidDataException("Кто поставил отрицательный уровень??");
+                    throw new InvalidDataException("Кто поставил отрицательный уровень?");
                 case < 2:
                     SetCurrentLevel(2);
                     break;
