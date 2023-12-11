@@ -32,6 +32,7 @@ namespace StorageService
                     AmountHardResources = data["user"]["HardCurrency"],
                     AmountSoftResources = data["user"]["SoftCurrency"],
                     CurrentLevel = data["user"]["lvl"],
+                    Name = data["user"]["Name"],
                 };
                 
                 callback?.Invoke(callbackData);
@@ -50,10 +51,26 @@ namespace StorageService
             return result;
         }
 
-        public void Upload(string key, object data, Action<bool> callback = null)
+        public async void Upload(string key, object data, Action<bool> callback = null)
         {
-            Debug.Log("Saved to the server..");
-            //throw new NotImplementedException();
+            Debug.Log("Saving to the server..");
+
+            using var wc = new WebClient();
+            try
+            {
+                var path = _url + $"/api.php?{key}";
+                var json = await wc.DownloadStringTaskAsync(path);
+                var data = JSONNode.Parse(json);
+
+                //wc.UploadDataAsync(new Uri(url));
+
+                callback?.Invoke(true);
+            }
+            catch (Exception exception)
+            {
+                Debug.LogError(exception.Message);
+                callback?.Invoke(false);
+            }
         }
     }
 }

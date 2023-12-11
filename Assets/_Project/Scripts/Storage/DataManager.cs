@@ -6,9 +6,9 @@ namespace StorageService
 {
     public class DataManager
     {
-        public const string PLAYER_DATA_KEY = "registry";
+        public const string REGISTRY_DATA_KEY = "registry";
         public const string MAX_LEVEL_DATA_KEY = "maxleveldata";
-        public const string DYNAMIC_DATA_KEY = "userdata";
+        public const string DYNAMIC_USER_DATA_KEY = "userdata";
 
         private readonly IStaticStorageService _staticStorageService;
         private readonly IDynamicStorageService _dynamicStorageService;
@@ -30,7 +30,7 @@ namespace StorageService
         public void SetLevel(int level)
         {
             _levelManager.SetCurrentLevel(level);
-            _dynamicStorageService.Upload(DYNAMIC_DATA_KEY, _dynamicData, b => Print("Level saved successfully!"));
+            _dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData, b => Print("Level saved successfully!"));
         }
 
         public void SetSoftCurrency(int amount)
@@ -48,7 +48,7 @@ namespace StorageService
         private void SaveSoftCurrency()
         {
             _dynamicData.AmountSoftResources = GetSoftCurrencyAmount();
-            _dynamicStorageService.Upload(DYNAMIC_DATA_KEY, _dynamicData,
+            _dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData,
                 b => Print("Soft Currency saved successfully!"));
         }
 
@@ -61,14 +61,14 @@ namespace StorageService
         private void SaveHardCurrency()
         {
             _dynamicData.AmountHardResources = GetHardCurrencyAmount();
-            _dynamicStorageService.Upload(DYNAMIC_DATA_KEY, _dynamicData,
+            _dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData,
                 b => Print("Hard Currency saved successfully!"));
         }
 
         private void SaveCurrentLevel()
         {
             _dynamicData.CurrentLevel = _levelManager.CurrentLevel;
-            _dynamicStorageService.Upload(DYNAMIC_DATA_KEY, _dynamicData,
+            _dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData,
                 b => Print("Current Level saved successfully!"));
         }
 
@@ -79,6 +79,8 @@ namespace StorageService
         public int GetSoftCurrencyAmount() => _resourceManager.GetResourceValue(ResourceType.SoftCurrency);
 
         public int GetHardCurrencyAmount() => _resourceManager.GetResourceValue(ResourceType.HardCurrency);
+
+        public string GetName() => _dynamicData.Name;
 
         public void SetData(StaticPlayerData playerData) => _staticPlayerData = playerData;
 

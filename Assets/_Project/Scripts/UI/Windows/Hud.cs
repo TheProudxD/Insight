@@ -2,6 +2,7 @@ using System;
 using System.Reflection;
 using Assets._Project.Scripts.Storage.Static;
 using Player;
+using StorageService;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -37,7 +38,7 @@ namespace UI
             _useSecondPotionButton.onClick.AddListener(UseSecondPotion);
             _useThirdPotionButton.onClick.AddListener(UseThirdPotion);
 
-            _playerNickname.text = SystemPlayerData.Instance.Name;
+            //_playerNickname.text = DataManager;
         }
 
         public void ChangeHealthBarAmount(float amount)

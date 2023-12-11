@@ -32,26 +32,48 @@ public class DataLoader : ILoadingOperation
         private set { }
     }
 
+    private SystemPlayerData ParserSysPlayerData(string json)
+    {
+        var data = JSONNode.Parse(json);
+        var UID = int.Parse(data["uid"]);
+        var Key = data["key"];
+        var systemData = new SystemPlayerData(UID, Key);
+        return systemData;
+    }
+
     private async Task GetSystemData()
     {
-        var localPath = Path.Combine(Application.persistentDataPath, DataManager.PLAYER_DATA_KEY);
+        var localPath = Path.Combine(Application.persistentDataPath, DataManager.REGISTRY_DATA_KEY);
 
         if (!File.Exists(localPath))
         {
             using var wc = new WebClient();
-            var path = _url + $"/api.php?action={DataManager.PLAYER_DATA_KEY}";
-            var value = await wc.DownloadStringTaskAsync(path);
-            var systemData = new SystemPlayerData();
-            var json = JSONNode.Parse(value);
-            systemData.UID = int.Parse(json["uid"]);
-            systemData.Name = "Player " + systemData.UID; //json["name"];
-            //systemData.Key = long.Parse(json["key"]);
+            var path = _url + $"/api.php?action={DataManager.REGISTRY_DATA_KEY}";
+            var json = await wc.DownloadStringTaskAsync(path);
+            var systemData = ParserSysPlayerData(json);
+
             await File.WriteAllTextAsync(localPath, JsonUtility.ToJson(systemData));
         }
         else
         {
             var localJsonFile = await File.ReadAllTextAsync(localPath);
-            JsonUtility.FromJson<SystemPlayerData>(localJsonFile);
+            var localData = ParserSysPlayerData(localJsonFile);
+
+            /*
+            using var wc = new WebClient();
+            var path = _url + $"/api.php?action={DataManager.PLAYER_DATA_KEY}";
+            var value = await wc.DownloadStringTaskAsync(path);
+            var webJson = JSONNode.Parse(value);
+            var WUID = int.Parse(webJson["uid"]);
+            var WName = "Player " + UID; //json["name"];
+            var WKey = 17; //json["key"];
+            var webdata = new SystemPlayerData(WUID, WName, WKey);
+
+            if (localData.GetHashCode() != webdata.GetHashCode())
+            {
+                Debug.LogError("Данные изменились");
+                await File.WriteAllTextAsync(localPath, value);
+            }*/
         }
 
         await Task.CompletedTask;
@@ -115,8 +137,8 @@ public class DataLoader : ILoadingOperation
 
         var playerParams = new Dictionary<string, string>
         {
-            { "action", DataManager.DYNAMIC_DATA_KEY },
-            { "playerid", SystemPlayerData.Instance.UID.ToString() }
+            { "action", DataManager.DYNAMIC_USER_DATA_KEY },
+            { "playerid", SystemPlayerData.Instance.uid.ToString() },
         };
 
         await _dynamicStorageService.Download(playerParams, data =>
@@ -131,6 +153,7 @@ public class DataLoader : ILoadingOperation
                 throw new Exception("File is not found");
             }
         });
+        _dynamicStorageService.Upload("name", "Vlad", (data)=>Debug.Log("sended"));
 
         onProcess?.Invoke(1f);
     }
