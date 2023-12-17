@@ -9,8 +9,7 @@ namespace Tools
     {
         public static string BuildPath(string key)
         {
-            // C:\Users\<user>\AppData\LocalLow\<company name>\Insight\key
-            var path = Path.Combine(Application.persistentDataPath, key); 
+            var path = Path.Combine(Application.persistentDataPath, key);
 
             if (!File.Exists(path))
             {

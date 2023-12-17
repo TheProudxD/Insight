@@ -20,6 +20,7 @@ namespace UI
         [SerializeField] private PlayerController _player;
         [SerializeField] private TextMeshProUGUI _playerNickname;
         [Inject] private Camera _uiCamera;
+        [Inject] private DataManager _dataManager;
 
         private void Awake()
         {
@@ -38,7 +39,7 @@ namespace UI
             _useSecondPotionButton.onClick.AddListener(UseSecondPotion);
             _useThirdPotionButton.onClick.AddListener(UseThirdPotion);
 
-            //_playerNickname.text = DataManager;
+            _playerNickname.text = _dataManager.GetName();
         }
 
         public void ChangeHealthBarAmount(float amount)

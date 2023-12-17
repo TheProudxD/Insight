@@ -3,7 +3,6 @@ using Cysharp.Threading.Tasks;
 using SimpleJSON;
 using StorageService;
 using System;
-using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -12,91 +11,15 @@ using UnityEngine;
 public class DataLoader : ILoadingOperation
 {
     private readonly string _url;
-    private readonly IStaticStorageService _staticStorageService;
-    private readonly IDynamicStorageService _dynamicStorageService;
     private readonly DataManager _dataManager;
-    private readonly string _defaultPlayerName = "Player";
 
-    public DataLoader(string url, DataManager dataManager, IStaticStorageService staticStorageService,
-        IDynamicStorageService dynamicStorageService)
+    public DataLoader(string url, DataManager dataManager)
     {
         _url = url;
         _dataManager = dataManager;
-        _staticStorageService = staticStorageService;
-        _dynamicStorageService = dynamicStorageService;
     }
 
     public string Description => "Loading data...";
-
-    private SystemPlayerData ParserSysPlayerData(string json)
-    {
-        var data = JSONNode.Parse(json);
-        var uid = int.Parse(data["uid"]);
-        var key = data["key"];
-        var systemData = new SystemPlayerData(uid, key);
-        return systemData;
-    }
-
-    private async Task GetSystemData()
-    {
-        var localPath = Path.Combine(Application.persistentDataPath, DataManager.REGISTRY_DATA_KEY);
-
-        if (!File.Exists(localPath))
-        {
-            using var wc = new WebClient();
-            var path = _url + $"/api.php?action={DataManager.REGISTRY_DATA_KEY}";
-            var json = await wc.DownloadStringTaskAsync(path);
-            var systemData = ParserSysPlayerData(json);
-
-            await File.WriteAllTextAsync(localPath, JsonUtility.ToJson(systemData));
-        }
-        else
-        {
-            var localJsonFile = await File.ReadAllTextAsync(localPath);
-            var localData = ParserSysPlayerData(localJsonFile);
-
-            /*
-            using var wc = new WebClient();
-            var path = _url + $"/api.php?action={DataManager.PLAYER_DATA_KEY}";
-            var value = await wc.DownloadStringTaskAsync(path);
-            var webJson = JSONNode.Parse(value);
-            var WUID = int.Parse(webJson["uid"]);
-            var WName = "Player " + UID; //json["name"];
-            var WKey = 17; //json["key"];
-            var webdata = new SystemPlayerData(WUID, WName, WKey);
-
-            if (localData.GetHashCode() != webdata.GetHashCode())
-            {
-                Debug.LogError("Данные изменились");
-                await File.WriteAllTextAsync(localPath, value);
-            }*/
-        }
-
-        await Task.CompletedTask;
-    }
-
-    private bool HasInternet() => Application.internetReachability != NetworkReachability.NotReachable;
-
-    private async Task<bool> TryToConnect(int tryAmount)
-    {
-        if (HasInternet())
-        {
-            Debug.Log("Connected!");
-            return true;
-        }
-
-        if (tryAmount == 0)
-        {
-            Debug.Log("Does not Connected!");
-            return false;
-        }
-
-        Debug.Log("Waiting...");
-        await Task.Delay(2000);
-        Debug.Log("Trying to reconnect");
-        await TryToConnect(tryAmount - 1);
-        return false;
-    }
 
     public async UniTask Load(Action<float> onProcess)
     {
@@ -113,58 +36,99 @@ public class DataLoader : ILoadingOperation
         onProcess?.Invoke(0.25f);
 
         await GetSystemData();
-        Debug.Log(SystemPlayerData.Instance.ToString());
-
         onProcess?.Invoke(0.5f);
-        await GetMaxLevel();
 
+        await _dataManager.DownloadMaxLevel();
         onProcess?.Invoke(0.75f);
 
-        await GetDynamicData();
-
+        await _dataManager.GetDynamicData();
         onProcess?.Invoke(1f);
     }
 
-    private async Task GetMaxLevel()
+    private SystemPlayerData ParseSystemPlayerData(string json)
     {
-        await _staticStorageService.Download(DataManager.MAX_LEVEL_DATA_KEY, data =>
-        {
-            if (data is not null)
-            {
-                Debug.Log("MaxLevel: " + data.MaxLevel);
-                _dataManager.SetData(data);
-            }
-            else
-            {
-                throw new Exception("File is not found");
-            }
-        });
+        var data = JSONNode.Parse(json);
+        var uid = int.Parse(data["uid"]);
+        var key = data["key"].ToString();
+        var systemData = new SystemPlayerData(uid, key);
+        return systemData;
     }
 
-    private async Task GetDynamicData()
+    private async Task GetSystemData()
     {
-        var downloadParams = new Dictionary<string, string>
-        {
-            { "action", DataManager.DYNAMIC_USER_DATA_KEY },
-            { "playerid", SystemPlayerData.Instance.uid.ToString() },
-        };
+        var localPath = Path.Combine(Application.persistentDataPath, DataManager.REGISTRY_DATA_KEY);
 
-        await _dynamicStorageService.Download(downloadParams, Callback);
-        return;
-
-        async void Callback(DynamicPlayerData data)
+        using var wc = new WebClient();
+        if (!File.Exists(localPath))
         {
-            if (data is not null)
+            var remotePath = _url + $"/api.php?action={DataManager.REGISTRY_DATA_KEY}";
+            var remoteJson = await wc.DownloadStringTaskAsync(remotePath);
+            var remoteData = ParseSystemPlayerData(remoteJson);
+            remoteData.ToSingleton();
+            await File.WriteAllTextAsync(localPath, JsonUtility.ToJson(remoteData));
+        }
+        
+        else
+        {
+            var localJsonFile = await File.ReadAllTextAsync(localPath);
+            var localData = ParseSystemPlayerData(localJsonFile);
+            
+            var id = localData.uid;
+            var webPath = _url + $"/api.php?playerid={id}&action=systemdata";
+            var webJson = await wc.DownloadStringTaskAsync(webPath);
+            var webData = ParseSystemPlayerData(webJson);
+            if (localData.GetHashCode() != webData.GetHashCode())
             {
-                _dataManager.SetData(data);
-                if (data.Name == _defaultPlayerName)
-                    await _dataManager.SetName("Player " + SystemPlayerData.Instance.uid);
-                Debug.Log(data.ToString());
+                Debug.LogError("Несовпадение данных!");
+                //await File.WriteAllTextAsync(localPath, JsonUtility.ToJson(webData));
             }
-            else
+            
+            localData.ToSingleton();
+        }
+        /*
+        {
+
+            using var wc = new WebClient();
+            var path = _url + $"/api.php?action={DataManager.PLAYER_DATA_KEY}";
+            var value = await wc.DownloadStringTaskAsync(path);
+            var webJson = JSONNode.Parse(value);
+            var WUID = int.Parse(webJson["uid"]);
+            var WName = "Player " + UID; //json["name"];
+            var WKey = 17; //json["key"];
+            var webdata = new SystemPlayerData(WUID, WName, WKey);
+
+            if (localData.GetHashCode() != webdata.GetHashCode())
             {
-                throw new Exception("dynamic data is null");
+                Debug.LogError("Данные изменились");
+                await File.WriteAllTextAsync(localPath, value);
             }
         }
+        */
+        Debug.Log(SystemPlayerData.Instance.ToString());
+        await Task.CompletedTask;
+    }
+
+    private bool HasInternet() => Application.internetReachability != NetworkReachability.NotReachable;
+
+    private async Task<bool> TryToConnect(int tryAmount)
+    {
+        if (HasInternet())
+        {
+            Debug.Log("<b>Connected!</b>");
+            Debug.Log("<color=red>Does not Connected!</color>");
+            return true;
+        }
+
+        if (tryAmount <= 0)
+        {
+            Debug.LogError("<color=red>Does not Connected!</color>");
+            return false;
+        }
+
+        Debug.Log("Waiting...");
+        await Task.Delay(2000);
+        Debug.Log("Trying to reconnect");
+        await TryToConnect(tryAmount - 1);
+        return false;
     }
 }

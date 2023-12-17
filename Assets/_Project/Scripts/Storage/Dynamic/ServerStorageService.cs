@@ -28,17 +28,17 @@ namespace StorageService
 
                 var callbackData = new DynamicPlayerData
                 {
-                    AmountHardResources = data["user"]["HardCurrency"],
-                    AmountSoftResources = data["user"]["SoftCurrency"],
-                    CurrentLevel = data["user"]["lvl"],
-                    Name = data["user"]["Name"],
+                    AmountHardResources = data["HardCurrency"],
+                    AmountSoftResources = data["SoftCurrency"],
+                    CurrentLevel = data["lvl"],
+                    Name = data["Name"],
                 };
 
                 callback?.Invoke(callbackData);
             }
             catch (Exception exception)
             {
-                Debug.LogError(exception.Message);
+                Debug.LogError(exception.Message + exception.StackTrace);
             }
         }
 

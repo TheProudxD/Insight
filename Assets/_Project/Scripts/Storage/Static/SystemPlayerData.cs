@@ -10,12 +10,12 @@ namespace Assets._Project.Scripts.Storage.Static
         {
             uid = uID;
             this.key = key;
-            Instance ??= this;
         }
 
         public int uid;
         public string key;
 
+        public void ToSingleton() => Instance = this;
         public override string ToString() => this.GiveAllFields();
 
         public override bool Equals(object obj)
@@ -26,10 +26,7 @@ namespace Assets._Project.Scripts.Storage.Static
 
             return newData.uid == uid;
         }
-
-        public override int GetHashCode()
-        {
-            return uid.GetHashCode()*13;
-        }
+        
+        public override int GetHashCode() => uid.GetHashCode()*19+key.GetHashCode()*13;
     }
 }
