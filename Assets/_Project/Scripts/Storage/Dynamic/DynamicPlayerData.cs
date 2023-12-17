@@ -2,7 +2,7 @@ using Tools;
 
 namespace StorageService
 {
-    public class DynamicData
+    public class DynamicPlayerData
     {
         public int CurrentLevel;
         public int AmountSoftResources;

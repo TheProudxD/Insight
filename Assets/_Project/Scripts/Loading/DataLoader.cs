@@ -8,7 +8,6 @@ using System.IO;
 using System.Net;
 using System.Threading.Tasks;
 using UnityEngine;
-using Random = UnityEngine.Random;
 
 public class DataLoader : ILoadingOperation
 {
@@ -16,6 +15,7 @@ public class DataLoader : ILoadingOperation
     private readonly IStaticStorageService _staticStorageService;
     private readonly IDynamicStorageService _dynamicStorageService;
     private readonly DataManager _dataManager;
+    private readonly string _defaultPlayerName = "Player";
 
     public DataLoader(string url, DataManager dataManager, IStaticStorageService staticStorageService,
         IDynamicStorageService dynamicStorageService)
@@ -26,18 +26,14 @@ public class DataLoader : ILoadingOperation
         _dynamicStorageService = dynamicStorageService;
     }
 
-    public string Description
-    {
-        get => "Loading data...";
-        private set { }
-    }
+    public string Description => "Loading data...";
 
     private SystemPlayerData ParserSysPlayerData(string json)
     {
         var data = JSONNode.Parse(json);
-        var UID = int.Parse(data["uid"]);
-        var Key = data["key"];
-        var systemData = new SystemPlayerData(UID, Key);
+        var uid = int.Parse(data["uid"]);
+        var key = data["key"];
+        var systemData = new SystemPlayerData(uid, key);
         return systemData;
     }
 
@@ -105,7 +101,7 @@ public class DataLoader : ILoadingOperation
     public async UniTask Load(Action<float> onProcess)
     {
         onProcess?.Invoke(0f);
-        
+
         var isConnected = await TryToConnect(3);
         if (!isConnected)
         {
@@ -117,9 +113,20 @@ public class DataLoader : ILoadingOperation
         onProcess?.Invoke(0.25f);
 
         await GetSystemData();
-        onProcess?.Invoke(0.5f);
-
         Debug.Log(SystemPlayerData.Instance.ToString());
+
+        onProcess?.Invoke(0.5f);
+        await GetMaxLevel();
+
+        onProcess?.Invoke(0.75f);
+
+        await GetDynamicData();
+
+        onProcess?.Invoke(1f);
+    }
+
+    private async Task GetMaxLevel()
+    {
         await _staticStorageService.Download(DataManager.MAX_LEVEL_DATA_KEY, data =>
         {
             if (data is not null)
@@ -132,29 +139,32 @@ public class DataLoader : ILoadingOperation
                 throw new Exception("File is not found");
             }
         });
+    }
 
-        onProcess?.Invoke(0.75f);
-
-        var playerParams = new Dictionary<string, string>
+    private async Task GetDynamicData()
+    {
+        var downloadParams = new Dictionary<string, string>
         {
             { "action", DataManager.DYNAMIC_USER_DATA_KEY },
             { "playerid", SystemPlayerData.Instance.uid.ToString() },
         };
 
-        await _dynamicStorageService.Download(playerParams, data =>
+        await _dynamicStorageService.Download(downloadParams, Callback);
+        return;
+
+        async void Callback(DynamicPlayerData data)
         {
             if (data is not null)
             {
-                Debug.Log(data.ToString());
                 _dataManager.SetData(data);
+                if (data.Name == _defaultPlayerName)
+                    await _dataManager.SetName("Player " + SystemPlayerData.Instance.uid);
+                Debug.Log(data.ToString());
             }
             else
             {
-                throw new Exception("File is not found");
+                throw new Exception("dynamic data is null");
             }
-        });
-        _dynamicStorageService.Upload("name", "Vlad", (data)=>Debug.Log("sended"));
-
-        onProcess?.Invoke(1f);
+        }
     }
 }

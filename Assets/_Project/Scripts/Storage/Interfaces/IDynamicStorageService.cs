@@ -6,7 +6,7 @@ namespace StorageService
 {
     public interface IDynamicStorageService // Database
     {
-        void Upload(string key, object data, Action<bool> callback = null);
-        Task Download(Dictionary<string, string> param, Action<DynamicData> callback);
+        Task Download(Dictionary<string, string> param, Action<DynamicPlayerData> callback);
+        Task Upload(Dictionary<string, string> key, Action<bool> callback = null);
     }
 }

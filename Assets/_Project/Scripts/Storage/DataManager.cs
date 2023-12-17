@@ -1,5 +1,9 @@
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using Assets._Project.Scripts.Storage.Static;
 using Game.Scripts.Storage;
 using ResourceService;
+using UnityEngine;
 using static Tools.Utils;
 
 namespace StorageService
@@ -16,7 +20,7 @@ namespace StorageService
         private readonly LevelManager _levelManager;
 
         private StaticPlayerData _staticPlayerData;
-        private DynamicData _dynamicData;
+        private DynamicPlayerData _dynamicPlayerData;
 
         public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService,
             ResourceManager resourceManager, LevelManager levelManager)
@@ -26,25 +30,50 @@ namespace StorageService
             _resourceManager = resourceManager;
             _levelManager = levelManager;
         }
-
+        
+        public async Task SetName(string newName)
+        {
+            var uploadParams = new Dictionary<string, string>
+            {
+                { "playername", newName },
+                { "playerid", SystemPlayerData.Instance.uid.ToString() },
+                { "action", "changename" },
+            };
+        
+            await _dynamicStorageService.Upload(uploadParams, result=>
+            {
+                if (result)
+                {
+                    _dynamicPlayerData.Name = newName;
+                    Debug.Log("Renaming Successfully");
+                }
+                else
+                {
+                    Debug.Log("Error while renaming");                
+                }
+            
+            });
+        }
+        
         public void SetLevel(int level)
         {
             _levelManager.SetCurrentLevel(level);
-            _dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData, b => Print("Level saved successfully!"));
+            //_dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData, b => Print("Level saved successfully!"));
         }
 
         public void SetSoftCurrency(int amount)
         {
             _resourceManager.AddResource(ResourceType.SoftCurrency, amount);
-            SaveSoftCurrency();
+            //SaveSoftCurrency();
         }
 
         public void SetHardCurrency(int amount)
         {
             _resourceManager.AddResource(ResourceType.HardCurrency, amount);
-            SaveHardCurrency();
+            //SaveHardCurrency();
         }
-
+        
+        /*
         private void SaveSoftCurrency()
         {
             _dynamicData.AmountSoftResources = GetSoftCurrencyAmount();
@@ -70,8 +99,9 @@ namespace StorageService
             _dynamicData.CurrentLevel = _levelManager.CurrentLevel;
             _dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData,
                 b => Print("Current Level saved successfully!"));
+                
         }
-
+        */
         public int GetCurrentLevel() => _levelManager.GetCurrentLevel();
 
         public int GetMaxLevel() => _staticPlayerData.MaxLevel;
@@ -80,10 +110,10 @@ namespace StorageService
 
         public int GetHardCurrencyAmount() => _resourceManager.GetResourceValue(ResourceType.HardCurrency);
 
-        public string GetName() => _dynamicData.Name;
+        public string GetName() => _dynamicPlayerData.Name;
 
         public void SetData(StaticPlayerData playerData) => _staticPlayerData = playerData;
 
-        public void SetData(DynamicData data) => _dynamicData = data;
+        public void SetData(DynamicPlayerData playerData) => _dynamicPlayerData = playerData;
     }
 }
