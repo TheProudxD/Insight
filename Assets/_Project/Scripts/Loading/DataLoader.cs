@@ -35,7 +35,12 @@ public class DataLoader : ILoadingOperation
 
         onProcess?.Invoke(0.25f);
 
-        await GetSystemData();
+        var result = await GetSystemData();
+        if (!result)
+        {
+            Debug.LogError("Error. Несовпадение данных!");
+            return;
+        }
         onProcess?.Invoke(0.5f);
 
         await _dataManager.DownloadMaxLevel();
@@ -49,12 +54,12 @@ public class DataLoader : ILoadingOperation
     {
         var data = JSONNode.Parse(json);
         var uid = int.Parse(data["uid"]);
-        var key = data["key"].ToString();
+        var key = data["key"];
         var systemData = new SystemPlayerData(uid, key);
         return systemData;
     }
 
-    private async Task GetSystemData()
+    private async Task<bool> GetSystemData()
     {
         var localPath = Path.Combine(Application.persistentDataPath, DataManager.REGISTRY_DATA_KEY);
 
@@ -79,12 +84,13 @@ public class DataLoader : ILoadingOperation
             var webData = ParseSystemPlayerData(webJson);
             if (localData.GetHashCode() != webData.GetHashCode())
             {
-                Debug.LogError("Несовпадение данных!");
+                return false;
                 //await File.WriteAllTextAsync(localPath, JsonUtility.ToJson(webData));
             }
             
             localData.ToSingleton();
         }
+        
         /*
         {
 
@@ -104,8 +110,10 @@ public class DataLoader : ILoadingOperation
             }
         }
         */
+
         Debug.Log(SystemPlayerData.Instance.ToString());
         await Task.CompletedTask;
+        return true;
     }
 
     private bool HasInternet() => Application.internetReachability != NetworkReachability.NotReachable;
@@ -114,14 +122,13 @@ public class DataLoader : ILoadingOperation
     {
         if (HasInternet())
         {
-            Debug.Log("<b>Connected!</b>");
-            Debug.Log("<color=red>Does not Connected!</color>");
+            Debug.Log("<color=green>Connected!</color>");
             return true;
         }
 
         if (tryAmount <= 0)
         {
-            Debug.LogError("<color=red>Does not Connected!</color>");
+            Debug.Log("<color=red>Does not connected!</color>");
             return false;
         }
 
