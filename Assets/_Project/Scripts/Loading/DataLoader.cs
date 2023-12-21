@@ -39,6 +39,7 @@ public class DataLoader : ILoadingOperation
         if (!result)
         {
             Debug.LogError("Error. Несовпадение данных!");
+            Time.timeScale = 0;
             return;
         }
         onProcess?.Invoke(0.5f);

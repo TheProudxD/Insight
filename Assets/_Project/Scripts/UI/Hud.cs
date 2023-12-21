@@ -10,6 +10,7 @@ using Zenject;
 
 namespace UI
 {
+    [RequireComponent(typeof(CameraInjector))]
     public class Hud : MonoBehaviour
     {
         [SerializeField] private Button _attackButton;
@@ -19,7 +20,7 @@ namespace UI
         [SerializeField] private Slider _hpSlider, _manaSlider;
         [SerializeField] private PlayerController _player;
         [SerializeField] private TextMeshProUGUI _playerNickname;
-        [Inject] private Camera _uiCamera;
+        
         [Inject] private DataManager _dataManager;
 
         private void Awake()
@@ -29,9 +30,7 @@ namespace UI
                 Debug.LogError(nameof(_player));
                 return;
             }
-
-            GetComponent<Canvas>().worldCamera = _uiCamera;
-
+            
             _attackButton.onClick.AddListener(Attack);
             _changeWeaponButton.onClick.AddListener(ChangeWeapon);
 
