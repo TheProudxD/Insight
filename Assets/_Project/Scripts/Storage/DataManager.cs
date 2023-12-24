@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Assets._Project.Scripts.Storage.Static;
 using Game.Scripts.Storage;
 using ResourceService;
+using UI.Shop.Data;
 using UnityEngine;
 
 namespace StorageService
@@ -22,6 +23,7 @@ namespace StorageService
 
         private StaticPlayerData _staticPlayerData = new();
         private DynamicPlayerData _dynamicPlayerData;
+        public ShopData ShopData;
 
         public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService,
             ResourceManager resourceManager, LevelManager levelManager)
@@ -30,6 +32,7 @@ namespace StorageService
             _dynamicStorageService = dynamicStorageService;
             _resourceManager = resourceManager;
             _levelManager = levelManager;
+            ShopData = new ShopData();
         }
 
         public async Task SetName(string newName)
@@ -61,13 +64,13 @@ namespace StorageService
             //_dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData, b => Print("Level saved successfully!"));
         }
 
-        public void SetSoftCurrency(int amount)
+        public void AddSoftCurrency(int amount)
         {
             _resourceManager.AddResource(ResourceType.SoftCurrency, amount);
             //SaveSoftCurrency();
         }
 
-        public void SetHardCurrency(int amount)
+        public void AddHardCurrency(int amount)
         {
             _resourceManager.AddResource(ResourceType.HardCurrency, amount);
             //SaveHardCurrency();

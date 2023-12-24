@@ -16,10 +16,10 @@ namespace ResourceService
             switch (_resourceType)
             {
                 case ResourceType.HardCurrency:
-                    _dataManager.SetHardCurrency(_amount);
+                    _dataManager.AddHardCurrency(_amount);
                     break;
                 case ResourceType.SoftCurrency:
-                    _dataManager.SetSoftCurrency(_amount);
+                    _dataManager.AddSoftCurrency(_amount);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException();

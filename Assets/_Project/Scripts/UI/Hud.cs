@@ -1,6 +1,5 @@
 using System;
 using System.Reflection;
-using Assets._Project.Scripts.Storage.Static;
 using Player;
 using StorageService;
 using TMPro;

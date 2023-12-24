@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7424934445168605913}
   - component: {fileID: 7768528400339468004}
   - component: {fileID: 3260683227402166673}
+  - component: {fileID: 1548200763436880305}
   m_Layer: 5
   m_Name: Title Button
   m_TagString: Untagged
@@ -122,6 +123,22 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1548200763436880305
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6444353455526044177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0d342424a7c24890b2c14491c0b8b6d4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _button: {fileID: 3260683227402166673}
+  _image: {fileID: 7768528400339468004}
+  _selectedColor: {r: 0.9433962, g: 0.9433962, b: 0.9433962, a: 1}
+  _unselectedColor: {r: 0.4811321, g: 0.4811321, b: 0.4811321, a: 1}
 --- !u!1 &7882016294493170274
 GameObject:
   m_ObjectHideFlags: 0
@@ -188,9 +205,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Weapon
-
-'
+  m_text: Sword
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}

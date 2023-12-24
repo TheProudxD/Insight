@@ -2673,6 +2673,7 @@ GameObject:
   - component: {fileID: 3219573524546295225}
   - component: {fileID: 7115495212264222771}
   - component: {fileID: 4500970560530711371}
+  - component: {fileID: 693407053593363766}
   m_Layer: 5
   m_Name: Canvas Game
   m_TagString: Untagged
@@ -2791,6 +2792,18 @@ MonoBehaviour:
   _manaSlider: {fileID: 363471761360576428}
   _player: {fileID: 0}
   _playerNickname: {fileID: 6774130078479436455}
+--- !u!114 &693407053593363766
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6652220780652119259}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 324d989a8bab4fb0b9957f899d911cc7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &6865807295154036590
 GameObject:
   m_ObjectHideFlags: 0
