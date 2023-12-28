@@ -10810,6 +10810,14 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 3989295603491002428, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3989295603491002428, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4500970560530711371, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
       propertyPath: _player
       value: 
@@ -14359,6 +14367,14 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7420727148227393418, guid: 7af9397722d465a46a87d3d27ef3184d, type: 3}
+      propertyPath: _loadingBar
+      value: 
+      objectReference: {fileID: 927504200}
+    - target: {fileID: 7420727148227393418, guid: 7af9397722d465a46a87d3d27ef3184d, type: 3}
+      propertyPath: _fadeAnimator
+      value: 
+      objectReference: {fileID: 816954053}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

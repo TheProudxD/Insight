@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 921656452292205781}
   - component: {fileID: 5817441588836258214}
   - component: {fileID: 5836619371064210121}
-  - component: {fileID: 3706911776064009753}
+  - component: {fileID: 7420727148227393418}
   m_Layer: 0
   m_Name: Level Changer
   m_TagString: Untagged
@@ -26,13 +26,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5828633306948058053}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 6.5, y: -2.19, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &5817441588836258214
 BoxCollider2D:
@@ -106,7 +106,7 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
---- !u!114 &3706911776064009753
+--- !u!114 &7420727148227393418
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -118,5 +118,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b606afb51d41448817c03fa3bb4911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  FadeAnimator: {fileID: 0}
+  _fadeAnimator: {fileID: 0}
   _loadingBar: {fileID: 0}

@@ -1,31 +1,34 @@
 using System;
 using System.IO;
+using UnityEngine.SceneManagement;
 
 namespace Game.Scripts.Storage
 {
     public class LevelManager
     {
-        public int CurrentLevel { get; private set; }
+        private int _currentLevel;
 
         public void SetCurrentLevel(int level)
         {
-            if (level <= 0)
+            if (level < 0)
                 throw new ArgumentException(nameof(level));
-            CurrentLevel = level;
+            _currentLevel = level;
+            SceneManager.LoadScene(_currentLevel);
         }
 
         public int GetCurrentLevel()
         {
+            /*
             switch (CurrentLevel)
             {
                 case < 0:
                     throw new InvalidDataException("Кто поставил отрицательный уровень?");
                 case < 2:
-                    SetCurrentLevel(2);
+                    SetCurrentLevel(CurrentLevel);
                     break;
             }
-
-            return CurrentLevel;
+            */
+            return _currentLevel;
         }
     }
 }

@@ -21,9 +21,9 @@ namespace StorageService
         private readonly ResourceManager _resourceManager;
         private readonly LevelManager _levelManager;
 
-        private StaticPlayerData _staticPlayerData = new();
         private DynamicPlayerData _dynamicPlayerData;
-        public ShopData ShopData;
+        private readonly StaticPlayerData _staticPlayerData = new();
+        public readonly ShopData ShopData;
 
         public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService,
             ResourceManager resourceManager, LevelManager levelManager)

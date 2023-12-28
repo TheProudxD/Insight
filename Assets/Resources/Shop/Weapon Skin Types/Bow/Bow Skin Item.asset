@@ -9,10 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: 5696d7e18b05497aab7ee05ac2be204f, type: 3}
   m_Name: Bow Skin Item
   m_EditorClassIdentifier: Assembly-CSharp:UI.Shop:BowSkinItem
-  <Model>k__BackingField: {fileID: -1918066030, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
-  <Sprite>k__BackingField: {fileID: -2020177825, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
-  <Price>k__BackingField: 2530
-  <SkinType>k__BackingField: 2
+  <Model>k__BackingField: {fileID: 412895851, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
+  <Sprite>k__BackingField: {fileID: 412895851, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
+  <Price>k__BackingField: 2174
+  <SkinType>k__BackingField: 1

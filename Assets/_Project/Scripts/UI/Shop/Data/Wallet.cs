@@ -4,8 +4,18 @@ using Zenject;
 
 public class Wallet
 {
-    [Inject] private DataManager _dataManager;
+    private readonly DataManager _dataManager;
     public event Action<int> CoinsChanged;
+    
+    [Inject]
+    public Wallet(DataManager dataManager)
+    {
+        _dataManager = dataManager;
+    }
+    
+    public Wallet()
+    {
+    }
 
     public void AddCoins(int coins)
     {

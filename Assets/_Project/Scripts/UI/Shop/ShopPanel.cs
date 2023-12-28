@@ -69,6 +69,16 @@ namespace UI.Shop
             shopItemView.Highlight();
         }
 
+        public void Select(ShopItemView shopItem)
+        {
+            foreach (var item in _shopItems)
+            {
+                item.Unselect();
+            }
+            
+            shopItem.Select();
+        }
+
         private void Clear()
         {
             foreach (var shopItem in _shopItems)

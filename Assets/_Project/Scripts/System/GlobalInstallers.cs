@@ -21,7 +21,6 @@ public class GlobalInstallers : MonoInstaller
         var camera = FindObjectOfType<Camera>();
         DontDestroyOnLoad(camera);
         Container.Bind<Camera>().FromInstance(camera).AsSingle();
-
         Container.Bind<WindowManager>().AsSingle();
         Container.Bind<AssetManager>().AsSingle();
     }
@@ -35,9 +34,10 @@ public class GlobalInstallers : MonoInstaller
 
     private void Data()
     {
-        Container.Bind<DataManager>().ToSelf().AsSingle();
+        Container.Bind<DataManager>().AsSingle();
         Container.Bind<ResourceManager>().AsSingle();
         Container.Bind<LevelManager>().AsSingle();
+        Container.Bind<Wallet>().ToSelf().AsSingle();
     }
 
     private void Storage()
