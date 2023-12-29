@@ -53,7 +53,7 @@ namespace Objects
 
         public void OnFadeComplete()
         {
-            var newLevel = _dataManager.GetCurrentLevel() + 1;
+            var newLevel = _dataManager.LevelManager.GetCurrentLevel() + 1;
             _fadeAnimator.SetTrigger(ConditionToNewLevel);
             _dataManager.SetLevel(newLevel);
         }

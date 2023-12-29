@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::SwordSkinItem
   <Model>k__BackingField: {fileID: -77811955, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
   <Sprite>k__BackingField: {fileID: -77811955, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
-  <Price>k__BackingField: 4980
+  <Price>k__BackingField: 60
   <SkinType>k__BackingField: 5

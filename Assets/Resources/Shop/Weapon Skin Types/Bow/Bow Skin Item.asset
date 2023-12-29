@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp:UI.Shop:BowSkinItem
   <Model>k__BackingField: {fileID: 412895851, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
   <Sprite>k__BackingField: {fileID: 412895851, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
-  <Price>k__BackingField: 2174
+  <Price>k__BackingField: 78
   <SkinType>k__BackingField: 1

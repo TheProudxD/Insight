@@ -1,4 +1,3 @@
-using System;
 using StorageService;
 using UnityEngine;
 using Zenject;
@@ -13,18 +12,8 @@ namespace ResourceService
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            switch (_resourceType)
-            {
-                case ResourceType.HardCurrency:
-                    _dataManager.AddHardCurrency(_amount);
-                    break;
-                case ResourceType.SoftCurrency:
-                    _dataManager.AddSoftCurrency(_amount);
-                    break;
-                default:
-                    throw new ArgumentOutOfRangeException();
-            }
-            
+            _dataManager.ResourceManager.AddResource(_resourceType, _amount);
+
             Destroy(gameObject);
         }
     }

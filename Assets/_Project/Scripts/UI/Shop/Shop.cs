@@ -11,7 +11,8 @@ namespace UI.Shop
         [SerializeField] private ShopPanel _shopPanel;
         [SerializeField] private ShopCategoryButton _swordCategoryButton;
         [SerializeField] private ShopCategoryButton _bowCategoryButton;
-        [Header("Buttons")]
+        [SerializeField] private SkinPlacement _skinPlacement;
+        [Header("Buttons")] 
         [SerializeField] private BuyButton _buyButton;
         [SerializeField] private Button _selectionButton;
         [SerializeField] private Image _selectedText;
@@ -23,7 +24,7 @@ namespace UI.Shop
         [Inject] private OpenedSkinsChecker _openedSkinsChecker;
         [Inject] private SelectedSkinsChecker _selectedSkinsChecker;
         private ShopItemView _previewedItem;
-        
+
         private void OnEnable()
         {
             _swordCategoryButton.Click += OnSwordSkinButtonClick;
@@ -31,7 +32,7 @@ namespace UI.Shop
             _buyButton.Click += OnBuyButtonClicked;
             _selectionButton.onClick.AddListener(OnSelectButtonClicked);
         }
-        
+
         private void OnDisable()
         {
             _swordCategoryButton.Click -= OnSwordSkinButtonClick;
@@ -45,7 +46,7 @@ namespace UI.Shop
         {
             _shopPanel.Initialize(_openedSkinsChecker, _selectedSkinsChecker);
             _shopPanel.ItemViewClicked += OnItemViewClicked;
-            //OnSwordSkinButtonClick();
+            OnSwordSkinButtonClick();
         }
 
         private void OnSwordSkinButtonClick()
@@ -54,7 +55,7 @@ namespace UI.Shop
             _bowCategoryButton.Unselect();
             _shopPanel.Show(_shopContent.SwordSkinItems);
         }
-        
+
         private void OnBowSkinButtonClick()
         {
             _bowCategoryButton.Select();
@@ -71,7 +72,7 @@ namespace UI.Shop
 
         private void ShowSelectedText()
         {
-            _selectionButton.gameObject.SetActive(true);
+            _selectedText.gameObject.SetActive(true);
             HideSelectionButton();
             HideBuyButton();
         }
@@ -85,19 +86,21 @@ namespace UI.Shop
                 SelectSkin();
                 _previewedItem.Unlock();
                 //save
-            }    
+            }
         }
-        
+
         private void OnSelectButtonClicked()
         {
             SelectSkin();
             //save
         }
-        
+
         private void OnItemViewClicked(ShopItemView shopItemView)
         {
             _previewedItem = shopItemView;
-            _openedSkinsChecker.Visit(shopItemView.Item);
+            _skinPlacement.SetGameModel(_previewedItem.Model);
+
+            _openedSkinsChecker.Visit(_previewedItem.Item);
             if (_openedSkinsChecker.IsOpened)
             {
                 _selectedSkinsChecker.Visit(_previewedItem.Item);
@@ -106,7 +109,7 @@ namespace UI.Shop
                     ShowSelectedText();
                     return;
                 }
-                
+
                 ShowSelectionButton();
             }
             else
@@ -114,7 +117,7 @@ namespace UI.Shop
                 ShowBuyButton(_previewedItem.Price);
             }
         }
-        
+
         private void ShowBuyButton(int price)
         {
             _buyButton.gameObject.SetActive(true);
@@ -128,7 +131,7 @@ namespace UI.Shop
             {
                 _buyButton.Lock();
             }
-            
+
             HideSelectedText();
             HideSelectionButton();
         }
@@ -139,7 +142,7 @@ namespace UI.Shop
             _shopPanel.Select(_previewedItem);
             ShowSelectedText();
         }
-        
+
         private void HideSelectionButton() => _selectionButton.gameObject.SetActive(false);
         private void HideSelectedText() => _selectedText.gameObject.SetActive(false);
         private void HideBuyButton() => _buyButton.gameObject.SetActive(false);

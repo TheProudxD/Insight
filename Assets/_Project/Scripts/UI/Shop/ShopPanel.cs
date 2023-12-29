@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace UI.Shop
@@ -11,7 +12,7 @@ namespace UI.Shop
         [SerializeField] private Transform _itemParent;
         [SerializeField] private ShopItemViewFactory _shopItemViewFactory;
 
-        private readonly List<ShopItemView> _shopItems = new();
+        private List<ShopItemView> _shopItems = new();
         private OpenedSkinsChecker _openedSkinsChecker;
         private SelectedSkinsChecker _selectedSkinsChecker;
 
@@ -24,6 +25,7 @@ namespace UI.Shop
         public void Show(IEnumerable<ShopItem> items)
         {
             Clear();
+            
             foreach (var shopItem in items)
             {
                 var spawnedItem = _shopItemViewFactory.Get(shopItem, _itemParent);
@@ -53,6 +55,8 @@ namespace UI.Shop
 
                 _shopItems.Add(spawnedItem);
             }
+            
+            Sort();
         }
 
         private void OnItemViewClick(ShopItemView shopItemView)
@@ -79,6 +83,14 @@ namespace UI.Shop
             shopItem.Select();
         }
 
+        private void Sort()
+        {
+            _shopItems = _shopItems.OrderBy(x => x.IsLock).ThenByDescending(x => x.Price).ToList();
+            
+            for (var i = 0; i < _shopItems.Count; i++) 
+                _shopItems[i].transform.SetSiblingIndex(i);
+        }
+        
         private void Clear()
         {
             foreach (var shopItem in _shopItems)

@@ -10,25 +10,24 @@ namespace UI.Shop
     {
         public event Action<ShopItemView> Click;
 
-        [SerializeField] private Sprite _standardBackground;
-        [SerializeField] private Sprite _highlightBackground;
+        [SerializeField] private Color _standardBackground;
+        [SerializeField] private Color _highlightBackground;
         [SerializeField] private Image _contentImage;
         [SerializeField] private Image _lockImage;
         [SerializeField] private Image _selectionText;
-
-        private Image _backgroundImage;
         [SerializeField] private IntValueView _priceView;
 
         public ShopItem Item { get; private set; }
         public int Price => Item.Price;
         public bool IsLock { get; private set; }
         public Sprite Model => Item.Model;
+        private Image _backgroundImage;
 
         public void Initialize(ShopItem shopItem)
         {
             Item = shopItem;
             _backgroundImage = GetComponent<Image>();
-            _backgroundImage.sprite = _standardBackground;
+            _backgroundImage.color = _standardBackground;
             _contentImage.sprite = shopItem.Sprite;
 
             _priceView.Show(Price);
@@ -53,7 +52,7 @@ namespace UI.Shop
         public void Select() => _selectionText.gameObject.SetActive(true);
         public void Unselect() => _selectionText.gameObject.SetActive(false);
 
-        public void Highlight() => _backgroundImage.sprite = _highlightBackground;
-        public void UnHighlight() => _backgroundImage.sprite = _standardBackground;
+        public void Highlight() => _backgroundImage.color = _highlightBackground;
+        public void UnHighlight() => _backgroundImage.color = _standardBackground;
     }
 }

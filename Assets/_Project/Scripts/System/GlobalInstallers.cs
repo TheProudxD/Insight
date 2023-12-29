@@ -35,8 +35,6 @@ public class GlobalInstallers : MonoInstaller
     private void Data()
     {
         Container.Bind<DataManager>().AsSingle();
-        Container.Bind<ResourceManager>().AsSingle();
-        Container.Bind<LevelManager>().AsSingle();
         Container.Bind<Wallet>().ToSelf().AsSingle();
     }
 

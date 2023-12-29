@@ -12,18 +12,18 @@ namespace ResourceService
 
         private readonly Dictionary<ResourceType, Resource> _resources;
 
-        public ResourceManager()
+        public ResourceManager(int defaultSoft, int defaultHard)
         {
             Resource[] resources =
             {
-                new(ResourceType.SoftCurrency),
-                new(ResourceType.HardCurrency)
+                new(ResourceType.SoftCurrency, defaultSoft),
+                new(ResourceType.HardCurrency, defaultHard)
             };
 
             _resources = resources.ToDictionary(r => r.Type);
 
             ResourceChanged += OnResourceChanged;
-            
+
             foreach (var resource in resources)
             {
                 resource.Changed += (oldValue, newValue) =>

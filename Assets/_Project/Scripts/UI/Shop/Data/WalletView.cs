@@ -8,18 +8,17 @@ public class WalletView : MonoBehaviour
 
     [Inject] private Wallet _wallet;
 
-    public void Initialize()
+    public void Initialize(int amount)
     {
-        if (_wallet == null)
-            print("wtf bro");
-        UpdateValue(_wallet.GetCurrentCoins());
+        UpdateValue(amount);
 
         _wallet.CoinsChanged += UpdateValue;
     }
 
     private void OnDestroy()
     {
-        if (_wallet != null) _wallet.CoinsChanged -= UpdateValue;
+        if (_wallet != null)
+            _wallet.CoinsChanged -= UpdateValue;
     }
 
     private void UpdateValue(int value) => _value.text = value.ToString();

@@ -1,6 +1,9 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ResourceService;
+using StorageService;
+using Zenject;
 
 namespace UI.Shop.Data
 {
@@ -12,11 +15,12 @@ namespace UI.Shop.Data
         private List<BowSkins> _openedBowSkins;
         private List<SwordSkins> _openedSwordSkins;
 
-        private int _money;
-
+        [Inject] private DataManager _dataManager;
+        //private int _money;
+        
         public ShopData()
         {
-            _money = 10_000;
+            //_money = ;
             _selectedBowSkins = BowSkins.Common;
             _selectedSwordSkins = SwordSkins.Common;
             _openedBowSkins = new List<BowSkins> { _selectedBowSkins };
@@ -25,13 +29,13 @@ namespace UI.Shop.Data
 
         public int Money
         {
-            get => _money;
+            get => _dataManager.ResourceManager.GetResourceValue(ResourceType.SoftCurrency);
             set
             {
                 if (value < 0)
                     throw new ArgumentException();
                 
-                _money = value;
+                // _money = value;
             }
         }
 

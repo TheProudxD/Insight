@@ -16,22 +16,20 @@ namespace StorageService
         public const string DYNAMIC_USER_DATA_KEY = "userdata";
         private const string DEFAULT_PLAYER_NAME = "Player";
 
-        private readonly IStaticStorageService _staticStorageService;
-        private readonly IDynamicStorageService _dynamicStorageService;
-        private readonly ResourceManager _resourceManager;
-        private readonly LevelManager _levelManager;
+        public IStaticStorageService StaticStorageService { get; private set; }
+        public IDynamicStorageService DynamicStorageService { get; private set; }
+        public ResourceManager ResourceManager { get; private set; }
+        public LevelManager LevelManager { get; private set; }
+        public ShopData ShopData { get; private set; }
 
-        private DynamicPlayerData _dynamicPlayerData;
+        private DynamicPlayerData _dynamicPlayerData = new();
         private readonly StaticPlayerData _staticPlayerData = new();
-        public readonly ShopData ShopData;
 
-        public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService,
-            ResourceManager resourceManager, LevelManager levelManager)
+        public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService)
         {
-            _staticStorageService = staticStorageService;
-            _dynamicStorageService = dynamicStorageService;
-            _resourceManager = resourceManager;
-            _levelManager = levelManager;
+            StaticStorageService = staticStorageService;
+            DynamicStorageService = dynamicStorageService;
+            LevelManager = new LevelManager();
             ShopData = new ShopData();
         }
 
@@ -44,7 +42,7 @@ namespace StorageService
                 { "action", "changename" },
             };
 
-            await _dynamicStorageService.Upload(uploadParams, result =>
+            await DynamicStorageService.Upload(uploadParams, result =>
             {
                 if (result)
                 {
@@ -60,19 +58,20 @@ namespace StorageService
 
         public void SetLevel(int level)
         {
-            _levelManager.SetCurrentLevel(level);
+            LevelManager.SetCurrentLevel(level);
             //_dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData, b => Print("Level saved successfully!"));
         }
 
-        public void AddSoftCurrency(int amount)
+        /*
+         public void AddSoftCurrency(int amount)
         {
-            _resourceManager.AddResource(ResourceType.SoftCurrency, amount);
+            ResourceManager.AddResource(ResourceType.SoftCurrency, amount);
             //SaveSoftCurrency();
         }
-
+        
         public void AddHardCurrency(int amount)
         {
-            _resourceManager.AddResource(ResourceType.HardCurrency, amount);
+            ResourceManager.AddResource(ResourceType.HardCurrency, amount);
             //SaveHardCurrency();
         }
 
@@ -97,13 +96,15 @@ namespace StorageService
             _dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData,
                 b => Print("Current Level saved successfully!"));
 
-        }
+        }    
+            
+        public int GetSoftCurrencyAmount() => ResourceManager.GetResourceValue(ResourceType.SoftCurrency);
+          
+        public int GetHardCurrencyAmount() => ResourceManager.GetResourceValue(ResourceType.HardCurrency);
         */
 
-        public int GetCurrentLevel() => _levelManager.GetCurrentLevel();
-
         public async Task DownloadMaxLevel() =>
-            await _staticStorageService.Download(MAX_LEVEL_DATA_KEY, data =>
+            await StaticStorageService.Download(MAX_LEVEL_DATA_KEY, data =>
             {
                 if (data is null)
                     throw new Exception("File is not found");
@@ -122,10 +123,6 @@ namespace StorageService
             return _staticPlayerData.MaxLevel;
         }
 
-        public int GetSoftCurrencyAmount() => _resourceManager.GetResourceValue(ResourceType.SoftCurrency);
-
-        public int GetHardCurrencyAmount() => _resourceManager.GetResourceValue(ResourceType.HardCurrency);
-
         public string GetName() => _dynamicPlayerData.Name;
 
         public async Task GetDynamicData()
@@ -136,7 +133,7 @@ namespace StorageService
                 { "playerid", SystemPlayerData.Instance.uid.ToString() },
             };
 
-            await _dynamicStorageService.Download(downloadParams, Callback);
+            await DynamicStorageService.Download(downloadParams, Callback);
         }
 
         private async void Callback(DynamicPlayerData data)
@@ -146,6 +143,9 @@ namespace StorageService
                 _dynamicPlayerData = data;
                 if (data.Name == DEFAULT_PLAYER_NAME)
                     await SetName("Player " + SystemPlayerData.Instance.uid);
+
+                ResourceManager = new ResourceManager(_dynamicPlayerData.AmountSoftResources,
+                    _dynamicPlayerData.AmountHardResources);
 
                 Debug.Log(data.ToString());
             }
