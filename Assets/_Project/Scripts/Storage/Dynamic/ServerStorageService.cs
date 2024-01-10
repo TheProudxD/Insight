@@ -13,7 +13,7 @@ namespace StorageService
 
         public ServerStorageService(string url) => _url = url;
 
-        public async Task Download(Dictionary<string, string> param, Action<DynamicPlayerData> callback = null)
+        public async Task Download(Dictionary<string, string> param, Action<PlayerData> callback = null)
         {
             using var wc = new WebClient();
             try
@@ -26,7 +26,7 @@ namespace StorageService
                 if (data is null)
                     throw new NullReferenceException("JSON string is null");
 
-                var callbackData = new DynamicPlayerData
+                var callbackData = new PlayerData
                 {
                     AmountHardResources = data["HardCurrency"],
                     AmountSoftResources = data["SoftCurrency"],

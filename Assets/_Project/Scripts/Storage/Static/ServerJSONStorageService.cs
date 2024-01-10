@@ -29,20 +29,20 @@ namespace StorageService
             }
         }
 
-        public async Task Download(string key, Action<StaticPlayerData> callback)
+        public async Task Download(string key, Action<GameData> callback)
         {
             try
             {
                 using var wc = new WebClient();
 
                 var serverJsonFile = await wc.DownloadStringTaskAsync(_url + "/" + key);
-                var serverData = JsonUtility.FromJson<StaticPlayerData>(serverJsonFile);
+                var serverData = JsonUtility.FromJson<GameData>(serverJsonFile);
                 var localPath = Utils.BuildPath(DataManager.MAX_LEVEL_DATA_KEY);
 
                 if (!File.Exists(localPath))
                 {
                     var localJsonFile = await File.ReadAllTextAsync(localPath);
-                    var localData = JsonUtility.FromJson<StaticPlayerData>(localJsonFile);
+                    var localData = JsonUtility.FromJson<GameData>(localJsonFile);
                     if ( localData.GetHashCode() != serverData.GetHashCode())
                     {
                         await File.WriteAllTextAsync(localPath, serverJsonFile);

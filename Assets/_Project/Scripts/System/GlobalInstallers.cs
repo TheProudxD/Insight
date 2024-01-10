@@ -43,5 +43,7 @@ public class GlobalInstallers : MonoInstaller
         Container.Bind<string>().FromInstance("http://game.ispu.ru/insight");
         Container.BindInterfacesTo<ServerJSONStorageService>().AsSingle();
         Container.BindInterfacesTo<ServerStorageService>().AsSingle();
+        Container.Bind<ResourceManager>().ToSelf().AsSingle();
+        Container.Bind<LevelManager>().ToSelf().AsSingle();
     }
 }

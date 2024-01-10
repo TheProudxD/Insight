@@ -23,7 +23,10 @@ namespace UI.Shop
         public void Select()
         {
             _categoryTitle.color = _selectedColor;
-            _focus.transform.position = new Vector2(_button.transform.position.x, _focus.transform.position.y);
+
+            var button = _button.GetComponent<RectTransform>().rect;
+            _focus.transform.localPosition =
+                new Vector2(_button.transform.localPosition.x, button.center.y - 1.5f * button.height);
         }
 
         public void Unselect() => _categoryTitle.color = _unselectedColor;

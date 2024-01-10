@@ -715,7 +715,7 @@ GameObject:
   - component: {fileID: 2145682794879892632}
   - component: {fileID: 6987157896839345098}
   m_Layer: 5
-  m_Name: Coin Image
+  m_Name: Currency Image
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -954,3 +954,6 @@ MonoBehaviour:
   _lockImage: {fileID: 1459017841682208890}
   _selectionText: {fileID: 3048790399756808431}
   _priceView: {fileID: 8427065125346957495}
+  _currencyImage: {fileID: 6987157896839345098}
+  _softCurrencyIcon: {fileID: 21300000, guid: 06bf06a4e187b374aaee0dbd16c04afd, type: 3}
+  _hardCurrencyIcon: {fileID: 21300000, guid: a7e9be88559c27347935dbff43dac55c, type: 3}

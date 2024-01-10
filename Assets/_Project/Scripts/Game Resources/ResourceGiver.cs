@@ -1,4 +1,3 @@
-using StorageService;
 using UnityEngine;
 using Zenject;
 
@@ -6,13 +5,13 @@ namespace ResourceService
 {
     public class ResourceGiver : MonoBehaviour
     {
-        [Inject] private DataManager _dataManager;
+        [Inject] private ResourceManager _resourceManager;
         [SerializeField] private ResourceType _resourceType;
         [SerializeField] private int _amount;
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            _dataManager.ResourceManager.AddResource(_resourceType, _amount);
+            _resourceManager.AddResource(_resourceType, _amount);
 
             Destroy(gameObject);
         }

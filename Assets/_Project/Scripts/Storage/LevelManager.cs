@@ -1,34 +1,66 @@
 using System;
-using System.IO;
+using StorageService;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Game.Scripts.Storage
 {
+    public enum Levels
+    {
+        Bootstrap = 0,
+        Menu,
+        Lobby,
+        Home,
+        Dungeon
+    }
+
     public class LevelManager
     {
-        private int _currentLevel;
+        private int _currentLevel; // max level passed by the player
+        private readonly IDynamicStorageService _dynamicStorageService;
 
-        public void SetCurrentLevel(int level)
+        [Inject]
+        private LevelManager(IDynamicStorageService dynamicStorageService)
+        {
+            _dynamicStorageService = dynamicStorageService;
+        }
+
+        public void Initialize(int currentLevel)
+        {
+            if (currentLevel <= (int)Levels.Lobby)
+            {
+                throw new ArgumentException("Level must be more than 3");
+            }
+
+            _currentLevel = currentLevel;
+        }
+
+        public void LoadLevel(int level)
         {
             if (level < 0)
-                throw new ArgumentException(nameof(level));
+            {
+                throw new ArgumentException("Negative level " + nameof(level));
+            }
+
+            if (SceneManager.GetActiveScene().buildIndex < (int)Levels.Lobby)
+            {
+                throw new ArgumentException("Changing level on unapproved scene" + nameof(level));
+            }
+
             _currentLevel = level;
             SceneManager.LoadScene(_currentLevel);
         }
 
-        public int GetCurrentLevel()
+        public int GetNextLevelId()
         {
-            /*
-            switch (CurrentLevel)
+            var buildId = SceneManager.GetActiveScene().buildIndex;
+
+            return buildId switch
             {
-                case < 0:
-                    throw new InvalidDataException("Кто поставил отрицательный уровень?");
-                case < 2:
-                    SetCurrentLevel(CurrentLevel);
-                    break;
-            }
-            */
-            return _currentLevel;
+                (int)Levels.Bootstrap or (int)Levels.Menu => buildId + 1,
+                (int)Levels.Lobby => _currentLevel,
+                _ => _currentLevel + 1
+            };
         }
     }
 }

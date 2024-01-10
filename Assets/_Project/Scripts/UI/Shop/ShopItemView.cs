@@ -1,4 +1,5 @@
 using System;
+using ResourceService;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -16,11 +17,16 @@ namespace UI.Shop
         [SerializeField] private Image _lockImage;
         [SerializeField] private Image _selectionText;
         [SerializeField] private IntValueView _priceView;
+        [SerializeField] private Image _currencyImage;
+        [SerializeField] private Sprite _softCurrencyIcon;
+        [SerializeField] private Sprite _hardCurrencyIcon;
 
         public ShopItem Item { get; private set; }
         public int Price => Item.Price;
         public bool IsLock { get; private set; }
         public Sprite Model => Item.Model;
+        public ResourceType ResourceType { get; private set; }
+
         private Image _backgroundImage;
 
         public void Initialize(ShopItem shopItem)
@@ -29,8 +35,15 @@ namespace UI.Shop
             _backgroundImage = GetComponent<Image>();
             _backgroundImage.color = _standardBackground;
             _contentImage.sprite = shopItem.Sprite;
-
+            ResourceType = shopItem.ResourceType;
             _priceView.Show(Price);
+
+            _currencyImage.sprite = ResourceType switch
+            {
+                ResourceType.SoftCurrency => _softCurrencyIcon,
+                ResourceType.HardCurrency => _hardCurrencyIcon,
+                _ => throw new ArgumentOutOfRangeException()
+            };
         }
 
         public void OnPointerClick(PointerEventData eventData) => Click?.Invoke(this);

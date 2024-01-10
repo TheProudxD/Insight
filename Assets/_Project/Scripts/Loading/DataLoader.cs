@@ -65,6 +65,7 @@ public class DataLoader : ILoadingOperation
         var localPath = Path.Combine(Application.persistentDataPath, DataManager.REGISTRY_DATA_KEY);
 
         using var wc = new WebClient();
+        
         if (!File.Exists(localPath))
         {
             var remotePath = _url + $"/api.php?action={DataManager.REGISTRY_DATA_KEY}";
@@ -73,7 +74,6 @@ public class DataLoader : ILoadingOperation
             remoteData.ToSingleton();
             await File.WriteAllTextAsync(localPath, JsonUtility.ToJson(remoteData));
         }
-        
         else
         {
             var localJsonFile = await File.ReadAllTextAsync(localPath);

@@ -1,3 +1,4 @@
+using ResourceService;
 using StorageService;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,7 +18,6 @@ namespace UI.Shop
         [SerializeField] private Button _selectionButton;
         [SerializeField] private Image _selectedText;
 
-        [Inject] private DataManager _dataManager;
         [Inject] private Wallet _wallet;
         [Inject] private SkinSelector _skinSelector;
         [Inject] private SkinUnlocker _skinUnlocker;
@@ -79,9 +79,9 @@ namespace UI.Shop
 
         private void OnBuyButtonClicked()
         {
-            if (_wallet.IsEnough(_previewedItem.Price))
+            if (_wallet.IsEnough(_previewedItem.ResourceType, _previewedItem.Price))
             {
-                _wallet.Spend(_previewedItem.Price);
+                _wallet.Spend(_previewedItem.ResourceType, _previewedItem.Price);
                 _skinUnlocker.Visit(_previewedItem.Item);
                 SelectSkin();
                 _previewedItem.Unlock();
@@ -99,8 +99,8 @@ namespace UI.Shop
         {
             _previewedItem = shopItemView;
             _skinPlacement.SetGameModel(_previewedItem.Model);
-
             _openedSkinsChecker.Visit(_previewedItem.Item);
+            
             if (_openedSkinsChecker.IsOpened)
             {
                 _selectedSkinsChecker.Visit(_previewedItem.Item);
@@ -114,16 +114,17 @@ namespace UI.Shop
             }
             else
             {
-                ShowBuyButton(_previewedItem.Price);
+                ShowBuyButton(_previewedItem.ResourceType ,_previewedItem.Price);
             }
         }
 
-        private void ShowBuyButton(int price)
+        private void ShowBuyButton(ResourceType resourceType, int price)
         {
             _buyButton.gameObject.SetActive(true);
             _buyButton.UpdateText(price);
+            _buyButton.SetResourceType(resourceType);
 
-            if (_wallet.IsEnough(price))
+            if (_wallet.IsEnough(resourceType, price))
             {
                 _buyButton.Unlock();
             }

@@ -16,21 +16,20 @@ namespace StorageService
         public const string DYNAMIC_USER_DATA_KEY = "userdata";
         private const string DEFAULT_PLAYER_NAME = "Player";
 
-        public IStaticStorageService StaticStorageService { get; private set; }
-        public IDynamicStorageService DynamicStorageService { get; private set; }
-        public ResourceManager ResourceManager { get; private set; }
-        public LevelManager LevelManager { get; private set; }
         public ShopData ShopData { get; private set; }
+        private readonly ResourceManager _resourceManager;
+        private readonly LevelManager _levelManager;
+        private readonly GameData _gameData = new();
+        private PlayerData _playerData = new();
+        private IStaticStorageService StaticStorageService { get; set; }
+        private IDynamicStorageService DynamicStorageService { get; set; }
 
-        private DynamicPlayerData _dynamicPlayerData = new();
-        private readonly StaticPlayerData _staticPlayerData = new();
-
-        public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService)
+        public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService, ResourceManager resourceManager, LevelManager levelManager)
         {
             StaticStorageService = staticStorageService;
             DynamicStorageService = dynamicStorageService;
-            LevelManager = new LevelManager();
-            ShopData = new ShopData();
+            _resourceManager = resourceManager;
+            _levelManager = levelManager;
         }
 
         public async Task SetName(string newName)
@@ -38,15 +37,15 @@ namespace StorageService
             var uploadParams = new Dictionary<string, string>
             {
                 { "playername", newName },
-                { "playerid", SystemPlayerData.Instance.uid.ToString() },
                 { "action", "changename" },
+                { "playerid", SystemPlayerData.Instance.uid.ToString() },
             };
 
             await DynamicStorageService.Upload(uploadParams, result =>
             {
                 if (result)
                 {
-                    _dynamicPlayerData.Name = newName;
+                    _playerData.Name = newName;
                     Debug.Log("Renaming Successfully");
                 }
                 else
@@ -56,52 +55,34 @@ namespace StorageService
             });
         }
 
-        public void SetLevel(int level)
+        public async void SetNextLevel()
         {
-            LevelManager.SetCurrentLevel(level);
-            //_dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData, b => Print("Level saved successfully!"));
-        }
+            var newLevel = _levelManager.GetNextLevelId();
 
-        /*
-         public void AddSoftCurrency(int amount)
-        {
-            ResourceManager.AddResource(ResourceType.SoftCurrency, amount);
-            //SaveSoftCurrency();
-        }
-        
-        public void AddHardCurrency(int amount)
-        {
-            ResourceManager.AddResource(ResourceType.HardCurrency, amount);
-            //SaveHardCurrency();
-        }
+            var uploadParams = new Dictionary<string, string>
+            {
+                { "playerlevel", newLevel.ToString() },
+                { "action", "changelevel" },
+                { "playerid", SystemPlayerData.Instance.uid.ToString() },
+            };
 
-        /*
-        private void SaveSoftCurrency()
-        {
-            _dynamicData.AmountSoftResources = GetSoftCurrencyAmount();
-            _dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData,
-                b => Print("Soft Currency saved successfully!"));
+            if (_playerData.CurrentLevel != newLevel)
+            {
+                await DynamicStorageService.Upload(uploadParams, result =>
+                {
+                    if (result)
+                    {
+                        _playerData.CurrentLevel = newLevel;
+                        _levelManager.LoadLevel(newLevel);
+                        Debug.Log($"New level saved Successfully to {newLevel}");
+                    }
+                    else
+                    {
+                        Debug.Log("Error while saving level");
+                    }
+                });
+            }
         }
-
-        private void SaveHardCurrency()
-        {
-            _dynamicData.AmountHardResources = GetHardCurrencyAmount();
-            _dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData,
-                b => Print("Hard Currency saved successfully!"));
-        }
-
-        private void SaveCurrentLevel()
-        {
-            _dynamicData.CurrentLevel = _levelManager.CurrentLevel;
-            _dynamicStorageService.Upload(DYNAMIC_USER_DATA_KEY, _dynamicData,
-                b => Print("Current Level saved successfully!"));
-
-        }    
-            
-        public int GetSoftCurrencyAmount() => ResourceManager.GetResourceValue(ResourceType.SoftCurrency);
-          
-        public int GetHardCurrencyAmount() => ResourceManager.GetResourceValue(ResourceType.HardCurrency);
-        */
 
         public async Task DownloadMaxLevel() =>
             await StaticStorageService.Download(MAX_LEVEL_DATA_KEY, data =>
@@ -110,20 +91,20 @@ namespace StorageService
                     throw new Exception("File is not found");
 
                 Debug.Log("MaxLevel: " + data.MaxLevel);
-                _staticPlayerData.MaxLevel = data.MaxLevel;
+                _gameData.MaxLevel = data.MaxLevel;
             });
 
         public async Task<int> GetMaxLevel()
         {
-            if (_staticPlayerData is { MaxLevel: > 0 })
-                return _staticPlayerData.MaxLevel;
+            if (_gameData is { MaxLevel: > 0 })
+                return _gameData.MaxLevel;
 
             await DownloadMaxLevel();
 
-            return _staticPlayerData.MaxLevel;
+            return _gameData.MaxLevel;
         }
 
-        public string GetName() => _dynamicPlayerData.Name;
+        public string GetName() => _playerData.Name;
 
         public async Task GetDynamicData()
         {
@@ -136,16 +117,18 @@ namespace StorageService
             await DynamicStorageService.Download(downloadParams, Callback);
         }
 
-        private async void Callback(DynamicPlayerData data)
+        private async void Callback(PlayerData data)
         {
             if (data is not null)
             {
-                _dynamicPlayerData = data;
+                _playerData = data;
                 if (data.Name == DEFAULT_PLAYER_NAME)
                     await SetName("Player " + SystemPlayerData.Instance.uid);
 
-                ResourceManager = new ResourceManager(_dynamicPlayerData.AmountSoftResources,
-                    _dynamicPlayerData.AmountHardResources);
+                _resourceManager.Initialize(_playerData.AmountSoftResources,
+                    _playerData.AmountHardResources, _playerData);
+                _levelManager.Initialize(data.CurrentLevel);
+                ShopData = new ShopData();
 
                 Debug.Log(data.ToString());
             }
