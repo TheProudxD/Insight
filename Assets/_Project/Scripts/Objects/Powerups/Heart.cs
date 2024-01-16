@@ -11,7 +11,7 @@ namespace Objects.Powerups
         {
             if (other.TryGetComponent(out PlayerHealth player) && !other.isTrigger)
             {
-                if (player.TryIncreaseHealth(_amountToIncrease))
+                if (player.TryIncrease(_amountToIncrease))
                     Destroy(gameObject);
             }
         }

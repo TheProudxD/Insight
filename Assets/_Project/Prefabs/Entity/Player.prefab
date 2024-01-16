@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8062397267079135003}
   - component: {fileID: 9072235518690952134}
   - component: {fileID: 3163663697484281662}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Down Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -110,7 +110,7 @@ GameObject:
   m_Component:
   - component: {fileID: 468791939730626813}
   - component: {fileID: 880289019196099168}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Contex Clue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -200,7 +200,7 @@ GameObject:
   - component: {fileID: 8937045145800848624}
   - component: {fileID: 6788893892087499731}
   - component: {fileID: 5898893768228825378}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Left Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -303,7 +303,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1545762575658711922}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ----------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -336,8 +336,8 @@ GameObject:
   - component: {fileID: 7117900330315217977}
   - component: {fileID: 439167346112616370}
   - component: {fileID: 72244969657298247}
-  m_Layer: 0
-  m_Name: Received Item
+  m_Layer: 6
+  m_Name: Receive Item
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -450,7 +450,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 64117301855844811}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: ----------------
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -483,7 +483,7 @@ GameObject:
   - component: {fileID: 6605839792270232063}
   - component: {fileID: 3721699174214664850}
   - component: {fileID: 7135538709761151459}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Up Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -598,7 +598,8 @@ GameObject:
   - component: {fileID: 7696137166542938749}
   - component: {fileID: 989182668464291223}
   - component: {fileID: 8146692788847941405}
-  m_Layer: 0
+  - component: {fileID: 5194434405733680887}
+  m_Layer: 6
   m_Name: Player
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -674,7 +675,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: -1703751193
   m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingOrder: 32767
   m_Sprite: {fileID: 1639808483, guid: 898400604f25cfb45a53e2c4f7bac217, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -694,7 +695,7 @@ BoxCollider2D:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8009199201838384755}
   m_Enabled: 1
-  m_Density: 1
+  m_Density: 10
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -787,9 +788,9 @@ Rigidbody2D:
   m_BodyType: 0
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
-  m_UseAutoMass: 0
-  m_Mass: 1
-  m_LinearDrag: 0
+  m_UseAutoMass: 1
+  m_Mass: 0.122252256
+  m_LinearDrag: 1
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
@@ -799,8 +800,8 @@ Rigidbody2D:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_Interpolate: 1
-  m_SleepingMode: 1
+  m_Interpolate: 0
+  m_SleepingMode: 0
   m_CollisionDetection: 1
   m_Constraints: 4
 --- !u!95 &1437124776207483451
@@ -902,8 +903,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e53b16ae094a6cae5875c24f5ab963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHealth: {fileID: 11400000, guid: dcbbbc11376b9624f86a4f142dcd9e69, type: 2}
-  _healthSignal: {fileID: 11400000, guid: 203f710f23c395740a70137675857d21, type: 2}
+  CurrentValue: {fileID: 11400000, guid: dcbbbc11376b9624f86a4f142dcd9e69, type: 2}
+  Signal: {fileID: 11400000, guid: 203f710f23c395740a70137675857d21, type: 2}
+--- !u!114 &5194434405733680887
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009199201838384755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: de95a4af9be740f4949fda6a01f832b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  CurrentValue: {fileID: 11400000, guid: dd7df88c56ee9ea42b103680554f91e7, type: 2}
+  Signal: {fileID: 11400000, guid: 9f735bf0ee7fce14bba5b88ff02408c0, type: 2}
 --- !u!1 &8235823234777146293
 GameObject:
   m_ObjectHideFlags: 0
@@ -915,7 +930,7 @@ GameObject:
   - component: {fileID: 6167905995760712049}
   - component: {fileID: 5204339751883649103}
   - component: {fileID: 7790385815675680331}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Right Hitbox
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1018,7 +1033,8 @@ GameObject:
   - component: {fileID: 8471958563731782389}
   - component: {fileID: 7766964044480131116}
   - component: {fileID: 8019969108416271356}
-  m_Layer: 0
+  - component: {fileID: 6066422071589408372}
+  m_Layer: 6
   m_Name: Listeners
   m_TagString: Player
   m_Icon: {fileID: 0}
@@ -1060,14 +1076,11 @@ MonoBehaviour:
   _signal: {fileID: 11400000, guid: 203f710f23c395740a70137675857d21, type: 2}
   _signalEvent:
     m_PersistentCalls:
-      m_Calls: []
-  _signalEventInt:
-    m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Hud, Assembly-CSharp
-        m_MethodName: DecreaseHPBar
-        m_Mode: 0
+        m_TargetAssemblyTypeName: CameraKick, Assembly-CSharp
+        m_MethodName: BeginKick
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -1076,9 +1089,12 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 859697073036862197}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: TakeDamage
+  _signalEventInt:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: Hud, Assembly-CSharp
+        m_MethodName: ChangeHealthBarAmount
         m_Mode: 0
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1119,3 +1135,34 @@ MonoBehaviour:
   _signalEventInt:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &6066422071589408372
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9047230829255976445}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b2510bee70ccf464a97049a2c1f2f11c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _signal: {fileID: 11400000, guid: 9f735bf0ee7fce14bba5b88ff02408c0, type: 2}
+  _signalEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  _signalEventInt:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UI.Hud, Assembly-CSharp
+        m_MethodName: ChangeManaBarAmount
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

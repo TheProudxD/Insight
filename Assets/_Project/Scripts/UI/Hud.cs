@@ -15,11 +15,14 @@ namespace UI
         [SerializeField] private Button _attackButton;
         [SerializeField] private Button _changeWeaponButton;
         [SerializeField] private Button _useFirstPotionButton, _useSecondPotionButton, _useThirdPotionButton;
+        
+        [SerializeField] private FloatValue _hpValue;
+        [SerializeField] private FloatValue _manaValue;
 
         [SerializeField] private Slider _hpSlider, _manaSlider;
         [SerializeField] private PlayerController _player;
         [SerializeField] private TextMeshProUGUI _playerNickname;
-        
+
         [Inject] private DataManager _dataManager;
 
         private void Awake()
@@ -29,7 +32,7 @@ namespace UI
                 Debug.LogError(nameof(_player));
                 return;
             }
-            
+
             _attackButton.onClick.AddListener(Attack);
             _changeWeaponButton.onClick.AddListener(ChangeWeapon);
 
@@ -38,6 +41,23 @@ namespace UI
             _useThirdPotionButton.onClick.AddListener(UseThirdPotion);
 
             _playerNickname.text = _dataManager.GetName();
+
+            InitializeHpBar();
+            InitializeManaBar();
+        }
+
+        private void InitializeHpBar()
+        {
+            _hpSlider.maxValue = _hpValue.InitialValue;
+            _hpSlider.minValue = 0;
+            _hpSlider.value = _hpValue.RuntimeValue;
+        }
+
+        private void InitializeManaBar()
+        {
+            _manaSlider.maxValue = _manaValue.InitialValue;
+            _manaSlider.minValue = 0;
+            _manaSlider.value = _manaValue.RuntimeValue;
         }
 
         public void ChangeHealthBarAmount(float amount)
@@ -45,33 +65,16 @@ namespace UI
             DecreaseBar(_hpSlider, amount);
         }
 
-        private void ChangeManaBarAmount(float amount)
+        public void ChangeManaBarAmount(float amount)
         {
             DecreaseBar(_manaSlider, amount);
         }
 
         private void DecreaseBar(Slider slider, float amount)
         {
-            if (slider is null) throw new NullReferenceException(nameof(slider));
-            if (slider.value > 0)
-            {
-                slider.GetComponentsInChildren<Image>()[1].enabled = true;
-                slider.value -= amount;
-            }
-            else
-            {
-                slider.GetComponentsInChildren<Image>()[1].enabled = false;
-            }
-        }
-
-        private void IncreaseBar(Slider slider)
-        {
-            if (slider is null) return;
-
-            if (!slider.GetComponentsInChildren<Image>()[1].enabled)
-                slider.GetComponentsInChildren<Image>()[1].enabled = true;
-            else
-                slider.value += 10;
+            if (slider is null)
+                throw new NullReferenceException(nameof(slider));
+            slider.value -= amount;
         }
 
         private void Attack()

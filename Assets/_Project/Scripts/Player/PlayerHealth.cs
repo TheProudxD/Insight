@@ -4,44 +4,31 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerHealth : MonoBehaviour
+    public class PlayerHealth : PlayerFeature
     {
-        [SerializeField] private FloatValue _currentHealth;
-        [SerializeField] private Signal _healthSignal;
-
-        public float CurrentHealth
+        public bool TryIncrease(float amount)
         {
-            get => _currentHealth.RuntimeValue;
-            private set => _currentHealth.RuntimeValue = value;
-        }
-
-        private int MaxHealth => 9;
-
-        private void Start()
-        {
-            _healthSignal.Raise(MaxHealth);
-        }
-
-        public bool TryIncreaseHealth(float amount)
-        {
-            _healthSignal.Raise(-amount);
-            if (Math.Abs(CurrentHealth - MaxHealth) < 0.01f)
+            if (Math.Abs(Value - MaxValue) < 0.01f)
                 return false;
-            CurrentHealth += amount;
-            CurrentHealth = Mathf.Clamp(CurrentHealth, 0, MaxHealth);
+            
+            Signal.Raise(-amount);
+
+            Value += amount;
+            Value = Mathf.Clamp(Value, 0, MaxValue);
             return true;
         }
 
-        public void DecreaseHealth(float damage)
+        public void Decrease(float amount)
         {
-            _healthSignal.Raise();
-            _healthSignal.Raise(damage);
-            CurrentHealth -= damage;
+            if (Value <= 0)
+                return;
 
-            print(CurrentHealth);
-            if (CurrentHealth <= 0)
+            Signal.Raise();
+            Signal.Raise(amount);
+            Value -= amount;
+
+            if (Value <= 0)
             {
-                print("death started");
                 StartCoroutine(GameManager.Instance.GameOver());
             }
         }

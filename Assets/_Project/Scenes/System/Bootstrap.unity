@@ -238,6 +238,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3837998601526713956, guid: 7967c94137b6c424da72103c44cf18fa, type: 3}
+      propertyPath: _signalEvent.m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3837998601526713956, guid: 7967c94137b6c424da72103c44cf18fa, type: 3}
+      propertyPath: _signalEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: -1509328927, guid: 545d5817316fa5347878c746cc0a5052, type: 3}
+    - target: {fileID: 3837998601526713956, guid: 7967c94137b6c424da72103c44cf18fa, type: 3}
+      propertyPath: _signalEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 6207588981745773402, guid: 7967c94137b6c424da72103c44cf18fa, type: 3}
       propertyPath: m_Name
       value: Game Manager

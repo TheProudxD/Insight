@@ -3,7 +3,7 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/FloatValue", fileName = "FloatValue")]
 public class FloatValue : ScriptableObject, ISerializationCallbackReceiver
 {
-    [field: SerializeField,Range(0,9)] public float InitialValue { get; private set; }
+    [field: SerializeField] public float InitialValue { get; private set; }
 
     [HideInInspector] public float RuntimeValue;
 

@@ -21,9 +21,10 @@ namespace Managers
                 DontDestroyOnLoad(gameObject);
             }
         }
-        
+
         public IEnumerator GameOver()
         {
+            print("death started");
             yield return new WaitForSeconds(1f);
             _gameOverSignal.Raise();
         }
