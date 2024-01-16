@@ -597,6 +597,7 @@ GameObject:
   - component: {fileID: 8794370517401437629}
   - component: {fileID: 7696137166542938749}
   - component: {fileID: 989182668464291223}
+  - component: {fileID: 8146692788847941405}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -835,10 +836,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c75e5d50ad61847bd7f0ca704603e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _currentHealth: {fileID: 11400000, guid: dcbbbc11376b9624f86a4f142dcd9e69, type: 2}
-  _healthSignal: {fileID: 11400000, guid: 203f710f23c395740a70137675857d21, type: 2}
   _playerHitSignal: {fileID: 11400000, guid: e1bbe0cf26eebed4d98948c11fef725c, type: 2}
-  _healthBar: {fileID: 0}
+  _playerProjectile: {fileID: 5183969362942274729, guid: 02e88d0b2d4f13f498c93a39c7b43e08, type: 3}
 --- !u!114 &5518825071074345950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -891,6 +890,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _context: {fileID: 1540547484364060274}
+--- !u!114 &8146692788847941405
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009199201838384755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69e53b16ae094a6cae5875c24f5ab963, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _currentHealth: {fileID: 11400000, guid: dcbbbc11376b9624f86a4f142dcd9e69, type: 2}
+  _healthSignal: {fileID: 11400000, guid: 203f710f23c395740a70137675857d21, type: 2}
 --- !u!1 &8235823234777146293
 GameObject:
   m_ObjectHideFlags: 0

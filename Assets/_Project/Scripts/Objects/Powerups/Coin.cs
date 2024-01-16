@@ -1,5 +1,7 @@
+using System;
 using Player;
 using UnityEngine;
+using Zenject;
 
 namespace Objects.Powerups
 {
@@ -11,9 +13,11 @@ namespace Objects.Powerups
         {
             if (other.TryGetComponent(out PlayerController player) && !other.isTrigger)
             {
-                Inventory.NumberOfCoins+=_amountToIncrease;
-                print(Inventory.NumberOfCoins);
-                Destroy(gameObject);
+                // TODO: zenject doesn't bind Inventory after instantiate!
+                
+                //Inventory.NumberOfCoins+=_amountToIncrease;
+                //print(Inventory.NumberOfCoins);
+                //Destroy(gameObject);
             }
         }
     }

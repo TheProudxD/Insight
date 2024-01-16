@@ -14,7 +14,7 @@ public class Signal : ScriptableObject
             if (_listeners[i] != null)
             {
                 if (_listeners[i].IsAlive)
-                ((SignalListener)_listeners[i].Target)?.OnSingleRaised();
+                    ((SignalListener)_listeners[i].Target)?.OnSingleRaised();
             }
             else
             {
@@ -26,6 +26,7 @@ public class Signal : ScriptableObject
     {
         for (var i = _listeners.Count - 1; i >= 0; i--)
             if (_listeners[i] != null)
+            {
                 if (_listeners[i] != null)
                 {
                     if (_listeners[i].IsAlive)
@@ -35,6 +36,7 @@ public class Signal : ScriptableObject
                 {
                     _listeners.RemoveAt(i);
                 }
+            }
     }
 
     public void RegisterListener(SignalListener listener)

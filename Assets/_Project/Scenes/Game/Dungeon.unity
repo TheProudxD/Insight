@@ -139,10 +139,6 @@ PrefabInstance:
       propertyPath: _healthBar
       value: 
       objectReference: {fileID: 399996033}
-    - target: {fileID: 859697073036862197, guid: 137537f91438149458497bd50ff9aa34, type: 3}
-      propertyPath: _playerProjectile
-      value: 
-      objectReference: {fileID: 5183969362942274729, guid: 02e88d0b2d4f13f498c93a39c7b43e08, type: 3}
     - target: {fileID: 1109736434427424925, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: m_Mass
       value: 0.122252256
@@ -188,6 +184,10 @@ PrefabInstance:
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 4797310092679485048, guid: 137537f91438149458497bd50ff9aa34, type: 3}
+      propertyPath: m_Name
+      value: Receive Item
+      objectReference: {fileID: 0}
+    - target: {fileID: 4797310092679485048, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: m_Layer
       value: 6
       objectReference: {fileID: 0}
@@ -205,11 +205,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEvent.m_PersistentCalls.m_Calls.Array.size
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEventInt.m_PersistentCalls.m_Calls.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
@@ -220,8 +220,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1416002650}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
+      propertyPath: _signalEventInt.m_PersistentCalls.m_Calls.Array.data[0].m_Mode
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEventInt.m_PersistentCalls.m_Calls.Array.data[1].m_Mode
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEvent.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
@@ -234,7 +238,7 @@ PrefabInstance:
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEventInt.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
-      objectReference: {fileID: 1416002650}
+      objectReference: {fileID: 845873382}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEvent.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: BeginKick
@@ -245,15 +249,19 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEventInt.m_PersistentCalls.m_Calls.Array.data[1].m_MethodName
-      value: BeginKick
+      value: ChangeHealthBarAmount
       objectReference: {fileID: 0}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEvent.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: CameraKick, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
+      propertyPath: _signalEventInt.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
+      value: Hud, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEventInt.m_PersistentCalls.m_Calls.Array.data[1].m_TargetAssemblyTypeName
-      value: CameraKick, Assembly-CSharp
+      value: Hud, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEvent.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
@@ -2945,6 +2953,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -27.141998
       objectReference: {fileID: 0}
+    - target: {fileID: 6140938959125183279, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.33333334
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140938959125183279, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6140938959125183279, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.33333334
+      objectReference: {fileID: 0}
     - target: {fileID: 6299501544901646454, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
       propertyPath: m_Value
       value: 2.83
@@ -2965,6 +2985,18 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 1198906920}
+    - target: {fileID: 7760648834632048577, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0.11111111
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760648834632048577, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7760648834632048577, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
+      propertyPath: m_AnchorMin.x
+      value: 0.11111111
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -25555,7 +25587,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b66506a2842ef0a4b84345b852e00376, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  magnitude: 0.1
+  _magnitude: 0.1
+  _vCam: {fileID: 1380163918186807822}
 --- !u!1 &1439006024
 GameObject:
   m_ObjectHideFlags: 0
@@ -26655,6 +26688,17 @@ PrefabInstance:
       insertIndex: -1
       addedObject: {fileID: 1416002650}
   m_SourcePrefab: {fileID: 100100000, guid: 25549be4be3959e4da482adc24be7068, type: 3}
+--- !u!114 &1380163918186807822 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3617282470823987945, guid: 25549be4be3959e4da482adc24be7068, type: 3}
+  m_PrefabInstance: {fileID: 1380163918186807821}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &2117552608245885092 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3872439736653257034, guid: 7db878a31e02a424fbe7826ddad16c51, type: 3}

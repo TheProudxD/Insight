@@ -55,35 +55,6 @@ namespace StorageService
             });
         }
 
-        public async void SetNextLevel()
-        {
-            var newLevel = _levelManager.GetNextLevelId();
-
-            var uploadParams = new Dictionary<string, string>
-            {
-                { "playerlevel", newLevel.ToString() },
-                { "action", "changelevel" },
-                { "playerid", SystemPlayerData.Instance.uid.ToString() },
-            };
-
-            if (_playerData.CurrentLevel != newLevel)
-            {
-                await DynamicStorageService.Upload(uploadParams, result =>
-                {
-                    if (result)
-                    {
-                        _playerData.CurrentLevel = newLevel;
-                        _levelManager.LoadLevel(newLevel);
-                        Debug.Log($"New level saved Successfully to {newLevel}");
-                    }
-                    else
-                    {
-                        Debug.Log("Error while saving level");
-                    }
-                });
-            }
-        }
-
         public async Task DownloadMaxLevel() =>
             await StaticStorageService.Download(MAX_LEVEL_DATA_KEY, data =>
             {
@@ -127,7 +98,7 @@ namespace StorageService
 
                 _resourceManager.Initialize(_playerData.AmountSoftResources,
                     _playerData.AmountHardResources, _playerData);
-                _levelManager.Initialize(data.CurrentLevel);
+                _levelManager.Initialize(data.CurrentLevel, _playerData);
                 ShopData = new ShopData();
 
                 Debug.Log(data.ToString());

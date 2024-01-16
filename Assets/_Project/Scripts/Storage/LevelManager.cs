@@ -1,5 +1,8 @@
 using System;
+using System.Collections.Generic;
+using Assets._Project.Scripts.Storage.Static;
 using StorageService;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
@@ -18,6 +21,7 @@ namespace Game.Scripts.Storage
     {
         private int _currentLevel; // max level passed by the player
         private readonly IDynamicStorageService _dynamicStorageService;
+        private PlayerData _playerData;
 
         [Inject]
         private LevelManager(IDynamicStorageService dynamicStorageService)
@@ -25,42 +29,63 @@ namespace Game.Scripts.Storage
             _dynamicStorageService = dynamicStorageService;
         }
 
-        public void Initialize(int currentLevel)
+        public void Initialize(int currentLevel, PlayerData playerData)
         {
             if (currentLevel <= (int)Levels.Lobby)
             {
-                throw new ArgumentException("Level must be more than 3");
+                throw new ArgumentException("Level must be more than 3, but was " + _currentLevel);
             }
 
             _currentLevel = currentLevel;
+            _playerData = playerData;
         }
 
-        public void LoadLevel(int level)
-        {
-            if (level < 0)
-            {
-                throw new ArgumentException("Negative level " + nameof(level));
-            }
-
-            if (SceneManager.GetActiveScene().buildIndex < (int)Levels.Lobby)
-            {
-                throw new ArgumentException("Changing level on unapproved scene" + nameof(level));
-            }
-
-            _currentLevel = level;
-            SceneManager.LoadScene(_currentLevel);
-        }
-
-        public int GetNextLevelId()
+        private int GetNextLevelId()
         {
             var buildId = SceneManager.GetActiveScene().buildIndex;
 
             return buildId switch
             {
-                (int)Levels.Bootstrap or (int)Levels.Menu => buildId + 1,
+                (int)Levels.Menu => (int)Levels.Lobby,
                 (int)Levels.Lobby => _currentLevel,
                 _ => _currentLevel + 1
             };
+        } 
+        
+        private async void Save(int newLevel)
+        {
+            var uploadParams = new Dictionary<string, string>
+            {
+                { "playerlevel", newLevel.ToString() },
+                { "action", "changelevel" },
+                { "playerid", SystemPlayerData.Instance.uid.ToString() },
+            };
+
+            await _dynamicStorageService.Upload(uploadParams, result =>
+            {
+                if (result)
+                {
+                    _playerData.CurrentLevel = newLevel;
+                    _currentLevel = newLevel;
+                    Debug.Log($"New level saved Successfully to {newLevel}");
+                }
+                else
+                {
+                    Debug.Log("Error while saving level");
+                }
+            });
+        }
+
+        public void StartNextLevel()
+        {
+            var newLevel = GetNextLevelId();
+
+            if (newLevel > (int)Levels.Lobby && newLevel > _currentLevel)
+            {
+                Save(newLevel);
+            }
+            
+            SceneManager.LoadScene(newLevel);
         }
     }
 }

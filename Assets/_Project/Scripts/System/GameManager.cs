@@ -6,9 +6,7 @@ namespace Managers
 {
     public class GameManager : MonoBehaviour
     {
-        private const string LOBBY_LOCATION = "Lobby";
         public static GameManager Instance;
-
         [SerializeField] private Signal _gameOverSignal;
 
         private void Awake()
@@ -23,12 +21,10 @@ namespace Managers
                 DontDestroyOnLoad(gameObject);
             }
         }
-
-        public void StartGame() => SceneManager.LoadScene(LOBBY_LOCATION);
-
+        
         public IEnumerator GameOver()
         {
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(1f);
             _gameOverSignal.Raise();
         }
     }

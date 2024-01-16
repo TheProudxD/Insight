@@ -1,4 +1,5 @@
 using System.Collections;
+using Game.Scripts.Storage;
 using Player;
 using StorageService;
 using UnityEngine;
@@ -11,7 +12,7 @@ namespace Objects
 {
     public class LevelChanger : MonoBehaviour
     {
-        [Inject] private DataManager _dataManager;
+        [Inject] private LevelManager _levelManager;
         private const string ConditionToNewLevel = "FadeNewLevel";
 
         [FormerlySerializedAs("FadeAnimator")] [SerializeField]
@@ -54,7 +55,7 @@ namespace Objects
         public void OnFadeComplete()
         {
             _fadeAnimator.SetTrigger(ConditionToNewLevel);
-            _dataManager.SetNextLevel();
+            _levelManager.StartNextLevel();
         }
 
         public void FadeGameOver() => _fadeAnimator.SetTrigger("FadeGameOver");
