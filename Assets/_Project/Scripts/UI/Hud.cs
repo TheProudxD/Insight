@@ -1,5 +1,6 @@
 using System;
 using System.Reflection;
+using Managers;
 using Player;
 using StorageService;
 using TMPro;
@@ -9,28 +10,37 @@ using Zenject;
 
 namespace UI
 {
-    [RequireComponent(typeof(CameraInjector))]
     public class Hud : MonoBehaviour
     {
         [SerializeField] private Button _attackButton;
         [SerializeField] private Button _changeWeaponButton;
         [SerializeField] private Button _useFirstPotionButton, _useSecondPotionButton, _useThirdPotionButton;
-        
+        [SerializeField] private Button _settingsButton, _inventoryButton;
+
         [SerializeField] private FloatValue _hpValue;
         [SerializeField] private FloatValue _manaValue;
 
         [SerializeField] private Slider _hpSlider, _manaSlider;
-        [SerializeField] private PlayerController _player;
         [SerializeField] private TextMeshProUGUI _playerNickname;
+        [SerializeField] private Animator _fadeAnimator;
+        [SerializeField] private Image _loadingBar;
+        [SerializeField] private Joystick _joystick;
 
-        [Inject] private DataManager _dataManager;
+        [Inject] private WindowManager _windowManager;
+
+        public Animator FadeAnimator => _fadeAnimator;
+        public Image LoadingBar => _loadingBar;
+        public Joystick Joystick => _joystick;
+
+        private PlayerController _player;
 
         private void Awake()
         {
             if (_player == null)
             {
-                Debug.LogError(nameof(_player));
-                return;
+                _player = FindObjectOfType<PlayerController>();
+                //Debug.LogError(nameof(_player));
+                // return;
             }
 
             _attackButton.onClick.AddListener(Attack);
@@ -40,8 +50,9 @@ namespace UI
             _useSecondPotionButton.onClick.AddListener(UseSecondPotion);
             _useThirdPotionButton.onClick.AddListener(UseThirdPotion);
 
-            _playerNickname.text = _dataManager.GetName();
-
+            _inventoryButton.onClick.AddListener(OpenInventory);
+            _settingsButton.onClick.AddListener(OpenSettings);
+            
             InitializeHpBar();
             InitializeManaBar();
         }
@@ -70,6 +81,8 @@ namespace UI
             DecreaseBar(_manaSlider, amount);
         }
 
+        public void SetPlayerNickname(string nick) => _playerNickname.text = nick;
+
         private void DecreaseBar(Slider slider, float amount)
         {
             if (slider is null)
@@ -79,11 +92,19 @@ namespace UI
 
         private void Attack()
         {
+            if (_player == null)
+            {
+                _player = FindObjectOfType<PlayerController>();
+            }
             _player.TryFirstAttack();
         }
 
         private void ChangeWeapon()
         {
+            if (_player == null)
+            {
+                _player = FindObjectOfType<PlayerController>();
+            }
             _player.TrySecondAttack();
         }
 
@@ -110,6 +131,15 @@ namespace UI
         private void UseThirdPotion()
         {
             print(MethodBase.GetCurrentMethod().Name);
+        }
+
+        private void OpenInventory()
+        {
+        }
+
+        private void OpenSettings()
+        {
+            _windowManager.OpenPauseWindow();
         }
     }
 }

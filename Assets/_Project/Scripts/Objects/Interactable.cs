@@ -1,11 +1,13 @@
 using Managers;
 using TMPro;
 using UnityEngine;
+using Zenject;
 
 namespace Objects
 {
     public abstract class Interactable : MonoBehaviour
     {
+        [Inject] private AssetManager _assetManager;
         [SerializeField] protected Signal Context;
 
         protected bool PlayerInRange;
@@ -14,9 +16,9 @@ namespace Objects
 
         private void Awake()
         {
-            if (!AssetManager.DialogAlreadySpawned)
+            if (!_assetManager.DialogAlreadySpawned)
             {
-                DialogBox = AssetManager.GetDialogBoxPrefab();
+                DialogBox = _assetManager.GetDialogBoxPrefab();
                 DialogUI = DialogBox.GetComponentInChildren<TextMeshProUGUI>();
             }
         }

@@ -74,3 +74,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb175fbadc67794c819490a1331aee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _hudCanvasPrefab: {fileID: 4500970560530711371, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}

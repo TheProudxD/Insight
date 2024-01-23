@@ -4,6 +4,7 @@ using System.Threading.Tasks;
 using Assets._Project.Scripts.Storage.Static;
 using Game.Scripts.Storage;
 using ResourceService;
+using UI;
 using UI.Shop.Data;
 using UnityEngine;
 
@@ -19,17 +20,20 @@ namespace StorageService
         public ShopData ShopData { get; private set; }
         private readonly ResourceManager _resourceManager;
         private readonly LevelManager _levelManager;
+        private readonly Hud _hud;
         private readonly GameData _gameData = new();
         private PlayerData _playerData = new();
         private IStaticStorageService StaticStorageService { get; set; }
         private IDynamicStorageService DynamicStorageService { get; set; }
 
-        public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService, ResourceManager resourceManager, LevelManager levelManager)
+        public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService,
+            ResourceManager resourceManager, LevelManager levelManager, Hud hud)
         {
             StaticStorageService = staticStorageService;
             DynamicStorageService = dynamicStorageService;
             _resourceManager = resourceManager;
             _levelManager = levelManager;
+            _hud = hud;
         }
 
         public async Task SetName(string newName)
@@ -100,6 +104,7 @@ namespace StorageService
                     _playerData.AmountHardResources, _playerData);
                 _levelManager.Initialize(data.CurrentLevel, _playerData);
                 ShopData = new ShopData();
+                _hud.SetPlayerNickname(_playerData.Name);
 
                 Debug.Log(data.ToString());
             }

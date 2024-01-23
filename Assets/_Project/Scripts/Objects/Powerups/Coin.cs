@@ -7,7 +7,7 @@ namespace Objects.Powerups
 {
     public class Coin : Powerup
     {
-        private readonly int _amountToIncrease = 2;
+        //private readonly int _amountToIncrease = 2;
 
         protected void OnTriggerEnter2D(Collider2D other)
         {

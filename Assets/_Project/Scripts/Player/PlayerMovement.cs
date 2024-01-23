@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using Zenject;
 
 namespace Player
 {
@@ -13,14 +14,13 @@ namespace Player
         public Vector3 PlayerMovementVector => _playerMovement;
         public Rigidbody2D PlayerRigidbody { get; private set; }
 
-        private Joystick _joystick;
+        [Inject] private Joystick _joystick;
         private Vector3 _playerMovement;
         private float _horizontalAxis;
         private float _verticalAxis;
 
         private void Start()
         {
-            _joystick = FindObjectOfType<Joystick>();
             PlayerRigidbody = GetComponent<Rigidbody2D>();
         }
 

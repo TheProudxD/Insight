@@ -1,4 +1,4 @@
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UI;
 using UnityEngine;
 
@@ -6,25 +6,26 @@ namespace Managers
 {
     public class WindowManager
     {
-        private readonly Dictionary<WindowType, WindowCommon> _allWindows = new();
+        private readonly Dictionary<WindowType, WindowCommon> _openedWindows = new();
+        private readonly AssetManager _assetManager;
 
-        private WindowManager()
+        private WindowManager(AssetManager assetManager)
         {
-            _allWindows.Clear();
+            _assetManager = assetManager;
         }
 
-        public WindowCommon Create(WindowType windowType)
+        private WindowCommon Create(WindowType windowType)
         {
-            var windowObject = AssetManager.GetWindowPrefab(windowType.ToString()).GetComponent<WindowCommon>();
+            var windowObject = _assetManager.GetWindowPrefab(windowType.ToString()).GetComponent<WindowCommon>();
             return windowObject;
         }
 
-        public void TryShow(WindowType windowType)
+        private void TryShow(WindowType windowType)
         {
-            if (!_allWindows.ContainsKey(windowType))
+            if (!_openedWindows.ContainsKey(windowType))
             {
                 var window = Create(windowType);
-                _allWindows[windowType] = window;
+                _openedWindows[windowType] = window;
                 window.Show();
             }
             else
@@ -35,11 +36,11 @@ namespace Managers
 
         public void TryClose(WindowType windowType)
         {
-            if (_allWindows.ContainsKey(windowType))
+            if (_openedWindows.ContainsKey(windowType))
             {
-                _allWindows[windowType].Close();
-                Object.Destroy(_allWindows[windowType]);
-                _allWindows.Remove(windowType);
+                _openedWindows[windowType].Close();
+                Object.Destroy(_openedWindows[windowType]);
+                _openedWindows.Remove(windowType);
             }
             else
             {

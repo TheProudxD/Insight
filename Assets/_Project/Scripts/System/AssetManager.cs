@@ -1,19 +1,31 @@
+using System;
+using System.Linq;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Managers
 {
     public class AssetManager
     {
-        public static bool DialogAlreadySpawned { get; private set; }
+        private readonly Canvas _canvas;
 
-        public static GameObject GetWindowPrefab(string windowName)
+        public bool DialogAlreadySpawned { get; private set; }
+
+        public AssetManager(Canvas canvas) => _canvas = canvas; // TODO
+
+        public GameObject GetWindowPrefab(string windowName)
         {
+            var canvas = Object.FindObjectsOfType<Canvas>().First(x => x.name.Contains("Game"));
             var windowGO = Resources.Load(windowName) as GameObject;
-            var window = Object.Instantiate(windowGO, windowGO.transform.position, Quaternion.identity);
+            if (windowGO == null)
+                throw new Exception($"{windowName} is not in Resources");
+
+            var window = Object.Instantiate(windowGO, windowGO.transform.position, Quaternion.identity,
+                parent: _canvas.transform);
             return window;
         }
 
-        public static GameObject GetDialogBoxPrefab()
+        public GameObject GetDialogBoxPrefab()
         {
             DialogAlreadySpawned = true;
             return GetWindowPrefab("Dialog Box");
