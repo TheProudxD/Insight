@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Assets._Project.Scripts.Storage.Static;
-using Game.Scripts.Storage;
+using Storage;
 using ResourceService;
 using UI;
 using UI.Shop.Data;

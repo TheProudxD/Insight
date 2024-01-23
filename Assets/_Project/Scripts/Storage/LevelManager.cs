@@ -6,19 +6,11 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using Zenject;
 
-namespace Game.Scripts.Storage
+namespace Storage
 {
-    public enum Levels
-    {
-        Bootstrap = 0,
-        Menu,
-        Lobby,
-        Home,
-        Dungeon
-    }
-
     public class LevelManager
     {
+        public event Action<Levels> LevelChanged; 
         private int _currentLevel; // max level passed by the player
         private readonly IDynamicStorageService _dynamicStorageService;
         private PlayerData _playerData;
@@ -85,6 +77,7 @@ namespace Game.Scripts.Storage
                 Save(newLevel);
             }
             
+            LevelChanged?.Invoke((Levels)newLevel);
             SceneManager.LoadScene(newLevel);
         }
     }

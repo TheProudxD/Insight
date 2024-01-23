@@ -1,4 +1,4 @@
-using Game.Scripts.Storage;
+using Storage;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;

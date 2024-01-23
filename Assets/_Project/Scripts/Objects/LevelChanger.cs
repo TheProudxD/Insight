@@ -1,6 +1,6 @@
 using System;
 using System.Collections;
-using Game.Scripts.Storage;
+using Storage;
 using Player;
 using StorageService;
 using UI;

@@ -10,11 +10,12 @@ namespace Player
         private const bool IS_JOYSTICK_MOVEMENT = false;
 
         [SerializeField, Range(1, 20)] private float _playerSpeed = 5f;
+        [SerializeField] private Joystick _joystick;
+
         public Vector3 PlayerDirectionVector { get; private set; } = Vector3.down;
         public Vector3 PlayerMovementVector => _playerMovement;
         public Rigidbody2D PlayerRigidbody { get; private set; }
 
-        [Inject] private Joystick _joystick;
         private Vector3 _playerMovement;
         private float _horizontalAxis;
         private float _verticalAxis;
@@ -48,7 +49,7 @@ namespace Player
 
             _playerMovement = new Vector3(_horizontalAxis, _verticalAxis, 0);
         }
-        
+
         private void GetDirection()
         {
             if (_horizontalAxis != 0)

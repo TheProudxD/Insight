@@ -1,4 +1,4 @@
-using Game.Scripts.Storage;
+using Storage;
 using Managers;
 using StorageService;
 using ResourceService;
@@ -8,8 +8,6 @@ using Zenject;
 
 public class GlobalInstallers : MonoInstaller
 {
-    [SerializeField] private Hud _hudCanvasPrefab;
-
     public override void InstallBindings()
     {
         System();
@@ -21,10 +19,7 @@ public class GlobalInstallers : MonoInstaller
     private void System()
     {
         var camera = FindObjectOfType<Camera>();
-        var hud = Instantiate(_hudCanvasPrefab);
-
-        DontDestroyOnLoad(camera);
-        DontDestroyOnLoad(hud);
+        var hud = FindObjectOfType<Hud>();
 
         Container.Bind<Hud>().FromInstance(hud).AsSingle();
         Container.Bind<Camera>().FromInstance(camera).AsSingle();

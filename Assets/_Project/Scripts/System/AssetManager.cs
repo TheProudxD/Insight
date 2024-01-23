@@ -15,11 +15,10 @@ namespace Managers
 
         public GameObject GetWindowPrefab(string windowName)
         {
-            var canvas = Object.FindObjectsOfType<Canvas>().First(x => x.name.Contains("Game"));
             var windowGO = Resources.Load(windowName) as GameObject;
             if (windowGO == null)
                 throw new Exception($"{windowName} is not in Resources");
-
+            
             var window = Object.Instantiate(windowGO, windowGO.transform.position, Quaternion.identity,
                 parent: _canvas.transform);
             return window;
