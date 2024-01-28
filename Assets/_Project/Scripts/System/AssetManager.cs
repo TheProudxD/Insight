@@ -19,8 +19,10 @@ namespace Managers
             if (windowGO == null)
                 throw new Exception($"{windowName} is not in Resources");
             
-            var window = Object.Instantiate(windowGO, windowGO.transform.position, Quaternion.identity,
+            var window = Object.Instantiate(windowGO, windowGO.transform.localPosition, Quaternion.identity,
                 parent: _canvas.transform);
+
+            window.transform.localPosition = Vector3.zero;
             return window;
         }
 

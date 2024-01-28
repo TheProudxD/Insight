@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using _Project.Scripts.Scriptable_Objects;
+using UnityEngine;
 using Zenject;
 
 namespace Player
@@ -9,7 +10,7 @@ namespace Player
         private const string VERTICAL_AXIS = "Vertical";
         private const bool IS_JOYSTICK_MOVEMENT = false;
 
-        [SerializeField, Range(1, 20)] private float _playerSpeed = 5f;
+        [SerializeField] private IntValue _speed;
         [SerializeField] private Joystick _joystick;
 
         public Vector3 PlayerDirectionVector { get; private set; } = Vector3.down;
@@ -20,14 +21,14 @@ namespace Player
         private float _horizontalAxis;
         private float _verticalAxis;
 
-        private void Start()
+        private void Awake()
         {
             PlayerRigidbody = GetComponent<Rigidbody2D>();
         }
 
         private void Update()
         {
-            if (PlayerController.CurrentState == PlayerState.Interact)
+            if (PlayerCurrentState.Current == PlayerState.Interact)
                 return;
 
             if (IS_JOYSTICK_MOVEMENT)
@@ -50,6 +51,12 @@ namespace Player
             _playerMovement = new Vector3(_horizontalAxis, _verticalAxis, 0);
         }
 
+        private void FixedUpdate()
+        {
+            if (PlayerCurrentState.Current is PlayerState.Walk or PlayerState.Idle)
+                MoveCharacter(transform.position);
+        }
+
         private void GetDirection()
         {
             if (_horizontalAxis != 0)
@@ -58,7 +65,7 @@ namespace Player
                 PlayerDirectionVector = _verticalAxis > 0 ? Vector2.up : Vector2.down;
         }
 
-        public void MoveCharacter(Vector3 position) =>
-            PlayerRigidbody.MovePosition(position + _playerSpeed * Time.deltaTime * _playerMovement.normalized);
+        private void MoveCharacter(Vector3 position) =>
+            PlayerRigidbody.MovePosition(position + _speed.RuntimeValue * Time.deltaTime * _playerMovement.normalized);
     }
 }

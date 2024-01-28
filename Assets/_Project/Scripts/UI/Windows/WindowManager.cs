@@ -30,7 +30,8 @@ namespace Managers
             }
             else
             {
-                Debug.LogError("Открытие уже открытого окна.");
+                TryClose(windowType);
+                //Debug.LogError("Открытие уже открытого окна.");
             }
         }
 

@@ -13,13 +13,24 @@ namespace Player
         private const string RECEIVE_ITEM_STATE = "receive item";
 
         private Animator _playerAnimator;
+        private PlayerMovement _playerMovement;
 
-        private void Awake() => _playerAnimator = GetComponent<Animator>();
+        private void Awake()
+        {
+            _playerAnimator = GetComponent<Animator>();
+            _playerMovement = GetComponent<PlayerMovement>();
+        }
 
         private void Start()
         {
             _playerAnimator.SetFloat(X_MOVE_STATE, 0);
             _playerAnimator.SetFloat(Y_MOVE_STATE, -1);
+        }
+        
+        private void FixedUpdate()
+        {
+            if (PlayerCurrentState.Current is PlayerState.Walk or PlayerState.Idle)
+                UpdateAnimation(_playerMovement.PlayerMovementVector);
         }
 
         public void UpdateAnimation(Vector3 playerMovement)
@@ -49,21 +60,21 @@ namespace Player
         public IEnumerator SwordAttackCo()
         {
             _playerAnimator.SetBool(ATTACKING_STATE, true);
-            PlayerController.CurrentState = PlayerState.Attack;
+            PlayerCurrentState.Current = PlayerState.Attack;
             yield return null;
             _playerAnimator.SetBool(ATTACKING_STATE, false);
             yield return new WaitForSeconds(0.3f);
-            if (PlayerController.CurrentState != PlayerState.Interact)
-                PlayerController.CurrentState = PlayerState.Walk;
+            if (PlayerCurrentState.Current != PlayerState.Interact)
+                PlayerCurrentState.Current = PlayerState.Walk;
         }
         
         public IEnumerator BowAttackCo()
         {
-            PlayerController.CurrentState = PlayerState.Attack;
+            PlayerCurrentState.Current = PlayerState.Attack;
             yield return null;
             yield return new WaitForSeconds(0.3f);
-            if (PlayerController.CurrentState != PlayerState.Interact)
-                PlayerController.CurrentState = PlayerState.Walk;
+            if (PlayerCurrentState.Current != PlayerState.Interact)
+                PlayerCurrentState.Current = PlayerState.Walk;
         }
     }
 }

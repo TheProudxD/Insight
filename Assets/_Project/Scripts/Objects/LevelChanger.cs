@@ -16,7 +16,7 @@ namespace Objects
     {
         [Inject] private LevelManager _levelManager;
         [Inject] private Hud _hud;
-        private const string ConditionToNewLevel = "FadeNewLevel";
+        private const string Fade = "Fade";
 
         private Animator _fadeAnimator;
         private Image _loadingBar;
@@ -29,13 +29,13 @@ namespace Objects
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out PlayerController player))
+            if (collision.gameObject.TryGetComponent(out PlayerAttacking player))
                 StartTransition();
         }
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out PlayerController player))
+            if (collision.gameObject.TryGetComponent(out PlayerAttacking player))
                 StopTransition();
         }
 
@@ -57,11 +57,10 @@ namespace Objects
             _loadingBar.fillAmount = 0f;
             
             
-            _fadeAnimator.SetTrigger(ConditionToNewLevel);
-            yield return new WaitForSecondsRealtime(0.01f);
+            _fadeAnimator.SetTrigger(Fade);
+            yield return new WaitForSecondsRealtime(1f);
             _levelManager.StartNextLevel();
-            yield return new WaitForSecondsRealtime(0.01f);
-            _fadeAnimator.SetTrigger(ConditionToNewLevel);
+            _fadeAnimator.SetTrigger(Fade);
         }
     }
 }

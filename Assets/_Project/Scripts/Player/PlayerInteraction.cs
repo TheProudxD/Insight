@@ -17,16 +17,16 @@ namespace Player
         {
             if (Inventory.CurrentItem == null) return;
 
-            if (PlayerController.CurrentState != PlayerState.Interact)
+            if (PlayerCurrentState.Current != PlayerState.Interact)
             {
                 _playerAnimation.SetReceiveItemAnimation(true);
-                PlayerController.CurrentState = PlayerState.Interact;
+                PlayerCurrentState.Current = PlayerState.Interact;
                 ReceivedItemSprite.sprite = Inventory.CurrentItem.ItemSprite;
             }
             else
             {
                 _playerAnimation.SetReceiveItemAnimation(false);
-                PlayerController.CurrentState = PlayerState.Idle;
+                PlayerCurrentState.Current = PlayerState.Idle;
                 ReceivedItemSprite.sprite = null;
                 Inventory.CurrentItem = null;
             }

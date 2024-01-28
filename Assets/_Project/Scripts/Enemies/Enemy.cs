@@ -26,7 +26,7 @@ namespace Enemies
         protected void Awake()
         {
             EnemyRigidbody = GetComponent<Rigidbody2D>();
-            Target = FindObjectOfType<PlayerController>().transform;
+            Target = FindObjectOfType<PlayerAttacking>().transform;
             Animator = GetComponent<Animator>();
             Animator.SetBool(AnimationConst.wakeUp.ToString(), true);
             CurrentState = EnemyState.Idle;

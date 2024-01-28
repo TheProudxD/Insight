@@ -11,7 +11,7 @@ namespace Objects.Powerups
 
         protected void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.TryGetComponent(out PlayerController player) && !other.isTrigger)
+            if (other.TryGetComponent(out PlayerAttacking player) && !other.isTrigger)
             {
                 // TODO: zenject doesn't bind Inventory after instantiate!
                 

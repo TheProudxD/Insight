@@ -11,21 +11,29 @@ namespace Managers
     {
         [SerializeField] private LevelSpawnPosition _levelSpawnData;
         [Inject] private LevelManager _levelManager;
-        private PlayerController _playerController;
+        [Inject] private Hud _hud;
+        private PlayerAttacking _playerAttacking;
 
         private void Awake()
         {
-            var gm = GetComponentInChildren<GameManager>();
-            var hud = GetComponentInChildren<Hud>();
-            _playerController = GetComponentInChildren<PlayerController>();
+            var gm = GetComponentInChildren<GameStateManager>();
+            _playerAttacking = GetComponentInChildren<PlayerAttacking>();
 
             _levelManager.LevelChanged += ChangePlayerPosition;
+            _hud.DisableView();
+            _playerAttacking.gameObject.SetActive(false);
             DontDestroyOnLoad(gameObject);
         }
 
         private void ChangePlayerPosition(Levels level)
         {
-            _playerController.transform.position = _levelSpawnData.SpawnPosition[level];
+            if (level > Levels.Menu)
+            {
+                _hud.EnableView();
+                _playerAttacking.gameObject.SetActive(true);
+            }
+
+            _playerAttacking.transform.position = _levelSpawnData.SpawnPosition[level];
         }
     }
 }

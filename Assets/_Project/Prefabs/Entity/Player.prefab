@@ -877,7 +877,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d0ebaa03853c4c8bb4e2d23b41110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _playerSpeed: 5
+  _speed: {fileID: 11400000, guid: c06ddadc6fd3ecd4d9d26b7f6b13261d, type: 2}
+  _joystick: {fileID: 0}
 --- !u!114 &989182668464291223
 MonoBehaviour:
   m_ObjectHideFlags: 0

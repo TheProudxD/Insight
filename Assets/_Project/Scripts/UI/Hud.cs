@@ -25,6 +25,7 @@ namespace UI
         [SerializeField] private Animator _fadeAnimator;
         [SerializeField] private Image _loadingBar;
         [SerializeField] private Joystick _joystick;
+        [SerializeField] private PlayerAttacking _player;
 
         [Inject] private WindowManager _windowManager;
 
@@ -32,17 +33,8 @@ namespace UI
         public Image LoadingBar => _loadingBar;
         public Joystick Joystick => _joystick;
 
-        private PlayerController _player;
-
         private void Awake()
         {
-            if (_player == null)
-            {
-                _player = FindObjectOfType<PlayerController>();
-                //Debug.LogError(nameof(_player));
-                // return;
-            }
-
             _attackButton.onClick.AddListener(Attack);
             _changeWeaponButton.onClick.AddListener(ChangeWeapon);
 
@@ -52,7 +44,7 @@ namespace UI
 
             _inventoryButton.onClick.AddListener(OpenInventory);
             _settingsButton.onClick.AddListener(OpenSettings);
-            
+
             InitializeHpBar();
             InitializeManaBar();
         }
@@ -92,20 +84,12 @@ namespace UI
 
         private void Attack()
         {
-            if (_player == null)
-            {
-                _player = FindObjectOfType<PlayerController>();
-            }
-            _player.TryFirstAttack();
+            _player.SwordAttack();
         }
 
         private void ChangeWeapon()
         {
-            if (_player == null)
-            {
-                _player = FindObjectOfType<PlayerController>();
-            }
-            _player.TrySecondAttack();
+            _player.BowAttack();
         }
 
         private void TakeFirstWeapon()
@@ -141,5 +125,15 @@ namespace UI
         {
             _windowManager.OpenPauseWindow();
         }
+
+        private void SwitchView(bool state)
+        {
+            for (int i = 0; i < transform.childCount; i++) 
+                transform.GetChild(i).gameObject.SetActive(state);
+        }
+        
+        public void DisableView() => SwitchView(false);
+        
+        public void EnableView() => SwitchView(true);
     }
 }

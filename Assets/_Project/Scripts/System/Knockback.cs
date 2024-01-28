@@ -18,8 +18,8 @@ namespace Managers
                 enemy.GetComponent<EnemyHealth>().TakeDamage(_damage);
                 StartCoroutine(enemy.KnockCoroutine(_knockTime));
             }
-            else if (collision.TryGetComponent(out PlayerController player) &&
-                     PlayerController.CurrentState != PlayerState.Stagger)
+            else if (collision.TryGetComponent(out PlayerAttacking player) &&
+                     PlayerCurrentState.Current != PlayerState.Stagger)
             {
                 MoveEntity(player);
                 StartCoroutine(player.KnockCoroutine(_knockTime, _damage));

@@ -7,7 +7,7 @@ public class ShopOpener : MonoBehaviour
     
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.gameObject.TryGetComponent(out PlayerController player))
+        if (other.gameObject.TryGetComponent(out PlayerAttacking player))
             _shopCanvas.SetActive(true);    
     }
 }

@@ -29,7 +29,7 @@ namespace Player
 
             if (Value <= 0)
             {
-                StartCoroutine(GameManager.Instance.GameOver());
+                StartCoroutine(GameStateManager.Instance.GameOver());
             }
         }
     }
