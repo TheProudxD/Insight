@@ -1,5 +1,26 @@
 {
   "dependencies": {
+    "com.antonysze.custom-play-button": {
+      "version": "https://github.com/antonysze/unity-custom-play-button.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "b6d122e7809c6529fb5a4b73d41a67ce1edac987"
+    },
+    "com.inf.my-hierarchy": {
+      "version": "https://github.com/INFGameDev/My-Hierarchy.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "49fd57a9e777b07a5f2904583abf1ee3c6818696"
+    },
+    "com.marijnzwemmer.unity-toolbar-extender": {
+      "version": "https://github.com/marijnz/unity-toolbar-extender.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "dbd76ed996483d219c39d240f785b1790aa039ed"
+    },
     "com.singularitygroup.hotreload": {
       "version": "file:com.singularitygroup.hotreload",
       "depth": 0,
