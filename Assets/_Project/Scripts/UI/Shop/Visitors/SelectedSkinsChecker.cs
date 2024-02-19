@@ -11,9 +11,9 @@ namespace UI.Shop
         public void Visit(ShopItem shopItem) => Visit((dynamic)shopItem);
 
         public void Visit(SwordSkinItem swordSkinItem) =>
-            IsSelected = _dataManager.ShopData.SelectedSwordSkins == swordSkinItem.SkinType;
+            IsSelected = _dataManager.ShopData.SelectedSwordSkins == swordSkinItem;
 
         public void Visit(BowSkinItem bowSkinItem) =>
-            IsSelected = _dataManager.ShopData.SelectedBowSkins == bowSkinItem.SkinType;
+            IsSelected = _dataManager.ShopData.SelectedBowSkins == bowSkinItem;
     }
 }

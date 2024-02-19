@@ -26,7 +26,7 @@ namespace Storage
             if (currentLevel <= (int)Levels.Lobby)
             {
                 throw new ArgumentException("Level must be more than 3, but was " + _currentLevel);
-            }
+			}
 
             _currentLevel = currentLevel;
             _playerData = playerData;

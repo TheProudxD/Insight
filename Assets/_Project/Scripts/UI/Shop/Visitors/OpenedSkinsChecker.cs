@@ -13,9 +13,9 @@ namespace UI.Shop
         public void Visit(ShopItem shopItem) => Visit((dynamic)shopItem);
 
         public void Visit(SwordSkinItem swordSkinItem) =>
-            IsOpened = _dataManager.ShopData.OpenSwordSkins.Contains(swordSkinItem.SkinType);
+            IsOpened = _dataManager.ShopData.OpenSwordSkins.Contains(swordSkinItem);
 
         public void Visit(BowSkinItem bowSkinItem) =>
-            IsOpened = _dataManager.ShopData.OpenedBowSkins.Contains(bowSkinItem.SkinType);
+            IsOpened = _dataManager.ShopData.OpenedBowSkins.Contains(bowSkinItem);
     }
 }

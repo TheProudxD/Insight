@@ -26,7 +26,7 @@ public class ShopBootstrap : MonoInstaller
         _shopCanvas.gameObject.SetActive(true);
         InitializeWallet();
         InitializeShop();
-        _shopCanvas.gameObject.SetActive(false);
+        //_shopCanvas.gameObject.SetActive(false);
     }
 
     private void InitializeWallet()

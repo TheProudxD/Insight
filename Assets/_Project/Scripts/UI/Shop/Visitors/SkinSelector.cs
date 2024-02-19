@@ -10,9 +10,9 @@ namespace UI.Shop
         public void Visit(ShopItem shopItem) => Visit((dynamic)shopItem);
 
         public void Visit(SwordSkinItem swordSkinItem) =>
-            _dataManager.ShopData.SelectedSwordSkins = swordSkinItem.SkinType;
+            _dataManager.ShopData.SelectedSwordSkins = swordSkinItem;
 
         public void Visit(BowSkinItem bowSkinItem) =>
-            _dataManager.ShopData.SelectedBowSkins = bowSkinItem.SkinType;
+            _dataManager.ShopData.SelectedBowSkins = bowSkinItem;
     }
 }

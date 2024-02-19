@@ -5,6 +5,8 @@ namespace UI.Shop
 {
     public abstract class ShopItem : ScriptableObject
     {
+        [field: SerializeField] public int ID { get; private set; }
+
         [field: SerializeField] public Sprite Model { get; private set; }
         [field: SerializeField] public Sprite Sprite { get; private set; }
         

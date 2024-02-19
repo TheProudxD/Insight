@@ -103,7 +103,7 @@ namespace StorageService
                 _resourceManager.Initialize(_playerData.AmountSoftResources,
                     _playerData.AmountHardResources, _playerData);
                 _levelManager.Initialize(data.CurrentLevel, _playerData);
-                ShopData = new ShopData();
+                ShopData = new ShopData(DynamicStorageService);
                 _hud.SetPlayerNickname(_playerData.Name);
 
                 Debug.Log(data.ToString());

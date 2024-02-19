@@ -11,9 +11,9 @@ namespace UI.Shop
         public void Visit(ShopItem shopItem) => Visit((dynamic)shopItem);
 
         public void Visit(SwordSkinItem swordSkinItem) =>
-            _dataManager.ShopData.OpenSwordSkin(swordSkinItem.SkinType);
+            _dataManager.ShopData.OpenSwordSkin(swordSkinItem);
 
         public void Visit(BowSkinItem bowSkinItem) =>
-            _dataManager.ShopData.OpenBowSkin(bowSkinItem.SkinType);
+            _dataManager.ShopData.OpenBowSkin(bowSkinItem);
     }
 }

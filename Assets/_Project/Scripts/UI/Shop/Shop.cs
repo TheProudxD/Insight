@@ -1,5 +1,6 @@
 using ResourceService;
 using StorageService;
+using UI.Shop.Data;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -23,6 +24,7 @@ namespace UI.Shop
         [Inject] private SkinUnlocker _skinUnlocker;
         [Inject] private OpenedSkinsChecker _openedSkinsChecker;
         [Inject] private SelectedSkinsChecker _selectedSkinsChecker;
+
         private ShopItemView _previewedItem;
 
         private void OnEnable()
@@ -85,14 +87,12 @@ namespace UI.Shop
                 _skinUnlocker.Visit(_previewedItem.Item);
                 SelectSkin();
                 _previewedItem.Unlock();
-                //save
             }
         }
 
         private void OnSelectButtonClicked()
         {
             SelectSkin();
-            //save
         }
 
         private void OnItemViewClicked(ShopItemView shopItemView)
@@ -114,7 +114,7 @@ namespace UI.Shop
             }
             else
             {
-                ShowBuyButton(_previewedItem.ResourceType ,_previewedItem.Price);
+                ShowBuyButton(_previewedItem.ResourceType,_previewedItem.Price);
             }
         }
 

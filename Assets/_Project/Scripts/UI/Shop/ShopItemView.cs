@@ -25,7 +25,7 @@ namespace UI.Shop
         public int Price => Item.Price;
         public bool IsLock { get; private set; }
         public Sprite Model => Item.Model;
-        public ResourceType ResourceType { get; private set; }
+        public ResourceType ResourceType => Item.ResourceType;
 
         private Image _backgroundImage;
 
@@ -35,7 +35,6 @@ namespace UI.Shop
             _backgroundImage = GetComponent<Image>();
             _backgroundImage.color = _standardBackground;
             _contentImage.sprite = shopItem.Sprite;
-            ResourceType = shopItem.ResourceType;
             _priceView.Show(Price);
 
             _currencyImage.sprite = ResourceType switch
