@@ -45,7 +45,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4e6589720da476459dc6dd71624b071, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _scriptableObjectInstallers: []
+  _scriptableObjectInstallers:
+  - {fileID: 11400000, guid: 0885e28b32fcebb46bb9f015175ade91, type: 2}
   _monoInstallers:
   - {fileID: -724043606941826524}
   _installerPrefabs: []
@@ -74,4 +75,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8cb175fbadc67794c819490a1331aee0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _hudCanvasPrefab: {fileID: 4500970560530711371, guid: c3fb66a756b5b9243bc8a629e99c6e9e, type: 3}
+  _shopContent: {fileID: 11400000, guid: 36241be7db70f274dba72a8bc57abbc3, type: 2}

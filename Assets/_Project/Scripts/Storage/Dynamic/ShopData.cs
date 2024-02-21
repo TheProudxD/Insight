@@ -3,22 +3,30 @@ using SimpleJSON;
 using StorageService;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using UnityEngine;
+using Zenject;
 
 namespace UI.Shop.Data
 {
     public class ShopData
     {
-        private BowSkinItem _selectedBowSkins;
+        [Inject] private ShopContent _shopContent;
+
+        [Inject]
+		public ShopData(ShopContent shopContent)
+		{
+			_shopContent = shopContent;
+		}
+
+		private BowSkinItem _selectedBowSkins;
         private SwordSkinItem _selectedSwordSkins;
 
-        private readonly List<BowSkinItem> _openedBowSkins;
-        private readonly List<SwordSkinItem> _openedSwordSkins;
-
-        private readonly List<int> _openedItems;
-
+        private List<BowSkinItem> _openedBowSkins => _openedItems.Keys.Where(x=>(BowSkinItem)x!=null).Select(x=> (BowSkinItem)x).ToList();
+        private List<SwordSkinItem> _openedSwordSkins=> _openedItems.Keys.Where(x=>(SwordSkinItem)x!=null).Select(x=> (SwordSkinItem)x).ToList();
+        private readonly Dictionary<ShopItem, int> _openedItems;
         private IDynamicStorageService _dynamicStorageService { get; set; }
 
         public BowSkinItem SelectedBowSkins
@@ -52,11 +60,14 @@ namespace UI.Shop.Data
         {
             //_selectedBowSkins = BowSkins.Common;
             //_selectedSwordSkins = SwordSkins.Common;
-            
-            _openedBowSkins = new ();
-            _openedSwordSkins = new ();
 
-			_dynamicStorageService = dynamicStorageService;
+            _dynamicStorageService = dynamicStorageService;
+
+            _openedItems = new(_shopContent.AllSkinItemsAmount);
+			foreach (var item in _shopContent.AllSkinItems)
+			{
+                _openedItems.Add(item, 0);
+			}
 
             GetItems();
         }
@@ -115,24 +126,23 @@ namespace UI.Shop.Data
 
             var boughtIdAmount = new List<int>
             {
-                int.Parse(data["0"]),
-                int.Parse(data["1"]),
-                int.Parse(data["2"]),
-                int.Parse(data["3"]),
-                int.Parse(data["4"]),
-                int.Parse(data["5"])
+                int.Parse(data[0]),
+                int.Parse(data[1]),
+                int.Parse(data[2]),
+                int.Parse(data[3]),
+                int.Parse(data[4]),
+                int.Parse(data[5])
             };
 
-			for (int i = 0; i < boughtIdAmount.Count; i++)
+            for (int i = 0; i < boughtIdAmount.Count; i++)
 			{
 				int amount = boughtIdAmount[i];
 
                 if (amount > 0)
                 {
-                    _openedItems[i] = amount;
+                   _openedItems[_shopContent.AllSkinItems.First(x=>x.ID== boughtIdAmount[i])] = amount;
                     Debug.Log(i);
                 }
-                Debug.Log("");
             }
         }
     }

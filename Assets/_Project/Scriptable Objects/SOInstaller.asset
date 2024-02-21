@@ -13,3 +13,4 @@ MonoBehaviour:
   m_Name: SOInstaller
   m_EditorClassIdentifier: 
   _playerInventory: {fileID: 11400000, guid: c48b402cc15736e4a829538661d9cbe6, type: 2}
+  _shopContent: {fileID: 11400000, guid: 36241be7db70f274dba72a8bc57abbc3, type: 2}

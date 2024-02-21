@@ -28,7 +28,8 @@ namespace Enemies
             {
                 if (CurrentState is EnemyState.Idle or EnemyState.Walk and not EnemyState.Idle)
                 {
-                    if (!_canFire) return;
+                    if (!_canFire) 
+                        return;
                     var delta = Target.transform.position - transform.position;
                     var currentProjectile = Instantiate(_projectile, transform.position, Quaternion.identity);
                     currentProjectile.Launch(delta);

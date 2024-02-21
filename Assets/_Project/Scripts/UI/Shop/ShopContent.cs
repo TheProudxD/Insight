@@ -13,9 +13,16 @@ namespace UI.Shop
 
         public IEnumerable<SwordSkinItem> SwordSkinItems => _swordSkinItems;
         public IEnumerable<BowSkinItem> BowSkinItems => _bowSkinItems;
+        public IEnumerable<ShopItem> AllSkinItems => _allSkinItems;
+        public int AllSkinItemsAmount => _allSkinItems.Count;
+
+        private List<ShopItem> _allSkinItems = new();
 
         private void Awake()
         {
+            _allSkinItems.AddRange(SwordSkinItems);
+            _allSkinItems.AddRange(BowSkinItems);
+
             /*
             var skinDuplicate = SwordSkinItems
                 ?.OrderBy(x => x.SkinType)

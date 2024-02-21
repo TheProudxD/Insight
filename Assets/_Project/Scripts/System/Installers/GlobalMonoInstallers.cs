@@ -6,7 +6,7 @@ using UI;
 using UnityEngine;
 using Zenject;
 
-public class GlobalInstallers : MonoInstaller
+public class GlobalMonoInstallers : MonoInstaller
 {
     public override void InstallBindings()
     {
