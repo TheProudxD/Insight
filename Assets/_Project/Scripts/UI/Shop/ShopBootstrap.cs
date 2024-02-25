@@ -1,6 +1,7 @@
 using ResourceService;
 using StorageService;
 using UI.Shop;
+using UI.Shop.Data;
 using UnityEngine;
 using Zenject;
 
@@ -9,8 +10,7 @@ public class ShopBootstrap : MonoInstaller
     [SerializeField] private Canvas _shopCanvas;
     [SerializeField] private Shop _shop;
     [SerializeField] private WalletView _walletView;
-
-    [Inject] private DataManager _dataManager;
+    
     [Inject] private ResourceManager _resourceManager;
 
     public override void InstallBindings()

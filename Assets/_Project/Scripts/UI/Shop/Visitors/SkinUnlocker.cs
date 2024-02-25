@@ -6,14 +6,14 @@ namespace UI.Shop
 {
     public class SkinUnlocker : IShopItemVisitor
     {
-        [Inject] private DataManager _dataManager;
+        [Inject] private ShopData _shopData;
 
         public void Visit(ShopItem shopItem) => Visit((dynamic)shopItem);
 
         public void Visit(SwordSkinItem swordSkinItem) =>
-            _dataManager.ShopData.OpenSwordSkin(swordSkinItem);
+            _shopData.OpenSwordSkin(swordSkinItem.SkinType);
 
         public void Visit(BowSkinItem bowSkinItem) =>
-            _dataManager.ShopData.OpenBowSkin(bowSkinItem);
+            _shopData.OpenBowSkin(bowSkinItem.SkinType);
     }
 }

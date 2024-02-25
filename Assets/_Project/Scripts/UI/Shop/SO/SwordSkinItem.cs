@@ -6,5 +6,6 @@ namespace UI.Shop
     public class SwordSkinItem : ShopItem
     {
         [field: SerializeField] public SwordSkins SkinType { get; private set; }
+        public override int ID => (int)SkinType;
     }
 }

@@ -24,7 +24,8 @@ namespace UI.Shop
         [Inject] private SkinUnlocker _skinUnlocker;
         [Inject] private OpenedSkinsChecker _openedSkinsChecker;
         [Inject] private SelectedSkinsChecker _selectedSkinsChecker;
-
+        [Inject] private ShopData _shopData;
+        
         private ShopItemView _previewedItem;
 
         private void OnEnable()
@@ -44,8 +45,9 @@ namespace UI.Shop
             _selectionButton.onClick.RemoveListener(OnSelectButtonClicked);
         }
 
-        public void Initialize()
+        public async void Initialize()
         {
+            await _shopData.GetBoughtItems();
             _shopPanel.Initialize(_openedSkinsChecker, _selectedSkinsChecker);
             _shopPanel.ItemViewClicked += OnItemViewClicked;
             OnSwordSkinButtonClick();

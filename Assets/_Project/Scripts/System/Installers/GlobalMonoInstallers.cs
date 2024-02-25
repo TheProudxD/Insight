@@ -3,6 +3,7 @@ using Managers;
 using StorageService;
 using ResourceService;
 using UI;
+using UI.Shop.Data;
 using UnityEngine;
 using Zenject;
 
@@ -14,6 +15,7 @@ public class GlobalMonoInstallers : MonoInstaller
         Loading();
         Data();
         Storage();
+        Shop();
     }
 
     private void System()
@@ -39,6 +41,11 @@ public class GlobalMonoInstallers : MonoInstaller
     {
         Container.Bind<DataManager>().AsSingle();
         Container.Bind<Wallet>().ToSelf().AsSingle();
+    }
+
+    private void Shop()
+    {
+        Container.Bind<ShopData>().AsSingle();
     }
 
     private void Storage()

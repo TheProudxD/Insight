@@ -5,8 +5,10 @@ using Assets._Project.Scripts.Storage.Static;
 using Storage;
 using ResourceService;
 using UI;
+using UI.Shop;
 using UI.Shop.Data;
 using UnityEngine;
+using Zenject;
 
 namespace StorageService
 {
@@ -17,7 +19,6 @@ namespace StorageService
         public const string DYNAMIC_USER_DATA_KEY = "userdata";
         private const string DEFAULT_PLAYER_NAME = "Player";
 
-        public ShopData ShopData { get; private set; }
         private readonly ResourceManager _resourceManager;
         private readonly LevelManager _levelManager;
         private readonly Hud _hud;
@@ -103,7 +104,6 @@ namespace StorageService
                 _resourceManager.Initialize(_playerData.AmountSoftResources,
                     _playerData.AmountHardResources, _playerData);
                 _levelManager.Initialize(data.CurrentLevel, _playerData);
-                ShopData = new ShopData(DynamicStorageService);
                 _hud.SetPlayerNickname(_playerData.Name);
 
                 Debug.Log(data.ToString());
