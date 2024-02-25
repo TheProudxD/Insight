@@ -1,5 +1,4 @@
 using ResourceService;
-using StorageService;
 using UI.Shop.Data;
 using UnityEngine;
 using UnityEngine.UI;
@@ -20,11 +19,11 @@ namespace UI.Shop
         [SerializeField] private Image _selectedText;
 
         [Inject] private Wallet _wallet;
+        [Inject] private ShopData _shopData;
         [Inject] private SkinSelector _skinSelector;
         [Inject] private SkinUnlocker _skinUnlocker;
         [Inject] private OpenedSkinsChecker _openedSkinsChecker;
         [Inject] private SelectedSkinsChecker _selectedSkinsChecker;
-        [Inject] private ShopData _shopData;
         
         private ShopItemView _previewedItem;
 

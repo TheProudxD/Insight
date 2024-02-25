@@ -7,16 +7,18 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f0b89e770dfe4cc68bf7268085da39ea, type: 3}
   m_Name: ShopContent
   m_EditorClassIdentifier: 
   _swordSkinItems:
   - {fileID: 11400000, guid: 07028d7f83c055a4ea6c377cf2bdc0e3, type: 2}
-  - {fileID: 11400000, guid: 752a0af36e0a4374189f65fe3ad9c861, type: 2}
+  - {fileID: 11400000, guid: 641eaec45251edf4ab29ca5ba7a75107, type: 2}
   - {fileID: 11400000, guid: dad52c78da5da1d44809994a8517e3ee, type: 2}
   - {fileID: 11400000, guid: 4c0353dec7b3c434bb464e5a8714b512, type: 2}
-  - {fileID: 11400000, guid: 641eaec45251edf4ab29ca5ba7a75107, type: 2}
+  - {fileID: 11400000, guid: 752a0af36e0a4374189f65fe3ad9c861, type: 2}
   _bowSkinItems:
+  - {fileID: 11400000, guid: e5b91610d29ef844aba98a65dddaee2c, type: 2}
   - {fileID: 11400000, guid: 09c71529c12344345969261cfb74e5ad, type: 2}
+  - {fileID: 11400000, guid: 667b8bd3452ab4c4991bd37cbfa6965c, type: 2}

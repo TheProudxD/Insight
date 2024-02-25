@@ -2,11 +2,10 @@ namespace UI.Shop
 {
     public enum SwordSkins
     {
-        Common,
-        Rare,
-        Epic,
-        Legendary,
-        Mythic,
-        Exotic
+        Wood = 0,
+        Silver,
+        Dagger,
+        Trident,
+        Double,
     }
 }

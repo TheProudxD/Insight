@@ -6,6 +6,7 @@ using System;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
+using Tools;
 using UnityEngine;
 
 public class DataLoader : ILoadingOperation
@@ -38,11 +39,14 @@ public class DataLoader : ILoadingOperation
         var result = await GetSystemData();
         if (!result)
         {
-            Debug.LogError("Error. Несовпадение данных!");
+            Debug.LogError("Error. Mismatch data!");
             Time.timeScale = 0;
             return;
         }
         onProcess?.Invoke(0.5f);
+        
+        Utils.IsCorrectShopItemsId();
+        onProcess?.Invoke(0.6f);
 
         await _dataManager.DownloadMaxLevel();
         onProcess?.Invoke(0.75f);

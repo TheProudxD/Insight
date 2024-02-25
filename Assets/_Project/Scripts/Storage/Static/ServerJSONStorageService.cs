@@ -43,7 +43,7 @@ namespace StorageService
                 {
                     var localJsonFile = await File.ReadAllTextAsync(localPath);
                     var localData = JsonUtility.FromJson<GameData>(localJsonFile);
-                    if ( localData.GetHashCode() != serverData.GetHashCode())
+                    if (localData.GetHashCode() != serverData.GetHashCode())
                     {
                         await File.WriteAllTextAsync(localPath, serverJsonFile);
                     }
@@ -52,7 +52,7 @@ namespace StorageService
                 {
                     await File.WriteAllTextAsync(localPath, serverJsonFile);
                 }
-                
+
                 callback?.Invoke(serverData);
             }
             catch (Exception exception)

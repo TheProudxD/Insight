@@ -1,7 +1,5 @@
-using System;
 using Player;
 using UnityEngine;
-using Zenject;
 
 namespace Objects.Powerups
 {

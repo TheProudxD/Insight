@@ -1,14 +1,29 @@
-using Player;
+using Objects;
+using Tools;
 using UnityEngine;
 
+[RequireComponent(typeof(LoadingAnimation))]
 public class ShopOpener : MonoBehaviour
 {
     [SerializeField] private GameObject _shopCanvas;
-    
+    private LoadingAnimation _loadingAnimation;
+
+    private void Awake() =>
+        _loadingAnimation = GetComponent<LoadingAnimation>();
+
     private void OnTriggerEnter2D(Collider2D other)
     {
-        //if (other.gameObject.TryGetComponent(out PlayerAttacking player))
-        if (other.CompareTag("Player"))
-            _shopCanvas.SetActive(true);    
+        if (other.CompareTag(Constants.PLAYER_TAG))
+        {
+            _loadingAnimation.Animate(() => _shopCanvas.SetActive(true));
+        }
+    }
+
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag(Constants.PLAYER_TAG))
+        {
+            _loadingAnimation.Reset();
+        }
     }
 }

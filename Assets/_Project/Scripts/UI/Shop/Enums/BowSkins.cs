@@ -1,9 +1,11 @@
 namespace UI.Shop
 {
+    // Max Sword Id + 1
     public enum BowSkins
     {
-        Common,
-        Rare,
-        Epic,
+        Wood = 5,
+        Slingshot,
+        Gold,
+        Crossbow
     }
 }

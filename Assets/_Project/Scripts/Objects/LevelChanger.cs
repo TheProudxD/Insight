@@ -1,64 +1,51 @@
-using System;
-using System.Collections;
+using System.Threading.Tasks;
 using Storage;
-using Player;
-using StorageService;
+using Tools;
 using UI;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 using Zenject;
 
 namespace Objects
 {
+    [RequireComponent(typeof(LoadingAnimation))]
     public class LevelChanger : MonoBehaviour
     {
+        private static readonly int Fade = Animator.StringToHash("Fade");
+
         [Inject] private LevelManager _levelManager;
         [Inject] private Hud _hud;
-        private const string Fade = "Fade";
 
+        private readonly int _waitPause = 1000;
         private Animator _fadeAnimator;
-        private Image _loadingBar;
+        private LoadingAnimation _loadingAnimation;
 
         private void Awake()
         {
+            _loadingAnimation = GetComponent<LoadingAnimation>();
             _fadeAnimator = _hud.FadeAnimator;
-            _loadingBar = _hud.LoadingBar;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out PlayerAttacking player))
+            if (collision.gameObject.CompareTag(Constants.PLAYER_TAG))
                 StartTransition();
         }
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (collision.gameObject.TryGetComponent(out PlayerAttacking player))
+            if (collision.gameObject.CompareTag(Constants.PLAYER_TAG))
                 StopTransition();
         }
 
-        private void StopTransition()
-        {
-            StopAllCoroutines();
-            _loadingBar.fillAmount = 0f;
-        }
+        private void StopTransition() => _loadingAnimation.Reset();
 
-        private void StartTransition() => StartCoroutine(LoadingTimer());
+        private void StartTransition() => _loadingAnimation.Animate(Transit);
 
-        private IEnumerator LoadingTimer()
+        private async void Transit()
         {
-            while (_loadingBar.fillAmount < 1f)
-            {
-                _loadingBar.fillAmount += 0.1f;
-                yield return new WaitForSecondsRealtime(0.15f);
-            }
-            _loadingBar.fillAmount = 0f;
-            
-            
+            _loadingAnimation.Reset();
             _fadeAnimator.SetTrigger(Fade);
-            yield return new WaitForSecondsRealtime(1f);
+            await Task.Delay(_waitPause);
             _levelManager.StartNextLevel();
             _fadeAnimator.SetTrigger(Fade);
         }

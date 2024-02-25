@@ -5,10 +5,7 @@ using Assets._Project.Scripts.Storage.Static;
 using Storage;
 using ResourceService;
 using UI;
-using UI.Shop;
-using UI.Shop.Data;
 using UnityEngine;
-using Zenject;
 
 namespace StorageService
 {
@@ -16,7 +13,7 @@ namespace StorageService
     {
         public const string REGISTRY_DATA_KEY = "registry";
         public const string MAX_LEVEL_DATA_KEY = "maxleveldata";
-        public const string DYNAMIC_USER_DATA_KEY = "userdata";
+        private const string DYNAMIC_USER_DATA_KEY = "userdata";
         private const string DEFAULT_PLAYER_NAME = "Player";
 
         private readonly ResourceManager _resourceManager;
@@ -37,7 +34,7 @@ namespace StorageService
             _hud = hud;
         }
 
-        public async Task SetName(string newName)
+        private async Task SetName(string newName)
         {
             var uploadParams = new Dictionary<string, string>
             {
@@ -90,28 +87,24 @@ namespace StorageService
                 { "playerid", SystemPlayerData.Instance.uid.ToString() },
             };
 
-            await DynamicStorageService.Download(downloadParams, Callback);
-        }
-
-        private async void Callback(PlayerData data)
-        {
-            if (data is not null)
+            var callbackData = await DynamicStorageService.Download(downloadParams);
+            _playerData = new PlayerData
             {
-                _playerData = data;
-                if (data.Name == DEFAULT_PLAYER_NAME)
-                    await SetName("Player " + SystemPlayerData.Instance.uid);
+                AmountHardResources = callbackData["HardCurrency"],
+                AmountSoftResources = callbackData["SoftCurrency"],
+                CurrentLevel = callbackData["lvl"],
+                Name = callbackData["Name"],
+            };
 
-                _resourceManager.Initialize(_playerData.AmountSoftResources,
-                    _playerData.AmountHardResources, _playerData);
-                _levelManager.Initialize(data.CurrentLevel, _playerData);
-                _hud.SetPlayerNickname(_playerData.Name);
+            if (_playerData.Name == DEFAULT_PLAYER_NAME)
+                await SetName("Player " + SystemPlayerData.Instance.uid);
 
-                Debug.Log(data.ToString());
-            }
-            else
-            {
-                throw new Exception("dynamic data is null");
-            }
+            _resourceManager.Initialize(_playerData.AmountSoftResources,
+                _playerData.AmountHardResources, _playerData);
+            _levelManager.Initialize(_playerData.CurrentLevel, _playerData);
+            _hud.SetPlayerNickname(_playerData.Name);
+
+            Debug.Log(_playerData.ToString());
         }
     }
 }
