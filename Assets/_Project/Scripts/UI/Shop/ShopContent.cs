@@ -20,11 +20,13 @@ namespace UI.Shop
                 ?.OrderBy(x => x.SkinType)
                 .GroupBy(i => i.SkinType)
                 .ToList();
-
+            
+            /*
             foreach (var duplicate in skinDuplicate)
             {
                 throw new InvalidOperationException(duplicate.Key + " " + duplicate.Count());
             }
+            */
         }
     }
 }
