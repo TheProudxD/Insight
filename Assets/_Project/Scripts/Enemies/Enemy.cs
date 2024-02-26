@@ -2,6 +2,7 @@ using System.Collections;
 using Player;
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace Enemies
 {
@@ -9,18 +10,12 @@ namespace Enemies
     [RequireComponent(typeof(EnemyHealth))]
     public abstract class Enemy : MonoBehaviour
     {
-        [FormerlySerializedAs("_enemyName"), SerializeField]
-        protected string EnemyName;
-
-        [FormerlySerializedAs("_baseAttack"), SerializeField]
-        protected int BaseAttack;
-
-        [FormerlySerializedAs("_moveSpeed"), SerializeField]
-        protected float MoveSpeed;
+        [Inject(Id ="log")] protected EntitySpecs Specs;
 
         protected EnemyState CurrentState { get; private set; }
         protected Rigidbody2D EnemyRigidbody;
         protected Transform Target;
+
         private Animator Animator;
 
         protected void Awake()

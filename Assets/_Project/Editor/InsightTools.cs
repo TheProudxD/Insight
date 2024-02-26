@@ -30,6 +30,25 @@ namespace _Project.Editor
             Application.OpenURL(
                 @"http://game.ispu.ru:8080/pma/sql.php?db=16_game1&table=d_data&token=0bc4aceff5c3d91ec953cc8258fea3bf&pos=0");
         }
+        
+        [MenuItem("Insight/Google Sheets")]
+        private static void OpenGoogleSheets()
+        {
+            Application.OpenURL(
+                @"https://docs.google.com/spreadsheets/d/1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ/export?format=csv&gid=2071689435");
+        }
+        
+        [MenuItem("Insight/Update Entities Specs")]
+        private static void UpdateEntitiesSpecs()
+        {
+            var googleSheetLoader = new GoogleSheetLoader(true);
+        }
+        
+        [MenuItem("Insight/Delete Entities Specs")]
+        private static void DeleteEntitiesSpecs()
+        {
+            //AssetDatabase.DeleteAssets("Assets/Resources/Entity Specs/", null);
+        }
 
         /*
         private static void ShowWindow()

@@ -24,12 +24,13 @@ namespace Enemies
         protected override void CheckDistance()
         {
             var distance = Vector3.Distance(Target.position, transform.position);
-            if (distance <= ChaseRadius && distance > AttackRadius)
+            if (distance <= Specs.ChaseRadius && distance > Specs.AttackRadius)
             {
                 if (CurrentState is EnemyState.Idle or EnemyState.Walk and not EnemyState.Idle)
                 {
                     if (!_canFire) 
                         return;
+
                     var delta = Target.transform.position - transform.position;
                     var currentProjectile = Instantiate(_projectile, transform.position, Quaternion.identity);
                     currentProjectile.Launch(delta);
@@ -38,7 +39,7 @@ namespace Enemies
                     ChangeState(EnemyState.Walk);
                 }
             }
-            else if (distance > ChaseRadius)
+            else if (distance > Specs.ChaseRadius)
             {
                 SetAnimationBool(AnimationConst.wakeUp, false);
             }

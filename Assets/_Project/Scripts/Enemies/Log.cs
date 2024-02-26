@@ -5,33 +5,27 @@ namespace Enemies
 {
     public class Log : Enemy
     {
-        [FormerlySerializedAs("_attackRadius")] [SerializeField]
-        protected float AttackRadius = 1.5f;
-
-        [FormerlySerializedAs("_chaseRadius")] [SerializeField]
-        protected float ChaseRadius = 4;
-
         private void FixedUpdate() => CheckDistance();
 
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position, ChaseRadius);
+            Gizmos.DrawWireSphere(transform.position, Specs.ChaseRadius);
             Gizmos.color = Color.red;
-            Gizmos.DrawWireSphere(transform.position, AttackRadius);
+            Gizmos.DrawWireSphere(transform.position, Specs.AttackRadius);
         }
 
         protected virtual void CheckDistance()
         {
             var distance = Vector3.Distance(Target.position, transform.position);
-            if (distance <= ChaseRadius && distance > AttackRadius)
+            if (distance <= Specs.ChaseRadius && distance > Specs.AttackRadius)
             {
                 if (CurrentState is EnemyState.Idle or EnemyState.Walk and not EnemyState.Idle)
                 {
                     var targetDirection = Vector3.MoveTowards(
                         transform.position,
                         Target.position,
-                        MoveSpeed * Time.deltaTime);
+                        Specs.MoveSpeed* Time.deltaTime);
                     EnemyRigidbody.MovePosition(targetDirection);
 
                     ChangeAnimation(targetDirection - transform.position);
@@ -39,7 +33,7 @@ namespace Enemies
                     ChangeState(EnemyState.Walk);
                 }
             }
-            else if (distance > ChaseRadius)
+            else if (distance > Specs.ChaseRadius)
             {
                 SetAnimationBool(AnimationConst.wakeUp, false);
             }

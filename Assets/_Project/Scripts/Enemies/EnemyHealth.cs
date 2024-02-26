@@ -1,22 +1,23 @@
 using System;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace Enemies
 {
     public class EnemyHealth : MonoBehaviour
     {
-        [SerializeField] private FloatValue _maxHealth;
+        [Inject(Id = "log")] private EntitySpecs _specs;
+
         [SerializeField] private Slider _healthBar;
         [SerializeField] private Animator _deathAnimator;
         [SerializeField] private LootTable _lootTable;
+
         private float _health;
 
         private void Start()
         {
-            if (_maxHealth is null)
-                throw new Exception(nameof(_maxHealth));
-            _health = _maxHealth.RuntimeValue;
+            _health = _specs.Hp;
             _healthBar.maxValue = _health;
             _healthBar.value = _health;
             _healthBar.gameObject.SetActive(false);

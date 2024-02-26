@@ -6,7 +6,6 @@ using UnityEngine.Networking;
 public class CVSLoader
 {
     private bool _debug;
-    private const string URL_TEMPLATE = "https://docs.google.com/spreadsheets/d/1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ/export?format=csv&gid=2071689435";
     private string _url;
 
 	public CVSLoader(string docsId, string sheetId = "0", bool debug = false)

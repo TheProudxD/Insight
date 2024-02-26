@@ -5,10 +5,15 @@ using UnityEngine.Networking;
 
 public class SheetProcessor
 {
-    private const int _id = 0;
-    private const int _hp = 1;
-    private const int _damage = 2;
-    private const int _speed = 3;
+    private enum RowTypes
+	{
+        Id=0,
+        Hp,
+        Damage,
+        MoveSpeed,
+        AttackRadius,
+        ChaseRadius,
+	}
 
     private const char _cellSeporator = ',';
     private const char _inCellSeporator = ';';
@@ -32,18 +37,22 @@ public class SheetProcessor
         for (int i = dataStartRawIndex; i < rows.Length; i++)
         {
             string[] cells = rows[i].Split(_cellSeporator);
-            var id = cells[_id];
-            var hp = ParseFloat(cells[_hp]);
-            var damage = ParseFloat(cells[_damage]);
-            var speed = ParseFloat(cells[_speed]);
-            
-            data.EntitiesOptions.Add(new EntityOptions()
-            {
-                Id = id,
-                Hp = hp,
-                Damage = damage,
-                Speed = speed
-            });
+            var id = cells[(int)RowTypes.Id];
+            var hp = ParseFloat(cells[(int)RowTypes.Hp]);
+            var damage = ParseFloat(cells[(int)RowTypes.Damage]);
+            var speed = ParseFloat(cells[(int)RowTypes.MoveSpeed]);
+            var attackRadius = ParseFloat(cells[(int)RowTypes.AttackRadius]);
+            var chaseRadius = ParseFloat(cells[(int)RowTypes.ChaseRadius]);
+
+            var entitySpecs = ScriptableObject.CreateInstance<EntitySpecs>();
+            entitySpecs.Id = id;
+            entitySpecs.Hp = hp;
+            entitySpecs.Damage = damage;
+            entitySpecs.MoveSpeed = speed;
+            entitySpecs.AttackRadius = attackRadius;
+            entitySpecs.ChaseRadius = chaseRadius;
+
+            data.EntitiesOptions.Add(entitySpecs);
         }
         return data;
     }
