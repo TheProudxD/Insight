@@ -16,14 +16,14 @@ namespace Enemies
         protected Rigidbody2D EnemyRigidbody;
         protected Transform Target;
 
-        private Animator Animator;
+        private Animator _animator;
 
         protected void Awake()
         {
             EnemyRigidbody = GetComponent<Rigidbody2D>();
             Target = FindObjectOfType<PlayerAttacking>().transform;
-            Animator = GetComponent<Animator>();
-            Animator.SetBool(AnimationConst.wakeUp.ToString(), true);
+            _animator = GetComponent<Animator>();
+            _animator.SetBool(AnimationConst.wakeUp.ToString(), true);
             CurrentState = EnemyState.Idle;
         }
 
@@ -37,12 +37,12 @@ namespace Enemies
             SetAnimationFloat(AnimationConst.moveX, AnimationConst.moveY, direction);
 
         protected void SetAnimationBool(AnimationConst animation, bool enable) =>
-            Animator.SetBool(animation.ToString(), enable);
+            _animator.SetBool(animation.ToString(), enable);
 
         private void SetAnimationFloat(AnimationConst animation1, AnimationConst animation2, Vector2 direction)
         {
-            Animator.SetFloat(animation1.ToString(), direction.x);
-            Animator.SetFloat(animation2.ToString(), direction.y);
+            _animator.SetFloat(animation1.ToString(), direction.x);
+            _animator.SetFloat(animation2.ToString(), direction.y);
         }
 
         public IEnumerator KnockCoroutine(float knockTime)

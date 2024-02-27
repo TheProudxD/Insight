@@ -1,10 +1,7 @@
-using System.Collections;
-using System.Collections.Generic;
 using UI;
-using UnityEngine;
 using Zenject;
 
-public class DungeonInstaller : MonoInstaller
+public class DungeonMonoInstaller : MonoInstaller
 {
     [Inject] private Hud _hud;
     

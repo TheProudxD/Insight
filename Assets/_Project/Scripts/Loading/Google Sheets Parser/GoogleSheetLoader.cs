@@ -1,28 +1,32 @@
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
+using Tools;
 using UnityEditor;
 using UnityEngine;
 
 public class GoogleSheetLoader
 {
     private string _docsId = "1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ";
-    private string _sheetId = "2071689435";
 
-    private CVSLoader _cvsLoader;
     private SheetProcessor _sheetProcessor;
 
     public GoogleSheetLoader(bool autoUpdate = false)
     {
-        _cvsLoader = new CVSLoader(_docsId);
+       
         _sheetProcessor = new SheetProcessor();
 
         if (autoUpdate)
             DownloadTable();
     }
 
-	public void DownloadTable() => _cvsLoader.DownloadTable(OnRawCVSLoaded);
+	public void DownloadTable(string sheetId="0")
+    { 
+        var cvsLoader = new CVSLoader(_docsId, sheetId);
+        cvsLoader.DownloadTable(OnRawCVSLoaded);
+    }
 
-	private void OnRawCVSLoaded(string rawCVSText)
+    private void OnRawCVSLoaded(string rawCVSText)
     {
         var data = _sheetProcessor.ProcessData(rawCVSText);
         ConfigureEntities(data.EntitiesOptions);
@@ -32,7 +36,14 @@ public class GoogleSheetLoader
     {
         foreach (var entity in data)
         {
-            AssetDatabase.CreateAsset(entity, $"Assets/Resources/Entity Specs/{entity.Id}.asset");
+            var path = Utils.GetEntitySpecsPath();
+            
+            if (Directory.Exists(path) == false)
+            {
+                Directory.CreateDirectory(path);
+            }
+            
+            AssetDatabase.CreateAsset(entity, $"{path}/{entity.Id}.asset");
             AssetDatabase.SaveAssets();
 
             EditorUtility.FocusProjectWindow();

@@ -26,9 +26,7 @@ namespace Tools
             return typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance).Aggregate("",
                 (current, field) => current + field.Name + ": " + field.GetValue(obj) + " ");
         }
-
-        public static void Print(string str) => Debug.Log(str);
-
+        
         public static void IsCorrectShopItemsId()
         {
             var swordMax = Enum.GetValues(typeof(SwordSkins)).Cast<int>();
@@ -37,5 +35,7 @@ namespace Tools
             if (errorsCount!=0)
                 Debug.LogError($"something wrong with shop items Id!. There are {errorsCount} errors.");
         }
+
+        public static string GetEntitySpecsPath() => "Assets/Resources/Entity Specs";
     }
 }

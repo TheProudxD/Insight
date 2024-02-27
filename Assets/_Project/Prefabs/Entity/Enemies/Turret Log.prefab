@@ -17,13 +17,13 @@ GameObject:
   - component: {fileID: 6275285900433412933}
   - component: {fileID: 7067353516252564706}
   - component: {fileID: 685336869857196403}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Turret Log
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &3872439736653257034
 Transform:
   m_ObjectHideFlags: 0
@@ -31,14 +31,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 440570741754297249}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 57.37, y: -10, z: 0}
   m_LocalScale: {x: 1.3, y: 1.3, z: 1.3}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 1804292040726353849}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &899584924243573673
 SpriteRenderer:
@@ -94,7 +94,7 @@ SpriteRenderer:
   m_SpriteSortPoint: 0
 --- !u!95 &2267314714496477632
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -111,7 +111,8 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
 --- !u!50 &7495020515442109246
 Rigidbody2D:
   serializedVersion: 4
@@ -129,6 +130,12 @@ Rigidbody2D:
   m_AngularDrag: 0.05
   m_GravityScale: 0
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
   m_Interpolate: 0
   m_SleepingMode: 0
   m_CollisionDetection: 1
@@ -143,6 +150,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -169,6 +195,25 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
@@ -212,10 +257,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9437df11c1ee4829a80496d639943c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: {fileID: 11400000, guid: 9e990481c915c764cb6dcd761a1577cf, type: 2}
   _healthBar: {fileID: 6374444607413590613}
   _deathAnimator: {fileID: 0}
-  _lootTable: {fileID: 0}
+  _lootTable: {fileID: 11400000, guid: f704792488d7e75429adb03a6f2c51d1, type: 2}
 --- !u!114 &685336869857196403
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,11 +272,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 23e523fb0f9c40ff957aefa45ff6278f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  EnemyName: Turret
-  BaseAttack: 2
-  MoveSpeed: 5
-  AttackRadius: 10
-  ChaseRadius: 7
   _projectile: {fileID: 7117325987862431954, guid: 87749ff09c90326409be2f5d938abe54, type: 3}
 --- !u!1 &1501079308304464725
 GameObject:
@@ -243,7 +282,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6980329221232971073}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Fill Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -282,7 +321,7 @@ GameObject:
   - component: {fileID: 1456845546285956062}
   - component: {fileID: 1310258812392692160}
   - component: {fileID: 3926823086458061718}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -305,7 +344,7 @@ RectTransform:
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
@@ -358,7 +397,7 @@ GameObject:
   - component: {fileID: 8272829420793852221}
   - component: {fileID: 7493551078681750893}
   - component: {fileID: 947500850450003039}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Background
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -432,7 +471,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 9018677252377450551}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Handle Slide Area
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -471,7 +510,7 @@ GameObject:
   - component: {fileID: 8926495464625629693}
   - component: {fileID: 5728072318728301104}
   - component: {fileID: 124056455578732660}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Handle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -549,7 +588,7 @@ GameObject:
   - component: {fileID: 4096181965418624495}
   - component: {fileID: 5041128058893062530}
   - component: {fileID: 2924773161115748862}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: HP Bar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -594,6 +633,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
@@ -661,7 +701,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3596282039660482136}
   - component: {fileID: 6374444607413590613}
-  m_Layer: 8
+  m_Layer: 7
   m_Name: Slider
   m_TagString: Untagged
   m_Icon: {fileID: 0}

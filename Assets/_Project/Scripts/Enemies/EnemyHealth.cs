@@ -1,4 +1,3 @@
-using System;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -8,9 +7,9 @@ namespace Enemies
     public class EnemyHealth : MonoBehaviour
     {
         [Inject(Id = "log")] private EntitySpecs _specs;
+        [Inject(Id = "enemyDeathEffect")] private Animator _deathAnimator;
 
         [SerializeField] private Slider _healthBar;
-        [SerializeField] private Animator _deathAnimator;
         [SerializeField] private LootTable _lootTable;
 
         private float _health;

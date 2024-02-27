@@ -1,3 +1,4 @@
+using Tools;
 using UI.Shop;
 using UnityEngine;
 using Zenject;
@@ -12,5 +13,6 @@ public class GlobalSOInstaller : ScriptableObjectInstaller
     {
         Container.Bind<Inventory>().FromInstance(_playerInventory).AsSingle();
         Container.Bind<ShopContent>().FromInstance(_shopContent).AsSingle();
+        Container.Bind<EntitySpecs>().WithId("log").FromResources(@"Entity Specs\log").AsSingle();
     }
 }

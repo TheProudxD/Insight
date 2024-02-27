@@ -1,12 +1,12 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 namespace Managers
 {
     public class GameStateManager : MonoBehaviour
     {
         public static GameStateManager Instance;
+        
         [SerializeField] private Signal _gameOverSignal;
 
         private void Awake()

@@ -33,8 +33,12 @@ public class DataLoader : ILoadingOperation
             Application.Quit();
             return;
         }
-
         onProcess?.Invoke(0.25f);
+
+        var googleSheetLoader = new GoogleSheetLoader();
+        googleSheetLoader.DownloadTable();
+        //googleSheetLoader.DownloadTable("2071689435");
+        onProcess?.Invoke(0.35f);
 
         var result = await GetSystemData();
         if (!result)
@@ -64,7 +68,7 @@ public class DataLoader : ILoadingOperation
         return systemData;
     }
 
-    private async Task<bool> GetSystemData()
+    private async UniTask<bool> GetSystemData()
     {
         var localPath = Path.Combine(Application.persistentDataPath, DataManager.REGISTRY_DATA_KEY);
 
@@ -90,31 +94,10 @@ public class DataLoader : ILoadingOperation
             if (localData.GetHashCode() != webData.GetHashCode())
             {
                 return false;
-                //await File.WriteAllTextAsync(localPath, JsonUtility.ToJson(webData));
             }
             
             localData.ToSingleton();
         }
-        
-        /*
-        {
-
-            using var wc = new WebClient();
-            var path = _url + $"/api.php?action={DataManager.PLAYER_DATA_KEY}";
-            var value = await wc.DownloadStringTaskAsync(path);
-            var webJson = JSONNode.Parse(value);
-            var WUID = int.Parse(webJson["uid"]);
-            var WName = "Player " + UID; //json["name"];
-            var WKey = 17; //json["key"];
-            var webdata = new SystemPlayerData(WUID, WName, WKey);
-
-            if (localData.GetHashCode() != webdata.GetHashCode())
-            {
-                Debug.LogError("Данные изменились");
-                await File.WriteAllTextAsync(localPath, value);
-            }
-        }
-        */
 
         Debug.Log(SystemPlayerData.Instance.ToString());
         await Task.CompletedTask;
@@ -123,7 +106,7 @@ public class DataLoader : ILoadingOperation
 
     private bool HasInternet() => Application.internetReachability != NetworkReachability.NotReachable;
 
-    private async Task<bool> TryToConnect(int tryAmount)
+    private async UniTask<bool> TryToConnect(int tryAmount)
     {
         if (HasInternet())
         {

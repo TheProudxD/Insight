@@ -1,3 +1,5 @@
+using System.IO;
+using Tools;
 using UnityEditor;
 using UnityEngine;
 
@@ -35,19 +37,22 @@ namespace _Project.Editor
         private static void OpenGoogleSheets()
         {
             Application.OpenURL(
-                @"https://docs.google.com/spreadsheets/d/1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ/export?format=csv&gid=2071689435");
+                @"https://docs.google.com/spreadsheets/d/1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ");
         }
         
-        [MenuItem("Insight/Update Entities Specs")]
+        [MenuItem("Entities Specs/Update")]
         private static void UpdateEntitiesSpecs()
         {
             var googleSheetLoader = new GoogleSheetLoader(true);
         }
         
-        [MenuItem("Insight/Delete Entities Specs")]
+        [MenuItem("Entities Specs/Delete Folder")]
         private static void DeleteEntitiesSpecs()
         {
-            //AssetDatabase.DeleteAssets("Assets/Resources/Entity Specs/", null);
+            var path = Utils.GetEntitySpecsPath();
+            AssetDatabase.DeleteAsset(path);
+            AssetDatabase.CreateFolder("Assets/Resources","Entity Specs");
+            AssetDatabase.SaveAssets();
         }
 
         /*
