@@ -1,7 +1,7 @@
 ﻿using Objects;
 using UnityEngine;
 
-public class BoundedNpc : Interactable
+public class BoundedNPC : Interactable
 {
     [SerializeField] private Collider2D _bounds;
     [SerializeField] private Animator _animator;

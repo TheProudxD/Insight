@@ -9,12 +9,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e1e3f828ba4b5084dab87c8dc8de45d5, type: 3}
-  m_Name: log
+  m_Script: {fileID: 11500000, guid: abc7a0e8fe8c2ae4fb00b01d13c71d55, type: 3}
+  m_Name: turret log
   m_EditorClassIdentifier: 
-  Id: log
-  Hp: 2
+  Id: turret log
+  Hp: 3
   Damage: 1
-  MoveSpeed: 3
-  AttackRadius: 3
-  ChaseRadius: 5
+  MoveSpeed: 0
+  AttackRadius: 4
+  ChaseRadius: 0

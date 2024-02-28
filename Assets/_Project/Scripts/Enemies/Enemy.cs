@@ -10,8 +10,6 @@ namespace Enemies
     [RequireComponent(typeof(EnemyHealth))]
     public abstract class Enemy : MonoBehaviour
     {
-        [Inject(Id ="log")] protected EntitySpecs Specs;
-
         protected EnemyState CurrentState { get; private set; }
         protected Rigidbody2D EnemyRigidbody;
         protected Transform Target;

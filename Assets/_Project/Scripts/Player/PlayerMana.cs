@@ -16,7 +16,6 @@ namespace Player
 
             Value += amount;
             Value = Mathf.Clamp(Value, 0, MaxValue);
-            print(Value);
         }
 
         public void Decrease(float amount)

@@ -11,24 +11,17 @@ public class GoogleSheetLoader
 
     private SheetProcessor _sheetProcessor;
 
-    public GoogleSheetLoader(bool autoUpdate = false)
-    {
-       
-        _sheetProcessor = new SheetProcessor();
+	public GoogleSheetLoader() => _sheetProcessor = new SheetProcessor();
 
-        if (autoUpdate)
-            DownloadTable();
-    }
-
-	public void DownloadTable(string sheetId="0")
+	public void DownloadTable<T>(string sheetId="0") where T : EntitySpecs
     { 
         var cvsLoader = new CVSLoader(_docsId, sheetId);
-        cvsLoader.DownloadTable(OnRawCVSLoaded);
+        cvsLoader.DownloadTable(OnRawCVSLoaded<T>);
     }
 
-    private void OnRawCVSLoaded(string rawCVSText)
+    private void OnRawCVSLoaded<T>(string rawCVSText) where T: EntitySpecs
     {
-        var data = _sheetProcessor.ProcessData(rawCVSText);
+        var data = _sheetProcessor.ProcessData<T>(rawCVSText);
         ConfigureEntities(data.EntitiesOptions);
     }
 
@@ -37,7 +30,7 @@ public class GoogleSheetLoader
         foreach (var entity in data)
         {
             var path = Utils.GetEntitySpecsPath();
-            
+            /*
             if (Directory.Exists(path) == false)
             {
                 Directory.CreateDirectory(path);
@@ -46,7 +39,7 @@ public class GoogleSheetLoader
             AssetDatabase.CreateAsset(entity, $"{path}/{entity.Id}.asset");
             AssetDatabase.SaveAssets();
 
-            EditorUtility.FocusProjectWindow();
+            EditorUtility.FocusProjectWindow();*/
 
             /*
             var e =_entitySpecs.FirstOrDefault(e => e.Id == entity.Id);

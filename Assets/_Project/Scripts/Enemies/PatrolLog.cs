@@ -1,10 +1,12 @@
 using UnityEngine;
 using System.Collections.Generic;
+using Zenject;
 
 namespace Enemies
 {
     public class PatrolLog : Log
     {
+        [Inject(Id = "dynamic log")] private LogEntitySpecs Specs;
         [SerializeField] private List<Transform> _waypoints;
 
         private Transform CurrentPoint => _waypoints[_currentPointIndex];

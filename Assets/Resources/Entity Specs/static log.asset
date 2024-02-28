@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: abc7a0e8fe8c2ae4fb00b01d13c71d55, type: 3}
-  m_Name: player
+  m_Name: static log
   m_EditorClassIdentifier: 
-  Id: player
-  Hp: 10
-  Damage: 2
-  MoveSpeed: 6
-  AttackRadius: 5
+  Id: static log
+  Hp: 2
+  Damage: 1
+  MoveSpeed: 0
+  AttackRadius: 3
   ChaseRadius: 0

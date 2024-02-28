@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace Enemies
 {
     public class Log : Enemy
     {
+        [Inject(Id = "static log")] private LogEntitySpecs Specs;
         private void FixedUpdate() => CheckDistance();
 
         private void OnDrawGizmos()

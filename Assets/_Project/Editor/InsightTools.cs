@@ -40,13 +40,7 @@ namespace _Project.Editor
                 @"https://docs.google.com/spreadsheets/d/1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ");
         }
         
-        [MenuItem("Entities Specs/Update")]
-        private static void UpdateEntitiesSpecs()
-        {
-            var googleSheetLoader = new GoogleSheetLoader(true);
-        }
-        
-        [MenuItem("Entities Specs/Delete Folder")]
+        [MenuItem("Entities Specs/Clear Folder")]
         private static void DeleteEntitiesSpecs()
         {
             var path = Utils.GetEntitySpecsPath();

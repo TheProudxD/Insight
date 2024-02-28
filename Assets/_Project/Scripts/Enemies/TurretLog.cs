@@ -1,12 +1,13 @@
 using Objects;
 using UnityEngine;
+using Zenject;
 
 namespace Enemies
 {
-    public class TurretEnemy : Log
+    public class TurretLog : Log
     {
         [SerializeField] private RockProjectile _projectile;
-
+        [Inject(Id = "turret log")] private LogEntitySpecs Specs;
         private readonly float _fireDelay = 2;
         private float _fireDelayTimer;
         private bool _canFire;

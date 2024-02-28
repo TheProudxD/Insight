@@ -13,6 +13,8 @@ public class GlobalSOInstaller : ScriptableObjectInstaller
     {
         Container.Bind<Inventory>().FromInstance(_playerInventory).AsSingle();
         Container.Bind<ShopContent>().FromInstance(_shopContent).AsSingle();
-        Container.Bind<EntitySpecs>().WithId("log").FromResources(@"Entity Specs\log").AsSingle();
+        Container.Bind<LogEntitySpecs>().WithId("static log").FromResources(@"Entity Specs\static log");
+        Container.Bind<LogEntitySpecs>().WithId("dynamic log").FromResources(@"Entity Specs\dynamic log");
+        Container.Bind<LogEntitySpecs>().WithId("turret log").FromResources(@"Entity Specs\turret log");
     }
 }

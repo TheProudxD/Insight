@@ -6,7 +6,7 @@ namespace Enemies
 {
     public class EnemyHealth : MonoBehaviour
     {
-        [Inject(Id = "log")] private EntitySpecs _specs;
+        [Inject(Id = "static log")] private LogEntitySpecs _specs;
         [Inject(Id = "enemyDeathEffect")] private Animator _deathAnimator;
 
         [SerializeField] private Slider _healthBar;
