@@ -8,24 +8,30 @@ using Zenject;
 
 namespace Storage
 {
-    public class LevelManager
+
+	public class LevelManager
     {
         public event Action<Levels> LevelChanged; 
-        private int _currentLevel; // max level passed by the player
+
         private readonly IDynamicStorageService _dynamicStorageService;
+        [Inject] private LevelRewardSystem _levelRewardSystem;
+
+        private int _currentLevel; // max level passed by the player by default
         private PlayerData _playerData;
 
-        [Inject]
-        private LevelManager(IDynamicStorageService dynamicStorageService)
-        {
-            _dynamicStorageService = dynamicStorageService;
-        }
+		public int CurrentLevel => _currentLevel;
 
-        public void Initialize(int currentLevel, PlayerData playerData)
+		[Inject]
+		private LevelManager(IDynamicStorageService dynamicStorageService)
+		{
+			_dynamicStorageService = dynamicStorageService;
+		}
+
+		public void Initialize(int currentLevel, PlayerData playerData)
         {
             if (currentLevel <= (int)Levels.Lobby)
             {
-                throw new ArgumentException("Level must be more than 3, but was " + _currentLevel);
+                throw new ArgumentException("Level must be more than 3, but was " + CurrentLevel);
 			}
 
             _currentLevel = currentLevel;
@@ -39,8 +45,8 @@ namespace Storage
             return buildId switch
             {
                 (int)Levels.Menu => (int)Levels.Lobby,
-                (int)Levels.Lobby => _currentLevel,
-                _ => _currentLevel + 1
+                (int)Levels.Lobby => CurrentLevel,
+                _ => CurrentLevel + 1
             };
         } 
         
@@ -78,7 +84,11 @@ namespace Storage
             }
             
             LevelChanged?.Invoke((Levels)newLevel);
-            SceneManager.LoadScene(newLevel);
+            
+            if (newLevel-1 > (int)Levels.Lobby)
+                _levelRewardSystem.GetReward();
+            else
+                SceneManager.LoadScene(newLevel);
         }
     }
 }

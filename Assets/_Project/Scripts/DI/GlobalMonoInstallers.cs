@@ -20,9 +20,11 @@ public class GlobalMonoInstallers : MonoInstaller
 
     private void System()
     {
+        var levelRewardSystem = FindObjectOfType<LevelRewardSystem>();
         var camera = FindObjectOfType<Camera>();
         var hud = FindObjectOfType<Hud>();
 
+        Container.Bind<LevelRewardSystem>().FromInstance(levelRewardSystem);
         Container.Bind<Hud>().FromInstance(hud).AsSingle();
         Container.Bind<Camera>().FromInstance(camera).AsSingle();
         Container.Bind<WindowManager>().AsSingle();

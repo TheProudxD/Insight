@@ -45,7 +45,6 @@ namespace StorageService
                 var query = CreateQuery(param);
                 var path = _url + $"/api.php?{query}";
                 var bytes = await wc.UploadDataTaskAsync(path, new byte[]{1});
-                // TODO: ...
                 callback?.Invoke(true);
             }
             catch (Exception exception)
