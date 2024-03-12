@@ -14,7 +14,7 @@ public class Signal : ScriptableObject
             if (_listeners[i] != null)
             {
                 if (_listeners[i].IsAlive)
-                    ((SignalListener)_listeners[i].Target)?.OnSingleRaised();
+                    ((SignalListener)_listeners[i].Target)?.SingleRaise();
             }
             else
             {
@@ -30,7 +30,7 @@ public class Signal : ScriptableObject
                 if (_listeners[i] != null)
                 {
                     if (_listeners[i].IsAlive)
-                        ((SignalListener)_listeners[i].Target)?.OnSingleRaised(amount);
+                        ((SignalListener)_listeners[i].Target)?.SingleRaise(amount);
                 }
                 else
                 {

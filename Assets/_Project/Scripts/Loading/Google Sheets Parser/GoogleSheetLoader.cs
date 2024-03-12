@@ -7,13 +7,16 @@ using UnityEngine;
 
 public class GoogleSheetLoader
 {
-    private string _docsId = "1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ";
+    private readonly string _docsId;
+    private readonly SheetProcessor _sheetProcessor;
 
-    private SheetProcessor _sheetProcessor;
+	public GoogleSheetLoader(string docsId)
+    {
+        _docsId = docsId;
+        _sheetProcessor = new SheetProcessor();
+    }
 
-	public GoogleSheetLoader() => _sheetProcessor = new SheetProcessor();
-
-	public void DownloadTable<T>(string sheetId="0") where T : EntitySpecs
+    public void DownloadTable<T>(string sheetId) where T : EntitySpecs
     { 
         var cvsLoader = new CVSLoader(_docsId, sheetId);
         cvsLoader.DownloadTable(OnRawCVSLoaded<T>);
@@ -30,7 +33,7 @@ public class GoogleSheetLoader
         foreach (var entity in data)
         {
             var path = Utils.GetEntitySpecsPath();
-            /*
+            
             if (Directory.Exists(path) == false)
             {
                 Directory.CreateDirectory(path);
@@ -39,19 +42,7 @@ public class GoogleSheetLoader
             AssetDatabase.CreateAsset(entity, $"{path}/{entity.Id}.asset");
             AssetDatabase.SaveAssets();
 
-            EditorUtility.FocusProjectWindow();*/
-
-            /*
-            var e =_entitySpecs.FirstOrDefault(e => e.Id == entity.Id);
-            if (e == null || e==entity)
-                continue;
-
-            e.Hp = entity.Hp;
-            e.Damage = entity.Damage; 
-            e.MoveSpeed = entity.MoveSpeed;
-            e.ChaseRadius = entity.ChaseRadius;
-            e.AttackRadius = entity.AttackRadius;
-            */
+            EditorUtility.FocusProjectWindow();
         }
     }
 }

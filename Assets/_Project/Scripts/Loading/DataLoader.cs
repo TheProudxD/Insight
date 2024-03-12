@@ -35,8 +35,8 @@ public class DataLoader : ILoadingOperation
         }
         onProcess?.Invoke(0.25f);
 
-        var googleSheetLoader = new GoogleSheetLoader();
-        googleSheetLoader.DownloadTable<LogEntitySpecs>();
+        var googleSheetLoader = new GoogleSheetLoader("1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ");
+        googleSheetLoader.DownloadTable<LogEntitySpecs>("0");
         //googleSheetLoader.DownloadTable("2071689435");
         onProcess?.Invoke(0.35f);
 

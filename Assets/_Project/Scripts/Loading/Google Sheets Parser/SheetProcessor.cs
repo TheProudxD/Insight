@@ -1,29 +1,29 @@
-using System.Collections.Generic;
 using UnityEngine;
 
 public class SheetProcessor
 {
-    private const char _cellSeporator = ',';
-    
-    public EntityData ProcessData<T>(string cvsRawData) where T: EntitySpecs
+    private const char CELL_SEPARATOR = ',';
+    private const int DATA_START_RAW_INDEX = 1;
+
+    public EntityData ProcessData<T>(string cvsRawData) where T : EntitySpecs
     {
-        char lineEnding = GetPlatformSpecificLineEnd();
-        string[] rows = cvsRawData.Split(lineEnding);
-        int dataStartRawIndex = 1;
-        EntityData data = new EntityData();
-        for (int i = dataStartRawIndex; i < rows.Length; i++)
+        var lineEnding = GetPlatformSpecificLineEnd();
+        var rows = cvsRawData.Split(lineEnding);
+        var data = new EntityData();
+        for (int i = DATA_START_RAW_INDEX; i < rows.Length; i++)
         {
-            string[] cells = rows[i].Split(_cellSeporator);
+            string[] cells = rows[i].Split(CELL_SEPARATOR);
             var entitySpecs = ScriptableObject.CreateInstance<T>();
             entitySpecs.Initialize(cells);
             data.EntitiesOptions.Add(entitySpecs);
         }
+
         return data;
     }
-    
+
     private char GetPlatformSpecificLineEnd()
     {
-        char lineEnding = '\n';
+        var lineEnding = '\n';
 #if UNITY_IOS
         lineEnding = '\r';
 #endif

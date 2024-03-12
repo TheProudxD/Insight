@@ -8,31 +8,35 @@ using Zenject;
 
 namespace Storage
 {
-
-	public class LevelManager
+    public class LevelManager
     {
-        public event Action<Levels> LevelChanged; 
+        public event Action<Levels> LevelChanged;
 
         private readonly IDynamicStorageService _dynamicStorageService;
-        [Inject] private LevelRewardSystem _levelRewardSystem;
+        private readonly LevelRewardSystem _levelRewardSystem;
 
         private int _currentLevel; // max level passed by the player by default
         private PlayerData _playerData;
+        private readonly int _minLevel;
 
-		public int CurrentLevel => _currentLevel;
+        public int CurrentLevel => _currentLevel;
 
-		[Inject]
-		private LevelManager(IDynamicStorageService dynamicStorageService)
-		{
-			_dynamicStorageService = dynamicStorageService;
-		}
-
-		public void Initialize(int currentLevel, PlayerData playerData)
+        [Inject]
+        private LevelManager(IDynamicStorageService dynamicStorageService, LevelRewardSystem levelRewardSystem)
         {
-            if (currentLevel <= (int)Levels.Lobby)
+            _dynamicStorageService = dynamicStorageService;
+            _levelRewardSystem = levelRewardSystem;
+             _minLevel = (int)Levels.Lobby + 1;
+        }
+
+        public void Initialize(int currentLevel, PlayerData playerData)
+        {
+            if (currentLevel < _minLevel)
             {
-                throw new ArgumentException("Level must be more than 3, but was " + CurrentLevel);
-			}
+                Debug.LogError($"Level must be more than {_minLevel}, but was " + currentLevel);
+                currentLevel = _minLevel;
+                Save(currentLevel);
+            }
 
             _currentLevel = currentLevel;
             _playerData = playerData;
@@ -48,8 +52,8 @@ namespace Storage
                 (int)Levels.Lobby => CurrentLevel,
                 _ => CurrentLevel + 1
             };
-        } 
-        
+        }
+
         private async void Save(int newLevel)
         {
             var uploadParams = new Dictionary<string, string>
@@ -77,18 +81,24 @@ namespace Storage
         public void StartNextLevel()
         {
             var newLevel = GetNextLevelId();
-
+            Debug.Log(newLevel);
+   
             if (newLevel > (int)Levels.Lobby && newLevel > _currentLevel)
             {
-                Save(newLevel);
-            }
-            
-            LevelChanged?.Invoke((Levels)newLevel);
-            
-            if (newLevel-1 > (int)Levels.Lobby)
+                 Save(newLevel);
+            }     
+
+            if (SceneManager.GetActiveScene().buildIndex > (int)Levels.Lobby)
+            {
+                SceneManager.LoadScene((int)Levels.Lobby);
                 _levelRewardSystem.GetReward();
+                LevelChanged?.Invoke(Levels.Lobby);
+            }
             else
+            {
                 SceneManager.LoadScene(newLevel);
+                LevelChanged?.Invoke((Levels)newLevel);
+            }
         }
     }
 }

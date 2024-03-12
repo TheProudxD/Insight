@@ -3,22 +3,23 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerMana : PlayerFeature
+    public class PlayerMana : PlayerFeature<float>
     {
         private readonly int _recoverySpeed = 2;
         private readonly int _timeAfterAttack = 8;
         private float _timerAfterAttack;
         private float _timerRecovery;
 
-        public void Increase(float amount)
+        public override bool TryIncrease(float amount)
         {
             Signal.Raise(-amount);
 
             Value += amount;
             Value = Mathf.Clamp(Value, 0, MaxValue);
+            return true;
         }
 
-        public void Decrease(float amount)
+        public override void Decrease(float amount)
         {
             if (Value <= 0)
                 return;
@@ -39,7 +40,7 @@ namespace Player
             _timerRecovery += Time.deltaTime;
             if (_timerRecovery > _recoverySpeed && Math.Abs(Value - MaxValue) > 0.01f)
             {
-                Increase(0.25f);
+                TryIncrease(0.25f);
                 _timerRecovery -= _recoverySpeed;
             }
         }

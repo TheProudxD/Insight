@@ -4,9 +4,9 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerHealth : PlayerFeature
+    public class PlayerHealth : PlayerFeature<float>
     {
-        public bool TryIncrease(float amount)
+        public override bool TryIncrease(float amount)
         {
             if (Math.Abs(Value - MaxValue) < 0.01f)
                 return false;
@@ -18,7 +18,7 @@ namespace Player
             return true;
         }
 
-        public void Decrease(float amount)
+        public override void Decrease(float amount)
         {
             if (Value <= 0)
                 return;
