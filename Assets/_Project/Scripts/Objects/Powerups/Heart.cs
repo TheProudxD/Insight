@@ -5,7 +5,13 @@ namespace Objects.Powerups
 {
     public class Heart : Powerup
     {
-        private readonly float _amountToIncrease = 2f;
+        private float _amountToIncrease;
+
+        public void Initialize(HeartPowerupEntitySpecs heartPowerupEntitySpecs)
+        {
+            _amountToIncrease = heartPowerupEntitySpecs.HealAmount;
+            Destroy(gameObject, heartPowerupEntitySpecs.DestroyTimeAfterSpawn);
+        }
 
         protected void OnTriggerEnter2D(Collider2D other)
         {

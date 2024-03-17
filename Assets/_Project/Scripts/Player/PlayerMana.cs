@@ -5,30 +5,25 @@ namespace Player
 {
     public class PlayerMana : PlayerFeature<float>
     {
-        private readonly int _recoverySpeed = 2;
-        private readonly int _timeAfterAttack = 8;
+        private float _recoverySpeed;
+        private float _timeAfterAttack;
+        
         private float _timerAfterAttack;
         private float _timerRecovery;
-
-        public override bool TryIncrease(float amount)
+        
+        public override float Amount
         {
-            Signal.Raise(-amount);
-
-            Value += amount;
-            Value = Mathf.Clamp(Value, 0, MaxValue);
-            return true;
+            get => PlayerEntitySpecs.ManaAmount;
+            protected set => PlayerEntitySpecs.ManaAmount = value;
         }
-
-        public override void Decrease(float amount)
+        
+        protected override void Awake()
         {
-            if (Value <= 0)
-                return;
-
-            _timerAfterAttack = 0;
-            _timerRecovery = 0;
-            Signal.Raise(amount);
-            Value -= amount;
-            print(Value);
+            base.Awake();
+            
+            MaxAmount = PlayerEntitySpecs.ManaAmount;
+            _recoverySpeed = PlayerEntitySpecs.ManaRecoverySpeed;
+            _timeAfterAttack = PlayerEntitySpecs.TimeAfterAttackManaIncrease;
         }
 
         private void Update()
@@ -38,11 +33,31 @@ namespace Player
                 return;
 
             _timerRecovery += Time.deltaTime;
-            if (_timerRecovery > _recoverySpeed && Math.Abs(Value - MaxValue) > 0.01f)
+            if (_timerRecovery > _recoverySpeed && Math.Abs(Amount - MaxAmount) > 0.01f)
             {
                 TryIncrease(0.25f);
                 _timerRecovery -= _recoverySpeed;
             }
+        }
+
+        public override bool TryIncrease(float amount)
+        {
+            Signal.Raise(-amount);
+
+            Amount += amount;
+            Amount = Mathf.Clamp(Amount, 0, MaxAmount);
+            return true;
+        }
+
+        public override void Decrease(float amount)
+        {
+            if (Amount <= 0)
+                return;
+
+            _timerAfterAttack = 0;
+            _timerRecovery = 0;
+            Signal.Raise(amount);
+            Amount -= amount;
         }
     }
 }

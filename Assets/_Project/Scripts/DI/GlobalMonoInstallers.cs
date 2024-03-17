@@ -1,5 +1,6 @@
 using Storage;
 using Managers;
+using Objects.Powerups;
 using StorageService;
 using ResourceService;
 using UI;
@@ -30,6 +31,8 @@ public class GlobalMonoInstallers : MonoInstaller
         Container.Bind<WindowManager>().AsSingle();
         Container.Bind<Canvas>().FromInstance(hud.GetComponent<Canvas>()).AsSingle().Lazy();
         Container.Bind<AssetManager>().AsSingle();
+        
+        Container.BindFactory<Powerup, Vector3, Powerup, PowerupFactory>().ToSelf();
     }
 
     private void Loading()

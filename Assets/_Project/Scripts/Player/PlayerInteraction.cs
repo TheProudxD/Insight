@@ -4,8 +4,9 @@ namespace Player
 {
     public class PlayerInteraction : MonoBehaviour
     {
-        public Inventory Inventory;
-        public SpriteRenderer ReceivedItemSprite;
+        [SerializeField] private Inventory _inventory;
+        [SerializeField] private SpriteRenderer ReceivedItemSprite;
+        
         private PlayerAnimation _playerAnimation;
 
         private void Awake()
@@ -15,20 +16,20 @@ namespace Player
 
         public void RaiseItem()
         {
-            if (Inventory.CurrentItem == null) return;
+            if (_inventory.CurrentItem == null) return;
 
             if (PlayerCurrentState.Current != PlayerState.Interact)
             {
                 _playerAnimation.SetReceiveItemAnimation(true);
                 PlayerCurrentState.Current = PlayerState.Interact;
-                ReceivedItemSprite.sprite = Inventory.CurrentItem.ItemSprite;
+                ReceivedItemSprite.sprite = _inventory.CurrentItem.ItemSprite;
             }
             else
             {
                 _playerAnimation.SetReceiveItemAnimation(false);
                 PlayerCurrentState.Current = PlayerState.Idle;
                 ReceivedItemSprite.sprite = null;
-                Inventory.CurrentItem = null;
+                _inventory.CurrentItem = null;
             }
         }
     }

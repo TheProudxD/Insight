@@ -23,16 +23,17 @@ namespace Tools
 
         public static string GiveAllFields<T>(this T obj)
         {
-            return typeof(T).GetFields(BindingFlags.Public | BindingFlags.Instance).Aggregate("",
-                (current, field) => current + field.Name + ": " + field.GetValue(obj) + " ");
+            return typeof(T)
+                .GetFields(BindingFlags.Public | BindingFlags.Instance | BindingFlags.FlattenHierarchy)
+                .Aggregate("", (current, field) => current + field.Name + ": " + field.GetValue(obj) + " ");
         }
-        
+
         public static void IsCorrectShopItemsId()
         {
             var swordMax = Enum.GetValues(typeof(SwordSkins)).Cast<int>();
             var bowMin = Enum.GetValues(typeof(BowSkins)).Cast<int>();
             var errorsCount = bowMin.Intersect(swordMax).Count();
-            if (errorsCount!=0)
+            if (errorsCount != 0)
                 Debug.LogError($"something wrong with shop items Id!. There are {errorsCount} errors.");
         }
 

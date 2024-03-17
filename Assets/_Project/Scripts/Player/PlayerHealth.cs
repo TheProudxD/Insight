@@ -6,28 +6,41 @@ namespace Player
 {
     public class PlayerHealth : PlayerFeature<float>
     {
+        public override float Amount
+        {
+            get => PlayerEntitySpecs.Hp;
+            protected set => PlayerEntitySpecs.Hp = value;
+        }
+        
+        protected override void Awake()
+        {
+            base.Awake();
+            
+            MaxAmount = PlayerEntitySpecs.Hp;
+        }
+
         public override bool TryIncrease(float amount)
         {
-            if (Math.Abs(Value - MaxValue) < 0.01f)
+            if (Math.Abs(Amount - MaxAmount) < 0.01f)
                 return false;
             
             Signal.Raise(-amount);
 
-            Value += amount;
-            Value = Mathf.Clamp(Value, 0, MaxValue);
+            Amount += amount;
+            Amount = Mathf.Clamp(Amount, 0, MaxAmount);
             return true;
         }
 
         public override void Decrease(float amount)
         {
-            if (Value <= 0)
+            if (Amount <= 0)
                 return;
 
             Signal.Raise();
             Signal.Raise(amount);
-            Value -= amount;
+            Amount -= amount;
 
-            if (Value <= 0)
+            if (Amount <= 0)
             {
                 StartCoroutine(GameStateManager.Instance.GameOver());
             }

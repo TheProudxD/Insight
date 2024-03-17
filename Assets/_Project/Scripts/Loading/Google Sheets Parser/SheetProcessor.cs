@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class SheetProcessor
@@ -5,19 +6,25 @@ public class SheetProcessor
     private const char CELL_SEPARATOR = ',';
     private const int DATA_START_RAW_INDEX = 1;
 
-    public EntityData ProcessData<T>(string cvsRawData) where T : EntitySpecs
+    private readonly bool _isDebug;
+
+    public SheetProcessor(bool isDebug) => _isDebug = isDebug;
+
+    public List<EntitySpecs> ProcessData<T>(string cvsRawData) where T : EntitySpecs
     {
         var lineEnding = GetPlatformSpecificLineEnd();
         var rows = cvsRawData.Split(lineEnding);
-        var data = new EntityData();
-        for (int i = DATA_START_RAW_INDEX; i < rows.Length; i++)
+        var data = new List<EntitySpecs>();
+        for (var i = DATA_START_RAW_INDEX; i < rows.Length; i++)
         {
-            string[] cells = rows[i].Split(CELL_SEPARATOR);
+            var cells = rows[i].Split(CELL_SEPARATOR);
             var entitySpecs = ScriptableObject.CreateInstance<T>();
             entitySpecs.Initialize(cells);
-            data.EntitiesOptions.Add(entitySpecs);
+            data.Add(entitySpecs);
         }
 
+        if (_isDebug)
+            data.ForEach(x => Debug.Log($"Parsed from GS with {x}"));
         return data;
     }
 

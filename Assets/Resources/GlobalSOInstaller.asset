@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _playerInventory: {fileID: 11400000, guid: c48b402cc15736e4a829538661d9cbe6, type: 2}
   _shopContent: {fileID: 11400000, guid: 36241be7db70f274dba72a8bc57abbc3, type: 2}
+  _coinPrefab: {fileID: 1362095853930651174, guid: 0abeb1db93fba6544b35548cf43b7ce2, type: 3}
+  _heartPrefab: {fileID: 8401542035861959854, guid: 242332ad44f030c4f98f1482c96a9585, type: 3}

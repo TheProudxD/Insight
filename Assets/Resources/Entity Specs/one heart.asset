@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe96a97703fbc34e833789b37e5c280, type: 3}
-  m_Name: Player Mana Amount
+  m_Script: {fileID: 11500000, guid: 885889a55581400990b55b31b65de61c, type: 3}
+  m_Name: one heart
   m_EditorClassIdentifier: 
-  <InitialValue>k__BackingField: 8
-  RuntimeValue: 8
+  Id: one heart
+  HealAmount: 1
+  DestroyTimeAfterSpawn: 10

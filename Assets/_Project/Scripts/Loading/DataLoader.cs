@@ -36,8 +36,10 @@ public class DataLoader : ILoadingOperation
         onProcess?.Invoke(0.25f);
 
         var googleSheetLoader = new GoogleSheetLoader("1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ");
-        googleSheetLoader.DownloadTable<LogEntitySpecs>("0");
-        //googleSheetLoader.DownloadTable("2071689435");
+        googleSheetLoader.DownloadTable<LogEntitySpecs>("0"); // Log Enemies
+        googleSheetLoader.DownloadTable<PlayerEntitySpecs>("863072486");
+        googleSheetLoader.DownloadTable<HeartPowerupEntitySpecs>("1682472823");
+        googleSheetLoader.DownloadTable<CoinPowerupEntitySpecs>("777294485");
         onProcess?.Invoke(0.35f);
 
         var result = await GetSystemData();

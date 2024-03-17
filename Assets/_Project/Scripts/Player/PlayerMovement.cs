@@ -10,7 +10,7 @@ namespace Player
         private const string VERTICAL_AXIS = "Vertical";
         private const bool IS_JOYSTICK_MOVEMENT = false;
 
-        [SerializeField] private IntValue _speed;
+        [Inject] private PlayerEntitySpecs _playerEntitySpecs;
         [SerializeField] private Joystick _joystick;
 
         public Vector3 PlayerDirectionVector { get; private set; } = Vector3.down;
@@ -66,6 +66,6 @@ namespace Player
         }
 
         private void MoveCharacter(Vector3 position) =>
-            PlayerRigidbody.MovePosition(position + _speed.RuntimeValue * Time.deltaTime * _playerMovement.normalized);
+            PlayerRigidbody.MovePosition(position + _playerEntitySpecs.MoveSpeed * Time.deltaTime * _playerMovement.normalized);
     }
 }

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b38b10d9df97347baa15b9a2f2b525, type: 3}
+  m_Name: 75% Coin Loot
+  m_EditorClassIdentifier: 
+  _chanceSumLimitedBy100Percent: 1
+  Loots:
+  - Powerup: {fileID: 1362095853930651174, guid: 0abeb1db93fba6544b35548cf43b7ce2, type: 3}
+    Chance: 75
+  - Powerup: {fileID: 8401542035861959854, guid: 242332ad44f030c4f98f1482c96a9585, type: 3}
+    Chance: 25

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace Player
 {
@@ -13,6 +14,7 @@ namespace Player
     {
         public event Action<AttackType> Attacked;
 
+        [Inject] private PlayerEntitySpecs _playerEntitySpecs;
         [SerializeField] private Signal _playerHitSignal;
         [SerializeField] private PlayerProjectile _playerProjectile;
 
@@ -21,7 +23,7 @@ namespace Player
         private PlayerHealth _playerHealth;
         private PlayerMana _playerMana;
         private float _timeBeforeLastAttackCounter;
-        private float _attackCooldown = 0.4f;
+        private float _destroyArrowTime =3;
 
         private void Awake()
         {
@@ -29,7 +31,8 @@ namespace Player
             _playerAnimation = GetComponent<PlayerAnimation>();
             _playerHealth = GetComponent<PlayerHealth>();
             _playerMana = GetComponent<PlayerMana>();
-            _timeBeforeLastAttackCounter = _attackCooldown;
+            
+            _timeBeforeLastAttackCounter = _playerEntitySpecs.AttackCooldown;
         }
 
         private void Update()
@@ -37,7 +40,7 @@ namespace Player
             if (PlayerCurrentState.Current == PlayerState.Interact)
                 return;
 
-            if (_timeBeforeLastAttackCounter < _attackCooldown)
+            if (_timeBeforeLastAttackCounter < _playerEntitySpecs.AttackCooldown)
             {
                 _timeBeforeLastAttackCounter += Time.deltaTime;
             }
@@ -51,12 +54,12 @@ namespace Player
             var direction = new Vector3(0, 0, directionZ);
             arrow.Setup(position, direction);
 
-            Destroy(arrow, 10);
+            Destroy(arrow, _destroyArrowTime);
         }
 
         private bool IsCanAttack() => PlayerCurrentState.Current != PlayerState.Attack &&
                                       PlayerCurrentState.Current != PlayerState.Stagger &&
-                                      _timeBeforeLastAttackCounter >= _attackCooldown;
+                                      _timeBeforeLastAttackCounter >= _playerEntitySpecs.AttackCooldown;
 
         public void SwordAttack()
         {
@@ -75,14 +78,7 @@ namespace Player
 
             var playerPos = _playerMovement.PlayerMovementVector;
 
-            if (playerPos.sqrMagnitude != 0)
-            {
-                ArrowSpawn(playerPos);
-            }
-            else
-            {
-                ArrowSpawn(_playerMovement.PlayerDirectionVector);
-            }
+            ArrowSpawn(playerPos.sqrMagnitude != 0 ? playerPos : _playerMovement.PlayerDirectionVector);
 
             StartCoroutine(_playerAnimation.BowAttackCo());
             _timeBeforeLastAttackCounter = 0;
@@ -95,7 +91,7 @@ namespace Player
             _playerHitSignal.Raise();
             _playerHealth.Decrease(damage);
 
-            if (_playerHealth.Value <= 0)
+            if (_playerHealth.Amount <= 0)
                 yield break;
 
             PlayerCurrentState.Current = PlayerState.Idle;
@@ -103,11 +99,5 @@ namespace Player
             PlayerCurrentState.Current = PlayerState.Idle;
             _playerMovement.PlayerRigidbody.velocity = Vector2.zero;
         }
-    }
-
-    public enum AttackType
-    {
-        Sword,
-        Bow
     }
 }

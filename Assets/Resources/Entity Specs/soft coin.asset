@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4fe96a97703fbc34e833789b37e5c280, type: 3}
-  m_Name: Player Exp
+  m_Script: {fileID: 11500000, guid: 7d8c52b09a48426d82fbb19e1898b292, type: 3}
+  m_Name: soft coin
   m_EditorClassIdentifier: 
-  <InitialValue>k__BackingField: 100
-  RuntimeValue: 100
+  Id: soft coin
+  Amount: 5
+  DestroyTimeAfterSpawn: 10

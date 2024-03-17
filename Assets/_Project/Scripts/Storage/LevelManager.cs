@@ -81,7 +81,6 @@ namespace Storage
         public void StartNextLevel()
         {
             var newLevel = GetNextLevelId();
-            Debug.Log(newLevel);
    
             if (newLevel > (int)Levels.Lobby && newLevel > _currentLevel)
             {

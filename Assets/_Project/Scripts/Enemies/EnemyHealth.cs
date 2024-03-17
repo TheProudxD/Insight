@@ -1,3 +1,5 @@
+using System;
+using Objects.Powerups;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -8,6 +10,7 @@ namespace Enemies
     {
         [Inject(Id = "static log")] private LogEntitySpecs _specs;
         [Inject(Id = "enemyDeathEffect")] private Animator _deathAnimator;
+        [Inject] private PowerupFactory _powerupFactory;
 
         [SerializeField] private Slider _healthBar;
         [SerializeField] private LootTable _lootTable;
@@ -36,8 +39,7 @@ namespace Enemies
             if (_lootTable != null)
             {
                 var powerup = _lootTable.LootPowerup();
-                if (powerup != null)
-                    Instantiate(powerup.gameObject, transform.position, Quaternion.identity);
+                _powerupFactory.Create(powerup, transform.position);
             }
         }
 

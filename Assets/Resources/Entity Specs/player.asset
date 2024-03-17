@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9ea3f6b3246e4e72944d8a8aab3e4f6d, type: 3}
+  m_Name: player
+  m_EditorClassIdentifier: 
+  Id: player
+  Hp: 9
+  BaseAttack: 2
+  MoveSpeed: 7
+  AttackRadius: 5
+  AttackCooldown: 2
+  ExperienceAmount: 100
+  ManaAmount: 8
+  ManaRecoverySpeed: 2
+  TimeAfterAttackManaIncrease: 7

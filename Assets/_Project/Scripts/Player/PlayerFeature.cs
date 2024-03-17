@@ -1,24 +1,19 @@
 using UnityEngine;
+using Zenject;
 
 namespace Player
 {
     public abstract class PlayerFeature<T> : MonoBehaviour
     {
-        [SerializeField] protected FloatValue CurrentValue;
+        [Inject] protected PlayerEntitySpecs PlayerEntitySpecs;
         [SerializeField] protected Signal Signal;
 
-        public float Value
-        {
-            get => CurrentValue.RuntimeValue;
-            protected set => CurrentValue.RuntimeValue = value;
-        }
-        
-        public abstract bool TryIncrease(T value);
-        
-        public abstract void Decrease(T value);
-        
-        protected float MaxValue => CurrentValue.InitialValue;
+        public abstract float Amount { get; protected set; }
 
-        protected virtual void Awake() => Signal.Raise(-MaxValue);
+        public abstract bool TryIncrease(T value);
+        public abstract void Decrease(T value);
+
+        protected virtual void Awake() => Signal.Raise(-MaxAmount);
+        public float MaxAmount { get; protected set; }
     }
 }

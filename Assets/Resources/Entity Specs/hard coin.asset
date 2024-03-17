@@ -9,8 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cdeabfde8fa54736ba6bf219cdcc9107, type: 3}
-  m_Name: Player Speed
+  m_Script: {fileID: 11500000, guid: 7d8c52b09a48426d82fbb19e1898b292, type: 3}
+  m_Name: hard coin
   m_EditorClassIdentifier: 
-  <InitialValue>k__BackingField: 5
-  RuntimeValue: 5
+  Id: hard coin
+  Amount: 1
+  DestroyTimeAfterSpawn: 3
