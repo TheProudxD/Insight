@@ -15,6 +15,9 @@ public class LoadingScreen : MonoBehaviour
     private Camera _uiCamera;
     private float _targetProgress;
 
+    [Inject]
+    private void Construct(Camera uiCamera) => _uiCamera = uiCamera;
+
     public async UniTask Load(ILoadingOperation[] queue)
     {
         if (queue == null)
@@ -34,9 +37,6 @@ public class LoadingScreen : MonoBehaviour
 
         _canvas.enabled = false;
     }
-
-    [Inject]
-    private void Construct(Camera uiCamera) => _uiCamera = uiCamera;
 
     private async UniTask Wait()
     {

@@ -1,5 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
+using System.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.Networking;
 
@@ -14,13 +15,13 @@ public class CVSLoader
 		_debug = debug;
 	}
 
-	public async void DownloadTable(Action<string> callback)
+	public async Task DownloadTable(Action<string> callback)
     {
-        using UnityWebRequest request = UnityWebRequest.Get(_url);
+        using var request = UnityWebRequest.Get(_url);
         
         await request.SendWebRequest();
-        if (request.result == UnityWebRequest.Result.ConnectionError || request.result == UnityWebRequest.Result.ProtocolError ||
-            request.result == UnityWebRequest.Result.DataProcessingError)
+        
+        if (request.result is UnityWebRequest.Result.ConnectionError or UnityWebRequest.Result.ProtocolError or UnityWebRequest.Result.DataProcessingError)
         {
             Debug.LogError(request.error);
         }

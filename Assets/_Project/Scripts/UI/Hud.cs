@@ -28,6 +28,7 @@ namespace UI
         [SerializeField] private PlayerAttacking _player;
 
         [Inject] private WindowManager _windowManager;
+        [Inject] private DataManager _dataManager;
 
         public Animator FadeAnimator => _fadeAnimator;
         public Image LoadingBar => _loadingBar;
@@ -47,7 +48,11 @@ namespace UI
 
             InitializeHpBar();
             InitializeManaBar();
+            
+            _dataManager.DataLoaded+= SetNicknameAfterLoading;
         }
+
+        private void SetNicknameAfterLoading(PlayerData pd) => SetPlayerNickname(pd.Name);
 
         private void InitializeHpBar()
         {

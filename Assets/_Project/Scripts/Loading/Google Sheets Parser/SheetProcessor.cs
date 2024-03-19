@@ -10,7 +10,7 @@ public class SheetProcessor
 
     public SheetProcessor(bool isDebug) => _isDebug = isDebug;
 
-    public List<EntitySpecs> ProcessData<T>(string cvsRawData) where T : EntitySpecs
+    public List<EntitySpecs> ProcessData<T>(string cvsRawData) where T : EntitySpecs, new()
     {
         var lineEnding = GetPlatformSpecificLineEnd();
         var rows = cvsRawData.Split(lineEnding);
@@ -18,7 +18,7 @@ public class SheetProcessor
         for (var i = DATA_START_RAW_INDEX; i < rows.Length; i++)
         {
             var cells = rows[i].Split(CELL_SEPARATOR);
-            var entitySpecs = ScriptableObject.CreateInstance<T>();
+            var entitySpecs = new T();
             entitySpecs.Initialize(cells);
             data.Add(entitySpecs);
         }

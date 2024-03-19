@@ -4,6 +4,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Tools;
 using UnityEngine;
+using Zenject;
 
 namespace StorageService
 {
@@ -11,7 +12,7 @@ namespace StorageService
     {
         private readonly string _url;
 
-        public ServerJSONStorageService(string url) => _url = url;
+        public ServerJSONStorageService([Inject(Id = "Server")] string url) => _url = url;
 
         public async void Upload(string key, object data, Action<bool> callback = null)
         {

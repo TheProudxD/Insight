@@ -11,27 +11,22 @@ namespace StorageService
 {
     public class DataManager
     {
+        public event Action<PlayerData> DataLoaded;
+        
         public const string REGISTRY_DATA_KEY = "registry";
         public const string MAX_LEVEL_DATA_KEY = "maxleveldata";
         private const string DYNAMIC_USER_DATA_KEY = "userdata";
         private const string DEFAULT_PLAYER_NAME = "Player";
-
-        private readonly ResourceManager _resourceManager;
-        private readonly LevelManager _levelManager;
-        private readonly Hud _hud;
+        
         private readonly GameData _gameData = new();
         private PlayerData _playerData = new();
         private IStaticStorageService StaticStorageService { get; set; }
         private IDynamicStorageService DynamicStorageService { get; set; }
 
-        public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService,
-            ResourceManager resourceManager, LevelManager levelManager, Hud hud)
+        public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService)
         {
             StaticStorageService = staticStorageService;
             DynamicStorageService = dynamicStorageService;
-            _resourceManager = resourceManager;
-            _levelManager = levelManager;
-            _hud = hud;
         }
 
         private async Task SetName(string newName)
@@ -96,14 +91,11 @@ namespace StorageService
                 Name = callbackData["Name"],
             };
 
+            DataLoaded?.Invoke(_playerData);
+            
             if (_playerData.Name == DEFAULT_PLAYER_NAME)
                 await SetName("Player " + SystemPlayerData.Instance.uid);
-
-            _resourceManager.Initialize(_playerData.AmountSoftResources,
-                _playerData.AmountHardResources, _playerData);
-            _levelManager.Initialize(_playerData.CurrentLevel, _playerData);
-            _hud.SetPlayerNickname(_playerData.Name);
-
+            
             Debug.Log(_playerData.ToString());
         }
     }

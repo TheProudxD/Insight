@@ -21,24 +21,25 @@ namespace Storage
 
         public int CurrentLevel => _currentLevel;
 
-        [Inject]
-        private LevelManager(IDynamicStorageService dynamicStorageService, LevelRewardSystem levelRewardSystem)
+        private LevelManager(IDynamicStorageService dynamicStorageService, DataManager dataManager,LevelRewardSystem levelRewardSystem)
         {
             _dynamicStorageService = dynamicStorageService;
+            
             _levelRewardSystem = levelRewardSystem;
-             _minLevel = (int)Levels.Lobby + 1;
+            _minLevel = (int)Levels.Lobby + 1;
+            dataManager.DataLoaded += Initialize;
         }
 
-        public void Initialize(int currentLevel, PlayerData playerData)
+        private void Initialize(PlayerData playerData)
         {
-            if (currentLevel < _minLevel)
+            _currentLevel = playerData.CurrentLevel;
+            if (_currentLevel < _minLevel)
             {
-                Debug.LogError($"Level must be more than {_minLevel}, but was " + currentLevel);
-                currentLevel = _minLevel;
-                Save(currentLevel);
+                Debug.LogError($"Level must be more than {_minLevel}, but was " + _currentLevel);
+                _currentLevel = _minLevel;
+                Save(_currentLevel);
             }
 
-            _currentLevel = currentLevel;
             _playerData = playerData;
         }
 
@@ -81,11 +82,11 @@ namespace Storage
         public void StartNextLevel()
         {
             var newLevel = GetNextLevelId();
-   
+
             if (newLevel > (int)Levels.Lobby && newLevel > _currentLevel)
             {
-                 Save(newLevel);
-            }     
+                Save(newLevel);
+            }
 
             if (SceneManager.GetActiveScene().buildIndex > (int)Levels.Lobby)
             {

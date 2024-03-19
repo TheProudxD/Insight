@@ -12,8 +12,8 @@ namespace Assets._Project.Scripts.Storage.Static
             this.key = key;
         }
 
-        public int uid;
-        public string key;
+        public readonly int uid;
+        public readonly string key;
 
         public void ToSingleton() => Instance = this;
         public override string ToString() => this.GiveAllFields();

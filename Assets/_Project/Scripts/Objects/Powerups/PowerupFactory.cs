@@ -11,8 +11,8 @@ namespace Objects.Powerups
         private readonly HeartPowerupEntitySpecs _heartPowerupEntitySpecs;
         private readonly ResourceManager _resourceManager;
 
-        public PowerupFactory(CoinPowerupEntitySpecs coinPowerupEntitySpecs,
-            HeartPowerupEntitySpecs heartPowerupEntitySpecs, ResourceManager resourceManager)
+        public PowerupFactory([Inject(Id = "one coin")] CoinPowerupEntitySpecs coinPowerupEntitySpecs,
+            [Inject(Id = "one heart")] HeartPowerupEntitySpecs heartPowerupEntitySpecs, ResourceManager resourceManager)
         {
             _coinPowerupEntitySpecs = coinPowerupEntitySpecs;
             _heartPowerupEntitySpecs = heartPowerupEntitySpecs;

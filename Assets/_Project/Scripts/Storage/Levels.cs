@@ -2,7 +2,8 @@ namespace Storage
 {
     public enum Levels
     {
-        Bootstrap = 0,
+        Downloader = 0,
+        Bootstrap,
         Menu,
         Lobby,
         Home,

@@ -3,6 +3,7 @@ using Cysharp.Threading.Tasks;
 using SimpleJSON;
 using StorageService;
 using System;
+using System.Collections.Generic;
 using System.IO;
 using System.Net;
 using System.Threading.Tasks;
@@ -11,13 +12,15 @@ using UnityEngine;
 
 public class DataLoader : ILoadingOperation
 {
-    private readonly string _url;
+    private readonly IDynamicStorageService _dynamicStorageService;
     private readonly DataManager _dataManager;
+    private readonly ConnectionManager _connectionManager;
 
-    public DataLoader(string url, DataManager dataManager)
+    public DataLoader(IDynamicStorageService dynamicStorageService, DataManager dataManager, ConnectionManager connectionManager)
     {
-        _url = url;
+        _dynamicStorageService = dynamicStorageService;
         _dataManager = dataManager;
+        _connectionManager = connectionManager;
     }
 
     public string Description => "Loading data...";
@@ -26,20 +29,13 @@ public class DataLoader : ILoadingOperation
     {
         onProcess?.Invoke(0f);
 
-        var isConnected = await TryToConnect(3);
+        var isConnected = await _connectionManager.Connect();
         if (!isConnected)
         {
-            Debug.LogError("Error. Check internet connection!");
             Application.Quit();
             return;
         }
-        onProcess?.Invoke(0.25f);
 
-        var googleSheetLoader = new GoogleSheetLoader("1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ");
-        googleSheetLoader.DownloadTable<LogEntitySpecs>("0"); // Log Enemies
-        googleSheetLoader.DownloadTable<PlayerEntitySpecs>("863072486");
-        googleSheetLoader.DownloadTable<HeartPowerupEntitySpecs>("1682472823");
-        googleSheetLoader.DownloadTable<CoinPowerupEntitySpecs>("777294485");
         onProcess?.Invoke(0.35f);
 
         var result = await GetSystemData();
@@ -49,8 +45,9 @@ public class DataLoader : ILoadingOperation
             Time.timeScale = 0;
             return;
         }
+
         onProcess?.Invoke(0.5f);
-        
+
         Utils.IsCorrectShopItemsId();
         onProcess?.Invoke(0.6f);
 
@@ -61,11 +58,10 @@ public class DataLoader : ILoadingOperation
         onProcess?.Invoke(1f);
     }
 
-    private SystemPlayerData ParseSystemPlayerData(string json)
+    private SystemPlayerData ParseSystemPlayerData(JSONNode data)
     {
-        var data = JSONNode.Parse(json);
         var uid = int.Parse(data["uid"]);
-        var key = data["key"];
+        var key = data["key"].Value;
         var systemData = new SystemPlayerData(uid, key);
         return systemData;
     }
@@ -75,11 +71,14 @@ public class DataLoader : ILoadingOperation
         var localPath = Path.Combine(Application.persistentDataPath, DataManager.REGISTRY_DATA_KEY);
 
         using var wc = new WebClient();
-        
+
         if (!File.Exists(localPath))
         {
-            var remotePath = _url + $"/api.php?action={DataManager.REGISTRY_DATA_KEY}";
-            var remoteJson = await wc.DownloadStringTaskAsync(remotePath);
+            var downloadParams = new Dictionary<string, string>
+            {
+                { "action", DataManager.REGISTRY_DATA_KEY },
+            };
+            var remoteJson = await _dynamicStorageService.Download(downloadParams);
             var remoteData = ParseSystemPlayerData(remoteJson);
             remoteData.ToSingleton();
             await File.WriteAllTextAsync(localPath, JsonUtility.ToJson(remoteData));
@@ -87,45 +86,27 @@ public class DataLoader : ILoadingOperation
         else
         {
             var localJsonFile = await File.ReadAllTextAsync(localPath);
-            var localData = ParseSystemPlayerData(localJsonFile);
-            
-            var id = localData.uid;
-            var webPath = _url + $"/api.php?playerid={id}&action=systemdata";
-            var webJson = await wc.DownloadStringTaskAsync(webPath);
+            var jsonNode = JSONNode.Parse(localJsonFile);
+            var localData = ParseSystemPlayerData(jsonNode);
+
+            var downloadParams = new Dictionary<string, string>
+            {
+                { "playerid", localData.uid.ToString() },
+                { "action", "systemdata" },
+            };
+            var webJson = await _dynamicStorageService.Download(downloadParams);
             var webData = ParseSystemPlayerData(webJson);
+
             if (localData.GetHashCode() != webData.GetHashCode())
             {
                 return false;
             }
-            
+
             localData.ToSingleton();
         }
 
         Debug.Log(SystemPlayerData.Instance.ToString());
         await Task.CompletedTask;
         return true;
-    }
-
-    private bool HasInternet() => Application.internetReachability != NetworkReachability.NotReachable;
-
-    private async UniTask<bool> TryToConnect(int tryAmount)
-    {
-        if (HasInternet())
-        {
-            Debug.Log("<color=green>Connected!</color>");
-            return true;
-        }
-
-        if (tryAmount <= 0)
-        {
-            Debug.Log("<color=red>Does not connected!</color>");
-            return false;
-        }
-
-        Debug.Log("Waiting...");
-        await Task.Delay(2000);
-        Debug.Log("Trying to reconnect");
-        await TryToConnect(tryAmount - 1);
-        return false;
     }
 }

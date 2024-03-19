@@ -1,7 +1,7 @@
 using Tools;
 using UnityEngine;
 
-public abstract class EntitySpecs : ScriptableObject
+public abstract class EntitySpecs
 {
 	[HideInInspector] public string Id;
 

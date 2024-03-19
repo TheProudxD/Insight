@@ -11,23 +11,24 @@ namespace ResourceService
     public class ResourceManager
     {
         public event Action<ResourceType, int, int> ResourceChanged;
+        
         private readonly IDynamicStorageService _dynamicStorageService;
         private Dictionary<ResourceType, Resource> _resources;
         private PlayerData _playerData;
 
-        [Inject]
-        private ResourceManager(IDynamicStorageService dynamicStorageService)
+        private ResourceManager(IDynamicStorageService dynamicStorageService, DataManager dataManager)
         {
             _dynamicStorageService = dynamicStorageService;
+            dataManager.DataLoaded += Initialize;
         }
 
-        public void Initialize(int defaultSoft, int defaultHard, PlayerData playerData)
-        {            
+        private void Initialize(PlayerData playerData)
+        {
             _playerData = playerData;
             Resource[] resources =
             {
-                new(ResourceType.SoftCurrency, defaultSoft),
-                new(ResourceType.HardCurrency, defaultHard)
+                new(ResourceType.SoftCurrency, _playerData.AmountSoftResources),
+                new(ResourceType.HardCurrency, _playerData.AmountHardResources)
             };
 
             _resources = resources.ToDictionary(r => r.Type);

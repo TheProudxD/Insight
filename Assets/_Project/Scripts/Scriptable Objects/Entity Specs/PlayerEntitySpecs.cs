@@ -1,8 +1,7 @@
 using Tools;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-public class PlayerEntitySpecs: EntitySpecs
+public class PlayerEntitySpecs : EntitySpecs
 {
     [HideInInspector] public float Hp;
     [HideInInspector] public float BaseAttack;
@@ -13,7 +12,7 @@ public class PlayerEntitySpecs: EntitySpecs
     [HideInInspector] public float ManaAmount;
     [HideInInspector] public float ManaRecoverySpeed;
     [HideInInspector] public float TimeAfterAttackManaIncrease;
-    
+
     public override void Initialize(string[] cells)
     {
         Id = cells[0];

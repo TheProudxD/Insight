@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Net;
 using System.Threading.Tasks;
+using Zenject;
 
 namespace StorageService
 {
@@ -10,7 +11,7 @@ namespace StorageService
     {
         private readonly string _url;
 
-        public ServerStorageService(string url) => _url = url;
+        public ServerStorageService([Inject(Id = "Server")] string url) => _url = url;
 
         public async Task<JSONNode> Download(Dictionary<string, string> param, Action<bool> callback)
         {
@@ -27,7 +28,7 @@ namespace StorageService
                     callback?.Invoke(false);
                     throw new NullReferenceException("data is null");
                 }
-                
+
                 callback?.Invoke(true);
                 return data;
             }
@@ -44,7 +45,7 @@ namespace StorageService
             {
                 var query = CreateQuery(param);
                 var path = _url + $"/api.php?{query}";
-                var bytes = await wc.UploadDataTaskAsync(path, new byte[]{1});
+                var bytes = await wc.UploadDataTaskAsync(path, new byte[] { 1 });
                 callback?.Invoke(true);
             }
             catch (Exception exception)
