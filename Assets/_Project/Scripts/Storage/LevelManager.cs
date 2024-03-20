@@ -1,104 +1,108 @@
-using System;
-using System.Collections.Generic;
 using Assets._Project.Scripts.Storage.Static;
 using StorageService;
+using System;
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Zenject;
 
 namespace Storage
 {
-    public class LevelManager
-    {
-        public event Action<Levels> LevelChanged;
+	public class LevelManager
+	{
+		public event Action<Levels> LevelChanged;
 
-        private readonly IDynamicStorageService _dynamicStorageService;
-        private readonly LevelRewardSystem _levelRewardSystem;
+		private readonly IDynamicStorageService _dynamicStorageService;
+		private readonly LevelRewardWindow _levelRewardSystem;
 
-        private int _currentLevel; // max level passed by the player by default
-        private PlayerData _playerData;
-        private readonly int _minLevel;
+		private int _currentLevel; // max level passed by the player by default
+		private PlayerData _playerData;
+		private readonly int _minLevel;
 
-        public int CurrentLevel => _currentLevel;
+		public int CurrentLevel => _currentLevel;
 
-        private LevelManager(IDynamicStorageService dynamicStorageService, DataManager dataManager,LevelRewardSystem levelRewardSystem)
-        {
-            _dynamicStorageService = dynamicStorageService;
-            
-            _levelRewardSystem = levelRewardSystem;
-            _minLevel = (int)Levels.Lobby + 1;
-            dataManager.DataLoaded += Initialize;
-        }
+		private LevelManager(IDynamicStorageService dynamicStorageService, DataManager dataManager, LevelRewardWindow levelRewardSystem)
+		{
+			_dynamicStorageService = dynamicStorageService;
 
-        private void Initialize(PlayerData playerData)
-        {
-            _currentLevel = playerData.CurrentLevel;
-            if (_currentLevel < _minLevel)
-            {
-                Debug.LogError($"Level must be more than {_minLevel}, but was " + _currentLevel);
-                _currentLevel = _minLevel;
-                Save(_currentLevel);
-            }
+			_levelRewardSystem = levelRewardSystem;
+			_minLevel = (int)Levels.Lobby + 1;
+			dataManager.DataLoaded += Initialize;
+		}
 
-            _playerData = playerData;
-        }
+		private void Initialize(PlayerData playerData)
+		{
+			_currentLevel = playerData.CurrentLevel;
+			if (_currentLevel < _minLevel)
+			{
+				Debug.LogError($"Level must be more than {_minLevel}, but was " + _currentLevel);
+				_currentLevel = _minLevel;
+				Save(_currentLevel);
+			}
 
-        private int GetNextLevelId()
-        {
-            var buildId = SceneManager.GetActiveScene().buildIndex;
+			_playerData = playerData;
+		}
 
-            return buildId switch
-            {
-                (int)Levels.Menu => (int)Levels.Lobby,
-                (int)Levels.Lobby => CurrentLevel,
-                _ => CurrentLevel + 1
-            };
-        }
+		private int GetNextLevelId()
+		{
+			var buildId = SceneManager.GetActiveScene().buildIndex;
 
-        private async void Save(int newLevel)
-        {
-            var uploadParams = new Dictionary<string, string>
-            {
-                { "playerlevel", newLevel.ToString() },
-                { "action", "changelevel" },
-                { "playerid", SystemPlayerData.Instance.uid.ToString() },
-            };
+			return buildId switch
+			{
+				(int)Levels.Menu => (int)Levels.Lobby,
+				(int)Levels.Lobby => CurrentLevel,
+				_ => CurrentLevel + 1
+			};
+		}
 
-            await _dynamicStorageService.Upload(uploadParams, result =>
-            {
-                if (result)
-                {
-                    _playerData.CurrentLevel = newLevel;
-                    _currentLevel = newLevel;
-                    Debug.Log($"New level saved Successfully to {newLevel}");
-                }
-                else
-                {
-                    Debug.Log("Error while saving level");
-                }
-            });
-        }
+		private async void Save(int newLevel)
+		{
+			var uploadParams = new Dictionary<string, string>
+			{
+				{ "playerlevel", newLevel.ToString() },
+				{ "action", "changelevel" },
+				{ "playerid", SystemPlayerData.Instance.uid.ToString() },
+			};
 
-        public void StartNextLevel()
-        {
-            var newLevel = GetNextLevelId();
+			await _dynamicStorageService.Upload(uploadParams, result =>
+			{
+				if (result)
+				{
+					_playerData.CurrentLevel = newLevel;
+					_currentLevel = newLevel;
+					Debug.Log($"New level saved Successfully to {newLevel}");
+				}
+				else
+				{
+					Debug.Log("Error while saving level");
+				}
+			});
+		}
 
-            if (newLevel > (int)Levels.Lobby && newLevel > _currentLevel)
-            {
-                Save(newLevel);
-            }
+		public void StartNextLevel()
+		{
+			var newLevel = GetNextLevelId();
 
-            if (SceneManager.GetActiveScene().buildIndex > (int)Levels.Lobby)
-            {
-                SceneManager.LoadScene((int)Levels.Lobby);
-                _levelRewardSystem.GetReward();
-                LevelChanged?.Invoke(Levels.Lobby);
-            }
-            else
-            {
-                SceneManager.LoadScene(newLevel);
-                LevelChanged?.Invoke((Levels)newLevel);
-            }
-        }
-    }
+			if (newLevel > (int)Levels.Lobby && newLevel > _currentLevel)
+			{
+				Save(newLevel);
+			}
+
+			if (SceneManager.GetActiveScene().buildIndex > (int)Levels.Lobby)
+			{
+				SceneManager.LoadScene((int)Levels.Lobby);
+				_levelRewardSystem.GetReward();
+				LevelChanged?.Invoke(Levels.Lobby);
+			}
+			else
+			{
+				SceneManager.LoadScene(newLevel);
+				LevelChanged?.Invoke((Levels)newLevel);
+			}
+		}
+
+		public void LoadScene(Levels level)
+		{
+			SceneManager.LoadScene((int)level);
+		}
+	}
 }

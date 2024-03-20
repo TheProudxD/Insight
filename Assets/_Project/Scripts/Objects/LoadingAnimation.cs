@@ -37,10 +37,18 @@ namespace Objects
 
         public void Reset()
         {
+            if (_coroutine == null)
+                return;
+
             StopCoroutine(_coroutine);
             _loadingBar.fillAmount = 0f;
+            _coroutine = null;
         }
 
-        public void Animate(Action callback) => _coroutine = StartCoroutine(Load(callback));
-    }
+		public void Animate(Action callback)
+		{
+            if (_coroutine==null)
+			    _coroutine = StartCoroutine(Load(callback));
+		}
+	}
 }

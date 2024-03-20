@@ -1,10 +1,11 @@
 ﻿using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 
 namespace Storage
 {
-	public class LevelRewardSystem: MonoBehaviour
+	public class LevelRewardWindow: WindowCommon
     {
         [SerializeField] private GameObject _resultWindow;
 

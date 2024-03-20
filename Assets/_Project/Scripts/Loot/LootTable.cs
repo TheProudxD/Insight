@@ -6,23 +6,7 @@ using Random = UnityEngine.Random;
 [CreateAssetMenu]
 public class LootTable : ScriptableObject
 {
-    [SerializeField] private bool _chanceSumLimitedBy100Percent;
     [SerializeField] private Loot[] Loots;
-
-    private void OnValidate()
-    {
-        if (!_chanceSumLimitedBy100Percent)
-            return;
-
-        var sum = 0;
-        foreach (var loot in Loots)
-        {
-            sum += loot.Chance;
-        }
-
-        if (sum != 100)
-            throw new ArgumentException("Chance sum must be equal 100!");
-    }
 
     public Powerup LootPowerup()
     {

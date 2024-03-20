@@ -7,7 +7,7 @@ using Zenject;
 
 namespace UI
 {
-    public class WindowCommon : MonoBehaviour
+    public abstract class WindowCommon : MonoBehaviour
     {
         private readonly List<Transform> _children = new();
 

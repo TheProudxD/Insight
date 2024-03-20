@@ -1,16 +1,19 @@
 ﻿using Objects;
 using UnityEngine;
+using Zenject;
 
 public class BoundedNPC : Interactable
 {
     [SerializeField] private Collider2D _bounds;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody2D _rigidbody;
-    [SerializeField] private float _speed;
-    [SerializeField] private float _minMoveTime;
-    [SerializeField] private float _maxMoveTime;
-    [SerializeField] private float _minWaitTime;
-    [SerializeField] private float _maxWaitTime;
+    [Inject(Id ="lizard")] private NPCEntitySpecs _NPCEntitySpecs;
+
+    private float _speed;
+    private float _minMoveTime;
+    private float _maxMoveTime;
+    private float _minWaitTime;
+    private float _maxWaitTime;
 
     private Vector3 _directionVector;
     private bool _isMoving;
@@ -19,6 +22,12 @@ public class BoundedNPC : Interactable
 
     private void Awake()
     {
+        _speed = _NPCEntitySpecs.MoveSpeed;
+        _minMoveTime = _NPCEntitySpecs.MinMoveTime;
+        _maxMoveTime = _NPCEntitySpecs.MaxMoveTime;
+        _minWaitTime = _NPCEntitySpecs.MinWaitTime;
+        _maxWaitTime = _NPCEntitySpecs.MaxWaitTime;
+
         _moveTimeSeconds = Random.Range(_minMoveTime, _maxMoveTime);
         _waitTimeSeconds = Random.Range(_minWaitTime, _maxWaitTime);
         ChangeDirection();

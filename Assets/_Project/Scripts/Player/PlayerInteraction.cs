@@ -1,10 +1,11 @@
 using UnityEngine;
+using Zenject;
 
 namespace Player
 {
     public class PlayerInteraction : MonoBehaviour
     {
-        [SerializeField] private Inventory _inventory;
+        [Inject] private Inventory _inventory;
         [SerializeField] private SpriteRenderer ReceivedItemSprite;
         
         private PlayerAnimation _playerAnimation;
