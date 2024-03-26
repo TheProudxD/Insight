@@ -16,10 +16,7 @@ namespace UI
         [SerializeField] private Button _changeWeaponButton;
         [SerializeField] private Button _useFirstPotionButton, _useSecondPotionButton, _useThirdPotionButton;
         [SerializeField] private Button _settingsButton, _inventoryButton;
-
-        [SerializeField] private FloatValue _hpValue;
-        [SerializeField] private FloatValue _manaValue;
-
+        
         [SerializeField] private Slider _hpSlider, _manaSlider;
         [SerializeField] private TextMeshProUGUI _playerNickname;
         [SerializeField] private Animator _fadeAnimator;
@@ -29,6 +26,7 @@ namespace UI
 
         [Inject] private WindowManager _windowManager;
         [Inject] private DataManager _dataManager;
+        [Inject] private PlayerEntitySpecs _playerEntitySpecs;
 
         public Animator FadeAnimator => _fadeAnimator;
         public Image LoadingBar => _loadingBar;
@@ -56,16 +54,16 @@ namespace UI
 
         private void InitializeHpBar()
         {
-            _hpSlider.maxValue = _hpValue.InitialValue;
+            _hpSlider.maxValue = _playerEntitySpecs.HpAmount;
             _hpSlider.minValue = 0;
-            _hpSlider.value = _hpValue.RuntimeValue;
+            _hpSlider.value = _playerEntitySpecs.HpAmount;
         }
 
         private void InitializeManaBar()
         {
-            _manaSlider.maxValue = _manaValue.InitialValue;
+            _manaSlider.maxValue = _playerEntitySpecs.ManaAmount;
             _manaSlider.minValue = 0;
-            _manaSlider.value = _manaValue.RuntimeValue;
+            _manaSlider.value = _playerEntitySpecs.ManaAmount;
         }
 
         public void ChangeHealthBarAmount(float amount)
@@ -82,6 +80,7 @@ namespace UI
 
         private void DecreaseBar(Slider slider, float amount)
         {
+            print(slider + " " + amount);
             if (slider is null)
                 throw new NullReferenceException(nameof(slider));
             slider.value -= amount;

@@ -8,15 +8,15 @@ namespace Player
     {
         public override float Amount
         {
-            get => PlayerEntitySpecs.Hp;
-            protected set => PlayerEntitySpecs.Hp = value;
+            get => PlayerEntitySpecs.HpAmount;
+            protected set => PlayerEntitySpecs.HpAmount = value;
         }
         
         protected override void Awake()
         {
             base.Awake();
             
-            MaxAmount = PlayerEntitySpecs.Hp;
+            MaxAmount = PlayerEntitySpecs.HpAmount;
         }
 
         public override bool TryIncrease(float amount)

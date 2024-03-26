@@ -9,8 +9,8 @@ public class ProjectMonoInstallers : MonoInstaller
 {
     public override void InstallBindings()
     {
-        System();
         GoogleSheetLoading();
+        System();
         Loading();
         Data();
         Storage();
@@ -21,14 +21,16 @@ public class ProjectMonoInstallers : MonoInstaller
     {
         Container.Bind<WindowManager>().AsSingle();
         Container.Bind<AssetManager>().AsSingle();
-        Container.Bind<ConnectionManager>().FromInstance(new ConnectionManager(3, 3000));
+        var tryAmount = 3;
+        var waitingDelay = 3000;
+        Container.Bind<ConnectionManager>().AsSingle().WithArguments(tryAmount, waitingDelay);
     }
 
     private void GoogleSheetLoading()
     {
-        Container.Bind<string>().WithId("Google Sheets").FromInstance("1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ");
-        Container.Bind<bool>().WithId("Debug").FromInstance(false);
-        Container.Bind<GoogleSheetLoader>().ToSelf().AsSingle();
+        Container.Bind<GoogleSheetLoader>()
+            .AsSingle()
+            .WithArguments("1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ", false);
     }
 
     private void Loading()

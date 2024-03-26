@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerEntitySpecs : EntitySpecs
 {
-    [HideInInspector] public float Hp;
+    [HideInInspector] public float HpAmount;
     [HideInInspector] public float BaseAttack;
     [HideInInspector] public float MoveSpeed;
     [HideInInspector] public float AttackRadius;
@@ -16,7 +16,7 @@ public class PlayerEntitySpecs : EntitySpecs
     public override void Initialize(string[] cells)
     {
         Id = cells[0];
-        Hp = TypeParser.ParseFloat(cells[1]);
+        HpAmount = TypeParser.ParseFloat(cells[1]);
         BaseAttack = TypeParser.ParseFloat(cells[2]);
         AttackCooldown = TypeParser.ParseFloat(cells[3]);
         MoveSpeed = TypeParser.ParseFloat(cells[4]);
