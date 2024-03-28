@@ -27,14 +27,16 @@ namespace Objects
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag(Constants.PLAYER_TAG))
-                StartTransition();
+            if (Utils.IsItPlayer(collision.collider) == false)
+                return;
+            StartTransition();
         }
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (collision.gameObject.CompareTag(Constants.PLAYER_TAG))
-                StopTransition();
+            if (Utils.IsItPlayer(collision.collider) == false)
+                return;
+            StopTransition();
         }
 
         private void StopTransition() => _loadingAnimation.Reset();

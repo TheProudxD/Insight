@@ -1,5 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
+using System;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -8,7 +7,9 @@ public class InventorySlot : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _itemNumberText;
     [SerializeField] private Image _itemImage;
-    [field: SerializeField] public Button ItemButton { get; private set; }
+    [SerializeField] private Image _itemBackgroundImage;
+    [SerializeField] private RarityBackgroundSprite _rarityBackgroundSprite;
+    [SerializeField] private Button _itemButton;
 
     private InventoryItem InventoryItem { get; set; }
     private InventoryManager InventoryManager { get;  set; }
@@ -17,13 +18,21 @@ public class InventorySlot : MonoBehaviour
     {
         InventoryItem = inventoryItem;
         InventoryManager = inventoryManager;
-        ItemButton.onClick.AddListener(OnClick);
-        _itemNumberText.SetText(inventoryItem.ID.ToString());
-        _itemImage.sprite = inventoryItem.Image;
+        _itemButton.onClick.AddListener(OnClick);
+        _itemNumberText.SetText(InventoryItem.Amount.ToString());
+        _itemImage.sprite = InventoryItem.Image;
+        _itemBackgroundImage.sprite = inventoryItem.Rarity switch
+        {
+            InventoryItemRarity.Gold => _rarityBackgroundSprite.GoldSprite,
+            InventoryItemRarity.Red => _rarityBackgroundSprite.RedSprite,
+            InventoryItemRarity.Purple => _rarityBackgroundSprite.PurpleSprite,
+            InventoryItemRarity.Green => _rarityBackgroundSprite.GreenSprite,
+            InventoryItemRarity.Gray => _rarityBackgroundSprite.GraySprite,
+            _ => throw new ArgumentOutOfRangeException()
+        };
     }
 
-    private void OnClick()
-    {
-        InventoryManager.ChangeSelectedItem(InventoryItem);
-    }
+    public void UpdateItemAmount() => _itemNumberText.SetText(InventoryItem.Amount.ToString());
+
+    private void OnClick() => InventoryManager.ChangeSelectedItem(InventoryItem);
 }

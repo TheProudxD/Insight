@@ -1,6 +1,7 @@
 using Enemies;
 using System.Collections.Generic;
 using System.Linq;
+using Tools;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -29,33 +30,33 @@ public class Room : MonoBehaviour
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !collision.isTrigger)
+        if (Utils.IsItPlayer(collision) == false)
+            return;
+        
+        foreach (var enemy in _enemies)
         {
-            foreach (var enemy in _enemies)
-            {
-                ChangeActivation(enemy, true);
-            }
+            ChangeActivation(enemy, true);
+        }
 
-            foreach (var @object in _objects)
-            {
-                ChangeActivation(@object, true);
-            }
+        foreach (var @object in _objects)
+        {
+            ChangeActivation(@object, true);
         }
     }
 
     protected virtual void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.CompareTag("Player") && !collision.isTrigger)
+        if (Utils.IsItPlayer(collision) == false)
+            return;
+        
+        foreach (var enemy in _enemies)
         {
-            foreach (var enemy in _enemies)
-            {
-                ChangeActivation(enemy, false);
-            }
+            ChangeActivation(enemy, false);
+        }
 
-            foreach (var @object in _objects)
-            {
-                ChangeActivation(@object, false);
-            }
+        foreach (var @object in _objects)
+        {
+            ChangeActivation(@object, false);
         }
     }
 

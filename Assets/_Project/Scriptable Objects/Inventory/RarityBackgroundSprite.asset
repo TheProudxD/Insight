@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5aeaeaae3fa34410a99f4f6f4961097c, type: 3}
+  m_Name: RarityBackgroundSprite
+  m_EditorClassIdentifier: 
+  <GoldSprite>k__BackingField: {fileID: 21300000, guid: 84063999b9e1741d099c1d8f7bbc0f7a, type: 3}
+  <RedSprite>k__BackingField: {fileID: 21300000, guid: c7ade68a31f1d4e12a57617409b6ee8a, type: 3}
+  <PurpleSprite>k__BackingField: {fileID: 21300000, guid: 10d23572713d041c596abf5c00be11dc, type: 3}
+  <GreenSprite>k__BackingField: {fileID: 21300000, guid: e6eea4f7cbb9f46f79c0fe06180fa5b3, type: 3}
+  <GraySprite>k__BackingField: {fileID: 21300000, guid: dd77367546bf4433dbbb2317a935df54, type: 3}

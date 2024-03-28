@@ -11,19 +11,19 @@ public class ShopOpener : MonoBehaviour
     private void Awake() =>
         _loadingAnimation = GetComponent<LoadingAnimation>();
 
-    private void OnTriggerEnter2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (other.CompareTag(Constants.PLAYER_TAG))
-        {
-            _loadingAnimation.Animate(() => _shopCanvas.SetActive(true));
-        }
+        if (Utils.IsItPlayer(collision) == false)
+            return;
+
+        _loadingAnimation.Animate(() => _shopCanvas.SetActive(true));
     }
 
-    private void OnTriggerExit2D(Collider2D other)
+    private void OnTriggerExit2D(Collider2D collision)
     {
-        if (other.CompareTag(Constants.PLAYER_TAG))
-        {
-            _loadingAnimation.Reset();
-        }
+        if (Utils.IsItPlayer(collision) == false)
+            return;
+
+        _loadingAnimation.Reset();
     }
 }

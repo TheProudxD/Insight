@@ -1,4 +1,5 @@
 using Objects;
+using Tools;
 using UnityEngine;
 
 namespace Managers
@@ -9,21 +10,21 @@ namespace Managers
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player") && !other.isTrigger)
-            {
-                DialogUI.text = _dialog;
-                DialogBox.SetActive(true);
-                PlayerInRange = true;
-            }
+            if (Utils.IsItPlayer(other) == false)
+                return;
+            
+            DialogUI.text = _dialog;
+            DialogBox.SetActive(true);
+            PlayerInRange = true;
         }
 
         protected override void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Player") && !other.isTrigger)
-            {
-                PlayerInRange = false;
-                DialogBox.SetActive(false);
-            }
+            if (Utils.IsItPlayer(other) == false)
+                return;
+
+            PlayerInRange = false;
+            DialogBox.SetActive(false);
         }
     }
 }

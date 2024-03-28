@@ -15,6 +15,9 @@ MonoBehaviour:
   <ID>k__BackingField: 3
   <Name>k__BackingField: Tasty pizza
   <Description>k__BackingField: Give some heal and ENERGY
+  <Amount>k__BackingField: 2
   <Image>k__BackingField: {fileID: 21300000, guid: 80012b5d5fe144f79941a58dae2295cd, type: 3}
   <Usable>k__BackingField: 0
   <Unique>k__BackingField: 0
+  <ItemReaction>k__BackingField: {fileID: 0}
+  <Rarity>k__BackingField: 0

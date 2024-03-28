@@ -349,4 +349,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _itemNumberText: {fileID: 5922980526907820712}
   _itemImage: {fileID: 6158072247694277985}
-  <ItemButton>k__BackingField: {fileID: 1440412192765768254}
+  _itemBackgroundImage: {fileID: 7719947826554933920}
+  _rarityBackgroundSprite: {fileID: 11400000, guid: a8d4ead2cdacc4a41acace410ca7b523, type: 2}
+  _itemButton: {fileID: 1440412192765768254}

@@ -10,10 +10,10 @@ namespace Objects
     public class LoadingAnimation : MonoBehaviour
     {
         [Inject] private Hud _hud;
+        [SerializeField] private float _loadingSpeed = 0.15f;
 
         private Image _loadingBar;
         private WaitForSecondsRealtime _timer;
-        private float _loadingSpeed = 0.15f;
         private Coroutine _coroutine;
 
         private void Awake()
@@ -45,10 +45,6 @@ namespace Objects
             _coroutine = null;
         }
 
-		public void Animate(Action callback)
-		{
-            if (_coroutine==null)
-			    _coroutine = StartCoroutine(Load(callback));
-		}
-	}
+		public void Animate(Action callback) => _coroutine ??= StartCoroutine(Load(callback));
+    }
 }

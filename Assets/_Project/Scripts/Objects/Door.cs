@@ -1,4 +1,5 @@
 using System.Collections;
+using Tools;
 using UnityEngine;
 using UnityEngine.Tilemaps;
 
@@ -38,20 +39,20 @@ namespace Objects
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player") && !other.isTrigger)
-            {
-                PlayerInRange = true;
-                Context.Raise();
-            }
+            if (Utils.IsItPlayer(other) == false)
+                return;
+            
+            PlayerInRange = true;
+            Context.Raise();
         }
 
         protected override void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Player") && !other.isTrigger)
-            {
-                PlayerInRange = false;
-                Context.Raise();
-            }
+            if (Utils.IsItPlayer(other) == false)
+                return;
+            
+            PlayerInRange = false;
+            Context.Raise();
         }
     }
 }

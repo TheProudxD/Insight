@@ -76,11 +76,10 @@ namespace UI
             DecreaseBar(_manaSlider, amount);
         }
 
-        public void SetPlayerNickname(string nick) => _playerNickname.text = nick;
+        private void SetPlayerNickname(string nick) => _playerNickname.text = nick;
 
         private void DecreaseBar(Slider slider, float amount)
         {
-            print(slider + " " + amount);
             if (slider is null)
                 throw new NullReferenceException(nameof(slider));
             slider.value -= amount;

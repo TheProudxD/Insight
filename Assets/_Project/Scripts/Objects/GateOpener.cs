@@ -1,3 +1,4 @@
+using Tools;
 using UnityEngine;
 
 namespace Objects
@@ -9,11 +10,10 @@ namespace Objects
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.CompareTag("Player"))
-            {
-                _closedGate.SetActive(false);
-                _openedGate.SetActive(true);
-            }
+            if (Utils.IsItPlayer(collision) == false)
+                return;
+            _closedGate.SetActive(false);
+            _openedGate.SetActive(true);
         }
     }
 }

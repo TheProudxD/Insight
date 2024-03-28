@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using Objects;
+using Tools;
 using UnityEngine;
 
 public class WaypointNpc : Interactable
@@ -92,24 +93,24 @@ public class WaypointNpc : Interactable
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !other.isTrigger)
-        {
-            _animator.SetBool("Idle", true);
-            RotateNPCToPlayer(other.transform.position.x);
-            Context.Raise();
-            PlayerInRange = true;
-        }
+        if (Utils.IsItPlayer(other) == false)
+            return;
+        
+        _animator.SetBool("Idle", true);
+        RotateNPCToPlayer(other.transform.position.x);
+        Context.Raise();
+        PlayerInRange = true;
     }
 
     protected override void OnTriggerExit2D(Collider2D other)
     {
-        if (other.CompareTag("Player") && !other.isTrigger)
-        {
-            _animator.SetBool("Idle", false);
-            transform.rotation = Quaternion.Euler(0, 0, 0);
-            UpdateAnimation();
-            Context.Raise();
-            PlayerInRange = false;
-        }
+        if (Utils.IsItPlayer(other) == false)
+            return;
+        
+        _animator.SetBool("Idle", false);
+        transform.rotation = Quaternion.Euler(0, 0, 0);
+        UpdateAnimation();
+        Context.Raise();
+        PlayerInRange = false;
     }
 }

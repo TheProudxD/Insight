@@ -1,3 +1,4 @@
+using Tools;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -29,10 +30,10 @@ namespace Objects
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player") && !other.isTrigger)
-            {
-                ActivateSwitch();
-            }
+            if (Utils.IsItPlayer(other) == false)
+                return;
+
+            ActivateSwitch();
         }
     }
 }

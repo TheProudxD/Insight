@@ -1,4 +1,5 @@
 using System.Collections;
+using Tools;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -62,19 +63,22 @@ namespace Objects
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.CompareTag("Player") && !other.isTrigger && !_opened.RuntimeValue)
-            {
-                PlayerInRange = true;
-                Context.Raise();
-            }
+            if (Utils.IsItPlayer(other) == false)
+                return;
+            
+            if (_opened.RuntimeValue) 
+                return;
+            PlayerInRange = true;
+            Context.Raise();
         }
 
         protected override void OnTriggerExit2D(Collider2D other)
         {
-            if (other.CompareTag("Player") && !other.isTrigger && !_opened.RuntimeValue)
-            {
+            if (Utils.IsItPlayer(other) == false)
+                return;
+            
+            if (!_opened.RuntimeValue) 
                 PlayerInRange = false;
-            }
         }
     }
 }

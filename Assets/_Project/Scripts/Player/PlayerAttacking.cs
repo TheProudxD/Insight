@@ -54,7 +54,7 @@ namespace Player
             var direction = new Vector3(0, 0, directionZ);
             arrow.Setup(position, direction);
 
-            Destroy(arrow, _destroyArrowTime);
+            Destroy(arrow.gameObject, _destroyArrowTime);
         }
 
         private bool IsCanAttack() => PlayerCurrentState.Current != PlayerState.Attack &&

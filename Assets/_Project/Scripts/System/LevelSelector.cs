@@ -1,41 +1,34 @@
 using Objects;
-using Storage;
 using Tools;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using Zenject;
 
 [RequireComponent(typeof(LoadingAnimation))]
 public class LevelSelector : MonoBehaviour
 {
-	[SerializeField] private GameObject _windowPrefab;
-	private LoadingAnimation _loadingAnimation;
+    [SerializeField] private GameObject _windowPrefab;
+    private LoadingAnimation _loadingAnimation;
+    private bool _changing;
 
-	private void Awake()
-	{
-		_loadingAnimation = GetComponent<LoadingAnimation>();
-	}
+    private void Awake() => _loadingAnimation = GetComponent<LoadingAnimation>();
 
-	private bool _changing;
+    private void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (Utils.IsItPlayer(collision) == false)
+            return;
 
-	private void OnTriggerEnter2D(Collider2D collision)
-	{
-		if (!collision.CompareTag(Constants.PLAYER_TAG))
-			return;
+        if (_changing) 
+            return;
+        
+        _loadingAnimation.Animate(() => Instantiate(_windowPrefab));
+        _changing = true;
+    }
 
-		if (!_changing)
-		{
-			_loadingAnimation.Animate(()=>Instantiate(_windowPrefab));
-			_changing = true;
-		}
-	}
+    private void OnTriggerExit2D(Collider2D collision)
+    {
+        if (Utils.IsItPlayer(collision) == false)
+            return;
 
-	private void OnTriggerExit2D(Collider2D collision)
-	{
-		if (!collision.CompareTag(Constants.PLAYER_TAG))
-			return;
-
-		_loadingAnimation.Reset();
-		_changing = false;
-	}
+        _loadingAnimation.Reset();
+        _changing = false;
+    }
 }
