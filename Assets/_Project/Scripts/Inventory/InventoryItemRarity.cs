@@ -1,8 +1,8 @@
 public enum InventoryItemRarity
 {
-    Gold,
-    Red,
-    Purple,
-    Green,
-    Gray
+    Legendary,
+    Epic,
+    Rare,
+    Uncommon,
+    Common
 }

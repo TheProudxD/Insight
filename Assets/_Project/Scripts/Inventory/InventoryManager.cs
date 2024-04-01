@@ -13,7 +13,13 @@ public class InventoryManager : MonoBehaviour
     [SerializeField] private Transform _inventoryPanel;
     [SerializeField] private Button _useButton;
     [SerializeField] private PlayerInventory _playerInventory;
-    [SerializeField] private TextMeshProUGUI _itemDescription;
+
+    [Header("Right Bar")] [SerializeField] private TextMeshProUGUI _selectedItemName;
+    [SerializeField] private TextMeshProUGUI _selectedItemDescription;
+    [SerializeField] private Image _selectedItemImage;
+    [SerializeField] private Image _selectedItemBackgroundImage;
+    [SerializeField] private TextMeshProUGUI _selectedItemRarity;
+    [SerializeField] private TextMeshProUGUI _selectedItemAmount;
 
     private readonly int _maxInventoryItem = 20;
     private readonly Dictionary<InventoryItem, InventorySlot> _inventorySlots = new();
@@ -38,7 +44,7 @@ public class InventoryManager : MonoBehaviour
             else
             {
                 var slot = _inventoryPanel.GetChild(i);
-                for (int j = 0; j < slot.childCount; j++) 
+                for (int j = 0; j < slot.childCount; j++)
                     Destroy(slot.GetChild(j).gameObject);
             }
         }
@@ -56,7 +62,7 @@ public class InventoryManager : MonoBehaviour
 
             if (item.Amount == 0)
                 continue;
-            
+
             var parent = _inventoryPanel.GetChild(i);
             var slot = Instantiate(_itemInventorySlotPrefab, parent: parent);
             slot.Setup(item, this);
@@ -88,11 +94,18 @@ public class InventoryManager : MonoBehaviour
         }
     }
 
-    public void ChangeSelectedItem(InventoryItem slot)
+    public void ChangeSelectedItem(InventoryItem item)
     {
-        _selectedItem = slot;
-        _itemDescription.SetText(slot.Description);
-        _useButton.interactable = slot.Usable;
+        _selectedItem = item;
+
+        _selectedItemName.SetText(item.Name);
+        _selectedItemDescription.SetText(item.Description);
+        _selectedItemRarity.SetText(item.Rarity.ToString());
+        _selectedItemAmount.SetText(item.Amount.ToString());
+        _selectedItemImage.sprite = item.Image;
+        _selectedItemBackgroundImage.sprite = _inventorySlots[item].ItemBackgroundImage.sprite;
+
+        _useButton.interactable = item.Usable;
         _useButton.onClick.RemoveAllListeners();
         _useButton.onClick.AddListener(OnUseButtonClick);
     }
