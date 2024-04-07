@@ -15,3 +15,5 @@ MonoBehaviour:
   <InventoryItems>k__BackingField:
   - {fileID: 11400000, guid: 003a01ef0d745aa45b1ab63f2e52b534, type: 2}
   - {fileID: 11400000, guid: 355c8959fcaffdd4496375282ca05d5f, type: 2}
+  - {fileID: 11400000, guid: 969c787da84d6b14791cbd2591ec88df, type: 2}
+  - {fileID: 11400000, guid: 963d07d9d1716e1428aaec55a2425322, type: 2}

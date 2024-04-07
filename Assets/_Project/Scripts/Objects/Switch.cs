@@ -1,5 +1,4 @@
 using Tools;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Objects
@@ -22,7 +21,7 @@ namespace Objects
 
         private void ActivateSwitch()
         {
-            if (!_door.IsUnityNull()) _door.Open();
+            _door.Open();
             _isActive = true;
             _storedValue.RuntimeValue = _isActive;
             _spriteRenderer.sprite = _activeSprite;
@@ -30,7 +29,7 @@ namespace Objects
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (Utils.IsItPlayer(other) == false)
+            if (InsightUtils.IsItPlayer(other) == false)
                 return;
 
             ActivateSwitch();

@@ -16,8 +16,6 @@ namespace _Project.Scripts.Inventory
 
         public void Follow()
         {
-            print("MouseFollower");
-
             RectTransformUtility.ScreenPointToLocalPointInRectangle(
                 (RectTransform)_canvas.transform, Input.mousePosition, _canvas.worldCamera, out var point);
 

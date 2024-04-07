@@ -14,17 +14,16 @@ public class InventorySlot : MonoBehaviour
     [field: SerializeField] public Image ItemBackgroundImage { get; private set; }
 
     private DragAndDropSlot _dragAndDrop;
-    private InventoryItem _inventoryItem;
+    public InventoryItem InventoryItem { get; private set; }
     private InventoryManager _inventoryManager;
-    
 
     public void Setup(InventoryItem inventoryItem, InventoryManager inventoryManager)
     {
-        _inventoryItem = inventoryItem;
+        InventoryItem = inventoryItem;
         _inventoryManager = inventoryManager;
         _itemButton.onClick.AddListener(OnClick);
-        _itemNumberText.SetText(_inventoryItem.Amount.ToString());
-        _itemImage.sprite = _inventoryItem.Image;
+        _itemNumberText.SetText(InventoryItem.Amount.ToString());
+        _itemImage.sprite = InventoryItem.Image;
         ItemBackgroundImage.sprite = inventoryItem.Rarity switch
         {
             InventoryItemRarity.Legendary => _rarityBackgroundSprite.GoldSprite,
@@ -39,7 +38,7 @@ public class InventorySlot : MonoBehaviour
         _dragAndDrop.Initialize(this);
     }
 
-    public void UpdateItemAmount() => _itemNumberText.SetText(_inventoryItem.Amount.ToString());
+    public void UpdateItemAmount() => _itemNumberText.SetText(InventoryItem.Amount.ToString());
 
-    private void OnClick() => _inventoryManager.ChangeSelectedItem(_inventoryItem);
+    private void OnClick() => _inventoryManager.ChangeSelectedItem(InventoryItem);
 }

@@ -89,12 +89,12 @@ namespace Player
         public IEnumerator KnockCoroutine(float knockTime, float damage)
         {
             _playerHitSignal.Raise();
+            _playerHitSignal.Raise(damage);
             _playerHealth.Decrease(damage);
 
             if (_playerHealth.Amount <= 0)
                 yield break;
 
-            PlayerCurrentState.Current = PlayerState.Idle;
             yield return new WaitForSeconds(knockTime);
             PlayerCurrentState.Current = PlayerState.Idle;
             _playerMovement.PlayerRigidbody.velocity = Vector2.zero;

@@ -48,7 +48,7 @@ public class DataLoader : ILoadingOperation
 
         onProcess?.Invoke(0.5f);
 
-        Utils.IsCorrectShopItemsId();
+        InsightUtils.IsCorrectShopItemsId();
         onProcess?.Invoke(0.6f);
 
         await _dataManager.DownloadMaxLevel();

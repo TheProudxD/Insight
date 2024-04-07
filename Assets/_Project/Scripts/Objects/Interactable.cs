@@ -26,7 +26,7 @@ namespace Objects
 
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {
-            if (Utils.IsItPlayer(other) == false)
+            if (InsightUtils.IsItPlayer(other) == false)
                 return;
             
             Context.Raise();
@@ -35,7 +35,7 @@ namespace Objects
 
         protected virtual void OnTriggerExit2D(Collider2D other)
         {
-            if (Utils.IsItPlayer(other) == false)
+            if (InsightUtils.IsItPlayer(other) == false)
                 return;
 
             Context.Raise();

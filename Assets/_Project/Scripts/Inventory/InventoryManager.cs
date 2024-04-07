@@ -1,14 +1,14 @@
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using _Project.Scripts.Inventory;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class InventoryManager : MonoBehaviour
 {
-    [SerializeField] private Image _blankInventorySlotPrefab;
+    [SerializeField] private BlankSlot _blankInventorySlotPrefab;
     [SerializeField] private InventorySlot _itemInventorySlotPrefab;
     [SerializeField] private Transform _inventoryPanel;
     [SerializeField] private Button _useButton;
@@ -23,7 +23,20 @@ public class InventoryManager : MonoBehaviour
 
     private readonly int _maxInventoryItem = 20;
     private readonly Dictionary<InventoryItem, InventorySlot> _inventorySlots = new();
+
+    private readonly Dictionary<InventoryItemCategory, List<(int index, InventoryItem item)>> _inventorySlotsPosition =
+        new();
+
     private InventoryItem _selectedItem;
+    private InventoryItemCategory _itemCategory = InventoryItemCategory.All;
+
+    private void Awake()
+    {
+        foreach (var itemCategory in typeof(InventoryItemCategory).GetEnumValues().Cast<InventoryItemCategory>())
+        {
+            _inventorySlotsPosition.Add(itemCategory, null);
+        }
+    }
 
     private void OnEnable() => Initialize();
 
@@ -39,7 +52,8 @@ public class InventoryManager : MonoBehaviour
         {
             if (i >= _inventoryPanel.childCount)
             {
-                Instantiate(_blankInventorySlotPrefab, parent: _inventoryPanel);
+                var blankSlot = Instantiate(_blankInventorySlotPrefab, parent: _inventoryPanel);
+                blankSlot.Initialize(i);
             }
             else
             {
@@ -54,23 +68,49 @@ public class InventoryManager : MonoBehaviour
 
     private void MakeInventory()
     {
-        var inventoryItems = OrderByRarity();
-
-        for (int i = 0; i < inventoryItems.Count; i++)
+        var inventoryItems = OrderByRarity().ToList();
+        if (_itemCategory != InventoryItemCategory.All)
         {
-            var item = inventoryItems[i];
+            inventoryItems = inventoryItems.Where(x => x.Category == _itemCategory)
+                .ToList();
+        }
+        
+        if (_inventorySlotsPosition[_itemCategory] == null || inventoryItems.All(x => _inventorySlotsPosition[_itemCategory].Any(y=>y.item==x)) == false)
+        {
+            var slotsPosition = new List<(int index, InventoryItem item)>();
+            for (int i = 0; i < inventoryItems.Count; i++)
+            {
+                var item = inventoryItems[i];
 
-            if (item.Amount == 0)
-                continue;
+                if (item.Amount == 0)
+                    continue;
 
-            var parent = _inventoryPanel.GetChild(i);
-            var slot = Instantiate(_itemInventorySlotPrefab, parent: parent);
-            slot.Setup(item, this);
-            _inventorySlots.Add(item, slot);
+                var parent = _inventoryPanel.GetChild(i);
+                var slot = Instantiate(_itemInventorySlotPrefab, parent: parent);
+                slot.Setup(item, this);
+                _inventorySlots.Add(item, slot);
+                slotsPosition.Add((i, item));
+            }
+
+            _inventorySlotsPosition[_itemCategory] = slotsPosition;
+        }
+        else
+        {
+            foreach (var slotData in _inventorySlotsPosition[_itemCategory])
+            {
+                if (slotData.item.Amount == 0)
+                    continue;
+
+                var parent = _inventoryPanel.GetChild(slotData.index);
+                var slot = Instantiate(_itemInventorySlotPrefab, parent: parent);
+                slot.Setup(slotData.item, this);
+
+                _inventorySlots.Add(slotData.item, slot);
+            }
         }
     }
 
-    private List<InventoryItem> OrderByRarity() => _playerInventory.InventoryItems.OrderBy(x => x.Rarity).ToList();
+    private IEnumerable<InventoryItem> OrderByRarity() => _playerInventory.InventoryItems.OrderBy(x => x.Rarity);
 
     private void OnUseButtonClick()
     {
@@ -108,5 +148,18 @@ public class InventoryManager : MonoBehaviour
         _useButton.interactable = item.Usable;
         _useButton.onClick.RemoveAllListeners();
         _useButton.onClick.AddListener(OnUseButtonClick);
+    }
+
+    public void SelectCategory(InventoryItemCategory itemCategory)
+    {
+        _itemCategory = itemCategory;
+        Initialize();
+    }
+
+    public void ChangeIndex(InventoryItem item, int newIndex)
+    {
+        var oldSlot = _inventorySlotsPosition[_itemCategory].First(x => x.item == item);
+        _inventorySlotsPosition[_itemCategory].Remove(oldSlot);
+        _inventorySlotsPosition[_itemCategory].Add((newIndex, item));
     }
 }

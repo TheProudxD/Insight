@@ -718,9 +718,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100835e75b91fac439b2f22eda658a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrust: 2
+  _thrust: 1
   _knockTime: 0.15
-  _damage: 1
+  _damage: 0.05
 --- !u!114 &4873682833966098629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -734,7 +734,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 5009070913515056206}
-  _deathAnimator: {fileID: 0}
   _lootTable: {fileID: 11400000, guid: a9209af93ee36f64095f5610c454932d, type: 2}
 --- !u!1 &7096255090561047047
 GameObject:

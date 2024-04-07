@@ -10,7 +10,7 @@ namespace Managers
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            if (Utils.IsItPlayer(other) == false)
+            if (InsightUtils.IsItPlayer(other) == false)
                 return;
             
             DialogUI.text = _dialog;
@@ -20,7 +20,7 @@ namespace Managers
 
         protected override void OnTriggerExit2D(Collider2D other)
         {
-            if (Utils.IsItPlayer(other) == false)
+            if (InsightUtils.IsItPlayer(other) == false)
                 return;
 
             PlayerInRange = false;

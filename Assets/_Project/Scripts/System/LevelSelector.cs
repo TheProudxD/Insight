@@ -13,7 +13,7 @@ public class LevelSelector : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Utils.IsItPlayer(collision) == false)
+        if (InsightUtils.IsItPlayer(collision) == false)
             return;
 
         if (_changing) 
@@ -25,7 +25,7 @@ public class LevelSelector : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (Utils.IsItPlayer(collision) == false)
+        if (InsightUtils.IsItPlayer(collision) == false)
             return;
 
         _loadingAnimation.Reset();

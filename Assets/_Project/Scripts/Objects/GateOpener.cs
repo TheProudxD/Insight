@@ -10,7 +10,7 @@ namespace Objects
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
-            if (Utils.IsItPlayer(collision) == false)
+            if (InsightUtils.IsItPlayer(collision) == false)
                 return;
             _closedGate.SetActive(false);
             _openedGate.SetActive(true);

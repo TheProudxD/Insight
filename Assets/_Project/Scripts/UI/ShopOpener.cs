@@ -13,7 +13,7 @@ public class ShopOpener : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Utils.IsItPlayer(collision) == false)
+        if (InsightUtils.IsItPlayer(collision) == false)
             return;
 
         _loadingAnimation.Animate(() => _shopCanvas.SetActive(true));
@@ -21,7 +21,7 @@ public class ShopOpener : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (Utils.IsItPlayer(collision) == false)
+        if (InsightUtils.IsItPlayer(collision) == false)
             return;
 
         _loadingAnimation.Reset();

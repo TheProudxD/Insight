@@ -9,7 +9,7 @@ public class WorldInventoryItem : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (Utils.IsItPlayer(other) == false)
+        if (InsightUtils.IsItPlayer(other) == false)
             return;
         
         AddItemToInventory();
@@ -21,7 +21,7 @@ public class WorldInventoryItem : MonoBehaviour
         if (_playerInventory.InventoryItems.Contains(_pickupItem) == false)
         {
             _playerInventory.InventoryItems.Add(_pickupItem);
-            _pickupItem.Waste();
+            _pickupItem.StartAmount(1);
         }
 
         _pickupItem.Add(_amountToAdd);

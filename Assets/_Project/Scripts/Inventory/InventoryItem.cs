@@ -14,6 +14,7 @@ public class InventoryItem : ScriptableObject
     [field: SerializeField] public bool Unique { get; private set; }
     [field: SerializeField] public ItemReaction ItemReaction { get; private set; }
     [field: SerializeField] public InventoryItemRarity Rarity { get; private set; }
+    [field: SerializeField] public InventoryItemCategory Category { get; private set; }
 
     public bool TryUse(int amount)
     {
@@ -45,5 +46,5 @@ public class InventoryItem : ScriptableObject
         Amount -= amount;
     }
 
-    public void Waste() => Amount = 0;
+    public void StartAmount(int amount) => Amount = amount;
 }

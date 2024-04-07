@@ -15,8 +15,7 @@ namespace Managers
             if (collision.TryGetComponent(out Enemy enemy))
             {
                 MoveEntity(enemy);
-                enemy.GetComponent<EnemyHealth>().TakeDamage(_damage);
-                StartCoroutine(enemy.KnockCoroutine(_knockTime));
+                StartCoroutine(enemy.KnockCoroutine(_knockTime, _damage));
             }
             else if (collision.TryGetComponent(out PlayerAttacking player) &&
                      PlayerCurrentState.Current != PlayerState.Stagger)
@@ -26,12 +25,13 @@ namespace Managers
             }
         }
 
-        private void MoveEntity(MonoBehaviour entity)
+        private void MoveEntity(Component entity)
         {
-            var entityRB = entity.gameObject.GetComponent<Rigidbody2D>();
+            var entityRB = entity.GetComponent<Rigidbody2D>();
 
             Vector2 difference = entityRB.transform.position - transform.position;
             difference = difference.normalized * _thrust;
+            //difference.DOMove(entityRB.transform.position + difference, _knockTime);
             entityRB.AddForce(difference, ForceMode2D.Impulse);
         }
 

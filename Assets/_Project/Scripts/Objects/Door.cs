@@ -39,7 +39,7 @@ namespace Objects
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
-            if (Utils.IsItPlayer(other) == false)
+            if (InsightUtils.IsItPlayer(other) == false)
                 return;
             
             PlayerInRange = true;
@@ -48,7 +48,7 @@ namespace Objects
 
         protected override void OnTriggerExit2D(Collider2D other)
         {
-            if (Utils.IsItPlayer(other) == false)
+            if (InsightUtils.IsItPlayer(other) == false)
                 return;
             
             PlayerInRange = false;

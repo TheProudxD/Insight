@@ -32,7 +32,7 @@ namespace _Project.Scripts.Inventory
             _mouseFollower.Toggle(false);
             Physics2D.CircleCastNonAlloc(transform.position, 0.5f, Vector2.one, _casts);
             var blankSlot = FindCastTarget();
-            ChangeSlotPosition(blankSlot.transform);
+            ChangeSlotPosition(blankSlot);
         }
 
         private BlankSlot FindCastTarget()
@@ -50,7 +50,7 @@ namespace _Project.Scripts.Inventory
             return null;
         }
 
-        private void ChangeSlotPosition(Transform blankSlot)
+        private void ChangeSlotPosition(BlankSlot blankSlot)
         {
             if (blankSlot == null)
             {
@@ -58,27 +58,32 @@ namespace _Project.Scripts.Inventory
             }
             else
             {
-                var oldParent = transform.parent;
+                var oldBlankSlot = transform.parent.GetComponent<BlankSlot>();
+                TrySwapSlots(blankSlot, oldBlankSlot);
                 SetInNewPosition(blankSlot);
-                TrySwapSlots(blankSlot, oldParent);
             }
         }
 
-        private void SetInNewPosition(Transform blankSlot)
+        private void SetInNewPosition(BlankSlot blankSlot)
         {
-            transform.position = blankSlot.position;
-            transform.SetParent(blankSlot);
+            transform.position = blankSlot.transform.position;
+            transform.SetParent(blankSlot.transform);
+            FindObjectOfType<InventoryManager>().ChangeIndex(_inventorySlot.InventoryItem, blankSlot.Index);
         }
 
-        private void TrySwapSlots(Component blankSlot, Transform oldParent)
+        private void TrySwapSlots(BlankSlot blankSlot, BlankSlot oldBlankSlot)
         {
-            var inventorySlot = blankSlot.GetComponentInChildren<InventorySlot>();
+            var newInventorySlot = blankSlot.GetComponentInChildren<InventorySlot>();
 
-            if (inventorySlot == null || inventorySlot == _inventorySlot)
+            if (newInventorySlot == null || newInventorySlot == _inventorySlot)
+            {
                 return;
+            }
 
-            inventorySlot.transform.position = oldParent.position;
-            inventorySlot.transform.SetParent(oldParent);
+            var oldBlankSlotTransform = oldBlankSlot.transform;
+            newInventorySlot.transform.position = oldBlankSlotTransform.position;
+            newInventorySlot.transform.SetParent(oldBlankSlotTransform);
+            FindObjectOfType<InventoryManager>().ChangeIndex(newInventorySlot.InventoryItem, oldBlankSlot.Index);
         }
     }
 }

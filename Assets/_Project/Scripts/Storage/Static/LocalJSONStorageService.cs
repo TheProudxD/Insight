@@ -10,7 +10,7 @@ namespace StorageService
     {
         public void Upload(string key, object data, Action<bool> callback = null)
         {
-            var path = Utils.BuildPath(key);
+            var path = InsightUtils.BuildPath(key);
             var json = JsonUtility.ToJson(data);
             using var fileStream = new StreamWriter(path);
             fileStream.Write(json);
@@ -19,7 +19,7 @@ namespace StorageService
 
         public Task Download(string key, Action<GameData> callback)
         {
-            var path = Utils.BuildPath(key);
+            var path = InsightUtils.BuildPath(key);
             using var fileStream = new StreamReader(path);
             var json = fileStream.ReadToEnd();
             var data = JsonUtility.FromJson<GameData>(json);

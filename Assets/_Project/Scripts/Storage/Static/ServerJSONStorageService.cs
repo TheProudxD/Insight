@@ -19,7 +19,7 @@ namespace StorageService
             try
             {
                 using var wc = new WebClient();
-                var path = Utils.BuildPath(key);
+                var path = InsightUtils.BuildPath(key);
                 var iri = new Uri(_url + "/" + key);
                 await wc.UploadFileTaskAsync(iri, path);
                 callback?.Invoke(true);
@@ -38,7 +38,7 @@ namespace StorageService
 
                 var serverJsonFile = await wc.DownloadStringTaskAsync(_url + "/" + key);
                 var serverData = JsonUtility.FromJson<GameData>(serverJsonFile);
-                var localPath = Utils.BuildPath(DataManager.MAX_LEVEL_DATA_KEY);
+                var localPath = InsightUtils.BuildPath(DataManager.MAX_LEVEL_DATA_KEY);
 
                 if (!File.Exists(localPath))
                 {

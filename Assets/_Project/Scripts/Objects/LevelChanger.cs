@@ -27,14 +27,14 @@ namespace Objects
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
-            if (Utils.IsItPlayer(collision.collider) == false)
+            if (InsightUtils.IsItPlayer(collision.collider) == false)
                 return;
             StartTransition();
         }
 
         private void OnCollisionExit2D(Collision2D collision)
         {
-            if (Utils.IsItPlayer(collision.collider) == false)
+            if (InsightUtils.IsItPlayer(collision.collider) == false)
                 return;
             StopTransition();
         }

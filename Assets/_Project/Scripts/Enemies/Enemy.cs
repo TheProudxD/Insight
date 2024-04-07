@@ -13,11 +13,13 @@ namespace Enemies
         protected EnemyState CurrentState { get; private set; }
         protected Rigidbody2D EnemyRigidbody;
         protected Transform Target;
+        protected EnemyHealth EnemyHealth;
 
         private Animator _animator;
 
         protected void Awake()
         {
+            EnemyHealth = GetComponent<EnemyHealth>();
             EnemyRigidbody = GetComponent<Rigidbody2D>();
             Target = FindObjectOfType<PlayerAttacking>().transform;
             _animator = GetComponent<Animator>();
@@ -25,11 +27,7 @@ namespace Enemies
             CurrentState = EnemyState.Idle;
         }
 
-        protected void ChangeState(EnemyState newState)
-        {
-            if (CurrentState != newState)
-                CurrentState = newState;
-        }
+        protected void ChangeState(EnemyState newState) => CurrentState = newState;
 
         protected void MoveAnimation(Vector2 direction) =>
             SetAnimationFloat(AnimationConst.moveX, AnimationConst.moveY, direction);
@@ -43,10 +41,12 @@ namespace Enemies
             _animator.SetFloat(animation2.ToString(), direction.y);
         }
 
-        public IEnumerator KnockCoroutine(float knockTime)
+        public IEnumerator KnockCoroutine(float knockTime, float damage)
         {
-            yield return new WaitForSeconds(knockTime);
+            EnemyHealth.TakeDamage(damage);
+            CurrentState = EnemyState.Stagger;
             EnemyRigidbody.velocity = Vector2.zero;
+            yield return new WaitForSeconds(knockTime);
             CurrentState = EnemyState.Idle;
             EnemyRigidbody.velocity = Vector2.zero;
         }

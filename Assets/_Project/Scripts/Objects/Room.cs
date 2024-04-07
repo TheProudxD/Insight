@@ -2,7 +2,6 @@ using Enemies;
 using System.Collections.Generic;
 using System.Linq;
 using Tools;
-using Unity.VisualScripting;
 using UnityEngine;
 
 public class Room : MonoBehaviour
@@ -23,14 +22,14 @@ public class Room : MonoBehaviour
     }
 
     private IEnumerable<Enemy> GetOnlyEnemies(IEnumerable<GameObject> objects) => objects
-        .Where(g => !g.IsUnityNull() && g.TryGetComponent(out Enemy enemy)).Select(x => x.GetComponent<Enemy>());
+        .Where(g => g !=null && g.TryGetComponent(out Enemy enemy)).Select(x => x.GetComponent<Enemy>());
 
     private IEnumerable<GameObject> GetAllExceptEnemies(IEnumerable<GameObject> objects) =>
-        objects.Where(g => !g.IsUnityNull() && !g.TryGetComponent(out Enemy enemy)).Select(x => x);
+        objects.Where(g => g !=null && !g.TryGetComponent(out Enemy enemy)).Select(x => x);
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
-        if (Utils.IsItPlayer(collision) == false)
+        if (InsightUtils.IsItPlayer(collision) == false)
             return;
         
         foreach (var enemy in _enemies)
@@ -46,7 +45,7 @@ public class Room : MonoBehaviour
 
     protected virtual void OnTriggerExit2D(Collider2D collision)
     {
-        if (Utils.IsItPlayer(collision) == false)
+        if (InsightUtils.IsItPlayer(collision) == false)
             return;
         
         foreach (var enemy in _enemies)
@@ -62,13 +61,13 @@ public class Room : MonoBehaviour
 
     protected void ChangeActivation(Enemy enemy, bool activation)
     {
-        if (!enemy.IsUnityNull())
+        if (enemy != null)
             enemy.gameObject.SetActive(activation);
     }
 
     protected void ChangeActivation(GameObject component, bool activation)
     {
-        if (!component.IsUnityNull())
+        if (component != null)
             component.SetActive(activation);
     }
 }

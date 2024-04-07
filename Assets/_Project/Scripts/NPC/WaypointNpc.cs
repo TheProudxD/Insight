@@ -93,7 +93,7 @@ public class WaypointNpc : Interactable
 
     protected override void OnTriggerEnter2D(Collider2D other)
     {
-        if (Utils.IsItPlayer(other) == false)
+        if (InsightUtils.IsItPlayer(other) == false)
             return;
         
         _animator.SetBool("Idle", true);
@@ -104,7 +104,7 @@ public class WaypointNpc : Interactable
 
     protected override void OnTriggerExit2D(Collider2D other)
     {
-        if (Utils.IsItPlayer(other) == false)
+        if (InsightUtils.IsItPlayer(other) == false)
             return;
         
         _animator.SetBool("Idle", false);
