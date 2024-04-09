@@ -1,10 +1,10 @@
 using Tools;
 using UnityEngine;
 
-public class CoinPowerupEntitySpecs: EntitySpecs
+public class CoinPowerupEntitySpecs : EntitySpecs
 {
-    [HideInInspector] public int Amount;
-    [HideInInspector] public float DestroyTimeAfterSpawn;
+    public int Amount { get; private set; }
+    public float DestroyTimeAfterSpawn { get; private set; }
 
     public override void Initialize(string[] cells)
     {

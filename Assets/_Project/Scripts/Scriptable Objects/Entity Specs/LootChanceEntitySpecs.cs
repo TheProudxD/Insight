@@ -4,8 +4,8 @@ using UnityEngine;
 
 public class LootChanceEntitySpecs: EntitySpecs
 {
-    [HideInInspector] public float Amount;
-    [HideInInspector] public Powerup _powerup;
+    public float Amount{ get; private set; }
+    public Powerup _powerup { get; private set; }
 
     public override void Initialize(string[] cells)
     {

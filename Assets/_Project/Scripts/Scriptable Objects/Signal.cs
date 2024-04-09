@@ -6,46 +6,21 @@ using UnityEngine;
 [CreateAssetMenu(menuName = "ScriptableObjects/Signal")]
 public class Signal : ScriptableObject
 {
-    private readonly List<WeakReference> _listeners = new();
+    private readonly List<SignalListener> _listeners = new();
 
     public void Raise()
     {
-        for (var i = _listeners.Count - 1; i >= 0; i--)
-            if (_listeners[i] != null)
-            {
-                if (_listeners[i].IsAlive)
-                    ((SignalListener)_listeners[i].Target)?.SingleRaise();
-            }
-            else
-            {
-                _listeners.RemoveAt(i);
-            }
+        foreach (var t in _listeners)
+            t.SingleRaise();
     }
 
     public void Raise(float amount)
     {
-        for (var i = _listeners.Count - 1; i >= 0; i--)
-            if (_listeners[i] != null)
-            {
-                if (_listeners[i] != null)
-                {
-                    if (_listeners[i].IsAlive)
-                        ((SignalListener)_listeners[i].Target)?.SingleRaise(amount);
-                }
-                else
-                {
-                    _listeners.RemoveAt(i);
-                }
-            }
+        foreach (var t in _listeners)
+            t.SingleRaise(amount);
     }
 
-    public void RegisterListener(SignalListener listener)
-    {
-        _listeners.Add(new WeakReference(listener));
-    }
+    public void RegisterListener(SignalListener listener) => _listeners.Add(listener);
 
-    public void DeRegisterListener(SignalListener listener)
-    {
-        _listeners.Remove(new WeakReference(listener));
-    }
+    public void DeRegisterListener(SignalListener listener) => _listeners.Remove(listener);
 }

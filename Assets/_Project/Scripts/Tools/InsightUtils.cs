@@ -36,8 +36,6 @@ namespace Tools
             if (errorsCount != 0)
                 Debug.LogError($"something wrong with shop items Id!. There are {errorsCount} errors.");
         }
-
-        public static string GetEntitySpecsPath() => "Assets/Resources/Entity Specs";
         
         public static bool IsItPlayer(Collider2D collision) => 
             collision.CompareTag(Constants.PLAYER_TAG) && !collision.isTrigger;

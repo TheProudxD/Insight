@@ -20,7 +20,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2058628797738236959
 Transform:
   m_ObjectHideFlags: 0
@@ -122,10 +122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Context: {fileID: 11400000, guid: 81b035d109415974bb1d74f65c52c66d, type: 2}
-  _playerInventory: {fileID: 11400000, guid: c48b402cc15736e4a829538661d9cbe6, type: 2}
-  _content: {fileID: 11400000, guid: 003b83d7a8b86fe46b136b3ca021064b, type: 2}
-  _opened: {fileID: 11400000, guid: bef279e894c18c54b89801c2845c0110, type: 2}
-  _raiseItem: {fileID: 11400000, guid: e95e889591e2e2748b6f269151ddfba6, type: 2}
+  _keyItem: {fileID: 11400000, guid: 678456e0dd3447f42bb1b4cd488e620d, type: 2}
 --- !u!61 &2366172639739106122
 BoxCollider2D:
   m_ObjectHideFlags: 0

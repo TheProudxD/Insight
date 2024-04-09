@@ -97,6 +97,8 @@ namespace StorageService
                 await SetName("Player " + SystemPlayerData.Instance.uid);
             
             Debug.Log(_playerData.ToString());
+            
+            await Task.CompletedTask;
         }
     }
 }

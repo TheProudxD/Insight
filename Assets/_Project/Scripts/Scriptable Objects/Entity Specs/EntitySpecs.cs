@@ -3,7 +3,7 @@ using UnityEngine;
 
 public abstract class EntitySpecs
 {
-	[HideInInspector] public string Id;
+    public string Id { get; protected set; }
 
     public override string ToString() => this.GiveAllFields();
 

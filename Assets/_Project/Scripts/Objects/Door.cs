@@ -7,17 +7,10 @@ namespace Objects
 {
     public class Door : Interactable
     {
+        [SerializeField] private PlayerInventory _inventory;
+        [SerializeField] private InventoryItem _keyItem;
         [SerializeField] private DoorType _doorType;
-        [SerializeField] private Inventory _inventory;
         [SerializeField] private Tilemap _map;
-
-        private void Update()
-        {
-            if (!PlayerInRange) return;
-            if (_doorType is not DoorType.Key || _inventory.NumberOfKeys <= 0) return;
-            Context.Raise();
-            Open();
-        }
 
         public void Open() => StartCoroutine(OpenRoutine());
 
@@ -33,7 +26,6 @@ namespace Objects
                 }
             }
 
-            _inventory.NumberOfKeys--;
             Destroy(gameObject);
         }
 
@@ -41,6 +33,14 @@ namespace Objects
         {
             if (InsightUtils.IsItPlayer(other) == false)
                 return;
+
+            if (_doorType is not DoorType.Key) 
+                return;
+            
+            if (_inventory.InventoryItems.Contains(_keyItem) == false) 
+                return;
+            
+            Open();
             
             PlayerInRange = true;
             Context.Raise();

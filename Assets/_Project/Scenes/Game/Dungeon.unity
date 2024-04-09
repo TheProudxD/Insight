@@ -25568,8 +25568,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Context: {fileID: 11400000, guid: 81b035d109415974bb1d74f65c52c66d, type: 2}
-  _doorType: 0
   _inventory: {fileID: 11400000, guid: c48b402cc15736e4a829538661d9cbe6, type: 2}
+  _keyItem: {fileID: 0}
+  _doorType: 0
   _map: {fileID: 883881949}
 --- !u!1 &1742310389
 GameObject:
@@ -25617,8 +25618,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Context: {fileID: 11400000, guid: 81b035d109415974bb1d74f65c52c66d, type: 2}
-  _doorType: 2
   _inventory: {fileID: 11400000, guid: c48b402cc15736e4a829538661d9cbe6, type: 2}
+  _keyItem: {fileID: 0}
+  _doorType: 2
   _map: {fileID: 883881949}
 --- !u!61 &1742310392
 BoxCollider2D:

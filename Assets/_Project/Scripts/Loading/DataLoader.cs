@@ -15,12 +15,15 @@ public class DataLoader : ILoadingOperation
     private readonly IDynamicStorageService _dynamicStorageService;
     private readonly DataManager _dataManager;
     private readonly ConnectionManager _connectionManager;
+    private readonly GoogleSheetLoader _googleSheetLoader;
 
-    public DataLoader(IDynamicStorageService dynamicStorageService, DataManager dataManager, ConnectionManager connectionManager)
+    public DataLoader(IDynamicStorageService dynamicStorageService, DataManager dataManager,
+        ConnectionManager connectionManager, GoogleSheetLoader googleSheetLoader)
     {
         _dynamicStorageService = dynamicStorageService;
         _dataManager = dataManager;
         _connectionManager = connectionManager;
+        _googleSheetLoader = googleSheetLoader;
     }
 
     public string Description => "Loading data...";
@@ -36,10 +39,14 @@ public class DataLoader : ILoadingOperation
             return;
         }
 
+        onProcess?.Invoke(0.25f);
+
+        await DownloadGoogleSheetsTables();
+
         onProcess?.Invoke(0.35f);
 
         var result = await GetSystemData();
-        if (!result)
+        if (result == false)
         {
             Debug.LogError("Error. Mismatch data!");
             Time.timeScale = 0;
@@ -55,7 +62,21 @@ public class DataLoader : ILoadingOperation
         onProcess?.Invoke(0.75f);
 
         await _dataManager.GetDynamicData();
+
         onProcess?.Invoke(1f);
+    }
+
+    private Task DownloadGoogleSheetsTables()
+    {
+        var allTasks = new List<Task>();
+
+        allTasks.Add(_googleSheetLoader.DownloadTable<PlayerEntitySpecs>("863072486"));
+        allTasks.Add(_googleSheetLoader.DownloadTable<LogEntitySpecs>("0"));
+        allTasks.Add(_googleSheetLoader.DownloadTable<HeartPowerupEntitySpecs>("1682472823"));
+        allTasks.Add(_googleSheetLoader.DownloadTable<CoinPowerupEntitySpecs>("777294485"));
+        allTasks.Add(_googleSheetLoader.DownloadTable<NPCEntitySpecs>("80218900"));
+        
+        return Task.WhenAll(allTasks);
     }
 
     private SystemPlayerData ParseSystemPlayerData(JSONNode data)

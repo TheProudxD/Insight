@@ -1,6 +1,8 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using UI;
 using UnityEngine;
+using Object = UnityEngine.Object;
 
 namespace Managers
 {
@@ -14,17 +16,20 @@ namespace Managers
             _assetManager = assetManager;
         }
 
-        private WindowCommon Create(WindowType windowType)
-        {
-            var windowObject = _assetManager.GetWindowPrefab(windowType.ToString()).GetComponent<WindowCommon>();
-            return windowObject;
-        }
-
         private void TryShow(WindowType windowType)
         {
             if (!_openedWindows.ContainsKey(windowType))
             {
-                var window = Create(windowType);
+                WindowCommon window = windowType switch
+                {
+                    WindowType.Pause => _assetManager.GetPauseWindow(),
+                    WindowType.Settings => _assetManager.GetSettingsWindow(),
+                    WindowType.Inventory => _assetManager.GetInventoryWindow(),
+                    WindowType.Exit => _assetManager.GetExitWindow(),
+                    WindowType.LevelReward => _assetManager.GetLevelRewardWindow(),
+                    _ => throw new ArgumentOutOfRangeException(nameof(windowType), windowType, null)
+                };
+                
                 _openedWindows[windowType] = window;
                 window.Show();
             }

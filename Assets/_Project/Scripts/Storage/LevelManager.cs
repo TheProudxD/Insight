@@ -2,8 +2,11 @@ using Assets._Project.Scripts.Storage.Static;
 using StorageService;
 using System;
 using System.Collections.Generic;
+using System.Threading;
+using Managers;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using Zenject;
 
 namespace Storage
 {
@@ -12,19 +15,18 @@ namespace Storage
 		public event Action<Levels> LevelChanged;
 
 		private readonly IDynamicStorageService _dynamicStorageService;
-		private readonly LevelRewardWindow _levelRewardSystem;
+		private readonly AssetManager _assetManager;
 
-		private int _currentLevel; // max level passed by the player by default
+		private int _currentLevel; // max level passed by the player - by default
 		private PlayerData _playerData;
 		private readonly int _minLevel;
 
 		public int CurrentLevel => _currentLevel;
 
-		private LevelManager(IDynamicStorageService dynamicStorageService, DataManager dataManager, LevelRewardWindow levelRewardSystem)
+		private LevelManager(IDynamicStorageService dynamicStorageService, DataManager dataManager, AssetManager assetManager)
 		{
 			_dynamicStorageService = dynamicStorageService;
-
-			_levelRewardSystem = levelRewardSystem;
+			_assetManager = assetManager;
 			_minLevel = (int)Levels.Lobby + 1;
 			dataManager.DataLoaded += Initialize;
 		}
@@ -89,20 +91,18 @@ namespace Storage
 
 			if (SceneManager.GetActiveScene().buildIndex > (int)Levels.Lobby)
 			{
-				SceneManager.LoadScene((int)Levels.Lobby);
-				_levelRewardSystem.GetReward();
+				LoadScene(Levels.Lobby);
+				var levelRewardWindow = _assetManager.GetLevelRewardWindow();
+				levelRewardWindow.DisplayReward();
 				LevelChanged?.Invoke(Levels.Lobby);
 			}
 			else
 			{
-				SceneManager.LoadScene(newLevel);
+				LoadScene((Levels)newLevel);
 				LevelChanged?.Invoke((Levels)newLevel);
 			}
 		}
 
-		public void LoadScene(Levels level)
-		{
-			SceneManager.LoadScene((int)level);
-		}
+		public void LoadScene(Levels level) => SceneManager.LoadScene((int)level);
 	}
 }

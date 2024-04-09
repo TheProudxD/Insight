@@ -3,8 +3,8 @@ using UnityEngine;
 
 public class HeartPowerupEntitySpecs: EntitySpecs
 {
-    [HideInInspector] public float HealAmount;
-    [HideInInspector] public float DestroyTimeAfterSpawn;
+    public float HealAmount { get; private set; }
+    public float DestroyTimeAfterSpawn { get; private set; }
 
     public override void Initialize(string[] cells)
     {

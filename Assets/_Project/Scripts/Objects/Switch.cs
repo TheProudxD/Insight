@@ -7,23 +7,20 @@ namespace Objects
     {
         [SerializeField] private Door _door;
         [SerializeField] private Sprite _activeSprite;
-        [SerializeField] private BoolValue _storedValue;
-        private bool _isActive;
+        private bool _pressed;
         private SpriteRenderer _spriteRenderer;
 
         private void Awake()
         {
             _spriteRenderer = GetComponent<SpriteRenderer>();
-            _isActive = _storedValue.RuntimeValue;
-            if (_isActive)
+            if (_pressed)
                 ActivateSwitch();
         }
 
         private void ActivateSwitch()
         {
             _door.Open();
-            _isActive = true;
-            _storedValue.RuntimeValue = _isActive;
+            _pressed = true;
             _spriteRenderer.sprite = _activeSprite;
         }
 

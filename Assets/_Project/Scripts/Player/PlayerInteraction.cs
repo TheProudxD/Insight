@@ -1,37 +1,32 @@
 using UnityEngine;
+using UnityEngine.Serialization;
 using Zenject;
 
 namespace Player
 {
     public class PlayerInteraction : MonoBehaviour
     {
-        [Inject] private Inventory _inventory;
-        [SerializeField] private SpriteRenderer ReceivedItemSprite;
+        [FormerlySerializedAs("ReceivedItemSprite"), SerializeField] private SpriteRenderer _receivedItemSprite;
         
         private PlayerAnimation _playerAnimation;
 
-        private void Awake()
+        private void Awake() => _playerAnimation = GetComponent<PlayerAnimation>();
+
+        public void DisplayPickupItem(InventoryItem item)
         {
-            _playerAnimation = GetComponent<PlayerAnimation>();
+            if (item == null) 
+                return;
+            
+            _playerAnimation.SetReceiveItemAnimation(true);
+            PlayerCurrentState.Current = PlayerState.Interact;
+            _receivedItemSprite.sprite = item.Image;
         }
-
-        public void RaiseItem()
+        
+        public void RemovePickupItem()
         {
-            if (_inventory.CurrentItem == null) return;
-
-            if (PlayerCurrentState.Current != PlayerState.Interact)
-            {
-                _playerAnimation.SetReceiveItemAnimation(true);
-                PlayerCurrentState.Current = PlayerState.Interact;
-                ReceivedItemSprite.sprite = _inventory.CurrentItem.ItemSprite;
-            }
-            else
-            {
-                _playerAnimation.SetReceiveItemAnimation(false);
-                PlayerCurrentState.Current = PlayerState.Idle;
-                ReceivedItemSprite.sprite = null;
-                _inventory.CurrentItem = null;
-            }
+            _playerAnimation.SetReceiveItemAnimation(false);
+            PlayerCurrentState.Current = PlayerState.Idle;
+            _receivedItemSprite.sprite = null;
         }
     }
 }

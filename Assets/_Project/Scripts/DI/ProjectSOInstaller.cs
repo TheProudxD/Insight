@@ -9,14 +9,14 @@ using Zenject;
 [CreateAssetMenu(fileName = "Create " + nameof(ProjectSOInstaller), menuName = "Installers/SOInstaller")]
 public class ProjectSOInstaller : ScriptableObjectInstaller
 {
-    [SerializeField] private Inventory _playerInventory;
+    [SerializeField] private PlayerInventory _playerInventory;
     [SerializeField] private ShopContent _shopContent;
     [SerializeField] private Coin _coinPrefab;
     [SerializeField] private Heart _heartPrefab;
     
     public override void InstallBindings()
     {
-        Container.Bind<Inventory>().FromInstance(_playerInventory).AsSingle();
+        Container.Bind<PlayerInventory>().FromInstance(_playerInventory).AsSingle();
         Container.Bind<ShopContent>().FromInstance(_shopContent).AsSingle();
         BindPowerups();
     }

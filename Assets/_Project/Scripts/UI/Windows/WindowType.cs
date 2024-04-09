@@ -5,6 +5,7 @@ namespace Managers
         Pause,
         Settings,
         Inventory,
-        Exit
+        Exit,
+        LevelReward
     }
 }

@@ -36,11 +36,11 @@ namespace Enemies
 
         private void MakeLoot()
         {
-            if (_lootTable != null)
-            {
-                var powerup = _lootTable.LootPowerup();
-                _powerupFactory.Create(powerup, transform.position);
-            }
+            if (_lootTable == null) 
+                return;
+            
+            var powerup = _lootTable.LootPowerup();
+            _powerupFactory.Create(powerup, transform.position);
         }
 
         private void Die()

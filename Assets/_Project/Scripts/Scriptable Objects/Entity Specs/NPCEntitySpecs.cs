@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class NPCEntitySpecs : EntitySpecs
 {
-    [HideInInspector] public float MoveSpeed;
-    [HideInInspector] public float MinMoveTime;
-    [HideInInspector] public float MaxMoveTime;
-    [HideInInspector] public float MinWaitTime;
-    [HideInInspector] public float MaxWaitTime;
+    public float MoveSpeed { get; private set; }
+    public float MinMoveTime { get; private set; }
+    public float MaxMoveTime { get; private set; }
+    public float MinWaitTime { get; private set; }
+    public float MaxWaitTime { get; private set; }
 
     public override void Initialize(string[] cells)
     {

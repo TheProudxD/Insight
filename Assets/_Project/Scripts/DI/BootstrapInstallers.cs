@@ -1,3 +1,6 @@
+using System;
+using System.Linq;
+using System.Threading.Tasks;
 using Objects.Powerups;
 using Player;
 using Storage;
@@ -9,22 +12,24 @@ public class BootstrapInstallers : MonoInstaller
 {
     public override void InstallBindings()
     {
-        var levelRewardSystem = FindObjectOfType<LevelRewardWindow>();
         var mainCamera = FindObjectOfType<Camera>();
         var hud = FindObjectOfType<Hud>();
         var playerHealth = FindObjectOfType<PlayerHealth>();
-        
-        ProjectContext.Instance.Container.Bind<PlayerHealth>().FromInstance(playerHealth).AsSingle();
-        ProjectContext.Instance.Container.Bind<Camera>().FromInstance(mainCamera).AsSingle();
-        ProjectContext.Instance.Container.Bind<Hud>().FromInstance(hud).AsSingle();
-        ProjectContext.Instance.Container.Bind<Canvas>().FromInstance(hud.GetComponent<Canvas>()).AsSingle().Lazy();
-        ProjectContext.Instance.Container.Bind<LevelRewardWindow>().FromInstance(levelRewardSystem);
-        ProjectContext.Instance.Container.BindFactory<Powerup, Vector3, Powerup, PowerupFactory>().ToSelf();
+
+        var projectContext = Container.ParentContainers.First();
+        projectContext.Bind<PlayerHealth>().FromInstance(playerHealth).AsSingle().NonLazy();
+        projectContext.Bind<Camera>().FromInstance(mainCamera).AsSingle().NonLazy();
+        projectContext.Bind<Hud>().FromInstance(hud).AsSingle().NonLazy();
+        projectContext.Bind<Canvas>().FromInstance(hud.GetComponent<Canvas>()).AsSingle().NonLazy();
+        projectContext.Bind<Joystick>().FromInstance(hud.Joystick);
+        projectContext.BindFactory<Powerup, Vector3, Powerup, PowerupFactory>().ToSelf().NonLazy();
 
         var reactions = Resources.LoadAll<ItemReaction>("Item reactions");
         foreach (var reaction in reactions)
         {
-            ProjectContext.Instance.Container.Bind().ToSelf().FromInstance(reaction).AsSingle();
+            projectContext.Bind().ToSelf().FromInstance(reaction).AsSingle();
         }
+        
+        projectContext.Resolve<LevelManager>().LoadScene(Levels.Menu);
     }
 }

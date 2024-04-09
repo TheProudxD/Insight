@@ -1,8 +1,12 @@
 using Managers;
+using Objects.Powerups;
+using Player;
 using Storage;
 using StorageService;
 using ResourceService;
+using UI;
 using UI.Shop.Data;
+using UnityEngine;
 using Zenject;
 
 public class ProjectMonoInstallers : MonoInstaller
@@ -20,15 +24,19 @@ public class ProjectMonoInstallers : MonoInstaller
     private void System()
     {
         Container.Bind<WindowManager>().AsSingle();
-        Container.Bind<AssetManager>().AsSingle();
+        Container.Bind<AssetManager>().AsSingle().Lazy();
         var tryAmount = 3;
         var waitingDelay = 3000;
-        Container.Bind<ConnectionManager>().AsSingle().WithArguments(tryAmount, waitingDelay);
+        Container
+            .Bind<ConnectionManager>()
+            .AsSingle()
+            .WithArguments(tryAmount, waitingDelay);
     }
 
     private void GoogleSheetLoading()
     {
-        Container.Bind<GoogleSheetLoader>()
+        Container
+            .Bind<GoogleSheetLoader>()
             .AsSingle()
             .WithArguments("1b5Ak77i6ubJFIcFagXtlwf2mwrYZrXJ3qOPp5c85NgQ", false);
     }
@@ -57,6 +65,6 @@ public class ProjectMonoInstallers : MonoInstaller
         Container.BindInterfacesTo<ServerJSONStorageService>().AsSingle();
         Container.BindInterfacesTo<ServerStorageService>().AsSingle();
         Container.Bind<ResourceManager>().AsSingle().NonLazy();
-        Container.Bind<LevelManager>().AsSingle().Lazy();
+        Container.Bind<LevelManager>().AsSingle().NonLazy();
     }
 }

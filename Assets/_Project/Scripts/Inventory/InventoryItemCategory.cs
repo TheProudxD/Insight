@@ -3,6 +3,6 @@ public enum InventoryItemCategory
     Attack,
     Heal,
     Boosters,
-    Decor,
+    Tool,
     All
 }

@@ -3059,7 +3059,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerInventory: {fileID: 11400000, guid: 80ee636432fc9cb4299a1a8e38aadd59, type: 2}
-  _pickupItem: {fileID: 11400000, guid: 003a01ef0d745aa45b1ab63f2e52b534, type: 2}
+  _pickupItem: {fileID: 11400000, guid: 678456e0dd3447f42bb1b4cd488e620d, type: 2}
   _amountToAdd: 0
 --- !u!61 &634226979
 BoxCollider2D:

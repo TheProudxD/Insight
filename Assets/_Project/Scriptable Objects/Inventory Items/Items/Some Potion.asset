@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 802233f7aada8f34599efcc71f52acb9, type: 3}
   m_Name: Some Potion
   m_EditorClassIdentifier: 
-  <ID>k__BackingField: 1
+  <ID>k__BackingField: 2
   <Name>k__BackingField: Some Potion
   <Description>k__BackingField: Give  shield
   <Amount>k__BackingField: 2

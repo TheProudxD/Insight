@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using Unity.Mathematics;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Player
 {
@@ -30,10 +28,10 @@ namespace Player
         private void FixedUpdate()
         {
             if (PlayerCurrentState.Current is PlayerState.Walk or PlayerState.Idle)
-                UpdateAnimation(_playerMovement.PlayerMovementVector);
+                UpdateMoveAnimation(_playerMovement.PlayerMovementVector);
         }
 
-        public void UpdateAnimation(Vector3 playerMovement)
+        public void UpdateMoveAnimation(Vector3 playerMovement)
         {
             if (playerMovement == Vector3.zero)
             {
@@ -57,24 +55,6 @@ namespace Player
 
         public void SetReceiveItemAnimation(bool value) => _playerAnimator.SetBool(RECEIVE_ITEM_STATE, value);
 
-        public IEnumerator SwordAttackCo()
-        {
-            _playerAnimator.SetBool(ATTACKING_STATE, true);
-            PlayerCurrentState.Current = PlayerState.Attack;
-            yield return null;
-            _playerAnimator.SetBool(ATTACKING_STATE, false);
-            yield return new WaitForSeconds(0.3f);
-            if (PlayerCurrentState.Current != PlayerState.Interact)
-                PlayerCurrentState.Current = PlayerState.Walk;
-        }
-        
-        public IEnumerator BowAttackCo()
-        {
-            PlayerCurrentState.Current = PlayerState.Attack;
-            yield return null;
-            yield return new WaitForSeconds(0.3f);
-            if (PlayerCurrentState.Current != PlayerState.Interact)
-                PlayerCurrentState.Current = PlayerState.Walk;
-        }
+        public void SetAttackingAnimation(bool value) => _playerAnimator.SetBool(ATTACKING_STATE, value);
     }
 }

@@ -492,9 +492,6 @@ MonoBehaviour:
   _signalEventFloat:
     m_PersistentCalls:
       m_Calls: []
-  _signalEventInt:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!1 &5718631694272113460
 GameObject:
   m_ObjectHideFlags: 0
@@ -654,6 +651,9 @@ GameObject:
   - component: {fileID: 8146692788847941405}
   - component: {fileID: 5194434405733680887}
   - component: {fileID: 1845351513107985812}
+  - component: {fileID: 8332397854503055776}
+  - component: {fileID: 7322271775358175047}
+  - component: {fileID: 6450499882860488668}
   m_Layer: 6
   m_Name: Player
   m_TagString: Player
@@ -894,7 +894,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerHitSignal: {fileID: 11400000, guid: e1bbe0cf26eebed4d98948c11fef725c, type: 2}
-  _playerProjectile: {fileID: 5183969362942274729, guid: 02e88d0b2d4f13f498c93a39c7b43e08, type: 3}
+  _hitAnimation: {fileID: 8332397854503055776}
+  _bowShooting: {fileID: 7322271775358175047}
+  _swordShooting: {fileID: 6450499882860488668}
 --- !u!114 &5518825071074345950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -907,7 +909,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2d71c9a16e43cf14c881f30273d26d34, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Inventory: {fileID: 11400000, guid: c48b402cc15736e4a829538661d9cbe6, type: 2}
   ReceivedItemSprite: {fileID: 439167346112616370}
 --- !u!114 &8794370517401437629
 MonoBehaviour:
@@ -933,7 +934,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cc4d0ebaa03853c4c8bb4e2d23b41110, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _speed: {fileID: 11400000, guid: c06ddadc6fd3ecd4d9d26b7f6b13261d, type: 2}
   _joystick: {fileID: 0}
 --- !u!114 &989182668464291223
 MonoBehaviour:
@@ -960,7 +960,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 69e53b16ae094a6cae5875c24f5ab963, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentValue: {fileID: 11400000, guid: dcbbbc11376b9624f86a4f142dcd9e69, type: 2}
   Signal: {fileID: 11400000, guid: 203f710f23c395740a70137675857d21, type: 2}
 --- !u!114 &5194434405733680887
 MonoBehaviour:
@@ -974,7 +973,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: de95a4af9be740f4949fda6a01f832b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentValue: {fileID: 11400000, guid: dd7df88c56ee9ea42b103680554f91e7, type: 2}
   Signal: {fileID: 11400000, guid: 9f735bf0ee7fce14bba5b88ff02408c0, type: 2}
 --- !u!114 &1845351513107985812
 MonoBehaviour:
@@ -988,9 +986,46 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6bca5c6a24cb49479bc4b8686798df8d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentValue: {fileID: 11400000, guid: be9581fa1a2cee84099c64e37cc519d2, type: 2}
   Signal: {fileID: 11400000, guid: ec329c7503d078d47807d2f414d0cec8, type: 2}
   _playerExpView: {fileID: 9012261040828968178}
+--- !u!114 &8332397854503055776
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009199201838384755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82028e2991f142fcad7de57c360cf9ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteAnimate: {fileID: 5721440561134889911}
+--- !u!114 &7322271775358175047
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009199201838384755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef8cfa3b09d14cb79d090ef2bbd9bf37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _arrowProjectile: {fileID: 5183969362942274729, guid: 02e88d0b2d4f13f498c93a39c7b43e08, type: 3}
+--- !u!114 &6450499882860488668
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8009199201838384755}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 42a5cb4bfd3042589aa52e514ee8be91, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8235823234777146293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1165,21 +1200,6 @@ MonoBehaviour:
   _signalEventFloat:
     m_PersistentCalls:
       m_Calls: []
-  _signalEventInt:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: Hud, Assembly-CSharp
-        m_MethodName: ChangeHealthBarAmount
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &8019969108416271356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1211,9 +1231,6 @@ MonoBehaviour:
   _signalEventFloat:
     m_PersistentCalls:
       m_Calls: []
-  _signalEventInt:
-    m_PersistentCalls:
-      m_Calls: []
 --- !u!114 &6066422071589408372
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1233,21 +1250,6 @@ MonoBehaviour:
   _signalEventFloat:
     m_PersistentCalls:
       m_Calls: []
-  _signalEventInt:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 0}
-        m_TargetAssemblyTypeName: UI.Hud, Assembly-CSharp
-        m_MethodName: ChangeManaBarAmount
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1490730589292496097
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1267,30 +1269,3 @@ MonoBehaviour:
   _signalEventFloat:
     m_PersistentCalls:
       m_Calls: []
-  _signalEventInt:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 9012261040828968178}
-        m_TargetAssemblyTypeName: Player.PlayerExpView, Assembly-CSharp
-        m_MethodName: DisplayExp
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 9012261040828968178}
-        m_TargetAssemblyTypeName: Player.PlayerExpView, Assembly-CSharp
-        m_MethodName: DisplayLevel
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2

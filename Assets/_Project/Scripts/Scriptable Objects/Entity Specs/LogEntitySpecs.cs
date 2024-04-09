@@ -3,11 +3,11 @@ using UnityEngine;
 
 public class LogEntitySpecs : EntitySpecs
 {
-    [HideInInspector] public float Hp;
-    [HideInInspector] public float Damage;
-    [HideInInspector] public float MoveSpeed;
-    [HideInInspector] public float AttackRadius;
-    [HideInInspector] public float ChaseRadius;
+    public float Hp { get; private set; }
+    public float Damage { get; private set; }
+    public float MoveSpeed { get; private set; }
+    public float AttackRadius { get; private set; }
+    public float ChaseRadius { get; private set; }
 
     public override void Initialize(string[] cells)
     {

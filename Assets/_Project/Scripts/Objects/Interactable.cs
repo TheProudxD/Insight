@@ -17,11 +17,8 @@ namespace Objects
 
         private void Awake()
         {
-            if (!_assetManager.DialogAlreadySpawned)
-            {
-                DialogBox = _assetManager.GetDialogBoxPrefab();
-                DialogUI = DialogBox.GetComponentInChildren<TextMeshProUGUI>();
-            }
+            DialogBox = _assetManager.GetDialogBox();
+            DialogUI = DialogBox.GetComponentInChildren<TextMeshProUGUI>();
         }
 
         protected virtual void OnTriggerEnter2D(Collider2D other)
@@ -37,7 +34,7 @@ namespace Objects
         {
             if (InsightUtils.IsItPlayer(other) == false)
                 return;
-
+            
             Context.Raise();
             PlayerInRange = false;
         }

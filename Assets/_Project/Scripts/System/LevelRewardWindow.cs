@@ -24,7 +24,7 @@ namespace Storage
                 Debug.LogError("not equal to 3 stars in result window");
         }
 
-        public void GetReward()
+        public void DisplayReward()
         {
             var softCurrencyEarned = CountSoftCurrencyEarned();
             _softCurrencyAmountText.SetText(softCurrencyEarned.ToString());
