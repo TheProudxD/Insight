@@ -13,8 +13,8 @@ namespace Managers
             if (InsightUtils.IsItPlayer(other) == false)
                 return;
             
-            DialogUI.text = _dialog;
-            DialogBox.SetActive(true);
+            var dialogBox = WindowManager.ShowDialogBox();
+            dialogBox.Text.SetText(_dialog);
             PlayerInRange = true;
         }
 
@@ -24,7 +24,7 @@ namespace Managers
                 return;
 
             PlayerInRange = false;
-            DialogBox.SetActive(false);
+            WindowManager.CloseDialogBox();
         }
     }
 }

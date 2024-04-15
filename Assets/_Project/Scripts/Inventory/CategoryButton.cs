@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace _Project.Scripts.Inventory
@@ -9,7 +10,7 @@ namespace _Project.Scripts.Inventory
     public class CategoryButton : MonoBehaviour
     {
         [SerializeField] private InventoryItemCategory _itemCategory;
-        [SerializeField] private InventoryManager _inventoryManager;
+        [FormerlySerializedAs("_inventoryCommonWindow")] [FormerlySerializedAs("_inventoryManager")] [SerializeField] private InventoryWindow _inventoryWindow;
         [SerializeField] private Transform _slider;
         [SerializeField] private Button _selectCategoryButton;
         [field: SerializeField] public Image Image { get; private set; }
@@ -31,7 +32,7 @@ namespace _Project.Scripts.Inventory
             _allButtons.ForEach(x => x.Image.color = _defaultColor);
             Image.color = _selectColor;
             _slider.localPosition = new Vector3(0, -55, 0);
-            _inventoryManager.SelectCategory(_itemCategory);
+            _inventoryWindow.SelectCategory(_itemCategory);
         }
     }
 }

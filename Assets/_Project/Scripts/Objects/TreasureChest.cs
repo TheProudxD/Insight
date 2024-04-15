@@ -1,6 +1,8 @@
 using System.Collections;
+using Managers;
 using Player;
 using Tools;
+using UI;
 using UnityEngine;
 using Zenject;
 
@@ -32,13 +34,12 @@ namespace Objects
             yield return new WaitForSeconds(_openDuration);
             Context.Raise();
             
-            DialogUI.SetText(_keyItem.Description);
-            DialogBox.SetActive(true);
+            var dialogWindow = WindowManager.ShowDialogBox();
+            dialogWindow.Text.SetText(_keyItem.Description);
             
             _playerInteraction.DisplayPickupItem(_keyItem);
             yield return new WaitUntil(() => Input.anyKey);
-
-            DialogBox.SetActive(false);
+            WindowManager.CloseDialogBox();
             _playerInteraction.RemovePickupItem();
         }
 

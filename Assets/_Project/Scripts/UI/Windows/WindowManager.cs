@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Storage;
 using UI;
 using UnityEngine;
 using Object = UnityEngine.Object;
@@ -8,39 +9,30 @@ namespace Managers
 {
     public class WindowManager
     {
-        private readonly Dictionary<WindowType, WindowCommon> _openedWindows = new();
+        private readonly Dictionary<WindowType, CommonWindow> _openedWindows = new();
         private readonly AssetManager _assetManager;
 
-        private WindowManager(AssetManager assetManager)
-        {
-            _assetManager = assetManager;
-        }
+        private WindowManager(AssetManager assetManager) => _assetManager = assetManager;
 
-        private void TryShow(WindowType windowType)
+        private CommonWindow TryShow(WindowType windowType)
         {
             if (!_openedWindows.ContainsKey(windowType))
             {
-                WindowCommon window = windowType switch
-                {
-                    WindowType.Pause => _assetManager.GetPauseWindow(),
-                    WindowType.Settings => _assetManager.GetSettingsWindow(),
-                    WindowType.Inventory => _assetManager.GetInventoryWindow(),
-                    WindowType.Exit => _assetManager.GetExitWindow(),
-                    WindowType.LevelReward => _assetManager.GetLevelRewardWindow(),
-                    _ => throw new ArgumentOutOfRangeException(nameof(windowType), windowType, null)
-                };
-                
+                var window = _assetManager.GetWindowPrefab(windowType);
+
                 _openedWindows[windowType] = window;
                 window.Show();
             }
             else
             {
-                TryClose(windowType);
-                //Debug.LogError("Открытие уже открытого окна.");
+                //TryClose(windowType);
+                Debug.LogError("Открытие уже открытого окна.");
             }
+
+            return _openedWindows[windowType];
         }
 
-        public void TryClose(WindowType windowType)
+        private void TryClose(WindowType windowType)
         {
             if (_openedWindows.ContainsKey(windowType))
             {
@@ -54,28 +46,25 @@ namespace Managers
             }
         }
 
-        #region openners
+        public DialogBox ShowDialogBox() => (DialogBox)TryShow(WindowType.Dialog);
+        public void CloseDialogBox() => TryClose(WindowType.Dialog);
 
-        public void OpenSettingsWindow()
-        {
-            TryShow(WindowType.Settings);
-        }
+        public LevelRewardCommonWindow ShowLevelRewardWindow() => (LevelRewardCommonWindow)TryShow(WindowType.LevelReward);
+        public void CloseLevelRewardWindow() => TryClose(WindowType.LevelReward);
 
-        public void OpenInventoryWindow()
-        {
-            TryShow(WindowType.Inventory);
-        }
+        public PauseCommonWindow ShowPauseWindow() => (PauseCommonWindow)TryShow(WindowType.Pause);
+        public void ClosePauseWindow() => TryClose(WindowType.Pause);
 
-        public void OpenExitWindow()
-        {
-            TryShow(WindowType.Exit);
-        }
+        public SettingsCommonWindow ShowSettingsWindow() => (SettingsCommonWindow)TryShow(WindowType.Settings);
+        public void CloseSettingsWindow() => TryClose(WindowType.Settings);
 
-        public void OpenPauseWindow()
-        {
-            TryShow(WindowType.Pause);
-        }
+        public InventoryWindow ShowInventoryWindow() => (InventoryWindow)TryShow(WindowType.Inventory);
+        public void CloseInventoryWindow() => TryClose(WindowType.Inventory);
 
-        #endregion
+        public ExitCommonWindow ShowExitWindow() => (ExitCommonWindow)TryShow(WindowType.Exit);
+        public void CloseExitWindow() => TryClose(WindowType.Exit);
+
+        public LevelSelectWindow ShowLevelSelectWindow()=> (LevelSelectWindow)TryShow(WindowType.LevelSelect);
+        public void CloseLevelSelectWindow() => TryClose(WindowType.LevelSelect);
     }
 }

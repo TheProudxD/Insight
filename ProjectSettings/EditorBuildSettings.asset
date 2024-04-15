@@ -6,10 +6,10 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/_Project/Scenes/Infrastructure/Downloading.unity
+    path: Assets/_Project/Scenes/Infrastructure/Downloader.unity
     guid: ee278986e58e37c4cbc3ea589ce05ab5
   - enabled: 1
-    path: Assets/_Project/Scenes/Infrastructure/Bootstrap.unity
+    path: Assets/_Project/Scenes/Infrastructure/Loader.unity
     guid: 1271a5eb1de92bf4eb6b2a093ec144e3
   - enabled: 1
     path: Assets/_Project/Scenes/Game/Menu.unity
@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/Game/Home.unity
     guid: b914e47369eb2d644bd3faca312bd94a
   - enabled: 1
-    path: Assets/_Project/Scenes/Game/Dungeon.unity
+    path: Assets/_Project/Scenes/Game/Dungeon 2.unity
     guid: 32d67f6809c42884ea15c2dd55cfd2e0
   m_configObjects:
     com.unity.addressableassets: {fileID: 11400000, guid: 649f0687047307e46802a4b97665eb12, type: 2}

@@ -68,7 +68,7 @@ namespace _Project.Scripts.Inventory
         {
             transform.position = blankSlot.transform.position;
             transform.SetParent(blankSlot.transform);
-            FindObjectOfType<InventoryManager>().ChangeIndex(_inventorySlot.InventoryItem, blankSlot.Index);
+            FindObjectOfType<InventoryWindow>().ChangeIndex(_inventorySlot.InventoryItem, blankSlot.Index);
         }
 
         private void TrySwapSlots(BlankSlot blankSlot, BlankSlot oldBlankSlot)
@@ -83,7 +83,7 @@ namespace _Project.Scripts.Inventory
             var oldBlankSlotTransform = oldBlankSlot.transform;
             newInventorySlot.transform.position = oldBlankSlotTransform.position;
             newInventorySlot.transform.SetParent(oldBlankSlotTransform);
-            FindObjectOfType<InventoryManager>().ChangeIndex(newInventorySlot.InventoryItem, oldBlankSlot.Index);
+            FindObjectOfType<InventoryWindow>().ChangeIndex(newInventorySlot.InventoryItem, oldBlankSlot.Index);
         }
     }
 }

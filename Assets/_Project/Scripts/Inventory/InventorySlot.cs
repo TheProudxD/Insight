@@ -15,12 +15,12 @@ public class InventorySlot : MonoBehaviour
 
     private DragAndDropSlot _dragAndDrop;
     public InventoryItem InventoryItem { get; private set; }
-    private InventoryManager _inventoryManager;
+    private InventoryWindow _inventoryWindow;
 
-    public void Setup(InventoryItem inventoryItem, InventoryManager inventoryManager)
+    public void Setup(InventoryItem inventoryItem, InventoryWindow inventoryWindow)
     {
         InventoryItem = inventoryItem;
-        _inventoryManager = inventoryManager;
+        _inventoryWindow = inventoryWindow;
         _itemButton.onClick.AddListener(OnClick);
         _itemNumberText.SetText(InventoryItem.Amount.ToString());
         _itemImage.sprite = InventoryItem.Image;
@@ -40,5 +40,5 @@ public class InventorySlot : MonoBehaviour
 
     public void UpdateItemAmount() => _itemNumberText.SetText(InventoryItem.Amount.ToString());
 
-    private void OnClick() => _inventoryManager.ChangeSelectedItem(InventoryItem);
+    private void OnClick() => _inventoryWindow.ChangeSelectedItem(InventoryItem);
 }

@@ -5,7 +5,7 @@ using Zenject;
 
 public class StartGameButton : MonoBehaviour
 {
-    [Inject] private LevelManager _levelManager;
+    [Inject] private SceneManager _sceneManager;
     [SerializeField] private Button _button;
 
     private void Awake()
@@ -15,6 +15,6 @@ public class StartGameButton : MonoBehaviour
 
     private void LoadLobby()
     {
-        _levelManager.StartNextLevel();
+        _sceneManager.StartNextLevel();
     }
 }

@@ -65,6 +65,6 @@ public class ProjectMonoInstallers : MonoInstaller
         Container.BindInterfacesTo<ServerJSONStorageService>().AsSingle();
         Container.BindInterfacesTo<ServerStorageService>().AsSingle();
         Container.Bind<ResourceManager>().AsSingle().NonLazy();
-        Container.Bind<LevelManager>().AsSingle().NonLazy();
+        Container.Bind<SceneManager>().AsSingle().NonLazy();
     }
 }

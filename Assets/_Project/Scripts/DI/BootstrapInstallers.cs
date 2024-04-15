@@ -30,6 +30,6 @@ public class BootstrapInstallers : MonoInstaller
             projectContext.Bind().ToSelf().FromInstance(reaction).AsSingle();
         }
         
-        projectContext.Resolve<LevelManager>().LoadScene(Levels.Menu);
+        projectContext.Resolve<SceneManager>().LoadScene(Scenes.Menu);
     }
 }

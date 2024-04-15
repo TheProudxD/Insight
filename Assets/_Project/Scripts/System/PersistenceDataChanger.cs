@@ -9,7 +9,7 @@ namespace Managers
     public class PersistenceDataChanger : MonoBehaviour
     {
         [SerializeField] private LevelSpawnPosition _levelSpawnData;
-        [Inject] private LevelManager _levelManager;
+        [Inject] private SceneManager _sceneManager;
         [Inject] private Hud _hud;
         private PlayerAttacking _playerAttacking;
 
@@ -18,21 +18,21 @@ namespace Managers
             var gm = GetComponentInChildren<GameStateManager>();
             _playerAttacking = GetComponentInChildren<PlayerAttacking>();
 
-            _levelManager.LevelChanged += ChangePlayerPosition;
+            _sceneManager.LevelChanged += ChangePlayerPosition;
             _hud.DisableView();
             _playerAttacking.gameObject.SetActive(false);
             DontDestroyOnLoad(gameObject);
         }
 
-        private void ChangePlayerPosition(Levels level)
+        private void ChangePlayerPosition(Scenes scene)
         {
-            if (level > Levels.Menu)
+            if (scene > Scenes.Menu)
             {
                 _hud.EnableView();
                 _playerAttacking.gameObject.SetActive(true);
             }
 
-            _playerAttacking.transform.position = _levelSpawnData.SpawnPosition[level];
+            _playerAttacking.transform.position = _levelSpawnData.SpawnPosition[scene];
         }
     }
 }

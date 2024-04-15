@@ -42,7 +42,7 @@ namespace UI
             _useThirdPotionButton.onClick.AddListener(UseThirdPotion);
 
             _inventoryButton.onClick.AddListener(OpenInventory);
-            _settingsButton.onClick.AddListener(OpenSettings);
+            _settingsButton.onClick.AddListener(OpenPause);
 
             InitializeHpBar();
             InitializeManaBar();
@@ -122,11 +122,12 @@ namespace UI
 
         private void OpenInventory()
         {
+            _windowManager.ShowInventoryWindow();
         }
 
-        private void OpenSettings()
+        private void OpenPause()
         {
-            _windowManager.OpenPauseWindow();
+            _windowManager.ShowPauseWindow();
         }
 
         private void SwitchView(bool state)

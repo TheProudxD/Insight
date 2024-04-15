@@ -8,12 +8,12 @@ public class LevelSpawnPosition : ScriptableObject
 {
 	[field: SerializeField] private List<LevelSpawnData> _spawnPosition;
 
-	public IReadOnlyDictionary<Levels, Vector3> SpawnPosition
+	public IReadOnlyDictionary<Scenes, Vector3> SpawnPosition
 	{
 		get
 		{
 			var levels = _spawnPosition.Select(x => x.ID).OrderBy(x => x);
-			var data = new Dictionary<Levels, Vector3>();
+			var data = new Dictionary<Scenes, Vector3>();
 
 			foreach (var level in levels)
 			{
@@ -27,6 +27,6 @@ public class LevelSpawnPosition : ScriptableObject
 [System.Serializable]
 public class LevelSpawnData
 {
-	public Levels ID;
+	public Scenes ID;
 	public Vector3 Position;
 }

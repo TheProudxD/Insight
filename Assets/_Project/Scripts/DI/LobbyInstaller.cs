@@ -17,6 +17,6 @@ public class LobbyInstaller : MonoInstaller
 
     public void Awake()
 	{
-        _levelPassedText.SetText(((Levels)Container.Resolve<LevelManager>().CurrentLevel).ToString());
+        _levelPassedText.SetText(((Scenes)Container.Resolve<SceneManager>().CurrentLevel).ToString());
 	}
 }

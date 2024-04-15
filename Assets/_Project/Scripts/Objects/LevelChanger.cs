@@ -12,7 +12,7 @@ namespace Objects
     {
         private static readonly int Fade = Animator.StringToHash("Fade");
 
-        [Inject] private LevelManager _levelManager;
+        [Inject] private SceneManager _sceneManager;
         [Inject] private Hud _hud;
 
         private readonly int _waitPause = 1000;
@@ -48,7 +48,7 @@ namespace Objects
             _loadingAnimation.Reset();
             _fadeAnimator.SetTrigger(Fade);
             await Task.Delay(_waitPause);
-            _levelManager.StartNextLevel();
+            _sceneManager.StartNextLevel();
             _fadeAnimator.SetTrigger(Fade);
         }
     }

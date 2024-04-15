@@ -1,11 +1,14 @@
+using Managers;
 using Objects;
 using Tools;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(LoadingAnimation))]
 public class LevelSelector : MonoBehaviour
 {
-    [SerializeField] private GameObject _windowPrefab;
+    [Inject] private WindowManager _windowManager;
+    
     private LoadingAnimation _loadingAnimation;
     private bool _changing;
 
@@ -19,7 +22,7 @@ public class LevelSelector : MonoBehaviour
         if (_changing) 
             return;
         
-        _loadingAnimation.Animate(() => Instantiate(_windowPrefab));
+        _loadingAnimation.Animate(() =>_windowManager.ShowLevelSelectWindow());
         _changing = true;
     }
 
