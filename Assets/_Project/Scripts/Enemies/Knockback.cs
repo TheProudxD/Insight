@@ -18,7 +18,7 @@ namespace Managers
                 StartCoroutine(enemy.KnockCoroutine(_knockTime, _damage));
             }
             else if (collision.TryGetComponent(out PlayerAttacking player) &&
-                     PlayerCurrentState.Current != PlayerState.Stagger)
+                     PlayerStateMachine.Current != PlayerState.Stagger)
             {
                 MoveEntity(player);
                 StartCoroutine(player.KnockCoroutine(_knockTime, _damage));

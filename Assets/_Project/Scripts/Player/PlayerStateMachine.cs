@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class PlayerCurrentState : MonoBehaviour
+    public class PlayerStateMachine : MonoBehaviour
     {
         public static PlayerState Current = PlayerState.Walk;
     }

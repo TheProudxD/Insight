@@ -3,68 +3,56 @@ using Zenject;
 
 namespace Player
 {
-	public class PlayerMovement : MonoBehaviour
-	{
-		private const string HORIZONTAL_AXIS = "Horizontal";
-		private const string VERTICAL_AXIS = "Vertical";
-		private const bool IS_JOYSTICK_MOVEMENT = false;
+    public class PlayerMovement : MonoBehaviour
+    {
+        [Inject] private PlayerEntitySpecs _playerEntitySpecs;
+        [Inject] private IInputReader _inputReader;
 
-		[Inject] private PlayerEntitySpecs _playerEntitySpecs;
-		[SerializeField] private Joystick _joystick;
+        public Vector2 PlayerMovementVector => _playerMovement;
+        public Rigidbody2D PlayerRigidbody { get; private set; }
 
-		public Vector3 PlayerDirectionVector { get; private set; } = Vector3.down;
-		public Vector3 PlayerMovementVector => _playerMovement;
-		public Rigidbody2D PlayerRigidbody { get; private set; }
+        private Vector2 _playerMovement;
+        private Vector2 _faceDirection;
 
-		private Vector3 _playerMovement;
-		private float _horizontalAxis;
-		private float _verticalAxis;
+        private void Awake() => PlayerRigidbody = GetComponent<Rigidbody2D>();
 
-		private void Awake()
-		{
-			PlayerRigidbody = GetComponent<Rigidbody2D>();
-		}
+        private void Update()
+        {
+            if (PlayerStateMachine.Current == PlayerState.Interact)
+                return;
+            
+            ReadInput();
+        }
 
-		private void Update()
-		{
-			if (PlayerCurrentState.Current == PlayerState.Interact)
-				return;
+        private void FixedUpdate()
+        {
+            if (PlayerStateMachine.Current is PlayerState.Walk or PlayerState.Idle)
+                MoveCharacter(transform.position);
+        }
 
-			if (IS_JOYSTICK_MOVEMENT)
-#pragma warning disable CS0162 // Unreachable code detected
-			{
-				_horizontalAxis = _joystick.Horizontal;
-				_verticalAxis = _joystick.Vertical;
-				_joystick.gameObject.SetActive(true);
-			}
-#pragma warning restore CS0162 // Unreachable code detected
-			else
-			{
-				_horizontalAxis = Input.GetAxisRaw(HORIZONTAL_AXIS);
-				_verticalAxis = Input.GetAxisRaw(VERTICAL_AXIS);
-				_joystick.gameObject.SetActive(false);
-			}
+        private void ReadInput()
+        {
+            var inputDirection = _inputReader.GetInputDirection();
+            var horizontalAxis = inputDirection.x;
+            var verticalAxis = inputDirection.y;
 
-			GetDirection();
+            _playerMovement = new Vector2(horizontalAxis, verticalAxis);
+            if (_playerMovement != Vector2.zero)
+            {
+                _faceDirection = _playerMovement;
+            }
+        }
 
-			_playerMovement = new Vector3(_horizontalAxis, _verticalAxis, 0);
-		}
+        private void MoveCharacter(Vector2 position) =>
+            PlayerRigidbody.MovePosition(position +
+                                         _playerEntitySpecs.MoveSpeed * Time.deltaTime * _playerMovement.normalized);
 
-		private void FixedUpdate()
-		{
-			if (PlayerCurrentState.Current is PlayerState.Walk or PlayerState.Idle)
-				MoveCharacter(transform.position);
-		}
-
-		private void GetDirection()
-		{
-			if (_horizontalAxis != 0)
-				PlayerDirectionVector = _horizontalAxis > 0 ? Vector2.right : Vector2.left;
-			else if (_verticalAxis != 0)
-				PlayerDirectionVector = _verticalAxis > 0 ? Vector2.up : Vector2.down;
-		}
-
-		private void MoveCharacter(Vector3 position) =>
-			PlayerRigidbody.MovePosition(position + _playerEntitySpecs.MoveSpeed * Time.deltaTime * _playerMovement.normalized);
-	}
+        public Vector2 GetFaceDirection()
+        {
+            var direction = new Vector2();
+            direction += _faceDirection.x > 0 ? Vector2.right : _faceDirection.x != 0 ? Vector2.left : Vector2.zero;
+            direction += _faceDirection.y > 0 ? Vector2.up : _faceDirection.y != 0 ? Vector2.down : Vector2.zero;
+            return direction;
+        }
+    }
 }

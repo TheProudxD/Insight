@@ -6,8 +6,9 @@ using UnityEngine;
 public class ShopOpener : MonoBehaviour
 {
     [SerializeField] private GameObject _shopCanvas;
+    
     private LoadingAnimation _loadingAnimation;
-
+    
     private void Awake() =>
         _loadingAnimation = GetComponent<LoadingAnimation>();
 

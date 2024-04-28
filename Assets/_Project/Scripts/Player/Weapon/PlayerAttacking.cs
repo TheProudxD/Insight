@@ -44,7 +44,7 @@ namespace Player
 
         public void BowAttack()
         {
-            if (_bowShooting.TryShoot(_playerMovement.PlayerMovementVector, _playerMovement.PlayerDirectionVector))
+            if (_bowShooting.TryShoot(_playerMovement.PlayerMovementVector, _playerMovement.GetFaceDirection()))
             {
                 _playerMana.Decrease(0.5f);
             }
@@ -61,7 +61,7 @@ namespace Player
 
             _hitAnimation.Play();
             yield return new WaitForSeconds(knockTime);
-            PlayerCurrentState.Current = PlayerState.Idle;
+            PlayerStateMachine.Current = PlayerState.Idle;
             _playerMovement.PlayerRigidbody.velocity = Vector2.zero;
         }
     }

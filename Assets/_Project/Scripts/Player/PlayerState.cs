@@ -6,6 +6,7 @@ namespace Player
         Walk,
         Attack,
         Interact,
-        Stagger
+        Stagger,
+        Ability
     }
 }

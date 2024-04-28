@@ -45,15 +45,15 @@ namespace Player
         
         public IEnumerator BowAttackCo()
         {
-            PlayerCurrentState.Current = PlayerState.Attack;
+            PlayerStateMachine.Current = PlayerState.Attack;
             yield return null;
             yield return new WaitForSeconds(_attackDuration);
-            if (PlayerCurrentState.Current != PlayerState.Interact)
-                PlayerCurrentState.Current = PlayerState.Walk;
+            if (PlayerStateMachine.Current != PlayerState.Interact)
+                PlayerStateMachine.Current = PlayerState.Walk;
         }
         
-        protected override bool CanAttack() => PlayerCurrentState.Current != PlayerState.Attack &&
-                                               PlayerCurrentState.Current != PlayerState.Stagger &&
+        protected override bool CanAttack() => PlayerStateMachine.Current != PlayerState.Attack &&
+                                               PlayerStateMachine.Current != PlayerState.Stagger &&
                                                TimeBeforeLastAttackCounter >= PlayerEntitySpecs.BowAttackCooldown;
     }
 }

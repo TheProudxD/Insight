@@ -14,7 +14,7 @@ namespace Player
         
         private void Update()
         {
-            if (PlayerCurrentState.Current == PlayerState.Interact)
+            if (PlayerStateMachine.Current == PlayerState.Interact)
                 return;
 
             if (TimeBeforeLastAttackCounter < PlayerEntitySpecs.SwordAttackCooldown)

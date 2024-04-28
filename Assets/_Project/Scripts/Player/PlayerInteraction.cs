@@ -1,6 +1,5 @@
 using UnityEngine;
 using UnityEngine.Serialization;
-using Zenject;
 
 namespace Player
 {
@@ -18,14 +17,14 @@ namespace Player
                 return;
             
             _playerAnimation.SetReceiveItemAnimation(true);
-            PlayerCurrentState.Current = PlayerState.Interact;
+            PlayerStateMachine.Current = PlayerState.Interact;
             _receivedItemSprite.sprite = item.Image;
         }
         
         public void RemovePickupItem()
         {
             _playerAnimation.SetReceiveItemAnimation(false);
-            PlayerCurrentState.Current = PlayerState.Idle;
+            PlayerStateMachine.Current = PlayerState.Idle;
             _receivedItemSprite.sprite = null;
         }
     }

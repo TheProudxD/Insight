@@ -1,6 +1,6 @@
 using System;
-using System.Reflection;
 using Managers;
+using Objects;
 using Player;
 using StorageService;
 using TMPro;
@@ -20,26 +20,26 @@ namespace UI
         [SerializeField] private Slider _hpSlider, _manaSlider;
         [SerializeField] private TextMeshProUGUI _playerNickname;
         [SerializeField] private Animator _fadeAnimator;
-        [SerializeField] private Image _loadingBar;
-        [SerializeField] private Joystick _joystick;
-        [SerializeField] private PlayerAttacking _player;
-
+        
+        [Inject] private PlayerAttacking _player;
+        [Inject] private PlayerAbilitySystem _playerAbilitySystem;
         [Inject] private WindowManager _windowManager;
         [Inject] private DataManager _dataManager;
         [Inject] private PlayerEntitySpecs _playerEntitySpecs;
 
         public Animator FadeAnimator => _fadeAnimator;
-        public Image LoadingBar => _loadingBar;
-        public Joystick Joystick => _joystick;
+        private AbilityLoadingAnimation _loadingAnimation;
 
         private void Awake()
         {
-            _attackButton.onClick.AddListener(Attack);
-            _changeWeaponButton.onClick.AddListener(ChangeWeapon);
+            _loadingAnimation = GetComponent<AbilityLoadingAnimation>();
+            
+            _attackButton.onClick.AddListener(FirstAttack);
+            _changeWeaponButton.onClick.AddListener(SecondAttack);
 
-            _useFirstPotionButton.onClick.AddListener(UseFirstPotion);
-            _useSecondPotionButton.onClick.AddListener(UseSecondPotion);
-            _useThirdPotionButton.onClick.AddListener(UseThirdPotion);
+            _useFirstPotionButton.onClick.AddListener(UseFirstAbility);
+            _useSecondPotionButton.onClick.AddListener(UseSecondAbility);
+            _useThirdPotionButton.onClick.AddListener(UseThirdAbility);
 
             _inventoryButton.onClick.AddListener(OpenInventory);
             _settingsButton.onClick.AddListener(OpenPause);
@@ -66,18 +66,6 @@ namespace UI
             _manaSlider.value = _playerEntitySpecs.ManaAmount;
         }
 
-        public void ChangeHealthBarAmount(float amount)
-        {
-            DecreaseBar(_hpSlider, amount);
-        }
-
-        public void ChangeManaBarAmount(float amount)
-        {
-            DecreaseBar(_manaSlider, amount);
-        }
-
-        private void SetPlayerNickname(string nick) => _playerNickname.text = nick;
-
         private void DecreaseBar(Slider slider, float amount)
         {
             if (slider is null)
@@ -85,50 +73,29 @@ namespace UI
             slider.value -= amount;
         }
 
-        private void Attack()
+        public void ChangeHealthBarAmount(float amount) => DecreaseBar(_hpSlider, amount);
+
+        public void ChangeManaBarAmount(float amount) => DecreaseBar(_manaSlider, amount);
+
+        private void SetPlayerNickname(string nick) => _playerNickname.text = nick;
+
+        private void FirstAttack() => _player.SwordAttack();
+
+        private void SecondAttack() => _player.BowAttack();
+
+        private void UseFirstAbility()
         {
-            _player.SwordAttack();
+            _loadingAnimation.Animate(_useFirstPotionButton.GetComponent<Image>(),0.2f);
+            _playerAbilitySystem.UseDash();
         }
 
-        private void ChangeWeapon()
-        {
-            _player.BowAttack();
-        }
+        private void UseSecondAbility() => _playerAbilitySystem.UseMultiProjectile();
 
-        private void TakeFirstWeapon()
-        {
-            print(MethodBase.GetCurrentMethod().Name);
-        }
+        private void UseThirdAbility() => _playerAbilitySystem.UseFireCircle();
 
-        private void TakeSecondWeapon()
-        {
-            print(MethodBase.GetCurrentMethod().Name);
-        }
+        private void OpenInventory() => _windowManager.ShowInventoryWindow();
 
-        private void UseFirstPotion()
-        {
-            print(MethodBase.GetCurrentMethod().Name);
-        }
-
-        private void UseSecondPotion()
-        {
-            print(MethodBase.GetCurrentMethod().Name);
-        }
-
-        private void UseThirdPotion()
-        {
-            print(MethodBase.GetCurrentMethod().Name);
-        }
-
-        private void OpenInventory()
-        {
-            _windowManager.ShowInventoryWindow();
-        }
-
-        private void OpenPause()
-        {
-            _windowManager.ShowPauseWindow();
-        }
+        private void OpenPause() => _windowManager.ShowPauseWindow();
 
         private void SwitchView(bool state)
         {

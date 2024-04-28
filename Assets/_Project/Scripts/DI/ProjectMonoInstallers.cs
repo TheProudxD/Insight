@@ -19,12 +19,14 @@ public class ProjectMonoInstallers : MonoInstaller
         Data();
         Storage();
         Shop();
+        Player();
     }
 
     private void System()
     {
         Container.Bind<WindowManager>().AsSingle();
         Container.Bind<AssetManager>().AsSingle().Lazy();
+        
         var tryAmount = 3;
         var waitingDelay = 3000;
         Container
@@ -66,5 +68,10 @@ public class ProjectMonoInstallers : MonoInstaller
         Container.BindInterfacesTo<ServerStorageService>().AsSingle();
         Container.Bind<ResourceManager>().AsSingle().NonLazy();
         Container.Bind<SceneManager>().AsSingle().NonLazy();
+    }
+
+    private void Player()
+    {
+        Container.Bind<IInputReader>().To<KeyboardInputReader>().AsSingle().Lazy();
     }
 }
