@@ -7,6 +7,13 @@
       "dependencies": {},
       "hash": "b6d122e7809c6529fb5a4b73d41a67ce1edac987"
     },
+    "com.gemserk.selectionhistory": {
+      "version": "https://github.com/acoppes/unity-history-window.git#1.1.13",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "e57c0b1d6da317a4eacaa47815478cc773694b91"
+    },
     "com.inf.my-hierarchy": {
       "version": "https://github.com/INFGameDev/My-Hierarchy.git",
       "depth": 0,

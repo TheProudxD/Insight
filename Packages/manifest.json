@@ -1,6 +1,7 @@
 {
   "dependencies": {
     "com.antonysze.custom-play-button": "https://github.com/antonysze/unity-custom-play-button.git",
+    "com.gemserk.selectionhistory": "https://github.com/acoppes/unity-history-window.git#1.1.13",
     "com.inf.my-hierarchy": "https://github.com/INFGameDev/My-Hierarchy.git",
     "com.marijnzwemmer.unity-toolbar-extender": "https://github.com/marijnz/unity-toolbar-extender.git",
     "com.unity.2d.animation": "9.0.4",

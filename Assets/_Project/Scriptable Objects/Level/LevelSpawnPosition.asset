@@ -18,4 +18,10 @@ MonoBehaviour:
   - ID: 4
     Position: {x: -7.37, y: 1, z: 0}
   - ID: 5
+    Position: {x: -10, y: 1, z: 0}
+  - ID: 6
+    Position: {x: -19, y: -8.5, z: 0}
+  - ID: 7
     Position: {x: 36.4, y: -7.3, z: 0}
+  - ID: 8
+    Position: {x: -27, y: -2, z: 0}

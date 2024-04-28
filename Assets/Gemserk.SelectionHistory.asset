@@ -1,0 +1,56 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76094f091f1f4b07bb27fd8667a16406, type: 3}
+  m_Name: Gemserk.SelectionHistory
+  m_EditorClassIdentifier: 
+  selectionHistory:
+    _history:
+    - reference: {fileID: 0}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 0}
+      sceneName: WayToHome
+      scenePath: Assets/_Project/Scenes/Game/WayToHome.unity
+      globalObjectId: GlobalObjectId_V1-2-d96e0a399321ac745a3db61109e7b46c-1295450742-0
+    - reference: {fileID: 0}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
+    - reference: {fileID: 0}
+      sceneName: WayToHome
+      scenePath: Assets/_Project/Scenes/Game/WayToHome.unity
+      globalObjectId: GlobalObjectId_V1-2-d96e0a399321ac745a3db61109e7b46c-1679601768-0
+    - reference: {fileID: 0}
+      sceneName: WayToHome
+      scenePath: Assets/_Project/Scenes/Game/WayToHome.unity
+      globalObjectId: GlobalObjectId_V1-2-d96e0a399321ac745a3db61109e7b46c-2016802045-0
+    - reference: {fileID: 0}
+      sceneName: WayToHome
+      scenePath: Assets/_Project/Scenes/Game/WayToHome.unity
+      globalObjectId: GlobalObjectId_V1-2-d96e0a399321ac745a3db61109e7b46c-173741352-0
+    - reference: {fileID: 0}
+      sceneName: WayToHome
+      scenePath: Assets/_Project/Scenes/Game/WayToHome.unity
+      globalObjectId: GlobalObjectId_V1-2-d96e0a399321ac745a3db61109e7b46c-5828633306948058053-6278130254115490082
+    - reference: {fileID: 0}
+      sceneName: WayToHome
+      scenePath: Assets/_Project/Scenes/Game/WayToHome.unity
+      globalObjectId: GlobalObjectId_V1-2-d96e0a399321ac745a3db61109e7b46c-614981857-0
+    - reference: {fileID: 0}
+      sceneName: WayToHome
+      scenePath: Assets/_Project/Scenes/Game/WayToHome.unity
+      globalObjectId: GlobalObjectId_V1-2-d96e0a399321ac745a3db61109e7b46c-670597665-0
+    - reference: {fileID: 0}
+      sceneName: WayToHome
+      scenePath: Assets/_Project/Scenes/Game/WayToHome.unity
+      globalObjectId: GlobalObjectId_V1-2-d96e0a399321ac745a3db61109e7b46c-177993302-0
