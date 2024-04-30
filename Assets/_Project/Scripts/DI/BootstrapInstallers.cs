@@ -27,6 +27,7 @@ public class BootstrapInstallers : MonoInstaller
         projectContext.Bind<Image>().WithId("loading image").FromInstance(loadingImage.Image).AsSingle().NonLazy();
         projectContext.Bind<Hud>().FromInstance(hud).AsSingle().NonLazy();
         projectContext.Bind<Canvas>().FromInstance(hud.GetComponent<Canvas>()).AsSingle().NonLazy();
+        projectContext.Bind<Animator>().WithId("fade animator").FromInstance(FindObjectsOfType<Animator>().First(x=>x.name.ToLower().Contains("fade"))).AsSingle().NonLazy();
         projectContext.Bind<Joystick>().FromInstance(joystick).NonLazy();
 
         projectContext.Bind<PlayerAttacking>().FromInstance(playerAttacking).AsSingle().NonLazy();

@@ -1120,7 +1120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db9f0ec80a16431a8c592cf822e73595, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _dashAbility: {fileID: 0}
+  _dashAbility: {fileID: 5297468188945689765}
 --- !u!1 &8235823234777146293
 GameObject:
   m_ObjectHideFlags: 0
@@ -1294,7 +1294,19 @@ MonoBehaviour:
         m_CallState: 2
   _signalEventFloat:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UI.PlayerFeaturesView, Assembly-CSharp
+        m_MethodName: ChangeHealthBarAmount
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &8019969108416271356
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1344,7 +1356,19 @@ MonoBehaviour:
       m_Calls: []
   _signalEventFloat:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UI.PlayerFeaturesView, Assembly-CSharp
+        m_MethodName: ChangeManaBarAmount
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1490730589292496097
 MonoBehaviour:
   m_ObjectHideFlags: 0

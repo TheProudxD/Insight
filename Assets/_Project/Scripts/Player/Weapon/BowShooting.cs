@@ -11,10 +11,10 @@ namespace Player
         private readonly float _destroyArrowTime = 3;
         private float _attackDuration;
 
-        public void Initialize(float attackDuration)
+        public void Initialize()
         {
-            TimeBeforeLastAttackCounter = PlayerEntitySpecs.SwordAttackCooldown;
-            _attackDuration = attackDuration;
+            TimeBeforeLastAttackCounter = PlayerEntitySpecs.BowAttackDuration;
+            _attackDuration = PlayerEntitySpecs.BowAttackDuration;
         }
 
         public override bool TryShoot(Vector3 position = default, Vector3 direction = default)
@@ -27,7 +27,6 @@ namespace Player
             ArrowSpawn(playerPos.sqrMagnitude != 0 ? playerPos : direction);
 
             StartCoroutine(BowAttackCo());
-            TimeBeforeLastAttackCounter = 0;
             
             return true;
         }
@@ -45,11 +44,12 @@ namespace Player
         
         public IEnumerator BowAttackCo()
         {
+            TimeBeforeLastAttackCounter = 0;
             PlayerStateMachine.Current = PlayerState.Attack;
             yield return null;
             yield return new WaitForSeconds(_attackDuration);
             if (PlayerStateMachine.Current != PlayerState.Interact)
-                PlayerStateMachine.Current = PlayerState.Walk;
+                PlayerStateMachine.Current = PlayerState.Idle;
         }
         
         protected override bool CanAttack() => PlayerStateMachine.Current != PlayerState.Attack &&

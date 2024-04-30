@@ -8,8 +8,7 @@ using Zenject;
 public class LevelSelector : MonoBehaviour
 {
     [Inject] private WindowManager _windowManager;
-    
-    private readonly float _loadingSpeed = 0.15f;
+
     private LoadingAnimation _loadingAnimation;
     private bool _changing;
 
@@ -20,10 +19,10 @@ public class LevelSelector : MonoBehaviour
         if (InsightUtils.IsItPlayer(collision) == false)
             return;
 
-        if (_changing) 
+        if (_changing)
             return;
-        
-        _loadingAnimation.Animate(() =>_windowManager.ShowLevelSelectWindow());
+
+        _loadingAnimation.Animate(() => _windowManager.ShowLevelSelectWindow());
         _changing = true;
     }
 

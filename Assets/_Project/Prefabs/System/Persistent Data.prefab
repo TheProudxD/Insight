@@ -35120,10 +35120,6 @@ PrefabInstance:
       value: ChangeManaBarAmount
       objectReference: {fileID: 0}
     - target: {fileID: 6066422071589408372, guid: 137537f91438149458497bd50ff9aa34, type: 3}
-      propertyPath: _signalEventFloat.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UI.Hud, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 6066422071589408372, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEventFloat.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
@@ -35161,10 +35157,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
       propertyPath: _signalEventInt.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
-      value: UI.Hud, Assembly-CSharp
-      objectReference: {fileID: 0}
-    - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}
-      propertyPath: _signalEventFloat.m_PersistentCalls.m_Calls.Array.data[0].m_TargetAssemblyTypeName
       value: UI.Hud, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 7766964044480131116, guid: 137537f91438149458497bd50ff9aa34, type: 3}

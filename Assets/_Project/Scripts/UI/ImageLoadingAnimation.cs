@@ -5,9 +5,8 @@ using UnityEngine.UI;
 
 namespace Objects
 {
-    public class AbilityLoadingAnimation : MonoBehaviour
+    public class ImageLoadingAnimation : MonoBehaviour
     {
-        private Coroutine _coroutine;
         private IEnumerator Load(Image loadingImage, float loadingSpeed, Action callback = null)
         {
             loadingImage.fillAmount = 0f;
@@ -19,12 +18,11 @@ namespace Objects
             }
 
             loadingImage.fillAmount = 1f;
-            _coroutine = null;
-            
+
             callback?.Invoke();
         }
 
-        public void Animate(Image loadingImage, float loadingSpeed, Action callback = null) =>_coroutine??=
+        public void Animate(Image loadingImage, float loadingSpeed, Action callback = null) =>
             StartCoroutine(Load(loadingImage, loadingSpeed, callback));
     }
 }

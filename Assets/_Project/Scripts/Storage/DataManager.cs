@@ -12,16 +12,16 @@ namespace StorageService
     public class DataManager
     {
         public event Action<PlayerData> DataLoaded;
-        
+
         public const string REGISTRY_DATA_KEY = "registry";
         public const string MAX_LEVEL_DATA_KEY = "maxleveldata";
         private const string DYNAMIC_USER_DATA_KEY = "userdata";
         private const string DEFAULT_PLAYER_NAME = "Player";
-        
+
         private readonly GameData _gameData = new();
-        private PlayerData _playerData = new();
-        private IStaticStorageService StaticStorageService { get; set; }
-        private IDynamicStorageService DynamicStorageService { get; set; }
+        private PlayerData _playerData = null;
+        private IStaticStorageService StaticStorageService { get; }
+        private IDynamicStorageService DynamicStorageService { get; }
 
         public DataManager(IStaticStorageService staticStorageService, IDynamicStorageService dynamicStorageService)
         {
@@ -74,8 +74,11 @@ namespace StorageService
 
         public string GetName() => _playerData.Name;
 
-        public async Task GetDynamicData()
+        public async Task<PlayerData> GetDynamicData()
         {
+            if (_playerData != null)
+                return _playerData;
+            
             var downloadParams = new Dictionary<string, string>
             {
                 { "action", DYNAMIC_USER_DATA_KEY },
@@ -92,13 +95,15 @@ namespace StorageService
             };
 
             DataLoaded?.Invoke(_playerData);
-            
+
             if (_playerData.Name == DEFAULT_PLAYER_NAME)
                 await SetName("Player " + SystemPlayerData.Instance.uid);
-            
+
             Debug.Log(_playerData.ToString());
-            
+
             await Task.CompletedTask;
+
+            return _playerData;
         }
     }
 }

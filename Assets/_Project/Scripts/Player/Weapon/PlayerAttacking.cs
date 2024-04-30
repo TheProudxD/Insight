@@ -30,15 +30,15 @@ namespace Player
             _playerHealth = GetComponent<PlayerHealth>();
             _playerMana = GetComponent<PlayerMana>();
             
-            _bowShooting.Initialize(PlayerEntitySpecs.BowAttackDuration);
-            _swordShooting.Initialize(_playerAnimation, PlayerEntitySpecs.SwordAttackDuration);
+            _bowShooting.Initialize();
+            _swordShooting.Initialize(_playerAnimation);
         }
 
         public void SwordAttack()
         {
             if (_swordShooting.TryShoot())
             {
-                _playerMana.Decrease(1);
+                _playerMana.Decrease(0);
             }
         }
 

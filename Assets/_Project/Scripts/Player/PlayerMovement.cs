@@ -12,7 +12,7 @@ namespace Player
         public Rigidbody2D PlayerRigidbody { get; private set; }
 
         private Vector2 _playerMovement;
-        private Vector2 _faceDirection;
+        private Vector2 _faceDirection = Vector2.down;
 
         private void Awake() => PlayerRigidbody = GetComponent<Rigidbody2D>();
 

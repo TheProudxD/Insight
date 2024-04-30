@@ -36,8 +36,9 @@ namespace Managers
         {
             if (_openedWindows.ContainsKey(windowType))
             {
+                Debug.Log(windowType);
                 _openedWindows[windowType].Close();
-                Object.Destroy(_openedWindows[windowType]);
+                Object.Destroy(_openedWindows[windowType].gameObject);
                 _openedWindows.Remove(windowType);
             }
             else
@@ -49,7 +50,9 @@ namespace Managers
         public DialogBox ShowDialogBox() => (DialogBox)TryShow(WindowType.Dialog);
         public void CloseDialogBox() => TryClose(WindowType.Dialog);
 
-        public LevelRewardCommonWindow ShowLevelRewardWindow() => (LevelRewardCommonWindow)TryShow(WindowType.LevelReward);
+        public LevelRewardCommonWindow ShowLevelRewardWindow() =>
+            (LevelRewardCommonWindow)TryShow(WindowType.LevelReward);
+
         public void CloseLevelRewardWindow() => TryClose(WindowType.LevelReward);
 
         public PauseCommonWindow ShowPauseWindow() => (PauseCommonWindow)TryShow(WindowType.Pause);
@@ -64,7 +67,12 @@ namespace Managers
         public ExitCommonWindow ShowExitWindow() => (ExitCommonWindow)TryShow(WindowType.Exit);
         public void CloseExitWindow() => TryClose(WindowType.Exit);
 
-        public LevelSelectWindow ShowLevelSelectWindow()=> (LevelSelectWindow)TryShow(WindowType.LevelSelect);
-        public void CloseLevelSelectWindow() => TryClose(WindowType.LevelSelect);
+        public LevelSelectWindow ShowLevelSelectWindow() => (LevelSelectWindow)TryShow(WindowType.LevelSelect);
+
+        public void CloseLevelSelectWindow()
+        {
+            Debug.Log("1");
+            TryClose(WindowType.LevelSelect);
+        }
     }
 }

@@ -17,7 +17,7 @@ public class DashAbility : Ability
 
     private void Awake() => _waitDurationTimer = _waitDuration;
 
-    public override void Use()
+    public override float Use()
     {
         _waitDurationTimer = 0;
         var dashVector = (Vector2)_playerRigidbody.transform.position + _playerMovement.GetFaceDirection() * _dashForce;
@@ -26,6 +26,8 @@ public class DashAbility : Ability
             PlayerStateMachine.Current = PlayerState.Idle;
             _tweener = null;
         });
+
+        return _waitDuration;
     }
 
     private void Update()

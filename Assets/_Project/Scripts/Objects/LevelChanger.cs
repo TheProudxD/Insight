@@ -1,7 +1,6 @@
 using System.Threading.Tasks;
 using Storage;
 using Tools;
-using UI;
 using UnityEngine;
 using Zenject;
 
@@ -10,25 +9,22 @@ namespace Objects
     [RequireComponent(typeof(LoadingAnimation))]
     public class LevelChanger : MonoBehaviour
     {
-        private static readonly int Fade = Animator.StringToHash("Fade");
+        private readonly int _waitPause = 1000;
 
         [Inject] private SceneManager _sceneManager;
-        [Inject] private Hud _hud;
-
-        private readonly int _waitPause = 1000;
-        private Animator _fadeAnimator;
+        [Inject(Id = "fade animator")] private Animator _fadeAnimator;
         private LoadingAnimation _loadingAnimation;
 
         private void Awake()
         {
             _loadingAnimation = GetComponent<LoadingAnimation>();
-            _fadeAnimator = _hud.FadeAnimator;
         }
 
         private void OnCollisionEnter2D(Collision2D collision)
         {
             if (InsightUtils.IsItPlayer(collision.collider) == false)
                 return;
+            
             StartTransition();
         }
 
@@ -36,6 +32,7 @@ namespace Objects
         {
             if (InsightUtils.IsItPlayer(collision.collider) == false)
                 return;
+            
             StopTransition();
         }
 
@@ -46,10 +43,12 @@ namespace Objects
         private async void Transit()
         {
             _loadingAnimation.Reset();
-            _fadeAnimator.SetTrigger(Fade);
+            _fadeAnimator.SetTrigger("Fade");
+            
             await Task.Delay(_waitPause);
+            
             _sceneManager.StartNextLevel();
-            _fadeAnimator.SetTrigger(Fade);
+            _fadeAnimator.SetTrigger("Fade");
         }
     }
 }

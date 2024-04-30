@@ -2,6 +2,7 @@ using System;
 using Storage;
 using UI;
 using UnityEngine;
+using Zenject;
 using Object = UnityEngine.Object;
 
 namespace Managers
@@ -36,9 +37,8 @@ namespace Managers
             var windowGO = Resources.Load($@"{PREFABS_FOLDER}/{windowName}") as GameObject;
             if (windowGO == null)
                 throw new Exception($@"{windowName} is not in Resources/{PREFABS_FOLDER}");
-
-            var window = Object.Instantiate(windowGO, windowGO.transform.localPosition, Quaternion.identity,
-                parent: parent);
+            
+            var window = ProjectContext.Instance.Container.InstantiatePrefab(windowGO, parent);
 
             window.transform.localPosition = Vector3.zero;
             return window.GetComponent<CommonWindow>();

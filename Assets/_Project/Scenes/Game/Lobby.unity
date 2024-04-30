@@ -2956,10 +2956,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 563654292}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db0d36e4aa2645a4a1b786ccda47d02b, type: 3}
+  m_Script: {fileID: 11500000, guid: b5fb21ce4ec82f34d9f2cac595b5f698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingSpeed: 0.15
 --- !u!1 &634226975
 GameObject:
   m_ObjectHideFlags: 0
@@ -3861,8 +3860,8 @@ GameObject:
   - component: {fileID: 1435678774}
   - component: {fileID: 1435678773}
   - component: {fileID: 1435678772}
-  - component: {fileID: 1435678776}
   - component: {fileID: 1435678775}
+  - component: {fileID: 1435678776}
   m_Layer: 0
   m_Name: Trigger Level Selector
   m_TagString: Untagged
@@ -3969,7 +3968,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3731b66834fb8a94d8c85e61647010ff, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _windowPrefab: {fileID: 3562371549389260395, guid: 0cf7cfd0f5cc9084197297c184683718, type: 3}
 --- !u!114 &1435678776
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3979,10 +3977,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 1435678770}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: db0d36e4aa2645a4a1b786ccda47d02b, type: 3}
+  m_Script: {fileID: 11500000, guid: b5fb21ce4ec82f34d9f2cac595b5f698, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _loadingSpeed: 0.15
 --- !u!1 &1482997867
 GameObject:
   m_ObjectHideFlags: 0

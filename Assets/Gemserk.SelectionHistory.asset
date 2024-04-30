@@ -15,42 +15,42 @@ MonoBehaviour:
   selectionHistory:
     _history:
     - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-3280862713381628232-548505730
+      sceneName: Lobby
+      scenePath: Assets/_Project/Scenes/Game/Lobby.unity
+      globalObjectId: GlobalObjectId_V1-2-548a32481bc0ba5408e7b3d4513dd008-2030680691-0
     - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-7469424482319613091-548505730
+      sceneName: Home
+      scenePath: Assets/_Project/Scenes/Game/Home.unity
+      globalObjectId: GlobalObjectId_V1-2-b914e47369eb2d644bd3faca312bd94a-1348970274-0
     - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-6137778188210596153-548505730
+      sceneName: DontDestroyOnLoad
+      scenePath: DontDestroyOnLoad
+      globalObjectId: GlobalObjectId_V1-0-00000000000000000000000000000000-0-0
     - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-320083884140948428-548505730
+      sceneName: WayToHome
+      scenePath: Assets/_Project/Scenes/Game/WayToHome.unity
+      globalObjectId: GlobalObjectId_V1-2-d96e0a399321ac745a3db61109e7b46c-1399088927-0
+    - reference: {fileID: 0}
+      sceneName: Downloader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Downloader.unity
+      globalObjectId: GlobalObjectId_V1-2-ee278986e58e37c4cbc3ea589ce05ab5-1894638919-0
     - reference: {fileID: 0}
       sceneName: Loader
       scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
       globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-3151361361751652840-548505730
     - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-512799961492829575-548505730
+      sceneName: WayToHome
+      scenePath: Assets/_Project/Scenes/Game/WayToHome.unity
+      globalObjectId: GlobalObjectId_V1-2-d96e0a399321ac745a3db61109e7b46c-326854029-0
     - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-1873653754008877028-548505730
+      sceneName: WayToHome
+      scenePath: Assets/_Project/Scenes/Game/WayToHome.unity
+      globalObjectId: GlobalObjectId_V1-2-d96e0a399321ac745a3db61109e7b46c-1348970274-0
     - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-6137778188210596153-548505730
-    - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-7469424482319613091-548505730
-    - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-320083884140948428-548505730
+      sceneName: WayToHome
+      scenePath: Assets/_Project/Scenes/Game/WayToHome.unity
+      globalObjectId: GlobalObjectId_V1-2-d96e0a399321ac745a3db61109e7b46c-1173520656-0
+    - reference: {fileID: 11400000, guid: 9190df4aefac6e649a457d4fcfbd3d24, type: 2}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 

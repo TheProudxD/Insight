@@ -15,7 +15,6 @@ namespace Managers
 
         private void Awake()
         {
-            var gm = GetComponentInChildren<GameStateManager>();
             _playerAttacking = GetComponentInChildren<PlayerAttacking>();
 
             _sceneManager.LevelChanged += ChangePlayerPosition;
@@ -26,6 +25,7 @@ namespace Managers
 
         private void ChangePlayerPosition(Scenes scene)
         {
+            print("123123");
             if (scene > Scenes.Menu)
             {
                 _hud.EnableView();
