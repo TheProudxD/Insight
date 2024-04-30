@@ -9435,7 +9435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af4a1c83b1b715f42a14615dbdbdf594, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Context: {fileID: 0}
+  Context: {fileID: 11400000, guid: 3c716f24b5afe534e970756c4f66757d, type: 2}
   _dialog: This is my lovely house.
 --- !u!114 &383715195
 MonoBehaviour:
@@ -9452,19 +9452,7 @@ MonoBehaviour:
   _signal: {fileID: 11400000, guid: 3c716f24b5afe534e970756c4f66757d, type: 2}
   _signalEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 2758604542294058170, guid: 4e0f44d89a4bc924fb8f86319e1a3cbb, type: 3}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: 
-        m_Mode: 0
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: 
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   _signalEventFloat:
     m_PersistentCalls:
       m_Calls: []

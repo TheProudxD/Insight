@@ -12,8 +12,8 @@ namespace Player
 
         public Vector2 GetInputDirection()
         {
-            var horizontalAxis = Input.GetAxisRaw(Constants.HORIZONTAL_AXIS);
-            var verticalAxis = Input.GetAxisRaw(Constants.VERTICAL_AXIS);
+            var horizontalAxis = Input.GetAxisRaw(MoveAxisConstants.HORIZONTAL_AXIS);
+            var verticalAxis = Input.GetAxisRaw(MoveAxisConstants.VERTICAL_AXIS);
             return new Vector2(horizontalAxis, verticalAxis);
         }
     }

@@ -13,9 +13,7 @@ public static class ListExtensions
         for (var i = list.Count - 1; i > 1; i--)
         {
             var j = Random.Range(0, i + 1);
-            var value = list[j];
-            list[j] = list[i];
-            list[i] = value;
+            (list[j], list[i]) = (list[i], list[j]);
         }
     }
 }

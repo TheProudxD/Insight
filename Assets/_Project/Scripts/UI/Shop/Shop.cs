@@ -1,3 +1,4 @@
+using Managers;
 using ResourceService;
 using UI.Shop.Data;
 using UnityEngine;
@@ -6,26 +7,38 @@ using Zenject;
 
 namespace UI.Shop
 {
-    public class Shop : MonoBehaviour
+    public class Shop : CommonWindow
     {
         [SerializeField] private ShopContent _shopContent;
         [SerializeField] private ShopPanel _shopPanel;
         [SerializeField] private ShopCategoryButton _swordCategoryButton;
         [SerializeField] private ShopCategoryButton _bowCategoryButton;
         [SerializeField] private SkinPlacement _skinPlacement;
-        [Header("Buttons")] 
-        [SerializeField] private BuyButton _buyButton;
-        [SerializeField] private Button _selectionButton;
-        [SerializeField] private Image _selectedText;
 
+        [Header("Buttons")] [SerializeField] private BuyButton _buyButton;
+        [SerializeField] private Button _selectionButton;
+        [SerializeField] private Button _closeButton;
+        [Header("Text")] [SerializeField] private Image _selectedText;
+
+        [Inject] private WindowManager _windowManager;
         [Inject] private Wallet _wallet;
         [Inject] private ShopData _shopData;
         [Inject] private SkinSelector _skinSelector;
         [Inject] private SkinUnlocker _skinUnlocker;
         [Inject] private OpenedSkinsChecker _openedSkinsChecker;
         [Inject] private SelectedSkinsChecker _selectedSkinsChecker;
-        
+
         private ShopItemView _previewedItem;
+
+        public override async void Show()
+        {
+            base.Show();
+
+            await _shopData.GetBoughtItems();
+            _shopPanel.Initialize(_openedSkinsChecker, _selectedSkinsChecker);
+            _shopPanel.ItemViewClicked += OnItemViewClicked;
+            OnSwordSkinButtonClick();
+        }
 
         private void OnEnable()
         {
@@ -33,6 +46,7 @@ namespace UI.Shop
             _bowCategoryButton.Click += OnBowSkinButtonClick;
             _buyButton.Click += OnBuyButtonClicked;
             _selectionButton.onClick.AddListener(OnSelectButtonClicked);
+            _closeButton.onClick.AddListener(CloseWindow);
         }
 
         private void OnDisable()
@@ -42,14 +56,7 @@ namespace UI.Shop
             _shopPanel.ItemViewClicked -= OnItemViewClicked;
             _buyButton.Click -= OnBuyButtonClicked;
             _selectionButton.onClick.RemoveListener(OnSelectButtonClicked);
-        }
-
-        public async void Initialize()
-        {
-            await _shopData.GetBoughtItems();
-            _shopPanel.Initialize(_openedSkinsChecker, _selectedSkinsChecker);
-            _shopPanel.ItemViewClicked += OnItemViewClicked;
-            OnSwordSkinButtonClick();
+            _closeButton.onClick.RemoveListener(CloseWindow);
         }
 
         private void OnSwordSkinButtonClick()
@@ -101,7 +108,7 @@ namespace UI.Shop
             _previewedItem = shopItemView;
             _skinPlacement.SetGameModel(_previewedItem.Model);
             _openedSkinsChecker.Visit(_previewedItem.Item);
-            
+
             if (_openedSkinsChecker.IsOpened)
             {
                 _selectedSkinsChecker.Visit(_previewedItem.Item);
@@ -115,7 +122,7 @@ namespace UI.Shop
             }
             else
             {
-                ShowBuyButton(_previewedItem.ResourceType,_previewedItem.Price);
+                ShowBuyButton(_previewedItem.ResourceType, _previewedItem.Price);
             }
         }
 
@@ -148,5 +155,7 @@ namespace UI.Shop
         private void HideSelectionButton() => _selectionButton.gameObject.SetActive(false);
         private void HideSelectedText() => _selectedText.gameObject.SetActive(false);
         private void HideBuyButton() => _buyButton.gameObject.SetActive(false);
+
+        private void CloseWindow() => _windowManager.CloseShopWindow();
     }
 }

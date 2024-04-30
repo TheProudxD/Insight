@@ -1,6 +1,8 @@
+using System;
 using System.Linq;
 using Objects.Powerups;
 using Player;
+using ResourceService;
 using Storage;
 using UI;
 using UI.Loading;
@@ -36,7 +38,7 @@ public class BootstrapInstallers : MonoInstaller
         projectContext.Bind<PlayerAbilitySystem>().FromInstance(playerAbilitySystem).NonLazy();
 
         projectContext.BindFactory<Powerup, Vector3, Powerup, PowerupFactory>().ToSelf().NonLazy();
-
+        
         var reactions = Resources.LoadAll<ItemReaction>("Item reactions");
         foreach (var reaction in reactions)
         {

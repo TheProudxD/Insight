@@ -11,12 +11,12 @@ public class WalletView : MonoBehaviour
 
     [Inject] private Wallet _wallet;
 
-    public void Initialize(int softAmount, int hardAmount)
+    public void Awake()
     {
         _wallet.CurrencyChanged += UpdateValue;
 
-        UpdateValue(ResourceType.SoftCurrency, softAmount);
-        UpdateValue(ResourceType.HardCurrency, hardAmount);
+        UpdateValue(ResourceType.SoftCurrency, _wallet.GetCurrentCoins(ResourceType.SoftCurrency));
+        UpdateValue(ResourceType.HardCurrency, _wallet.GetCurrentCoins(ResourceType.HardCurrency));
     }
 
     private void OnDestroy()

@@ -38,6 +38,6 @@ namespace Tools
         }
         
         public static bool IsItPlayer(Collider2D collision) => 
-            collision.CompareTag(Constants.PLAYER_TAG) && !collision.isTrigger;
+            collision.CompareTag(MoveAxisConstants.PLAYER_TAG) && !collision.isTrigger;
     }
 }

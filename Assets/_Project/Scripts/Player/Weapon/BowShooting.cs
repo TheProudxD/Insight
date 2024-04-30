@@ -8,13 +8,14 @@ namespace Player
         [SerializeField] private PlayerProjectile _arrowProjectile;
         protected override float TimeBeforeLastAttackCounter { get; set; }
         
-        private readonly float _destroyArrowTime = 3;
+        private float _destroyArrowTime;
         private float _attackDuration;
 
         public void Initialize()
         {
             TimeBeforeLastAttackCounter = PlayerEntitySpecs.BowAttackDuration;
             _attackDuration = PlayerEntitySpecs.BowAttackDuration;
+            _destroyArrowTime = PlayerEntitySpecs.DestroyArrowTime;
         }
 
         public override bool TryShoot(Vector3 position = default, Vector3 direction = default)

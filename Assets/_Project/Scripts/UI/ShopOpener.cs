@@ -1,11 +1,13 @@
+using Managers;
 using Objects;
 using Tools;
 using UnityEngine;
+using Zenject;
 
 [RequireComponent(typeof(LoadingAnimation))]
 public class ShopOpener : MonoBehaviour
 {
-    [SerializeField] private GameObject _shopCanvas;
+    [Inject] private WindowManager _windowManager;
     
     private LoadingAnimation _loadingAnimation;
     
@@ -17,7 +19,7 @@ public class ShopOpener : MonoBehaviour
         if (InsightUtils.IsItPlayer(collision) == false)
             return;
 
-        _loadingAnimation.Animate(() => _shopCanvas.SetActive(true));
+        _loadingAnimation.Animate(() => _windowManager.ShowShopWindow());
     }
 
     private void OnTriggerExit2D(Collider2D collision)

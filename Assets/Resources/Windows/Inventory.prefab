@@ -20379,19 +20379,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1183046615079626234}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 6648636777747791001}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
 --- !u!1 &5261799997314634845
 GameObject:
   m_ObjectHideFlags: 0
@@ -29214,7 +29202,7 @@ RectTransform:
   - {fileID: 5977315060376183713}
   - {fileID: 2108829796280254815}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -29300,6 +29288,7 @@ MonoBehaviour:
   _itemInventorySlotPrefab: {fileID: 1406418090042942306, guid: 11634e242e8180d40aaf49951c4840e7, type: 3}
   _inventoryPanel: {fileID: 2638744200731542321}
   _useButton: {fileID: 4971417311487694724}
+  _closeButton: {fileID: 5663678981774156173}
   _playerInventory: {fileID: 11400000, guid: 80ee636432fc9cb4299a1a8e38aadd59, type: 2}
   _selectedItemName: {fileID: 4491662874021237832}
   _selectedItemDescription: {fileID: 2333387746536100222}

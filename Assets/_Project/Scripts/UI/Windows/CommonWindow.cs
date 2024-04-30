@@ -1,34 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using Managers;
+﻿using System.Collections.Generic;
 using UnityEngine;
-using Zenject;
 
 namespace UI
 {
     public abstract class CommonWindow : MonoBehaviour
     {
-        private readonly List<Transform> _children = new();
+        private readonly List<GameObject> _children = new();
 
-        private void Awake()
+        public virtual void Close()
         {
-            var thisTransform = gameObject.transform;
-            var childCount = thisTransform.childCount;
+            _children.ForEach(x => x.SetActive(false));
+        }
+
+        public virtual void Show()
+        {
+            var childCount = transform.childCount;
             for (int i = 0; i < childCount; i++)
             {
-                _children.Add(thisTransform.GetChild(i));
+                _children.Add(transform.GetChild(i).gameObject);
             }
-        }
-
-        public void Close()
-        {
-            _children.ForEach(x => x.gameObject.SetActive(false));
-        }
-
-        public void Show()
-        {
-            _children.ForEach(x => x.gameObject.SetActive(true));
+            _children.ForEach(x => x.SetActive(true));
         }
     }
 }

@@ -38,7 +38,7 @@ namespace Player
         {
             if (_swordShooting.TryShoot())
             {
-                _playerMana.Decrease(0);
+                _playerMana.Decrease(PlayerEntitySpecs.SwordShootingPrice);
             }
         }
 
@@ -46,7 +46,7 @@ namespace Player
         {
             if (_bowShooting.TryShoot(_playerMovement.PlayerMovementVector, _playerMovement.GetFaceDirection()))
             {
-                _playerMana.Decrease(0.5f);
+                _playerMana.Decrease(PlayerEntitySpecs.BowShootingPrice);
             }
         }
 

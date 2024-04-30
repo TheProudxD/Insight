@@ -6,6 +6,7 @@ namespace Managers
         Pause,
         Settings,
         Inventory,
+        Shop,
         Exit,
         LevelReward,
         LevelSelect

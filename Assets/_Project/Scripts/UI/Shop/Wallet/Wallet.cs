@@ -7,11 +7,7 @@ public class Wallet
     public event Action<ResourceType, int> CurrencyChanged;
     private readonly ResourceManager _resourceManager;
 
-    [Inject]
-    public Wallet(ResourceManager resourceManager)
-    {
-        _resourceManager = resourceManager;
-    }
+    public Wallet(ResourceManager resourceManager) => _resourceManager = resourceManager;
 
     public void AddCoins(ResourceType resourceType, int value)
     {

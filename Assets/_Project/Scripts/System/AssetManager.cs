@@ -19,6 +19,7 @@ namespace Managers
         private const string INVENTORY_WINDOW_KEY = "Inventory";
         private const string EXIT_WINDOW_KEY = "Exit";
         private const string LEVEL_SELECT_WINDOW_KEY = "Level Select";
+        private const string SHOP_WINDOW_KEY = "Shop";
         
         public CommonWindow GetWindowPrefab(WindowType windowType, Transform parent = null)
         {
@@ -31,6 +32,7 @@ namespace Managers
                 WindowType.Inventory => INVENTORY_WINDOW_KEY,
                 WindowType.Exit => EXIT_WINDOW_KEY,
                 WindowType.LevelSelect => LEVEL_SELECT_WINDOW_KEY,
+                WindowType.Shop => SHOP_WINDOW_KEY,
                 _ => throw new ArgumentOutOfRangeException(nameof(windowType), windowType, null)
             };
 

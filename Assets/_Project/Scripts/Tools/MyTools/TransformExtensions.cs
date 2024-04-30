@@ -7,6 +7,11 @@ public static class TransformExtensions
         for (var i = transform.childCount - 1; i >= 0; i--)
             Object.Destroy(transform.GetChild(i).gameObject);
     }
+    
+    public static void DestroyChildAt(this Transform transform, int i)
+    {
+        Object.Destroy(transform.GetChild(i).gameObject);
+    }
 
     public static void ResetTransformation(this Transform transform)
     {

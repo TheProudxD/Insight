@@ -5,6 +5,7 @@ using Storage;
 using StorageService;
 using ResourceService;
 using UI;
+using UI.Shop;
 using UI.Shop.Data;
 using UnityEngine;
 using Zenject;
@@ -59,6 +60,10 @@ public class ProjectMonoInstallers : MonoInstaller
     private void Shop()
     {
         Container.Bind<ShopData>().AsSingle();
+        Container.Bind<OpenedSkinsChecker>().ToSelf().AsSingle();
+        Container.Bind<SelectedSkinsChecker>().ToSelf().AsSingle();
+        Container.Bind<SkinSelector>().ToSelf().AsSingle();
+        Container.Bind<SkinUnlocker>().ToSelf().AsSingle();
     }
 
     private void Storage()

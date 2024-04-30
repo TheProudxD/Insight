@@ -21,12 +21,7 @@ namespace Tools
         {
             color = color.Trim();
             Color result = default;
-            if (_colors.ContainsKey(color))
-            {
-                result = _colors[color];
-            }
-
-            return result;
+            return _colors.TryGetValue(color, out var c) ? c : result;
         }
 
         public static Vector3 ParseVector3(string s)

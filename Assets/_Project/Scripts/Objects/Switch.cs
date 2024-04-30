@@ -19,6 +19,9 @@ namespace Objects
 
         private void ActivateSwitch()
         {
+            if (_door==null)
+                return;
+            
             _door.Open();
             _pressed = true;
             _spriteRenderer.sprite = _activeSprite;

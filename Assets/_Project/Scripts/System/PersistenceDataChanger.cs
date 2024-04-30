@@ -25,7 +25,6 @@ namespace Managers
 
         private void ChangePlayerPosition(Scenes scene)
         {
-            print("123123");
             if (scene > Scenes.Menu)
             {
                 _hud.EnableView();

@@ -30,7 +30,7 @@ namespace Player
             _timerRecovery += Time.deltaTime;
             if (_timerRecovery > _recoverySpeed && Math.Abs(Amount - MaxAmount) > 0.01f)
             {
-                TryIncrease(0.25f);
+                TryIncrease(PlayerEntitySpecs.ManaRecoveryStep);
                 _timerRecovery -= _recoverySpeed;
             }
         }

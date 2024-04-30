@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Storage;
 using UI;
+using UI.Shop;
 using UnityEngine;
-using Object = UnityEngine.Object;
 
 namespace Managers
 {
@@ -19,31 +18,23 @@ namespace Managers
             if (!_openedWindows.ContainsKey(windowType))
             {
                 var window = _assetManager.GetWindowPrefab(windowType);
-
                 _openedWindows[windowType] = window;
-                window.Show();
             }
-            else
-            {
-                //TryClose(windowType);
-                Debug.LogError("Открытие уже открытого окна.");
-            }
+
+            _openedWindows[windowType].Show();
 
             return _openedWindows[windowType];
         }
 
         private void TryClose(WindowType windowType)
         {
-            if (_openedWindows.ContainsKey(windowType))
+            if (_openedWindows.TryGetValue(windowType, out var window))
             {
-                Debug.Log(windowType);
-                _openedWindows[windowType].Close();
-                Object.Destroy(_openedWindows[windowType].gameObject);
-                _openedWindows.Remove(windowType);
+                window.Close();
             }
             else
             {
-                Debug.LogError("Закрытие уже закрытого окна.");
+                Debug.LogError("Закрытие не открытого окна.");
             }
         }
 
@@ -68,11 +59,9 @@ namespace Managers
         public void CloseExitWindow() => TryClose(WindowType.Exit);
 
         public LevelSelectWindow ShowLevelSelectWindow() => (LevelSelectWindow)TryShow(WindowType.LevelSelect);
-
-        public void CloseLevelSelectWindow()
-        {
-            Debug.Log("1");
-            TryClose(WindowType.LevelSelect);
-        }
+        public void CloseLevelSelectWindow() => TryClose(WindowType.LevelSelect);        
+        
+        public Shop ShowShopWindow() => (Shop)TryShow(WindowType.Shop);
+        public void CloseShopWindow() => TryClose(WindowType.Shop);
     }
 }
