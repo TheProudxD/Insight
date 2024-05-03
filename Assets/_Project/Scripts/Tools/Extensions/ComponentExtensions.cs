@@ -1,6 +1,4 @@
 using UnityEngine;
-using UnityEngine.Events;
-using UnityEngine.UI;
 
 namespace Extensions
 {
@@ -25,12 +23,8 @@ namespace Extensions
         {
             if (component) component.gameObject.SetActive(false);
         }
-    }
 
-    public static class ButtonExtensions
-    {
-        public static void Add(this Button button, UnityAction action) => button.onClick.AddListener(action);
-        public static void Remove(this Button button, UnityAction action) => button.onClick.RemoveListener(action);
-        public static void RemoveAll(this Button button) => button.onClick.RemoveAllListeners();
+        public static T GetOrAddComponent<T>(this Component child) where T : Component =>
+            child.GetComponent<T>() ?? child.gameObject.AddComponent<T>();
     }
 }

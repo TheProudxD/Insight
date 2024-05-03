@@ -338,8 +338,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 65c48d8bb56f471e8c9ae3897d6904a3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MagicCost>k__BackingField: 10
+  <MagicCost>k__BackingField: 1
   <Duration>k__BackingField: 1
+  <ReloadingDuration>k__BackingField: 5
   _dashForce: 5
   _playerRigidbody: {fileID: 1109736434427424925}
   _playerMovement: {fileID: 7696137166542938749}
@@ -1121,6 +1122,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _dashAbility: {fileID: 5297468188945689765}
+  _fireCircleAbility: {fileID: 0}
 --- !u!1 &8235823234777146293
 GameObject:
   m_ObjectHideFlags: 0

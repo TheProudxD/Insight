@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Extensions;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.EventSystems;
@@ -10,7 +11,7 @@ namespace Utilites
     public static class Utils
     {
         public const int SORTING_ORDER_DEFAULT = 5000;
-        
+
         private static Camera _camera;
 
         public static Camera Camera
@@ -39,8 +40,6 @@ namespace Utilites
             return _canvas;
         }
 
-
-        // Get Default Unity Font, used in text objects if no font given
         public static Font GetDefaultFont() => Resources.GetBuiltinResource<Font>("Arial.ttf");
 
         // Create a Sprite in the World, no parent
@@ -148,7 +147,7 @@ namespace Utilites
         public static RectTransform DrawSprite(Sprite sprite, Color color, Transform parent, Vector2 pos, Vector2 size,
             string name = null)
         {
-            if (name is null or "") 
+            if (name is null or "")
                 name = "Sprite";
             var go = new GameObject(name, typeof(RectTransform), typeof(Image));
             var goRectTransform = go.GetComponent<RectTransform>();
@@ -163,7 +162,7 @@ namespace Utilites
             return goRectTransform;
         }
 
-        public static Text DrawTextUI(string textString, Vector2 anchoredPosition, int fontSize, Font font) => 
+        public static Text DrawTextUI(string textString, Vector2 anchoredPosition, int fontSize, Font font) =>
             DrawTextUI(textString, GetCanvas().transform, anchoredPosition, fontSize, font);
 
         public static Text DrawTextUI(string textString, Transform parent, Vector2 anchoredPosition, int fontSize,
@@ -201,28 +200,6 @@ namespace Utilites
         public static int ParseInt(string value, int @default = 0) =>
             (int)ParseFloat(value, @default);
 
-        // Get Mouse Position in World with Z = 0f
-        public static Vector3 GetMouseWorldPosition() => GetMouseWorldPosition(Input.mousePosition);
-
-        public static Vector3 GetMouseWorldPosition(Vector3 position)
-        {
-            var vec = GetMouseWorldPositionWithZ(position, Camera);
-            vec.z = 0f;
-            return vec;
-        }
-
-        public static Vector3 GetMouseWorldPositionWithZ() =>
-            GetMouseWorldPositionWithZ(Input.mousePosition, Camera);
-
-        public static Vector3 GetMouseWorldPositionWithZ(Camera worldCamera) =>
-            GetMouseWorldPositionWithZ(Input.mousePosition, worldCamera);
-
-        public static Vector3 GetMouseWorldPositionWithZ(Vector3 screenPosition, Camera worldCamera) =>
-            worldCamera.ScreenToWorldPoint(screenPosition);
-        
-        public static Vector3 GetMouseWorldPositionWithZ(Vector3 screenPosition) =>
-            Camera.ScreenToWorldPoint(screenPosition);
-
         // Is Mouse over a UI Element? Used for ignoring World clicks through UI
         public static bool IsPointerOverUI()
         {
@@ -238,89 +215,6 @@ namespace Utilites
             return hits.Count > 0;
         }
 
-        // Returns 00-FF, value 0->255
-        public static string Dec_to_Hex(int value) => value.ToString("X2");
-
-        // Returns 0-255
-        public static int Hex_to_Dec(string hex) => Convert.ToInt32(hex, 16);
-
-        // Returns a hex string based on a number between 0->1
-        public static string Dec01_to_Hex(float value) => Dec_to_Hex((int)Mathf.Round(value * 255f));
-
-        // Returns a float between 0->1
-        public static float Hex_to_Dec01(string hex) => Hex_to_Dec(hex) / 255f;
-
-        // Get Hex Color FF00FF
-        public static string GetStringFromColor(Color color)
-        {
-            var red = Dec01_to_Hex(color.r);
-            var green = Dec01_to_Hex(color.g);
-            var blue = Dec01_to_Hex(color.b);
-            return red + green + blue;
-        }
-
-        // Get Hex Color FF00FFAA
-        public static string GetStringFromColorWithAlpha(Color color)
-        {
-            var alpha = Dec01_to_Hex(color.a);
-            return GetStringFromColor(color) + alpha;
-        }
-
-        // Sets out values to Hex String 'FF'
-        public static void GetStringFromColor(Color color, out string red, out string green, out string blue,
-            out string alpha)
-        {
-            red = Dec01_to_Hex(color.r);
-            green = Dec01_to_Hex(color.g);
-            blue = Dec01_to_Hex(color.b);
-            alpha = Dec01_to_Hex(color.a);
-        }
-
-        // Get Hex Color FF00FF
-        public static string GetStringFromColor(float r, float g, float b)
-        {
-            var red = Dec01_to_Hex(r);
-            var green = Dec01_to_Hex(g);
-            var blue = Dec01_to_Hex(b);
-            return red + green + blue;
-        }
-
-        // Get Hex Color FF00FFAA
-        public static string GetStringFromColor(float r, float g, float b, float a)
-        {
-            var alpha = Dec01_to_Hex(a);
-            return GetStringFromColor(r, g, b) + alpha;
-        }
-
-        // Get Color from Hex string FF00FFAA
-        public static Color GetColorFromString(string color)
-        {
-            var red = Hex_to_Dec01(color.Substring(0, 2));
-            var green = Hex_to_Dec01(color.Substring(2, 2));
-            var blue = Hex_to_Dec01(color.Substring(4, 2));
-            var alpha = 1f;
-            if (color.Length >= 8)
-            {
-                // Color string contains alpha
-                alpha = Hex_to_Dec01(color.Substring(6, 2));
-            }
-
-            return new Color(red, green, blue, alpha);
-        }
-
-        public static Vector3 GetNormalizedRandomVector3() =>
-            GetRandomVector3().normalized;
-
-        public static Vector3 GetRandomVector3() =>
-            new(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f));
-
-        public static Vector3 GetVectorFromAngle(int angle)
-        {
-            // angle = 0 -> 360
-            var angleRad = angle * (Mathf.PI / 180f);
-            return new Vector3(Mathf.Cos(angleRad), Mathf.Sin(angleRad));
-        }
-
         public static float GetAngleFromVectorFloat(Vector3 dir)
         {
             dir = dir.normalized;
@@ -328,26 +222,6 @@ namespace Utilites
             if (n < 0) n += 360;
 
             return n;
-        }
-
-        public static int GetAngleFromVector(Vector3 dir)
-        {
-            dir = dir.normalized;
-            var n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            if (n < 0) 
-                n += 360;
-            var angle = Mathf.RoundToInt(n);
-
-            return angle;
-        }
-
-        public static int GetAngleFromVector180(Vector3 dir)
-        {
-            dir = dir.normalized;
-            var n = Mathf.Atan2(dir.y, dir.x) * Mathf.Rad2Deg;
-            var angle = Mathf.RoundToInt(n);
-
-            return angle;
         }
 
         public static Vector3 ApplyRotationToVector(Vector3 vec, Vector3 vecRotation) =>
@@ -376,7 +250,7 @@ namespace Utilites
 
                 if (dragging)
                 {
-                    onMouseDragging(GetMouseWorldPosition());
+                    onMouseDragging(_camera.GetMouseWorldPosition());
                 }
 
                 return false;
@@ -396,7 +270,7 @@ namespace Utilites
             {
                 if (state == 1)
                 {
-                    onWaitingForToPosition?.Invoke(from, GetMouseWorldPosition());
+                    onWaitingForToPosition?.Invoke(from, _camera.GetMouseWorldPosition());
                 }
 
                 if (state == 1 && Input.GetMouseButtonDown(cancelMouseButton))
@@ -410,26 +284,13 @@ namespace Utilites
                     if (state == 0)
                     {
                         state = 1;
-                        from = GetMouseWorldPosition();
+                        from = _camera.GetMouseWorldPosition();
                     }
                     else
                     {
                         state = 0;
-                        onMouseClickFromTo(from, GetMouseWorldPosition());
+                        onMouseClickFromTo(from, _camera.GetMouseWorldPosition());
                     }
-                }
-
-                return false;
-            });
-        }
-
-        public static FunctionUpdater CreateMouseClickAction(Action<Vector3> onMouseClick, int mouseButton = 0)
-        {
-            return FunctionUpdater.Create(() =>
-            {
-                if (Input.GetMouseButtonDown(mouseButton))
-                {
-                    onMouseClick(GetWorldPositionFromUI());
                 }
 
                 return false;
@@ -447,63 +308,6 @@ namespace Utilites
 
                 return false;
             });
-        }
-
-        // Get UI Position from World Position
-        public static Vector2 GetWorldUIPosition(Vector3 worldPosition, Transform parent, Camera uiCamera,
-            Camera worldCamera)
-        {
-            var screenPosition = worldCamera.WorldToScreenPoint(worldPosition);
-            var uiCameraWorldPosition = uiCamera.ScreenToWorldPoint(screenPosition);
-            var localPos = parent.InverseTransformPoint(uiCameraWorldPosition);
-            return new Vector2(localPos.x, localPos.y);
-        }
-
-        public static Vector3 GetWorldPositionFromUIWithZeroZ()
-        {
-            var vec = GetWorldPositionFromUI(Input.mousePosition, Camera.main);
-            vec.z = 0f;
-            return vec;
-        }
-
-        // Get World Position from UI Position
-        public static Vector3 GetWorldPositionFromUI() =>
-            GetWorldPositionFromUI(Input.mousePosition, Camera);
-
-        public static Vector3 GetWorldPositionFromUI(Camera camera) =>
-            GetWorldPositionFromUI(Input.mousePosition, camera);
-
-        public static Vector3 GetWorldPositionFromUI(Vector3 screenPosition, Camera camera) =>
-            camera.ScreenToWorldPoint(screenPosition);
-
-        public static Vector3 GetWorldPositionFromUI_Perspective() =>
-            GetWorldPositionFromUI_Perspective(Input.mousePosition, Camera.main);
-
-        public static Vector3 GetWorldPositionFromUI_Perspective(Camera worldCamera) =>
-            GetWorldPositionFromUI_Perspective(Input.mousePosition, worldCamera);
-
-        public static Vector3 GetWorldPositionFromUI_Perspective(Vector3 screenPosition, Camera worldCamera)
-        {
-            var ray = worldCamera.ScreenPointToRay(screenPosition);
-            var plane = new Plane(Vector3.forward, new Vector3(0, 0, 0f));
-            plane.Raycast(ray, out var distance);
-            return ray.GetPoint(distance);
-        }
-
-        public static void ShakeCamera(float intensity, float timer)
-        {
-            var lastCameraMovement = Vector3.zero;
-            FunctionUpdater.Create(delegate()
-            {
-                timer -= Time.unscaledDeltaTime;
-                var randomMovement =
-                    new Vector3(UnityEngine.Random.Range(-1f, 1f), UnityEngine.Random.Range(-1f, 1f)).normalized *
-                    intensity;
-                var cameraTransform = Camera.transform;
-                cameraTransform.position = cameraTransform.position - lastCameraMovement + randomMovement;
-                lastCameraMovement = randomMovement;
-                return timer <= 0f;
-            }, "CAMERA_SHAKE");
         }
     }
 }

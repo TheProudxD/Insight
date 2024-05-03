@@ -7,6 +7,7 @@ using UnityEngine.UI;
 public class PlayerAbilitySystem : MonoBehaviour
 {
     [SerializeField] private DashAbility _dashAbility;
+    [SerializeField] private FireCircleAbility _fireCircleAbility;
 
     private PlayerMana _playerMana;
 
@@ -15,15 +16,26 @@ public class PlayerAbilitySystem : MonoBehaviour
         _playerMana = GetComponent<PlayerMana>();
     }
 
-    private bool EnoughMana(Ability ability) => ability.MagicCost >= _playerMana.Amount;
+    private bool EnoughMana(Ability ability) => ability.MagicCost <= _playerMana.Amount;
 
+    private bool TryUseAbility(Ability ability, out float duration)
+    {
+        if (EnoughMana(ability) ==false || ability.CanUse() == false)
+        {
+            duration = 0;
+            return false;
+        }
+
+        _playerMana.Decrease(ability.MagicCost);
+        PlayerStateMachine.Current = PlayerState.Ability;
+        duration = ability.Use();
+        return true;
+    }
+    
     public float UseDash() // небольшой буст
     {
-        if (EnoughMana(_dashAbility) == false || _dashAbility.CanUse() == false)
-            return 0;
-
-        PlayerStateMachine.Current = PlayerState.Ability;
-        return _dashAbility.Use();
+        TryUseAbility(_dashAbility, out var duration);
+        return duration;
     }
 
     public float UseMultiProjectile() // выстрел из нескольких снарядов
@@ -53,7 +65,8 @@ public class PlayerAbilitySystem : MonoBehaviour
 
     public float UseFireCircle() // огонь в радиусе от игрока
     {
-        throw new System.NotImplementedException();
+        TryUseAbility(_fireCircleAbility, out var duration);
+        return duration;
     }
 
     public float UseShield() // полное поглощение всего дамага

@@ -15,42 +15,42 @@ MonoBehaviour:
   selectionHistory:
     _history:
     - reference: {fileID: 0}
-      sceneName: Inventory
-      scenePath: 
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-5189355647082054104-0
+      sceneName: DontDestroyOnLoad
+      scenePath: DontDestroyOnLoad
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-512799962022329605-0
     - reference: {fileID: 0}
-      sceneName: Inventory
+      sceneName: DontDestroyOnLoad
+      scenePath: DontDestroyOnLoad
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-518008203782059674-0
+    - reference: {fileID: 0}
+      sceneName: DontDestroyOnLoad
+      scenePath: DontDestroyOnLoad
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-335455066-0
+    - reference: {fileID: 0}
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-3975113957845666528-548505730
+    - reference: {fileID: 0}
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-5825105546489695962-548505730
+    - reference: {fileID: 0}
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-335455066-0
+    - reference: {fileID: 0}
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-631097026102896465-395759869
+    - reference: {fileID: 631097026102896465, guid: e3d296760f4860f4b91d5ba8bb159438, type: 3}
+      sceneName: 
       scenePath: 
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-6648636777747791001-0
+      globalObjectId: GlobalObjectId_V1-1-e3d296760f4860f4b91d5ba8bb159438-631097026102896465-0
+    - reference: {fileID: 0}
+      sceneName: fire_small
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-631097026102896465-0
     - reference: {fileID: 0}
       sceneName: 
       scenePath: 
       globalObjectId: 
-    - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-1705864458-0
-    - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-130374862234469792-0
-    - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-277257984-0
-    - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-2136194370-0
-    - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-591218660-0
-    - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-1742310389-0
-    - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-2815795291417852808-2800282225840356904
