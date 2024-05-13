@@ -200,7 +200,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2741a643485048efa345756e557e88d1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _levelPassedText: {fileID: 1944935103}
+  _levelPassedText: {fileID: 0}
 --- !u!1 &173741352
 GameObject:
   m_ObjectHideFlags: 0
@@ -1609,6 +1609,10 @@ PrefabInstance:
       value: Trigger Next Level
       objectReference: {fileID: 0}
     - target: {fileID: 5828633306948058053, guid: 7af9397722d465a46a87d3d27ef3184d, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5828633306948058053, guid: 7af9397722d465a46a87d3d27ef3184d, type: 3}
       propertyPath: m_StaticEditorFlags
       value: 2147483647
       objectReference: {fileID: 0}
@@ -2612,7 +2616,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.5446949, y: -0.113330364}
+  m_Offset: {x: 0.4996853, y: 0.101713896}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -2623,7 +2627,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 1.6015587, y: 1.1626873}
+  m_Size: {x: 1.9516296, y: 1.5927758}
   m_EdgeRadius: 0
 --- !u!4 &1435678774
 Transform:
@@ -2676,7 +2680,7 @@ GameObject:
   - component: {fileID: 1540676805}
   - component: {fileID: 1540676804}
   m_Layer: 5
-  m_Name: LoadNextLevel
+  m_Name: Story mode
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2722,7 +2726,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Load the next Level
+  m_text: story mode
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 9f1f3eb221c81374dbb4a9e8f5735ba0, type: 2}
   m_sharedMaterial: {fileID: -7360214402453367820, guid: 9f1f3eb221c81374dbb4a9e8f5735ba0, type: 2}

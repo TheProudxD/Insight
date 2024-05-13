@@ -12,16 +12,16 @@ namespace Storage
 {
     public class SceneManager
     {
+        public const string CHANGE_LEVEL_KEY = "changelevel";
         public event Action<Scenes> LevelChanged;
 
         private readonly IDynamicStorageService _dynamicStorageService;
         private readonly WindowManager _windowManager;
 
-        private int _currentLevel; // max level passed by the player - by default
         private PlayerData _playerData;
         private readonly int _minLevel;
 
-        public int CurrentLevel => _currentLevel;
+        public int CurrentLevel { get; private set; }
 
         private SceneManager(IDynamicStorageService dynamicStorageService, DataManager dataManager,
             WindowManager windowManager)
@@ -34,12 +34,12 @@ namespace Storage
 
         private void Initialize(PlayerData playerData)
         {
-            _currentLevel = playerData.CurrentLevel;
-            if (_currentLevel < _minLevel)
+            CurrentLevel = playerData.CurrentLevel;
+            if (CurrentLevel < _minLevel)
             {
-                Debug.LogError($"Level must be more than {_minLevel}, but was " + _currentLevel);
-                _currentLevel = _minLevel;
-                Save(_currentLevel);
+                Debug.LogError($"Level must be more than {_minLevel}, but was " + CurrentLevel);
+                CurrentLevel = _minLevel;
+                Save(CurrentLevel);
             }
 
             _playerData = playerData;
@@ -62,7 +62,7 @@ namespace Storage
             var uploadParams = new Dictionary<string, string>
             {
                 { "playerlevel", newLevel.ToString() },
-                { "action", "changelevel" },
+                { "action", CHANGE_LEVEL_KEY },
                 { "playerid", SystemPlayerData.Instance.uid.ToString() },
             };
 
@@ -71,7 +71,7 @@ namespace Storage
                 if (result)
                 {
                     _playerData.CurrentLevel = newLevel;
-                    _currentLevel = newLevel;
+                    CurrentLevel = newLevel;
                     Debug.Log($"New level saved Successfully to {newLevel}");
                 }
                 else
@@ -85,7 +85,7 @@ namespace Storage
         {
             var newLevel = GetNextLevelId();
 
-            if (newLevel > (int)Scenes.Lobby && newLevel > _currentLevel)
+            if (newLevel > (int)Scenes.Lobby && newLevel > CurrentLevel)
             {
                 Save(newLevel);
             }

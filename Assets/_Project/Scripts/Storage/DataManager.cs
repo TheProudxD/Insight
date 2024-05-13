@@ -14,12 +14,13 @@ namespace StorageService
         public event Action<PlayerData> DataLoaded;
 
         public const string REGISTRY_DATA_KEY = "registry";
+        public const string CHANGE_NAME_KEY = "changename";
         public const string MAX_LEVEL_DATA_KEY = "maxleveldata";
         private const string DYNAMIC_USER_DATA_KEY = "userdata";
         private const string DEFAULT_PLAYER_NAME = "Player";
 
         private readonly GameData _gameData = new();
-        private PlayerData _playerData = null;
+        private PlayerData _playerData;
         private IStaticStorageService StaticStorageService { get; }
         private IDynamicStorageService DynamicStorageService { get; }
 
@@ -34,7 +35,7 @@ namespace StorageService
             var uploadParams = new Dictionary<string, string>
             {
                 { "playername", newName },
-                { "action", "changename" },
+                { "action", CHANGE_NAME_KEY },
                 { "playerid", SystemPlayerData.Instance.uid.ToString() },
             };
 
@@ -93,11 +94,18 @@ namespace StorageService
                 CurrentLevel = callbackData["lvl"],
                 Name = callbackData["Name"],
             };
-
+            
             DataLoaded?.Invoke(_playerData);
 
             if (_playerData.Name == DEFAULT_PLAYER_NAME)
+            {
                 await SetName("Player " + SystemPlayerData.Instance.uid);
+            }
+
+            if (_playerData.CurrentLevel > _gameData.MaxLevel)
+            {
+                Debug.LogError("Max level less than current user!");
+            }
 
             Debug.Log(_playerData.ToString());
 
