@@ -15,42 +15,42 @@ MonoBehaviour:
   selectionHistory:
     _history:
     - reference: {fileID: 0}
-      sceneName: Lobby
-      scenePath: Assets/_Project/Scenes/Game/Lobby.unity
-      globalObjectId: GlobalObjectId_V1-2-548a32481bc0ba5408e7b3d4513dd008-177993302-0
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-8016286177003335534-548505730
     - reference: {fileID: 0}
-      sceneName: Lobby
-      scenePath: Assets/_Project/Scenes/Game/Lobby.unity
-      globalObjectId: GlobalObjectId_V1-2-548a32481bc0ba5408e7b3d4513dd008-485892720-0
+      sceneName: HUD
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-6451949262979310506-0
     - reference: {fileID: 0}
-      sceneName: Lobby
-      scenePath: Assets/_Project/Scenes/Game/Lobby.unity
-      globalObjectId: GlobalObjectId_V1-2-548a32481bc0ba5408e7b3d4513dd008-2030680691-0
+      sceneName: HUD
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-1909580645093356863-0
     - reference: {fileID: 0}
-      sceneName: Lobby
-      scenePath: Assets/_Project/Scenes/Game/Lobby.unity
-      globalObjectId: GlobalObjectId_V1-2-548a32481bc0ba5408e7b3d4513dd008-634226975-0
+      sceneName: HUD
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-2448085017646026652-0
     - reference: {fileID: 0}
-      sceneName: Lobby
-      scenePath: Assets/_Project/Scenes/Game/Lobby.unity
-      globalObjectId: GlobalObjectId_V1-2-548a32481bc0ba5408e7b3d4513dd008-563654292-0
+      sceneName: HUD
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-7770423387831458423-0
     - reference: {fileID: 0}
-      sceneName: Lobby
-      scenePath: Assets/_Project/Scenes/Game/Lobby.unity
-      globalObjectId: GlobalObjectId_V1-2-548a32481bc0ba5408e7b3d4513dd008-1399088927-0
+      sceneName: HUD
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-1404037976284305926-0
     - reference: {fileID: 0}
-      sceneName: Lobby
-      scenePath: Assets/_Project/Scenes/Game/Lobby.unity
-      globalObjectId: GlobalObjectId_V1-2-548a32481bc0ba5408e7b3d4513dd008-64896403-0
+      sceneName: HUD
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-3302891857190022926-0
     - reference: {fileID: 0}
-      sceneName: Lobby
-      scenePath: Assets/_Project/Scenes/Game/Lobby.unity
-      globalObjectId: GlobalObjectId_V1-2-548a32481bc0ba5408e7b3d4513dd008-5828633306948058053-514699725
+      sceneName: HUD
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-2985447203022249041-0
     - reference: {fileID: 0}
-      sceneName: Lobby
-      scenePath: Assets/_Project/Scenes/Game/Lobby.unity
-      globalObjectId: GlobalObjectId_V1-2-548a32481bc0ba5408e7b3d4513dd008-1919418645-0
+      sceneName: HUD
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-1096979706551988905-0
     - reference: {fileID: 0}
-      sceneName: Lobby
-      scenePath: Assets/_Project/Scenes/Game/Lobby.unity
-      globalObjectId: GlobalObjectId_V1-2-548a32481bc0ba5408e7b3d4513dd008-1435678770-0
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-5289654357295137174-548505730

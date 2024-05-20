@@ -1,6 +1,5 @@
 using System;
 using ResourceService;
-using Zenject;
 
 public class Wallet
 {
@@ -9,23 +8,17 @@ public class Wallet
 
     public Wallet(ResourceManager resourceManager) => _resourceManager = resourceManager;
 
-    public void AddCoins(ResourceType resourceType, int value)
+    public void Add(ResourceType resourceType, int value)
     {
-        if (value < 0)
-            throw new ArgumentOutOfRangeException(nameof(value));
-        
         _resourceManager.AddResource(resourceType, value);
 
         CurrencyChanged?.Invoke(resourceType, GetCurrentCoins(resourceType));
     }
 
-    public void Spend(ResourceType resourceType,int value)
+    public void Spend(ResourceType resourceType, int value)
     {
-        if (value < 0)
-            throw new ArgumentOutOfRangeException(nameof(value));
-
         _resourceManager.SpendResource(resourceType, value);
-        
+
         CurrencyChanged?.Invoke(resourceType, GetCurrentCoins(resourceType));
     }
 

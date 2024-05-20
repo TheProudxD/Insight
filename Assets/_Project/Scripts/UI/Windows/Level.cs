@@ -1,7 +1,6 @@
 using Extensions;
 using Managers;
 using Storage;
-using StorageService;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,12 +16,12 @@ namespace UI
 
         [SerializeField] private LevelSelectWindow _levelSelectWindow;
         [SerializeField] private LevelSelectPopup _levelSelectPopup;
-        
+
         [SerializeField] private Scenes _scene;
         [SerializeField] private Image[] _starImages;
-        [SerializeField] private TextMeshProUGUI _requireLevelText;
         [SerializeField] private Image _lock;
-        [SerializeField] private bool _isPassed;
+        [SerializeField] private TextMeshProUGUI _requireLevelText;
+        
         [SerializeField, Range(0, 3)] private int _starPassedAmount;
 
         private Button _openPopupButton;
@@ -30,11 +29,19 @@ namespace UI
         private void Awake()
         {
             _openPopupButton = GetComponent<Button>();
+            if (_starImages.Length>3)
+                Debug.LogError(nameof(_starImages));
 
+            InitializeOpenButton();
+            InitializeUI();
+        }
+
+        private void InitializeOpenButton()
+        {
             _openPopupButton.onClick.AddListener(() =>
             {
                 _levelSelectPopup.gameObject.SetActive(true);
-                _levelSelectPopup.SetLevelTitle(_scene.ToString());
+                _levelSelectPopup.Activate(_scene.ToString());
                 _levelSelectPopup.StartLevelButton.RemoveAll();
                 _levelSelectPopup.StartLevelButton.Add(() =>
                 {
@@ -42,36 +49,21 @@ namespace UI
                     _sceneManager.LoadScene(_scene);
                 });
             });
+        }
 
+        private void InitializeUI()
+        {
             var isOpen = _sceneManager.CurrentLevel >= (int)_scene;
             if (isOpen)
             {
-                if (_isPassed)
+                for (var i = 0; i < _starImages.Length; i++)
                 {
-                    for (var i = 0; i < _starImages.Length; i++)
-                    {
-                        var starImage = _starImages[i];
-                        if (i < _starPassedAmount)
-                        {
-                            starImage.sprite = _levelSelectWindow.Star;
-                        }
-                        else
-                        {
-                            starImage.sprite = _levelSelectWindow.PlaceholderStar;
-                        }
+                    var starImage = _starImages[i];
+                    starImage.sprite = i < _starPassedAmount ? _levelSelectWindow.Star : _levelSelectWindow.PlaceholderStar;
 
-                        starImage.gameObject.SetActive(true);
-                    }
+                    starImage.gameObject.SetActive(true);
                 }
-                else
-                {
-                    foreach (var starImage in _starImages)
-                    {
-                        starImage.sprite = _levelSelectWindow.PlaceholderStar;
-                        starImage.gameObject.SetActive(true);
-                    }
-                }
-
+                
                 _openPopupButton.interactable = true;
                 _requireLevelText.gameObject.SetActive(false);
                 _lock.gameObject.SetActive(false);

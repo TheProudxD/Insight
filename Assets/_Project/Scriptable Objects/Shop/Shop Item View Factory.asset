@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8661b7bf215648fda1efb8708eb271c5, type: 3}
   m_Name: Shop Item View Factory
   m_EditorClassIdentifier: 
-  _swordSkinItemPrefab: {fileID: 7240807944688905233, guid: c4a6e6b1d52623a48b43bcc5e1737b0c, type: 3}
-  _bowSkinItemPrefab: {fileID: 7240807944688905233, guid: c4a6e6b1d52623a48b43bcc5e1737b0c, type: 3}
+  _swordSkinItemPrefab: {fileID: 8864651333644807601, guid: 718777ea3515a4948853329f62c38bb4, type: 3}
+  _bowSkinItemPrefab: {fileID: 8864651333644807601, guid: 718777ea3515a4948853329f62c38bb4, type: 3}

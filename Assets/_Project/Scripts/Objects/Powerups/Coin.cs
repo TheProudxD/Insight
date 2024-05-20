@@ -1,7 +1,7 @@
+using DG.Tweening;
 using Player;
 using ResourceService;
 using UnityEngine;
-using Zenject;
 
 namespace Objects.Powerups
 {
@@ -9,12 +9,14 @@ namespace Objects.Powerups
     {
         private int _amountToIncrease;
         private ResourceManager _resourceManager;
+        private Tweener _tweener;
 
         public void Initialize(CoinPowerupEntitySpecs coinPowerupEntitySpecs, ResourceManager resourceManager)
         {
             _amountToIncrease = coinPowerupEntitySpecs.Amount;
             _resourceManager = resourceManager;
-            Destroy(gameObject, coinPowerupEntitySpecs.DestroyTimeAfterSpawn);
+            
+            _tweener = transform.DOScale(Vector3.zero, coinPowerupEntitySpecs.DestroyTimeAfterSpawn).OnComplete(()=>Destroy(gameObject));
         }
 
         protected void OnTriggerEnter2D(Collider2D other)
@@ -22,6 +24,7 @@ namespace Objects.Powerups
             if (other.TryGetComponent(out PlayerAttacking player) && !other.isTrigger)
             {
                 _resourceManager.AddResource(ResourceType.SoftCurrency, _amountToIncrease);
+                _tweener.Complete();
                 Destroy(gameObject);
             }
         }

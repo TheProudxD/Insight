@@ -14,15 +14,27 @@ namespace UI
 
         private void Awake()
         {
-            _closeButton.Add(()=>gameObject.SetActive(false));
-            
-            gameObject.SetActive(false);
+            _closeButton.Add(() => gameObject.SetActive(false));
         }
-        
-        public void SetLevelTitle(string title)=> _titleText.SetText(title);
-        
-        public void DisplayEnemies(){}
-        
-        public void DisplayRewards(){}
+
+        private void SetLevelTitle(string title) => _titleText.SetText(title);
+
+        private void DisplayEnemies()
+        {
+        }
+
+        private void DisplayRewards()
+        {
+        }
+
+        public void Activate(string title)
+        {
+            SetLevelTitle(title);
+            DisplayEnemies();
+            DisplayRewards();
+            gameObject.SetActive(true);
+        }
+
+        public void Deactivate() => gameObject.SetActive(false);
     }
 }

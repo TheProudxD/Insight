@@ -4,12 +4,14 @@ using System.Linq;
 using Assets._Project.Scripts.Storage.Static;
 using StorageService;
 using UnityEngine;
-using Zenject;
 
 namespace ResourceService
 {
     public class ResourceManager
     {
+        private const string CHANGE_HARD_CUR_KEY = "changehardcurrency";
+        private const string CHANGE_SOFT_CUR_KEY = "changesoftcurrency";
+        
         public event Action<ResourceType, int, int> ResourceChanged;
         
         private readonly IDynamicStorageService _dynamicStorageService;
@@ -25,6 +27,7 @@ namespace ResourceService
         private void Initialize(PlayerData playerData)
         {
             _playerData = playerData;
+            
             Resource[] resources =
             {
                 new(ResourceType.SoftCurrency, _playerData.AmountSoftResources),
@@ -48,6 +51,7 @@ namespace ResourceService
         {
             if (value < 0)
                 throw new ArgumentException("Value cannot be negative");
+            
             var resource = _resources[type];
             resource.Amount += value;
         }
@@ -56,7 +60,12 @@ namespace ResourceService
         {
             if (value < 0)
                 throw new ArgumentException("Value cannot be negative");
+
             var resource = _resources[type];
+            
+            if (resource.Amount - value < 0)
+                throw new ArgumentException("You can't spend more than is in current amount");
+            
             resource.Amount -= value;
         }
 
@@ -65,7 +74,7 @@ namespace ResourceService
             var uploadParams = new Dictionary<string, string>
             {
                 { "playercurrency", newValue.ToString() },
-                { "action", "changesoftcurrency" },
+                { "action", CHANGE_SOFT_CUR_KEY },
                 { "playerid", SystemPlayerData.Instance.uid.ToString() },
             };
 
@@ -88,7 +97,7 @@ namespace ResourceService
             var uploadParams = new Dictionary<string, string>
             {
                 { "playercurrency", newValue.ToString() },
-                { "action", "changehardcurrency" },
+                { "action", CHANGE_HARD_CUR_KEY },
                 { "playerid", SystemPlayerData.Instance.uid.ToString() },
             };
 
