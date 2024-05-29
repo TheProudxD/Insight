@@ -26,9 +26,8 @@ namespace UI.Shop
         {
             Clear();
             
-            foreach (var shopItem in items)
+            foreach (var spawnedItem in items.Select(shopItem => _shopItemViewFactory.Get(shopItem, _itemParent)))
             {
-                var spawnedItem = _shopItemViewFactory.Get(shopItem, _itemParent);
                 spawnedItem.Click += OnItemViewClick;
 
                 spawnedItem.Unselect();
@@ -85,7 +84,7 @@ namespace UI.Shop
 
         private void Sort()
         {
-            _shopItems = _shopItems.OrderBy(x => x.IsLock).ThenByDescending(x => x.Price).ToList();
+            _shopItems = _shopItems.OrderBy(x => x.IsLock).ThenByDescending(x => x.Item.Price).ToList();
             
             for (var i = 0; i < _shopItems.Count; i++) 
                 _shopItems[i].transform.SetSiblingIndex(i);

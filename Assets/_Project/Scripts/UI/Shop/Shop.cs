@@ -89,9 +89,11 @@ namespace UI.Shop
 
         private void OnBuyButtonClicked()
         {
-            if (_wallet.IsEnough(_previewedItem.ResourceType, _previewedItem.Price))
+            var rt = _previewedItem.Item.ResourceType;
+            var price = _previewedItem.Item.Price;
+            if (_wallet.IsEnough(rt, price))
             {
-                _wallet.Spend(_previewedItem.ResourceType, _previewedItem.Price);
+                _wallet.Spend(rt, price);
                 _skinUnlocker.Visit(_previewedItem.Item);
                 SelectSkin();
                 _previewedItem.Unlock();
@@ -106,8 +108,14 @@ namespace UI.Shop
         private void OnItemViewClicked(ShopItemView shopItemView)
         {
             _previewedItem = shopItemView;
-            _skinPlacement.SetGameModel(_previewedItem.Model);
+            var model = _previewedItem.Item.Model;
+            var itemName = _previewedItem.Item.Name;
+            var description = _previewedItem.Item.Description;
+            var rt = _previewedItem.Item.ResourceType;
+            var price = _previewedItem.Item.Price;
+            
             _openedSkinsChecker.Visit(_previewedItem.Item);
+            _skinPlacement.SetGameModel(model, itemName, description);
 
             if (_openedSkinsChecker.IsOpened)
             {
@@ -122,7 +130,7 @@ namespace UI.Shop
             }
             else
             {
-                ShowBuyButton(_previewedItem.ResourceType, _previewedItem.Price);
+                ShowBuyButton(rt, price);
             }
         }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.EventSystems;
@@ -11,6 +12,11 @@ namespace _Project.Scripts.Inventory
         private Vector2 _startDragPosition;
         private readonly RaycastHit2D[] _casts = new RaycastHit2D[5];
         private InventorySlot _inventorySlot;
+
+        private void Start()
+        {
+            
+        }
 
         public void Initialize(InventorySlot inventorySlot)
         {

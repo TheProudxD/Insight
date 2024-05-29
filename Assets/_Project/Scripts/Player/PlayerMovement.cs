@@ -37,10 +37,8 @@ namespace Player
             var verticalAxis = inputDirection.y;
 
             _playerMovement = new Vector2(horizontalAxis, verticalAxis);
-            if (_playerMovement != Vector2.zero)
-            {
+            if (_playerMovement != Vector2.zero) 
                 _faceDirection = _playerMovement;
-            }
         }
 
         private void MoveCharacter(Vector2 position) =>

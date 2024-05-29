@@ -18656,11 +18656,11 @@ MonoBehaviour:
   _itemInventorySlotPrefab: {fileID: 1406418090042942306, guid: 11634e242e8180d40aaf49951c4840e7, type: 3}
   _inventoryPanel: {fileID: 2055786034820928504}
   _useButton: {fileID: 3330446279323906067}
+  _closeButton: {fileID: 0}
   _playerInventory: {fileID: 11400000, guid: 80ee636432fc9cb4299a1a8e38aadd59, type: 2}
   _selectedItemName: {fileID: 4269399002061022390}
   _selectedItemDescription: {fileID: 0}
   _selectedItemImage: {fileID: 0}
-  _selectedItemBackgroundImage: {fileID: 0}
   _selectedItemRarity: {fileID: 0}
   _selectedItemAmount: {fileID: 0}
 --- !u!1 &6401102243887388540

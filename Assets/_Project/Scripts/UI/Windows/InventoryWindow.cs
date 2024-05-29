@@ -18,11 +18,12 @@ public class InventoryWindow : CommonWindow
     [SerializeField] private Button _closeButton;
     [SerializeField] private PlayerInventory _playerInventory;
 
-    [Header("Right Bar")] 
-    [SerializeField] private TextMeshProUGUI _selectedItemName;
+    [Header("Right Bar")] [SerializeField] private TextMeshProUGUI _selectedItemName;
     [SerializeField] private TextMeshProUGUI _selectedItemDescription;
+
     [SerializeField] private Image _selectedItemImage;
-    [SerializeField] private Image _selectedItemBackgroundImage;
+
+    //[SerializeField] private Image _selectedItemBackgroundImage;
     [SerializeField] private TextMeshProUGUI _selectedItemRarity;
     [SerializeField] private TextMeshProUGUI _selectedItemAmount;
 
@@ -36,7 +37,7 @@ public class InventoryWindow : CommonWindow
     private InventoryItemCategory _itemCategory = InventoryItemCategory.All;
 
     [Inject] private WindowManager _windowManager;
-    
+
     private void Awake()
     {
         foreach (var itemCategory in typeof(InventoryItemCategory).GetEnumValues().Cast<InventoryItemCategory>())
@@ -84,8 +85,9 @@ public class InventoryWindow : CommonWindow
             inventoryItems = inventoryItems.Where(x => x.Category == _itemCategory)
                 .ToList();
         }
-        
-        if (_inventorySlotsPosition[_itemCategory] == null || inventoryItems.All(x => _inventorySlotsPosition[_itemCategory].Any(y=>y.item==x)) == false)
+
+        if (_inventorySlotsPosition[_itemCategory] == null ||
+            inventoryItems.All(x => _inventorySlotsPosition[_itemCategory].Any(y => y.item == x)) == false)
         {
             var slotsPosition = new List<(int index, InventoryItem item)>();
             for (int i = 0; i < inventoryItems.Count; i++)
@@ -153,7 +155,7 @@ public class InventoryWindow : CommonWindow
         _selectedItemRarity.SetText(item.Rarity.ToString());
         _selectedItemAmount.SetText(item.Amount.ToString());
         _selectedItemImage.sprite = item.Image;
-        _selectedItemBackgroundImage.sprite = _inventorySlots[item].ItemBackgroundImage.sprite;
+        //_selectedItemBackgroundImage.sprite = _inventorySlots[item].ItemBackgroundImage.sprite;
 
         _useButton.interactable = item.Usable;
         _useButton.onClick.RemoveAllListeners();

@@ -3,7 +3,7 @@ using UnityEngine;
 
 namespace Player
 {
-    public class HitAnimation: MonoBehaviour
+    public class HitAnimation : MonoBehaviour
     {
         [SerializeField] private SpriteRenderer _spriteAnimate;
         

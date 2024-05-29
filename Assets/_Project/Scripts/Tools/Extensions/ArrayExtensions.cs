@@ -66,14 +66,14 @@ namespace Extensions
             {
                 result = array1.Count == array2.Count;
 
-                if (result)
+                if (result == false) 
+                    return false;
+                
+                for (int i = 0; i < array1.Count && result; i++)
                 {
-                    for (int i = 0; i < array1.Count && result; i++)
+                    if (array1[i])
                     {
-                        if (array1[i])
-                        {
-                            result &= array1[i] == array2[i];
-                        }
+                        result &= array1[i] == array2[i];
                     }
                 }
             }
@@ -94,7 +94,7 @@ namespace Extensions
 
         public static bool ArrayContains<T>(this T[] array, T value)
         {
-            var result = array != null && value != null;
+            var result = array is not null && value is not null;
             return result && array.Contains(value);
         }
 
@@ -276,12 +276,9 @@ namespace Extensions
                 return;
             }
 
-            foreach (T element in list)
+            foreach (var _ in list.Where(breakFunc))
             {
-                if (breakFunc(element))
-                {
-                    break;
-                }
+                break;
             }
         }
 
@@ -337,10 +334,9 @@ namespace Extensions
         {
             if (array == null) throw new NullReferenceException("Array is null");
             if (array.Length == 0) throw new IndexOutOfRangeException("Array is empty");
-            foreach (var t in array)
+            foreach (var t in array.Where(t => predicate(t)))
             {
-                if (predicate(t)) 
-                    return t;
+                return t;
             }
 
             throw new ArgumentException("Cant find predicate in array");

@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 359ec0161515411fb974840f3609fd70, type: 3}
   m_Name: Wood Sword [def]
   m_EditorClassIdentifier: Assembly-CSharp::SwordSkinItem
+  <Name>k__BackingField: Wood Sword
+  <Description>k__BackingField: Simple sword
   <Model>k__BackingField: {fileID: -2050228364, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
   <Sprite>k__BackingField: {fileID: -2050228364, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
   <ResourceType>k__BackingField: 0

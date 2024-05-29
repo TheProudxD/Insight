@@ -15,17 +15,14 @@ namespace UI.Shop
         [SerializeField] private Color _highlightBackground;
         [SerializeField] private Image _contentImage;
         [SerializeField] private Image _lockImage;
-        [SerializeField] private Image _selectionText;
+        [SerializeField] private GameObject _selectionText;
         [SerializeField] private IntValueView _priceView;
         [SerializeField] private Image _currencyImage;
         [SerializeField] private Sprite _softCurrencyIcon;
         [SerializeField] private Sprite _hardCurrencyIcon;
 
         public ShopItem Item { get; private set; }
-        public int Price => Item.Price;
         public bool IsLock { get; private set; }
-        public Sprite Model => Item.Model;
-        public ResourceType ResourceType => Item.ResourceType;
 
         private Image _backgroundImage;
 
@@ -35,9 +32,9 @@ namespace UI.Shop
             _backgroundImage = GetComponent<Image>();
             _backgroundImage.color = _standardBackground;
             _contentImage.sprite = shopItem.Sprite;
-            _priceView.Show(Price);
+            _priceView.Show(Item.Price);
 
-            _currencyImage.sprite = ResourceType switch
+            _currencyImage.sprite = Item.ResourceType switch
             {
                 ResourceType.SoftCurrency => _softCurrencyIcon,
                 ResourceType.HardCurrency => _hardCurrencyIcon,
@@ -51,7 +48,7 @@ namespace UI.Shop
         {
             IsLock = true;
             _lockImage.gameObject.SetActive(true);
-            _priceView.Show(Price);
+            _priceView.Show(Item.Price);
         }
 
         public void Unlock()

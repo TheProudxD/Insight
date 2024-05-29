@@ -3,11 +3,11 @@ using UnityEngine;
 
 namespace Player
 {
-    public class BowShooting: Shooting
+    public class BowShooting : Shooting
     {
         [SerializeField] private PlayerProjectile _arrowProjectile;
         protected override float TimeBeforeLastAttackCounter { get; set; }
-        
+
         private float _destroyArrowTime;
         private float _attackDuration;
 
@@ -28,10 +28,10 @@ namespace Player
             ArrowSpawn(playerPos.sqrMagnitude != 0 ? playerPos : direction);
 
             StartCoroutine(BowAttackCo());
-            
+
             return true;
         }
-        
+
         private void ArrowSpawn(Vector3 position)
         {
             var arrow = Instantiate(_arrowProjectile, transform.position, Quaternion.identity);
@@ -42,8 +42,8 @@ namespace Player
 
             Destroy(arrow.gameObject, _destroyArrowTime);
         }
-        
-        public IEnumerator BowAttackCo()
+
+        private IEnumerator BowAttackCo()
         {
             TimeBeforeLastAttackCounter = 0;
             PlayerStateMachine.Current = PlayerState.Attack;
@@ -52,7 +52,7 @@ namespace Player
             if (PlayerStateMachine.Current != PlayerState.Interact)
                 PlayerStateMachine.Current = PlayerState.Idle;
         }
-        
+
         protected override bool CanAttack() => PlayerStateMachine.Current != PlayerState.Attack &&
                                                PlayerStateMachine.Current != PlayerState.Stagger &&
                                                TimeBeforeLastAttackCounter >= PlayerEntitySpecs.BowAttackCooldown;

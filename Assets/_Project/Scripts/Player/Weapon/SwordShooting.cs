@@ -17,16 +17,6 @@ namespace Player
             _playerAnimation = playerAnimation;
         }
 
-        public override bool TryShoot(Vector3 position = default, Vector3 direction = default)
-        {
-            if (!CanAttack())
-                return false;
-
-            StartCoroutine(SwordAttackCo());
-
-            return true;
-        }
-
         private IEnumerator SwordAttackCo()
         {
             TimeBeforeLastAttackCounter = 0;
@@ -37,6 +27,16 @@ namespace Player
             yield return new WaitForSeconds(_attackDuration);
             if (PlayerStateMachine.Current != PlayerState.Interact)
                 PlayerStateMachine.Current = PlayerState.Idle;
+        }
+
+        public override bool TryShoot(Vector3 position = default, Vector3 direction = default)
+        {
+            if (!CanAttack())
+                return false;
+
+            StartCoroutine(SwordAttackCo());
+
+            return true;
         }
 
         protected override bool CanAttack() => PlayerStateMachine.Current != PlayerState.Attack &&

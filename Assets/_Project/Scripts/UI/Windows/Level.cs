@@ -21,7 +21,7 @@ namespace UI
         [SerializeField] private Image[] _starImages;
         [SerializeField] private Image _lock;
         [SerializeField] private TextMeshProUGUI _requireLevelText;
-        
+
         [SerializeField, Range(0, 3)] private int _starPassedAmount;
 
         private Button _openPopupButton;
@@ -29,7 +29,7 @@ namespace UI
         private void Awake()
         {
             _openPopupButton = GetComponent<Button>();
-            if (_starImages.Length>3)
+            if (_starImages.Length > 3)
                 Debug.LogError(nameof(_starImages));
 
             InitializeOpenButton();
@@ -59,11 +59,13 @@ namespace UI
                 for (var i = 0; i < _starImages.Length; i++)
                 {
                     var starImage = _starImages[i];
-                    starImage.sprite = i < _starPassedAmount ? _levelSelectWindow.Star : _levelSelectWindow.PlaceholderStar;
+                    starImage.sprite = i < _starPassedAmount
+                        ? _levelSelectWindow.Star
+                        : _levelSelectWindow.PlaceholderStar;
 
                     starImage.gameObject.SetActive(true);
                 }
-                
+
                 _openPopupButton.interactable = true;
                 _requireLevelText.gameObject.SetActive(false);
                 _lock.gameObject.SetActive(false);

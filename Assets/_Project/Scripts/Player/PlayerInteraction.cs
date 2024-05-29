@@ -13,7 +13,7 @@ namespace Player
 
         public void DisplayPickupItem(InventoryItem item)
         {
-            if (item == null) 
+            if (item == null)
                 return;
             
             _playerAnimation.SetReceiveItemAnimation(true);

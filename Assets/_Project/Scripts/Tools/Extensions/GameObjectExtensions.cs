@@ -24,21 +24,21 @@ namespace Extensions
 
         public static void AskColor(GameObject obj, Color color)
         {
-            if (obj.TryGetComponent<Renderer>(out Renderer renderer))
+            if (obj.TryGetComponent(out Renderer renderer))
             {
                 foreach (var curMaterial in renderer.materials)
                 {
                     curMaterial.color = color;
                 }
             }
-            
+
             if (obj.transform.childCount <= 0) return;
             foreach (Transform d in obj.transform)
             {
                 AskColor(d.gameObject, color);
             }
         }
-        
+
         public static void DisableRigidBody(this GameObject obj)
         {
             var rigidbodies = obj.GetComponentsInChildren<Rigidbody>();
@@ -47,13 +47,13 @@ namespace Extensions
                 rb.isKinematic = true;
             }
         }
-        
+
         public static void EnableRigidBody(this GameObject obj, float force)
         {
             EnableRigidBody(obj);
             obj.GetComponent<Rigidbody>().AddForce(obj.transform.forward * force);
         }
-        
+
         public static void EnableRigidBody(this GameObject obj)
         {
             var rigidbodies = obj.GetComponentsInChildren<Rigidbody>();
@@ -62,7 +62,7 @@ namespace Extensions
                 rb.isKinematic = false;
             }
         }
-        
+
         public static void ConstraintsRigidBody(this GameObject self, RigidbodyConstraints rigidbodyConstraints)
         {
             var rigidbodies = self.GetComponentsInChildren<Rigidbody>();
@@ -74,48 +74,40 @@ namespace Extensions
 
         public static bool TryGetComponent<T>(this GameObject obj, out T component)
         {
-            bool doesComponentExists = false;
             component = default;
 
             if (typeof(T).IsSubclassOf(typeof(Component)))
             {
-                T newComponent = obj.GetComponent<T>();
+                var newComponent = obj.GetComponent<T>();
 
-                if(newComponent as Component != null)
-                {
-                    component = newComponent;
-                    doesComponentExists = true;
-                }
+                if (newComponent as Component == null) return false;
+                component = newComponent;
             }
             else
             {
                 throw new System.Exception("Searching type os not a component");
             }
 
-            return doesComponentExists;
+            return true;
         }
 
         public static bool TryGetComponentInChildren<T>(this GameObject obj, out T component)
         {
-            bool doesComponentExists = false;
             component = default;
 
             if (typeof(T).IsSubclassOf(typeof(Component)))
             {
                 T newComponent = obj.GetComponentInChildren<T>();
 
-                if (newComponent as Component != null)
-                {
-                    component = newComponent;
-                    doesComponentExists = true;
-                }
+                if (newComponent as Component == null) return false;
+                component = newComponent;
             }
             else
             {
                 throw new System.Exception("Searching type os not a component");
             }
 
-            return doesComponentExists;
+            return true;
         }
 
         public static bool HasComponent<T>(this GameObject obj)
@@ -125,7 +117,7 @@ namespace Extensions
             if (typeof(T).IsSubclassOf(typeof(Component)))
             {
                 T component = obj.GetComponent<T>();
-                hasComponent = component != null;
+                hasComponent = component is not null;
             }
             else
             {
@@ -142,7 +134,7 @@ namespace Extensions
             if (typeof(T).IsSubclassOf(typeof(Component)))
             {
                 T component = obj.GetComponentInChildren<T>();
-                hasComponent = component != null;
+                hasComponent = component is not null;
             }
             else
             {

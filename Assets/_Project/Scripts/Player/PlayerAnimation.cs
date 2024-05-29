@@ -12,11 +12,11 @@ namespace Player
 
         private Animator _playerAnimator;
         private PlayerMovement _playerMovement;
-        private readonly int XMoveStateProperty = Animator.StringToHash(X_MOVE_STATE);
-        private readonly int YMoveStateProperty = Animator.StringToHash(Y_MOVE_STATE);
-        private readonly int AttackingStateProperty = Animator.StringToHash(ATTACKING_STATE);
-        private readonly int MovingStateProperty = Animator.StringToHash(MOVING_STATE);
-        private readonly int ReceiveItemStateProperty = Animator.StringToHash(RECEIVE_ITEM_STATE);
+        private readonly int _xMoveStateProperty = Animator.StringToHash(X_MOVE_STATE);
+        private readonly int _yMoveStateProperty = Animator.StringToHash(Y_MOVE_STATE);
+        private readonly int _attackingStateProperty = Animator.StringToHash(ATTACKING_STATE);
+        private readonly int _movingStateProperty = Animator.StringToHash(MOVING_STATE);
+        private readonly int _receiveItemStateProperty = Animator.StringToHash(RECEIVE_ITEM_STATE);
 
         private void Awake()
         {
@@ -26,8 +26,8 @@ namespace Player
 
         private void Start()
         {
-            _playerAnimator.SetFloat(XMoveStateProperty, 0);
-            _playerAnimator.SetFloat(YMoveStateProperty, -1);
+            _playerAnimator.SetFloat(_xMoveStateProperty, 0);
+            _playerAnimator.SetFloat(_yMoveStateProperty, -1);
         }
         
         private void FixedUpdate()
@@ -40,26 +40,26 @@ namespace Player
         {
             if (playerMovement == Vector3.zero)
             {
-                _playerAnimator.SetBool(MovingStateProperty, false);
+                _playerAnimator.SetBool(_movingStateProperty, false);
                 return;
             }
 
             if (Mathf.Abs(playerMovement.x) > Mathf.Abs(playerMovement.y))
             {
-                _playerAnimator.SetFloat(XMoveStateProperty, playerMovement.x * (1 / Mathf.Abs(playerMovement.x)));
-                _playerAnimator.SetFloat(YMoveStateProperty, 0);
+                _playerAnimator.SetFloat(_xMoveStateProperty, playerMovement.x * (1 / Mathf.Abs(playerMovement.x)));
+                _playerAnimator.SetFloat(_yMoveStateProperty, 0);
             }
             else
             {
-                _playerAnimator.SetFloat(XMoveStateProperty, 0);
-                _playerAnimator.SetFloat(YMoveStateProperty, playerMovement.y * (1 / Mathf.Abs(playerMovement.y)));
+                _playerAnimator.SetFloat(_xMoveStateProperty, 0);
+                _playerAnimator.SetFloat(_yMoveStateProperty, playerMovement.y * (1 / Mathf.Abs(playerMovement.y)));
             }
 
-            _playerAnimator.SetBool(MovingStateProperty, true);
+            _playerAnimator.SetBool(_movingStateProperty, true);
         }
 
-        public void SetReceiveItemAnimation(bool value) => _playerAnimator.SetBool(ReceiveItemStateProperty, value);
+        public void SetReceiveItemAnimation(bool value) => _playerAnimator.SetBool(_receiveItemStateProperty, value);
 
-        public void SetAttackingAnimation(bool value) => _playerAnimator.SetBool(AttackingStateProperty, value);
+        public void SetAttackingAnimation(bool value) => _playerAnimator.SetBool(_attackingStateProperty, value);
     }
 }

@@ -1,4 +1,3 @@
-using System;
 using _Project.Scripts.Inventory;
 using TMPro;
 using UnityEngine;
@@ -24,6 +23,7 @@ public class InventorySlot : MonoBehaviour
         _itemButton.onClick.AddListener(OnClick);
         _itemNumberText.SetText(InventoryItem.Amount.ToString());
         _itemImage.sprite = InventoryItem.Image;
+        /*
         ItemBackgroundImage.sprite = inventoryItem.Rarity switch
         {
             InventoryItemRarity.Legendary => _rarityBackgroundSprite.GoldSprite,
@@ -33,7 +33,7 @@ public class InventorySlot : MonoBehaviour
             InventoryItemRarity.Common => _rarityBackgroundSprite.GraySprite,
             _ => throw new ArgumentOutOfRangeException()
         };
-
+        */
         _dragAndDrop = GetComponent<DragAndDropSlot>();
         _dragAndDrop.Initialize(this);
     }

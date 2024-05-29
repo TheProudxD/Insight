@@ -12,6 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5696d7e18b05497aab7ee05ac2be204f, type: 3}
   m_Name: Slingshot
   m_EditorClassIdentifier: Assembly-CSharp:UI.Shop:BowSkinItem
+  <Name>k__BackingField: Slingshot
+  <Description>k__BackingField: Funny gun
   <Model>k__BackingField: {fileID: 323661611, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
   <Sprite>k__BackingField: {fileID: 323661611, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
   <ResourceType>k__BackingField: 0

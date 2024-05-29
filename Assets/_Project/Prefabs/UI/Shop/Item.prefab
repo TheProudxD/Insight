@@ -36,7 +36,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 7}
+  m_AnchoredPosition: {x: 0, y: 20}
   m_SizeDelta: {x: 220, y: 220}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2986043511253958617
@@ -166,8 +166,8 @@ RectTransform:
   - {fileID: 8354894967030722229}
   - {fileID: 1453619523292849472}
   - {fileID: 5668859717465170806}
-  - {fileID: 2500762635220394727}
   - {fileID: 5424223420383861012}
+  - {fileID: 2500762635220394727}
   - {fileID: 6843762724045080471}
   - {fileID: 7665534221489604364}
   - {fileID: 4499627747966999297}
@@ -292,7 +292,7 @@ MonoBehaviour:
   _highlightBackground: {r: 0.8784314, g: 0.8666667, b: 0.8666667, a: 1}
   _contentImage: {fileID: 2782633644250880905}
   _lockImage: {fileID: 6590879817993852880}
-  _selectionText: {fileID: 5201436926503608237}
+  _selectionText: {fileID: 6135045730410857658}
   _priceView: {fileID: 1820277258100622518}
   _currencyImage: {fileID: 527259065760043053}
   _softCurrencyIcon: {fileID: 21300000, guid: 0a38e31b2944c634dbc2d3f32d55188c, type: 3}
@@ -574,10 +574,10 @@ RectTransform:
   m_Father: {fileID: 4499627747966999297}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 1}
-  m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 50.869274, y: -37.32364}
-  m_SizeDelta: {x: 88.3199, y: 62.6551}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7086750536348119508
 CanvasRenderer:
@@ -649,15 +649,15 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56
-  m_fontSizeBase: 56
+  m_fontSize: 80
+  m_fontSizeBase: 80
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 6
   m_fontSizeMax: 60
   m_fontStyle: 0
   m_HorizontalAlignment: 2
-  m_VerticalAlignment: 4096
+  m_VerticalAlignment: 512
   m_textAlignment: 65535
   m_characterSpacing: 0
   m_wordSpacing: 0
@@ -726,7 +726,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -70}
+  m_AnchoredPosition: {x: 0, y: -158.25}
   m_SizeDelta: {x: 300, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &6370547525712624537
@@ -746,7 +746,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &4499627747966999297
 RectTransform:
   m_ObjectHideFlags: 0
@@ -765,8 +765,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -47, y: -67}
-  m_SizeDelta: {x: 102, y: 75}
+  m_AnchoredPosition: {x: -135, y: -39}
+  m_SizeDelta: {x: 120, y: 90}
   m_Pivot: {x: 1, y: 0.5}
 --- !u!222 &6790453109927671181
 CanvasRenderer:
@@ -841,7 +841,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -0.000076585, y: -44.596016}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 83.097, y: 22.808}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5323930607847459372
@@ -874,8 +874,8 @@ MonoBehaviour:
       m_Calls: []
   m_text: Selected
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 9f1f3eb221c81374dbb4a9e8f5735ba0, type: 2}
-  m_sharedMaterial: {fileID: -7360214402453367820, guid: 9f1f3eb221c81374dbb4a9e8f5735ba0, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 2ba93c3c82d9fa340873a6c8c513095f, type: 2}
+  m_sharedMaterial: {fileID: 2492233972553359269, guid: 2ba93c3c82d9fa340873a6c8c513095f, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -899,10 +899,10 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 11.1
-  m_fontSizeBase: 36
+  m_fontSize: 20
+  m_fontSizeBase: 20
   m_fontWeight: 400
-  m_enableAutoSizing: 1
+  m_enableAutoSizing: 0
   m_fontSizeMin: 5
   m_fontSizeMax: 40
   m_fontStyle: 0
@@ -1053,8 +1053,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -83.3728}
-  m_SizeDelta: {x: -69.4925, y: 166.7499}
+  m_AnchoredPosition: {x: 0, y: -79.49573}
+  m_SizeDelta: {x: -69.4925, y: 158.9957}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7030085808089821297
 CanvasRenderer:
@@ -1180,7 +1180,7 @@ GameObject:
   - component: {fileID: 8357187160950925186}
   - component: {fileID: 3810123868307621267}
   m_Layer: 5
-  m_Name: Image
+  m_Name: Outline
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1260,7 +1260,7 @@ GameObject:
   - component: {fileID: 2268954169249995421}
   - component: {fileID: 1820277258100622518}
   m_Layer: 5
-  m_Name: Button
+  m_Name: Buy Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1457,11 +1457,11 @@ RectTransform:
   m_Father: {fileID: 6843762724045080471}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0}
-  m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: 0.0000015497, y: -6}
-  m_SizeDelta: {x: 83.097, y: 22.808}
-  m_Pivot: {x: 0.5, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 83.097, y: 22.807999}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7365551201332472933
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1490,7 +1490,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 8a81a1c04a1cf0243bc2fbe67054b722, type: 3}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1499,7 +1499,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
+  m_PixelsPerUnitMultiplier: 4
 --- !u!1 &8775822055497136365
 GameObject:
   m_ObjectHideFlags: 0
@@ -1604,7 +1604,7 @@ GameObject:
   - component: {fileID: 8946391971163395388}
   - component: {fileID: 48765608806391752}
   m_Layer: 5
-  m_Name: Image
+  m_Name: BG
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
