@@ -54,8 +54,6 @@ public class ProjectMonoInstallers : MonoInstaller
     private void Data()
     {
         Container.Bind<DataManager>().AsSingle();
-        Container.Bind<Wallet>().ToSelf().AsSingle();
-        Container.Bind<EnergyCounter>().ToSelf().AsSingle();
     }
 
     private void Shop()

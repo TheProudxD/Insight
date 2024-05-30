@@ -23,7 +23,7 @@ namespace Objects.Powerups
         {
             if (other.TryGetComponent(out PlayerAttacking player) && !other.isTrigger)
             {
-                _resourceManager.AddResource(ResourceType.SoftCurrency, _amountToIncrease);
+                _resourceManager.Add(ResourceType.SoftCurrency, _amountToIncrease);
                 _tweener.Complete();
                 Destroy(gameObject);
             }

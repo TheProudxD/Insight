@@ -1,4 +1,5 @@
-﻿using System;
+﻿#nullable enable
+using System;
 
 namespace SharpStackConvert
 {
@@ -127,7 +128,7 @@ namespace SharpStackConvert
                 return false;
             }
 
-            return input.ToLower() == "true" || input.ToLower().Trim() == "1";
+            return input?.ToLower() == "true" || input?.ToLower().Trim() == "1";
         }
 
         /// <summary>

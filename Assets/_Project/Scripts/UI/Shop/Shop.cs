@@ -21,7 +21,7 @@ namespace UI.Shop
         [Header("Text")] [SerializeField] private Image _selectedText;
 
         [Inject] private WindowManager _windowManager;
-        [Inject] private Wallet _wallet;
+        [Inject] private ResourceManager _resourceManager;
         [Inject] private ShopData _shopData;
         [Inject] private SkinSelector _skinSelector;
         [Inject] private SkinUnlocker _skinUnlocker;
@@ -91,9 +91,9 @@ namespace UI.Shop
         {
             var rt = _previewedItem.Item.ResourceType;
             var price = _previewedItem.Item.Price;
-            if (_wallet.IsEnough(rt, price))
+            if (_resourceManager.IsEnough(rt, price))
             {
-                _wallet.Spend(rt, price);
+                _resourceManager.Spend(rt, price);
                 _skinUnlocker.Visit(_previewedItem.Item);
                 SelectSkin();
                 _previewedItem.Unlock();
@@ -113,7 +113,7 @@ namespace UI.Shop
             var description = _previewedItem.Item.Description;
             var rt = _previewedItem.Item.ResourceType;
             var price = _previewedItem.Item.Price;
-            
+
             _openedSkinsChecker.Visit(_previewedItem.Item);
             _skinPlacement.SetGameModel(model, itemName, description);
 
@@ -140,7 +140,7 @@ namespace UI.Shop
             _buyButton.UpdateText(price);
             _buyButton.SetResourceType(resourceType);
 
-            if (_wallet.IsEnough(resourceType, price))
+            if (_resourceManager.IsEnough(resourceType, price))
             {
                 _buyButton.Unlock();
             }
