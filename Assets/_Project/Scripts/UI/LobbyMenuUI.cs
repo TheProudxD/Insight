@@ -1,4 +1,5 @@
-using System;
+using Extensions;
+using Managers;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
@@ -14,11 +15,33 @@ namespace UI
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _newsButton;
         
-        [Inject] private void Construct(Camera uiCamera) => GetComponent<Canvas>().worldCamera = uiCamera;
+        private WindowManager _windowManager;
 
-        private void Awake()
+        [Inject]
+        private void Construct(Camera uiCamera, WindowManager windowManager)
         {
-            _VKButton.onClick.AddListener(()=>Application.OpenURL("https://vk.com/callmeproud"));
+            _windowManager = windowManager;
+            GetComponent<Canvas>().worldCamera = uiCamera;
         }
+
+        private void OnEnable()
+        {
+            _VKButton.Add(OpenVk);
+            _discordButton.Add(OpenDiscord);
+            
+            _leaderboardButton.Add(OpenLeaderboardWindow);
+            _settingsButton.Add(OpenSettingsWindow);
+            _newsButton.Add(OpenNewsWindow);
+        }
+
+        private void OpenVk() => Application.OpenURL("https://vk.com/callmeproud");
+
+        private void OpenDiscord() => Application.OpenURL("https://vk.com/callmeproud");
+        
+        private void OpenLeaderboardWindow() => _windowManager.ShowLeaderboardWindow();
+        
+        private void OpenSettingsWindow() => _windowManager.ShowSettingsWindow();
+        
+        private void OpenNewsWindow() => _windowManager.ShowNewsWindow();
     }
 }

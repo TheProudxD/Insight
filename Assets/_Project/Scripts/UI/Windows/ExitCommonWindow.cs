@@ -1,13 +1,16 @@
 ﻿using UnityEngine;
+using UnityEngine.Events;
+using UnityEngine.UI;
 
 namespace UI
 {
     public class ExitCommonWindow : CommonWindow
     {
-        public void Exit()
+        [SerializeField] private Button _exitButton;
+
+        public void OnExit(UnityAction exit)
         {
-            Application.Quit();
-            Debug.LogWarning("Exit pressed!");
+            _exitButton.onClick.AddListener(exit);
         }
     }
 }

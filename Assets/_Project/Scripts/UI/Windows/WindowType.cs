@@ -9,6 +9,10 @@ namespace Managers
         Shop,
         Exit,
         LevelReward,
-        LevelSelect
+        LevelSelect,
+        Leaderboard,
+        News,
+        CurrencyShop,
+        ConnectionLost,
     }
 }

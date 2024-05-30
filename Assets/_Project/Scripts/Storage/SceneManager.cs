@@ -21,7 +21,9 @@ namespace Storage
         private PlayerData _playerData;
         private readonly int _minLevel;
 
-        public int CurrentLevel { get; private set; }
+        public int MaxPassedLevel { get; private set; }
+
+        public int CurrentLevel => UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
 
         private SceneManager(IDynamicStorageService dynamicStorageService, DataManager dataManager,
             WindowManager windowManager)
@@ -34,12 +36,12 @@ namespace Storage
 
         private void Initialize(PlayerData playerData)
         {
-            CurrentLevel = playerData.CurrentLevel;
-            if (CurrentLevel < _minLevel)
+            MaxPassedLevel = playerData.MaxPassedLevel;
+            if (MaxPassedLevel < _minLevel)
             {
-                Debug.LogError($"Level must be more than {_minLevel}, but was " + CurrentLevel);
-                CurrentLevel = _minLevel;
-                Save(CurrentLevel);
+                Debug.LogError($"Level must be more than {_minLevel}, but was " + MaxPassedLevel);
+                MaxPassedLevel = _minLevel;
+                Save(MaxPassedLevel);
             }
 
             _playerData = playerData;
@@ -52,8 +54,8 @@ namespace Storage
             return buildId switch
             {
                 (int)Scenes.Menu => (int)Scenes.Lobby,
-                (int)Scenes.Lobby => CurrentLevel,
-                _ => CurrentLevel + 1
+                (int)Scenes.Lobby => MaxPassedLevel,
+                _ => MaxPassedLevel + 1
             };
         }
 
@@ -70,8 +72,8 @@ namespace Storage
             {
                 if (result)
                 {
-                    _playerData.CurrentLevel = newLevel;
-                    CurrentLevel = newLevel;
+                    _playerData.MaxPassedLevel = newLevel;
+                    MaxPassedLevel = newLevel;
                     Debug.Log($"New level saved Successfully to {newLevel}");
                 }
                 else
@@ -85,7 +87,7 @@ namespace Storage
         {
             var newLevel = GetNextLevelId();
 
-            if (newLevel > (int)Scenes.Lobby && newLevel > CurrentLevel)
+            if (newLevel > (int)Scenes.Lobby && newLevel > MaxPassedLevel)
             {
                 Save(newLevel);
             }
@@ -95,12 +97,10 @@ namespace Storage
                 LoadScene(Scenes.Lobby);
                 var levelRewardWindow = _windowManager.ShowLevelRewardWindow();
                 levelRewardWindow.DisplayReward();
-                LevelChanged?.Invoke(Scenes.Lobby);
             }
             else
             {
                 LoadScene((Scenes)newLevel);
-                LevelChanged?.Invoke((Scenes)newLevel);
             }
         }
 
@@ -109,5 +109,7 @@ namespace Storage
             LevelChanged?.Invoke(scene);
             UnityEngine.SceneManagement.SceneManager.LoadScene((int)scene);
         }
+
+        public void RestartLevel() => LoadScene((Scenes)CurrentLevel);
     }
 }

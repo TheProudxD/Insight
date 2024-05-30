@@ -4,7 +4,7 @@ namespace StorageService
 {
     public class PlayerData
     {
-        public int CurrentLevel;
+        public int MaxPassedLevel;
         public int AmountSoftResources;
         public int AmountHardResources;
         public int AmountEnergy;

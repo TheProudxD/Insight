@@ -1,13 +1,10 @@
-using System;
 using System.Collections.Generic;
 using System.Linq;
 using _Project.Scripts.Inventory;
-using Managers;
 using TMPro;
 using UI;
 using UnityEngine;
 using UnityEngine.UI;
-using Zenject;
 
 public class InventoryWindow : CommonWindow
 {
@@ -15,7 +12,6 @@ public class InventoryWindow : CommonWindow
     [SerializeField] private InventorySlot _itemInventorySlotPrefab;
     [SerializeField] private Transform _inventoryPanel;
     [SerializeField] private Button _useButton;
-    [SerializeField] private Button _closeButton;
     [SerializeField] private PlayerInventory _playerInventory;
 
     [Header("Right Bar")] [SerializeField] private TextMeshProUGUI _selectedItemName;
@@ -36,8 +32,6 @@ public class InventoryWindow : CommonWindow
     private InventoryItem _selectedItem;
     private InventoryItemCategory _itemCategory = InventoryItemCategory.All;
 
-    [Inject] private WindowManager _windowManager;
-
     private void Awake()
     {
         foreach (var itemCategory in typeof(InventoryItemCategory).GetEnumValues().Cast<InventoryItemCategory>())
@@ -46,7 +40,12 @@ public class InventoryWindow : CommonWindow
         }
     }
 
-    private void OnEnable() => Initialize();
+    protected override void OnEnable()
+    {
+        base.OnEnable();
+
+        Initialize();
+    }
 
     private void Initialize()
     {
@@ -54,7 +53,6 @@ public class InventoryWindow : CommonWindow
         MakeInventory();
 
         //ChangeSelectedItem(_inventorySlots.First().Key);
-        _closeButton.onClick.AddListener(_windowManager.CloseInventoryWindow);
     }
 
     private void MakeBlankInventorySlots()

@@ -91,7 +91,7 @@ namespace StorageService
             {
                 AmountHardResources = callbackData["HardCurrency"],
                 AmountSoftResources = callbackData["SoftCurrency"],
-                CurrentLevel = callbackData["lvl"],
+                MaxPassedLevel = callbackData["lvl"],
                 Name = callbackData["Name"],
             };
             
@@ -102,7 +102,7 @@ namespace StorageService
                 await SetName("Player " + SystemPlayerData.Instance.uid);
             }
 
-            if (_playerData.CurrentLevel > _gameData.MaxLevel)
+            if (_playerData.MaxPassedLevel > _gameData.MaxLevel)
             {
                 Debug.LogError("Max level less than current user!");
             }

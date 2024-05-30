@@ -5,14 +5,14 @@ using UnityEngine.UI;
 
 namespace Storage
 {
-	public class LevelRewardCommonWindow: CommonWindow
+    public class LevelResultWindow : CommonWindow
     {
         [SerializeField] private GameObject _resultWindow;
 
         [SerializeField] private Sprite _starEmpty, _starFilled;
         [SerializeField] private Image[] _stars;
         [SerializeField] private GameObject[] _starsParticles;
-        
+
         [SerializeField] private TextMeshProUGUI _softCurrencyAmountText;
         [SerializeField] private TextMeshProUGUI _hardCurrencyAmountText;
         [SerializeField] private GameObject _chests;
@@ -20,7 +20,7 @@ namespace Storage
         private void Awake()
         {
             _resultWindow.SetActive(false);
-            if (_stars.Length!=3)
+            if (_stars.Length != 3)
                 Debug.LogError("not equal to 3 stars in result window");
         }
 
@@ -30,7 +30,7 @@ namespace Storage
             _softCurrencyAmountText.SetText(softCurrencyEarned.ToString());
             var hardCurrencyEarned = CountHardCurrencyEarned();
             _hardCurrencyAmountText.SetText(hardCurrencyEarned.ToString());
-            
+
             var score = CountScore();
             DisplayStars(2);
             _resultWindow.SetActive(true);
@@ -39,8 +39,8 @@ namespace Storage
         private int CountSoftCurrencyEarned()
         {
             return default;
-        } 
-        
+        }
+
         private int CountHardCurrencyEarned()
         {
             return default;
@@ -60,5 +60,5 @@ namespace Storage
                 _starsParticles[i].SetActive(isEnough);
             }
         }
-	}
+    }
 }

@@ -7,7 +7,7 @@ using Zenject;
 
 namespace UI.Shop
 {
-    public class Shop : CommonWindow
+    public class ShopWindow : CommonWindow
     {
         [SerializeField] private ShopContent _shopContent;
         [SerializeField] private ShopPanel _shopPanel;
@@ -17,7 +17,6 @@ namespace UI.Shop
 
         [Header("Buttons")] [SerializeField] private BuyButton _buyButton;
         [SerializeField] private Button _selectionButton;
-        [SerializeField] private Button _closeButton;
         [Header("Text")] [SerializeField] private Image _selectedText;
 
         [Inject] private WindowManager _windowManager;
@@ -40,23 +39,25 @@ namespace UI.Shop
             OnSwordSkinButtonClick();
         }
 
-        private void OnEnable()
+        protected override void OnEnable()
         {
+            base.OnEnable();
+
             _swordCategoryButton.Click += OnSwordSkinButtonClick;
             _bowCategoryButton.Click += OnBowSkinButtonClick;
             _buyButton.Click += OnBuyButtonClicked;
             _selectionButton.onClick.AddListener(OnSelectButtonClicked);
-            _closeButton.onClick.AddListener(CloseWindow);
         }
 
-        private void OnDisable()
+        protected override void OnDisable()
         {
+            base.OnDisable();
+            
             _swordCategoryButton.Click -= OnSwordSkinButtonClick;
             _bowCategoryButton.Click -= OnBowSkinButtonClick;
             _shopPanel.ItemViewClicked -= OnItemViewClicked;
             _buyButton.Click -= OnBuyButtonClicked;
             _selectionButton.onClick.RemoveListener(OnSelectButtonClicked);
-            _closeButton.onClick.RemoveListener(CloseWindow);
         }
 
         private void OnSwordSkinButtonClick()

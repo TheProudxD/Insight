@@ -7404,6 +7404,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4836738e49c4a38bd0238e787c90e10, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CloseButton: {fileID: 770136615601693393}
   _shopContent: {fileID: 11400000, guid: 36241be7db70f274dba72a8bc57abbc3, type: 2}
   _shopPanel: {fileID: 6726754712484191849}
   _swordCategoryButton: {fileID: 1273368870958362256}
@@ -7411,7 +7412,6 @@ MonoBehaviour:
   _skinPlacement: {fileID: 392765264978716307}
   _buyButton: {fileID: 7619877173362075146}
   _selectionButton: {fileID: 8275641691965879716}
-  _closeButton: {fileID: 770136615601693393}
   _selectedText: {fileID: 7846320550403335931}
 --- !u!1 &5173184577668587325
 GameObject:

@@ -53,7 +53,7 @@ namespace UI
 
         private void InitializeUI()
         {
-            var isOpen = _sceneManager.CurrentLevel >= (int)_scene;
+            var isOpen = _sceneManager.MaxPassedLevel >= (int)_scene;
             if (isOpen)
             {
                 for (var i = 0; i < _starImages.Length; i++)

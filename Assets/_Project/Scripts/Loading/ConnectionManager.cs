@@ -1,20 +1,21 @@
 using System.Threading.Tasks;
 using Cysharp.Threading.Tasks;
+using Managers;
 using UnityEngine;
 
 public class ConnectionManager
 {
     private readonly int _tryAmount;
     private readonly int _waitingDelay;
+    private readonly WindowManager _windowManager;
 
-    public ConnectionManager(int tryAmount, int waitingDelay)
+    public ConnectionManager(int tryAmount, int waitingDelay, WindowManager windowManager)
     {
+        _windowManager = windowManager;
         _tryAmount = tryAmount;
         _waitingDelay = waitingDelay;
     }
 
-    public UniTask<bool> Connect() => TryToConnect(_tryAmount);
-    
     private async UniTask<bool> TryToConnect(int tryAmount)
     {
         if (HasInternet())
@@ -25,6 +26,7 @@ public class ConnectionManager
 
         if (tryAmount <= 0)
         {
+            _windowManager.ShowConnectionLostWindow();
             Debug.Log("<color=red>Does not connected!</color>");
             return false;
         }
@@ -37,4 +39,6 @@ public class ConnectionManager
     }
 
     private bool HasInternet() => Application.internetReachability != NetworkReachability.NotReachable;
+    
+    public UniTask<bool> Connect() => TryToConnect(_tryAmount);
 }
