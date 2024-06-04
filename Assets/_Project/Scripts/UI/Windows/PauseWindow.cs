@@ -31,7 +31,7 @@ namespace UI
             var exitWindow = _windowManager.ShowExitWindow();
             exitWindow.OnExit(() =>
             {
-                _sceneManager.LoadScene(Scenes.Lobby);
+                _sceneManager.LoadScene(Scene.Lobby);
                 exitWindow.Close();
             });
             DisablePauseMode();

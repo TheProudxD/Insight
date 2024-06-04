@@ -566,6 +566,7 @@ GameObject:
   - component: {fileID: 914735629889661113}
   - component: {fileID: 7906070284133588212}
   - component: {fileID: 9134907469416325736}
+  - component: {fileID: 7496982207401897191}
   m_Layer: 2
   m_Name: Static Log
   m_TagString: Untagged
@@ -820,6 +821,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 2678873999552141039}
   _lootTable: {fileID: 11400000, guid: f704792488d7e75429adb03a6f2c51d1, type: 2}
+--- !u!114 &7496982207401897191
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8234452926868499496}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63cd7489149340d7990d08d8dc2c6f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitParticles:
+  - {fileID: 5373061118796645098, guid: 2e860dbf01010ba428d8b4e12f164bec, type: 3}
 --- !u!1 &9015432013766855132
 GameObject:
   m_ObjectHideFlags: 0

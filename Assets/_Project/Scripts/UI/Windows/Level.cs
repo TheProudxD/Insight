@@ -17,7 +17,7 @@ namespace UI
         [SerializeField] private LevelSelectWindow _levelSelectWindow;
         [SerializeField] private LevelSelectPopup _levelSelectPopup;
 
-        [SerializeField] private Scenes _scene;
+        [SerializeField] private Scene _scene;
         [SerializeField] private Image[] _starImages;
         [SerializeField] private Image _lock;
         [SerializeField] private TextMeshProUGUI _requireLevelText;
@@ -81,7 +81,7 @@ namespace UI
 
                 _lock.gameObject.SetActive(true);
                 _requireLevelText.gameObject.SetActive(true);
-                _requireLevelText.SetText("Required level " + (int)_scene);
+                _requireLevelText.SetText("Required level " + _sceneManager.GetLevelId(_scene));
             }
         }
     }

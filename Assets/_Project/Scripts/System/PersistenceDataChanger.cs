@@ -23,9 +23,9 @@ namespace Managers
             DontDestroyOnLoad(gameObject);
         }
 
-        private void ChangePlayerPosition(Scenes scene)
+        private void ChangePlayerPosition(Scene scene)
         {
-            if (scene > Scenes.Menu)
+            if (scene > Scene.Menu)
             {
                 _hud.EnableView();
                 _playerAttacking.gameObject.SetActive(true);

@@ -13,7 +13,7 @@ namespace Storage
     public class SceneManager
     {
         public const string CHANGE_LEVEL_KEY = "changelevel";
-        public event Action<Scenes> LevelChanged;
+        public event Action<Scene> LevelChanged;
 
         private readonly IDynamicStorageService _dynamicStorageService;
         private readonly WindowManager _windowManager;
@@ -30,7 +30,7 @@ namespace Storage
         {
             _dynamicStorageService = dynamicStorageService;
             _windowManager = windowManager;
-            _minLevel = (int)Scenes.Lobby + 1;
+            _minLevel = (int)Scene.Lobby + 1;
             dataManager.DataLoaded += Initialize;
         }
 
@@ -53,8 +53,8 @@ namespace Storage
 
             return buildId switch
             {
-                (int)Scenes.Menu => (int)Scenes.Lobby,
-                (int)Scenes.Lobby => MaxPassedLevel,
+                (int)Scene.Menu => (int)Scene.Lobby,
+                (int)Scene.Lobby => MaxPassedLevel,
                 _ => MaxPassedLevel + 1
             };
         }
@@ -87,29 +87,31 @@ namespace Storage
         {
             var newLevel = GetNextLevelId();
 
-            if (newLevel > (int)Scenes.Lobby && newLevel > MaxPassedLevel)
+            if (newLevel > (int)Scene.Lobby && newLevel > MaxPassedLevel)
             {
                 Save(newLevel);
             }
 
-            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex > (int)Scenes.Lobby)
+            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex > (int)Scene.Lobby)
             {
-                LoadScene(Scenes.Lobby);
+                LoadScene(Scene.Lobby);
                 var levelRewardWindow = _windowManager.ShowLevelRewardWindow();
                 levelRewardWindow.DisplayReward();
             }
             else
             {
-                LoadScene((Scenes)newLevel);
+                LoadScene((Scene)newLevel);
             }
         }
 
-        public void LoadScene(Scenes scene)
+        public void LoadScene(Scene scene)
         {
             LevelChanged?.Invoke(scene);
             UnityEngine.SceneManagement.SceneManager.LoadScene((int)scene);
         }
 
-        public void RestartLevel() => LoadScene((Scenes)CurrentLevel);
+        public void RestartLevel() => LoadScene((Scene)CurrentLevel);
+        
+        public int GetLevelId(Scene scene) => (int)scene-4;
     }
 }

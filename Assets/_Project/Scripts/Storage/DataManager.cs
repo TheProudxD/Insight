@@ -44,7 +44,7 @@ namespace StorageService
                 if (result)
                 {
                     _playerData.Name = newName;
-                    Debug.Log("Renaming Successfully");
+                    Debug.Log($"Renamed Successfully to {newName}");
                 }
                 else
                 {

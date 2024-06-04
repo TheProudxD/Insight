@@ -1,8 +1,6 @@
 using System.Collections;
-using Managers;
 using Player;
 using Tools;
-using UI;
 using UnityEngine;
 using Zenject;
 
@@ -13,7 +11,7 @@ namespace Objects
         private const string OPEN_STATE = "opened";
 
         [Inject] private PlayerInteraction _playerInteraction;
-        [SerializeField] private InventoryItem _keyItem;
+        [SerializeField] private InventoryItem[] _items;
 
         private Animator _animator;
         private readonly float _openDuration = 1f;
@@ -35,10 +33,13 @@ namespace Objects
             Context.Raise();
             
             var dialogWindow = WindowManager.ShowDialogBox();
-            dialogWindow.Text.SetText(_keyItem.Description);
+            foreach (var item in _items)
+            {
+                dialogWindow.Text.SetText(item.Description);            
+                _playerInteraction.DisplayPickupItem(item);
+                yield return new WaitUntil(() => Input.anyKey);
+            }
             
-            _playerInteraction.DisplayPickupItem(_keyItem);
-            yield return new WaitUntil(() => Input.anyKey);
             WindowManager.CloseDialogBox();
             _playerInteraction.RemovePickupItem();
         }

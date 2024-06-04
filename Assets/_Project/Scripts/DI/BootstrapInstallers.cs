@@ -45,6 +45,6 @@ public class BootstrapInstallers : MonoInstaller
             projectContext.Bind().ToSelf().FromInstance(reaction).AsSingle();
         }
 
-        projectContext.Resolve<SceneManager>().LoadScene(Scenes.Menu);
+        projectContext.Resolve<SceneManager>().LoadScene(Scene.Menu);
     }
 }

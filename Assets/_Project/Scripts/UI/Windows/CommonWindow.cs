@@ -9,9 +9,35 @@ namespace UI
         [SerializeField] protected Button CloseButton;
         private readonly List<GameObject> _children = new();
 
-        protected virtual void OnEnable() => CloseButton.onClick.AddListener(Close);
-        
-        protected virtual void OnDisable() => CloseButton.onClick.RemoveListener(Close);
+        protected virtual void OnEnable()
+        {
+            if (this is DialogBox)
+                return;
+
+            if (CloseButton != null)
+            {
+                CloseButton.onClick.AddListener(Close);
+            }
+            else
+            {
+                Debug.Log($"{nameof(CloseButton)} is null on {gameObject}");
+            }
+        }
+
+        protected virtual void OnDisable()
+        {
+            if (this is DialogBox)
+                return;
+
+            if (CloseButton != null)
+            {
+                CloseButton.onClick.RemoveListener(Close);
+            }
+            else
+            {
+                Debug.Log($"{nameof(CloseButton)} is null on {gameObject}");
+            }
+        }
 
         public virtual void Close()
         {

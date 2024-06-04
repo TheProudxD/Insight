@@ -5,6 +5,7 @@ using StorageService;
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 using Extensions;
@@ -76,7 +77,7 @@ public class DataLoader : ILoadingOperation
         allTasks.Add(_googleSheetLoader.DownloadTable<HeartPowerupEntitySpecs>("1682472823"));
         allTasks.Add(_googleSheetLoader.DownloadTable<CoinPowerupEntitySpecs>("777294485"));
         allTasks.Add(_googleSheetLoader.DownloadTable<NPCEntitySpecs>("80218900"));
-        
+
         return Task.WhenAll(allTasks);
     }
 
@@ -94,16 +95,20 @@ public class DataLoader : ILoadingOperation
 
         using var wc = new WebClient();
 
-        if (!File.Exists(localPath))
+        if (File.Exists(localPath) == false || File.ReadLines(localPath).Any() == false)
         {
             var downloadParams = new Dictionary<string, string>
             {
                 { "action", DataManager.REGISTRY_DATA_KEY },
             };
+            
             var remoteJson = await _dynamicStorageService.Download(downloadParams);
             var remoteData = ParseSystemPlayerData(remoteJson);
             remoteData.ToSingleton();
-            await File.WriteAllTextAsync(localPath, JsonUtility.ToJson(remoteData));
+
+            await using var f = File.CreateText(localPath);
+            await f.WriteAsync(remoteJson.ToString());
+            f.Close();
         }
         else
         {
