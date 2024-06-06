@@ -17,7 +17,7 @@ namespace UI
 
         public void Awake()
         {
-            float currentStarsAmount = 1, maxStarsAmount = 1, chapter = 1;
+            float currentStarsAmount = 6, maxStarsAmount = 18, chapter = 1;
             _starsAmount.SetText($"{currentStarsAmount} / {maxStarsAmount}");
             _chapter.SetText($"Chapter {chapter}");
         }

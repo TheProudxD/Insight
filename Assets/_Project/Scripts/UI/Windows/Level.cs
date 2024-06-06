@@ -1,5 +1,7 @@
+using System;
 using Extensions;
 using Managers;
+using ResourceService;
 using Storage;
 using TMPro;
 using UnityEngine;
@@ -13,6 +15,7 @@ namespace UI
     {
         [Inject] private SceneManager _sceneManager;
         [Inject] private WindowManager _windowManager;
+        [Inject] private ResourceManager _resourceManager;
 
         [SerializeField] private LevelSelectWindow _levelSelectWindow;
         [SerializeField] private LevelSelectPopup _levelSelectPopup;
@@ -21,6 +24,7 @@ namespace UI
         [SerializeField] private Image[] _starImages;
         [SerializeField] private Image _lock;
         [SerializeField] private TextMeshProUGUI _requireLevelText;
+        [SerializeField] private int _energyPrice;
 
         [SerializeField, Range(0, 3)] private int _starPassedAmount;
 
@@ -31,7 +35,10 @@ namespace UI
             _openPopupButton = GetComponent<Button>();
             if (_starImages.Length > 3)
                 Debug.LogError(nameof(_starImages));
+        }
 
+        private void OnEnable()
+        {
             InitializeOpenButton();
             InitializeUI();
         }
@@ -43,11 +50,20 @@ namespace UI
                 _levelSelectPopup.gameObject.SetActive(true);
                 _levelSelectPopup.Activate(_scene.ToString());
                 _levelSelectPopup.StartLevelButton.RemoveAll();
-                _levelSelectPopup.StartLevelButton.Add(() =>
+                
+                if (_resourceManager.IsEnough(ResourceType.Energy, _energyPrice))
                 {
-                    _windowManager.CloseLevelSelectWindow();
-                    _sceneManager.LoadScene(_scene);
-                });
+                    _levelSelectPopup.StartLevelButton.Add(() =>
+                    {
+                        _resourceManager.Spend(ResourceType.Energy, _energyPrice);
+                        _windowManager.CloseLevelSelectWindow();
+                        _sceneManager.LoadScene(_scene);
+                    });
+                }
+                else
+                {
+                    _levelSelectPopup.StartLevelButton.interactable = false;
+                }
             });
         }
 

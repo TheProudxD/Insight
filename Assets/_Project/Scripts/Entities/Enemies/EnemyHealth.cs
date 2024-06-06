@@ -1,4 +1,3 @@
-using System;
 using Objects.Powerups;
 using UnityEngine;
 using UnityEngine.UI;

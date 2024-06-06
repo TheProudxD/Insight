@@ -1,10 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Assets._Project.Scripts.Storage.Static;
-using Storage;
-using ResourceService;
-using UI;
+using Storage.Static;
 using UnityEngine;
 
 namespace StorageService
@@ -79,7 +76,7 @@ namespace StorageService
         {
             if (_playerData != null)
                 return _playerData;
-            
+
             var downloadParams = new Dictionary<string, string>
             {
                 { "action", DYNAMIC_USER_DATA_KEY },
@@ -93,8 +90,9 @@ namespace StorageService
                 AmountSoftResources = callbackData["SoftCurrency"],
                 MaxPassedLevel = callbackData["lvl"],
                 Name = callbackData["Name"],
+                AmountEnergy = callbackData["Energy"],
             };
-            
+
             DataLoaded?.Invoke(_playerData);
 
             if (_playerData.Name == DEFAULT_PLAYER_NAME)
@@ -104,7 +102,7 @@ namespace StorageService
 
             if (_playerData.MaxPassedLevel > _gameData.MaxLevel)
             {
-                Debug.LogError("Max level less than current user!");
+                Debug.LogError("Max level less than current!");
             }
 
             Debug.Log(_playerData.ToString());

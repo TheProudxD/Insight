@@ -15,42 +15,42 @@ MonoBehaviour:
   selectionHistory:
     _history:
     - reference: {fileID: 0}
-      sceneName: Level Select
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-160796649-0
+    - reference: {fileID: 0}
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-1968489422-0
+    - reference: {fileID: 0}
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-1620291447-0
+    - reference: {fileID: 0}
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-1660277332-0
+    - reference: {fileID: 102900000, guid: 36e8709d699e957448893af337bd9905, type: 3}
+      sceneName: 
       scenePath: 
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-6751288915075942175-0
-    - reference: {fileID: 0}
-      sceneName: Level Select
+      globalObjectId: 
+    - reference: {fileID: 102900000, guid: b43e6a4a053bd474caf46c9050ee0283, type: 3}
+      sceneName: 
       scenePath: 
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-3497295299509433435-0
+      globalObjectId: 
     - reference: {fileID: 0}
-      sceneName: Level Select
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-341693862-0
+    - reference: {fileID: 102900000, guid: 1cc6ab28712e8e5499a573a7eee25f8a, type: 3}
+      sceneName: 
       scenePath: 
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-219793957167847622-0
+      globalObjectId: 
     - reference: {fileID: 0}
-      sceneName: Level Select
-      scenePath: 
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-8119646338991880817-2136374864329095364
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-1731615245-0
     - reference: {fileID: 0}
-      sceneName: Level Select
-      scenePath: 
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-4308185988468462722-2136374864329095364
-    - reference: {fileID: 0}
-      sceneName: Level Select
-      scenePath: 
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-3822123825891562750-2136374864329095364
-    - reference: {fileID: 0}
-      sceneName: Level Select
-      scenePath: 
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-2044885038496366833-2136374864329095364
-    - reference: {fileID: 0}
-      sceneName: Dungeon 1
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 1.unity
-      globalObjectId: GlobalObjectId_V1-2-4ad72a19855ceec4fa3f89bb67b00746-5412253856784975363-8542516213665379575
-    - reference: {fileID: 0}
-      sceneName: Dungeon 1
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 1.unity
-      globalObjectId: GlobalObjectId_V1-2-4ad72a19855ceec4fa3f89bb67b00746-2103003483-0
-    - reference: {fileID: 0}
-      sceneName: Dungeon 1
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 1.unity
-      globalObjectId: GlobalObjectId_V1-2-4ad72a19855ceec4fa3f89bb67b00746-277257984-0
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-465273346-0

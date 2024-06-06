@@ -1,4 +1,4 @@
-using Assets._Project.Scripts.Storage.Static;
+using Storage.Static;
 using Cysharp.Threading.Tasks;
 using SimpleJSON;
 using StorageService;

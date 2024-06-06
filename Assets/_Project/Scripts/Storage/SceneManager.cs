@@ -1,12 +1,9 @@
-using Assets._Project.Scripts.Storage.Static;
+using Storage.Static;
 using StorageService;
 using System;
 using System.Collections.Generic;
-using System.Threading;
 using Managers;
 using UnityEngine;
-using UnityEngine.SceneManagement;
-using Zenject;
 
 namespace Storage
 {
@@ -24,6 +21,8 @@ namespace Storage
         public int MaxPassedLevel { get; private set; }
 
         public int CurrentLevel => UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
+
+        public Scene CurrentScene => (Scene)CurrentLevel;
 
         private SceneManager(IDynamicStorageService dynamicStorageService, DataManager dataManager,
             WindowManager windowManager)
@@ -47,17 +46,7 @@ namespace Storage
             _playerData = playerData;
         }
 
-        private int GetNextLevelId()
-        {
-            var buildId = UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex;
-
-            return buildId switch
-            {
-                (int)Scene.Menu => (int)Scene.Lobby,
-                (int)Scene.Lobby => MaxPassedLevel,
-                _ => MaxPassedLevel + 1
-            };
-        }
+        private int GetNextLevelId() => CurrentLevel + 1;
 
         private async void Save(int newLevel)
         {
@@ -86,17 +75,17 @@ namespace Storage
         public void StartNextLevel()
         {
             var newLevel = GetNextLevelId();
-
+            
             if (newLevel > (int)Scene.Lobby && newLevel > MaxPassedLevel)
             {
                 Save(newLevel);
             }
 
-            if (UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex > (int)Scene.Lobby)
+            if (CurrentLevel > (int)Scene.Lobby)
             {
                 LoadScene(Scene.Lobby);
                 var levelRewardWindow = _windowManager.ShowLevelRewardWindow();
-                levelRewardWindow.DisplayReward();
+                levelRewardWindow.Display(LevelResult.Successful);
             }
             else
             {
@@ -111,7 +100,7 @@ namespace Storage
         }
 
         public void RestartLevel() => LoadScene((Scene)CurrentLevel);
-        
-        public int GetLevelId(Scene scene) => (int)scene-4;
+
+        public int GetLevelId(Scene scene) => (int)scene - SceneIDConstants.LEVEL_ID_OFFSET;
     }
 }

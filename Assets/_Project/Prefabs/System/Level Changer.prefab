@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 5817441588836258214}
   - component: {fileID: 5836619371064210121}
   - component: {fileID: 7420727148227393418}
+  - component: {fileID: 6664512835424447290}
   m_Layer: 0
   m_Name: Level Changer
   m_TagString: Untagged
@@ -63,7 +64,7 @@ BoxCollider2D:
   m_CallbackLayers:
     serializedVersion: 2
     m_Bits: 4294967295
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: -0.49129128, y: -0.3390066}
@@ -118,5 +119,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 54b606afb51d41448817c03fa3bb4911, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _fadeAnimator: {fileID: 0}
-  _loadingBar: {fileID: 0}
+--- !u!114 &6664512835424447290
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5828633306948058053}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b5fb21ce4ec82f34d9f2cac595b5f698, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

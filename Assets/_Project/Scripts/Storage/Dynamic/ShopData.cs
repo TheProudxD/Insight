@@ -1,4 +1,4 @@
-using Assets._Project.Scripts.Storage.Static;
+using Storage.Static;
 using StorageService;
 using System;
 using System.Collections.Generic;

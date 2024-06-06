@@ -1,6 +1,6 @@
 ﻿using Tools;
 
-namespace Assets._Project.Scripts.Storage.Static
+namespace Storage.Static
 {
     public class SystemPlayerData 
     {

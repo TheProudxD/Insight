@@ -38,6 +38,12 @@ namespace UI
             Close();
         }
 
+        private void ReturnInGame()
+        {
+            base.Close();
+            DisablePauseMode();
+        }
+
         protected override void OnEnable()
         {
             EnablePauseMode();
@@ -45,12 +51,6 @@ namespace UI
             CloseButton.Add(ReturnInGame);
             _restartLevelButton.Add(RestartLevel);
             _returnToLobbyButton.Add(ReturnToLobby);
-        }
-
-        private void ReturnInGame()
-        {
-            base.Close();
-            DisablePauseMode();
         }
 
         protected override void OnDisable()

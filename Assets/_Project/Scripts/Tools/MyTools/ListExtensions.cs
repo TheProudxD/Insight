@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class ListExtensions
 {
-    public static T GetRandomItem<T>(this IList<T> list) =>
+    public static T GetRandom<T>(this IList<T> list) =>
         list is { Count: > 0 } ? list[Random.Range(0, list.Count)] : default;
 
     public static void Shuffle<T>(this IList<T> list)

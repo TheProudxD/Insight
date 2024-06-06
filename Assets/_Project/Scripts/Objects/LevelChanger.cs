@@ -13,6 +13,7 @@ namespace Objects
 
         [Inject] private SceneManager _sceneManager;
         [Inject(Id = "fade animator")] private Animator _fadeAnimator;
+        
         private LoadingAnimation _loadingAnimation;
 
         private void Awake()

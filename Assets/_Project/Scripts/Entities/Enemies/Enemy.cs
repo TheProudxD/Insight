@@ -52,11 +52,14 @@ namespace Enemies
             CurrentState = EnemyState.Idle;
             EnemyRigidbody.velocity = Vector2.zero;
         }
-        
+
         private void HitParticle(Vector3 position) => _hitParticleAnimation.Hit(position);
 
         public void Hit(Vector3 position, float knockTime, float damage)
         {
+            if (gameObject.activeSelf == false)
+                return;
+
             HitParticle(position);
             StartCoroutine(KnockCoroutine(knockTime, damage));
         }

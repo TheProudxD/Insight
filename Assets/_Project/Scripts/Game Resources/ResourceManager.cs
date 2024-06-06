@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using Assets._Project.Scripts.Storage.Static;
+using Storage.Static;
 using StorageService;
 using UnityEngine;
 
