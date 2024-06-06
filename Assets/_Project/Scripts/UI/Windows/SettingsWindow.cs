@@ -6,7 +6,8 @@ namespace UI
 {
     public class SettingsWindow : CommonWindow
     {
-        [Header("Language")] [SerializeField] private Dropdown _languageChangeDropdown;
+        [Header("Language")] 
+        [SerializeField] private Dropdown _languageChangeDropdown;
         //[SerializeField] private LanguageChanger _languageChanger;
 
         [Header("Tutorial")] 
@@ -70,18 +71,21 @@ namespace UI
         private void ChangeLanguage(int lang)
         {
             //
+            AudioPlayer.PlayButtonSound();
         }
 
         private void EnableTutorial()
         {
             _tutorialEnableButton.gameObject.SetActive(false);
             _tutorialDisableButton.gameObject.SetActive(true);
+            AudioPlayer.PlayButtonSound();
         }
 
         private void DisableTutorial()
         {
             _tutorialEnableButton.gameObject.SetActive(true);
             _tutorialDisableButton.gameObject.SetActive(false);
+            AudioPlayer.PlayButtonSound();
         }
 
         private void ToggleLowQuality(bool value) => ChangeQuality(0);
@@ -96,12 +100,18 @@ namespace UI
         
         private void ChangeHotShopDealsToggle(bool arg0)
         {
+            AudioPlayer.PlayToggleSound();
         }
 
         private void ChangeLimitedTimeEventsToggle(bool arg0)
         {
+            AudioPlayer.PlayToggleSound();
         }
 
-        private void ChangeQuality(int q) => QualitySettings.SetQualityLevel(q);
+        private void ChangeQuality(int q)
+        {
+            QualitySettings.SetQualityLevel(q);
+            AudioPlayer.PlayToggleSound();
+        }
     }
 }

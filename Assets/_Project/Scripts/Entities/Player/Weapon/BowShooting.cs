@@ -24,11 +24,9 @@ namespace Player
                 return false;
 
             var playerPos = position;
-
             ArrowSpawn(playerPos.sqrMagnitude != 0 ? playerPos : direction);
-
             StartCoroutine(BowAttackCo());
-
+            CharacterAudioPlayer.PlayAttack(AttackType.Bow);
             return true;
         }
 

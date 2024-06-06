@@ -16,11 +16,13 @@ namespace UI
         [SerializeField] private Button _newsButton;
         
         private WindowManager _windowManager;
+        private UIAudioPlayer _audioPlayer;
 
         [Inject]
-        private void Construct(Camera uiCamera, WindowManager windowManager)
+        private void Construct(Camera uiCamera, WindowManager windowManager, UIAudioPlayer audioPlayer)
         {
             _windowManager = windowManager;
+            _audioPlayer = audioPlayer;
             GetComponent<Canvas>().worldCamera = uiCamera;
         }
 
@@ -34,14 +36,34 @@ namespace UI
             _newsButton.Add(OpenNewsWindow);
         }
 
-        private void OpenVk() => Application.OpenURL("https://vk.com/callmeproud");
+        private void OpenVk()
+        {
+            _audioPlayer.PlayButtonSound();
+            Application.OpenURL("https://vk.com/callmeproud");
+        }
 
-        private void OpenDiscord() => Application.OpenURL("https://vk.com/callmeproud");
-        
-        private void OpenLeaderboardWindow() => _windowManager.ShowLeaderboardWindow();
-        
-        private void OpenSettingsWindow() => _windowManager.ShowSettingsWindow();
-        
-        private void OpenNewsWindow() => _windowManager.ShowNewsWindow();
+        private void OpenDiscord()
+        {
+            _audioPlayer.PlayButtonSound();
+            Application.OpenURL("https://vk.com/callmeproud");
+        }
+
+        private void OpenLeaderboardWindow()
+        {
+            _audioPlayer.PlayButtonSound();
+            _windowManager.ShowLeaderboardWindow();
+        }
+
+        private void OpenSettingsWindow()
+        {
+            _audioPlayer.PlayButtonSound();
+            _windowManager.ShowSettingsWindow();
+        }
+
+        private void OpenNewsWindow()
+        {
+            _audioPlayer.PlayButtonSound();
+            _windowManager.ShowNewsWindow();
+        }
     }
 }

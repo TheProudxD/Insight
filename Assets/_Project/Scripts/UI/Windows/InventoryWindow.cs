@@ -158,6 +158,7 @@ public class InventoryWindow : CommonWindow
         _useButton.interactable = item.Usable;
         _useButton.onClick.RemoveAllListeners();
         _useButton.onClick.AddListener(OnUseButtonClick);
+        _useButton.onClick.AddListener(AudioPlayer.PlayButtonSound);
     }
 
     public void SelectCategory(InventoryItemCategory itemCategory)

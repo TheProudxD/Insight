@@ -14,6 +14,7 @@ namespace Player
     public class PlayerAttacking : MonoBehaviour, IKnockbackable
     {
         [Inject] protected PlayerEntitySpecs PlayerEntitySpecs;
+        [Inject] protected HitAudioPlayer HitAudioPlayer;
         
         [SerializeField] private Signal _playerHitSignal;
         [SerializeField] private HitAnimation _hitAnimation;
@@ -49,6 +50,7 @@ namespace Player
             if (_playerHealth.Amount <= 0)
                 yield break;
 
+            HitAudioPlayer.Play();
             _hitAnimation.Play();
             yield return new WaitForSeconds(knockTime);
             PlayerStateMachine.Current = PlayerState.Idle;

@@ -6,7 +6,8 @@ namespace Player
     public abstract class Shooting : MonoBehaviour
     {
         [Inject] protected PlayerEntitySpecs PlayerEntitySpecs;
-        
+        [Inject] protected CharacterAudioPlayer CharacterAudioPlayer;
+
         protected abstract float TimeBeforeLastAttackCounter { get; set; }
         protected abstract bool CanAttack();
 

@@ -34,6 +34,7 @@ public class FireCircleAbility : Ability
     public override float Use()
     {
         ReloadingDurationTimer = 0;
+        AbilityAudioPlayer.PlayFireCircleAbilitySound();
         for (int angle = 0; angle < 360; angle++)
         {
             angle += 30;

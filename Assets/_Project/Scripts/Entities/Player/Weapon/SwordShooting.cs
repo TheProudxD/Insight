@@ -22,6 +22,7 @@ namespace Player
             TimeBeforeLastAttackCounter = 0;
             _playerAnimation.SetAttackingAnimation(true);
             PlayerStateMachine.Current = PlayerState.Attack;
+            CharacterAudioPlayer.PlayAttack(AttackType.Sword);
             yield return null;
             _playerAnimation.SetAttackingAnimation(false);
             yield return new WaitForSeconds(_attackDuration);

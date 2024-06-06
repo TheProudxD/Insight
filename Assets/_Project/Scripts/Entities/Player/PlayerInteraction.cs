@@ -1,10 +1,13 @@
 using UnityEngine;
 using UnityEngine.Serialization;
+using Zenject;
 
 namespace Player
 {
     public class PlayerInteraction : MonoBehaviour
     {
+        [Inject] private CharacterAudioPlayer _characterAudioPlayer;
+        
         [FormerlySerializedAs("ReceivedItemSprite"), SerializeField]
         private SpriteRenderer _receivedItemSprite;
 
@@ -20,6 +23,7 @@ namespace Player
             _playerAnimation.SetReceiveItemAnimation(true);
             PlayerStateMachine.Current = PlayerState.Interact;
             _receivedItemSprite.sprite = item.Image;
+            _characterAudioPlayer.PlayPickupItemSound();
         }
 
         public void RemovePickupItem()

@@ -1,26 +1,22 @@
-using Objects;
 using Player;
 using UnityEngine;
-using UnityEngine.UI;
 
 [RequireComponent(typeof(PlayerMana))]
 public class PlayerAbilitySystem : MonoBehaviour
 {
     [SerializeField] private DashAbility _dashAbility;
     [SerializeField] private FireCircleAbility _fireCircleAbility;
+    [SerializeField] private MultiProjectilesAbility _multiProjectilesAbility;
 
     private PlayerMana _playerMana;
 
-    private void Awake()
-    {
-        _playerMana = GetComponent<PlayerMana>();
-    }
+    private void Awake() => _playerMana = GetComponent<PlayerMana>();
 
     private bool EnoughMana(Ability ability) => ability.MagicCost <= _playerMana.Amount;
 
     private bool TryUseAbility(Ability ability, out float duration)
     {
-        if (EnoughMana(ability) ==false || ability.CanUse() == false)
+        if (EnoughMana(ability) == false || ability.CanUse() == false)
         {
             duration = 0;
             return false;
@@ -31,7 +27,7 @@ public class PlayerAbilitySystem : MonoBehaviour
         duration = ability.Use();
         return true;
     }
-    
+
     public float UseDash() // небольшой буст
     {
         TryUseAbility(_dashAbility, out var duration);
@@ -40,7 +36,8 @@ public class PlayerAbilitySystem : MonoBehaviour
 
     public float UseMultiProjectile() // выстрел из нескольких снарядов
     {
-        throw new System.NotImplementedException();
+        TryUseAbility(_multiProjectilesAbility, out var duration);
+        return duration;
     }
 
     public float UseFireBall() // поджигает при попадании, наносит дамаг в течение времени
@@ -69,7 +66,7 @@ public class PlayerAbilitySystem : MonoBehaviour
         return duration;
     }
 
-    public float UseShield() // полное поглощение всего дамага
+    public float UseShield() // полное поглощение всего дамага на некоторое время
     {
         throw new System.NotImplementedException();
     }

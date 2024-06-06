@@ -281,6 +281,14 @@ namespace Extensions
                 break;
             }
         }
+        
+        public static void ForEach<T>(this IEnumerable<T> list, Action<T> func)
+        {
+            foreach (var item in list)
+            {
+                func?.Invoke(item);
+            }
+        }
 
         public static bool IsOneOf<T>(this T self, params T[] elem) => elem.Contains(self);
 

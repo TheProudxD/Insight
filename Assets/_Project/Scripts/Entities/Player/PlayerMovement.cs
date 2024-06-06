@@ -7,6 +7,7 @@ namespace Player
     {
         [Inject] private PlayerEntitySpecs _playerEntitySpecs;
         [Inject] private IInputReader _inputReader;
+        [Inject] private CharacterAudioPlayer _characterAudioPlayer;
 
         public Vector2 PlayerMovementVector => _playerMovement;
         public Rigidbody2D PlayerRigidbody { get; private set; }
@@ -27,7 +28,9 @@ namespace Player
         private void FixedUpdate()
         {
             if (PlayerStateMachine.Current is PlayerState.Walk or PlayerState.Idle)
+            {
                 MoveCharacter(transform.position);
+            }
         }
 
         private void ReadInput()
@@ -37,8 +40,11 @@ namespace Player
             var verticalAxis = inputDirection.y;
 
             _playerMovement = new Vector2(horizontalAxis, verticalAxis);
-            if (_playerMovement != Vector2.zero) 
+            if (_playerMovement != Vector2.zero)
+            {
                 _faceDirection = _playerMovement;
+                _characterAudioPlayer.PlayStepsSound(CharacterAudioPlayer.GroundType.Inner);
+            }
         }
 
         private void MoveCharacter(Vector2 position) =>

@@ -15,6 +15,7 @@ public class DashAbility : Ability
     public override float Use()
     {
         ReloadingDurationTimer = 0;
+        AbilityAudioPlayer.PlayDashAbilitySound();
         var dashVector = (Vector2)_playerRigidbody.transform.position + _playerMovement.GetFaceDirection() * _dashForce;
         _tweener = _playerRigidbody.DOMove(dashVector, Duration).OnComplete(() =>
         {

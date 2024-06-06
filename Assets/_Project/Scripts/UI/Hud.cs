@@ -8,6 +8,7 @@ namespace UI
     public class Hud : MonoBehaviour
     {
         [Inject] private WindowManager _windowManager;
+        [Inject] private UIAudioPlayer _audioPlayer;
 
         [SerializeField] private Button _settingsButton;
         [SerializeField] private Button _inventoryButton;
@@ -18,9 +19,17 @@ namespace UI
             _settingsButton.onClick.AddListener(OpenPause);
         }
 
-        private void OpenInventory() => _windowManager.ShowInventoryWindow();
+        private void OpenInventory()
+        {
+            _audioPlayer.PlayButtonSound();
+            _windowManager.ShowInventoryWindow();
+        }
 
-        private void OpenPause() => _windowManager.ShowPauseWindow();
+        private void OpenPause()
+        {
+            _audioPlayer.PlayButtonSound();
+            _windowManager.ShowPauseWindow();
+        }
 
         private void SwitchView(bool state)
         {

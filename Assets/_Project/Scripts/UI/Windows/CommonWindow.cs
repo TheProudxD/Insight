@@ -1,11 +1,13 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace UI
 {
     public abstract class CommonWindow : MonoBehaviour
     {
+        [Inject] protected UIAudioPlayer AudioPlayer;
         [SerializeField] protected Button CloseButton;
         private readonly List<GameObject> _children = new();
 
@@ -17,6 +19,7 @@ namespace UI
             if (CloseButton != null)
             {
                 CloseButton.onClick.AddListener(Close);
+                CloseButton.onClick.AddListener(AudioPlayer.PlayButtonSound);
             }
             else
             {
@@ -32,6 +35,7 @@ namespace UI
             if (CloseButton != null)
             {
                 CloseButton.onClick.RemoveListener(Close);
+                CloseButton.onClick.RemoveListener(AudioPlayer.PlayButtonSound);
             }
             else
             {

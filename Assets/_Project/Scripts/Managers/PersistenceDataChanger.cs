@@ -31,7 +31,8 @@ namespace Managers
                 _playerAttacking.gameObject.SetActive(true);
             }
 
-            _playerAttacking.transform.position = _levelSpawnData.SpawnPosition[scene];
+            if (_levelSpawnData.SpawnPosition.TryGetValue(scene, out var position))
+                _playerAttacking.transform.position = position;
         }
     }
 }

@@ -85,7 +85,7 @@ namespace Storage
             {
                 LoadScene(Scene.Lobby);
                 var levelRewardWindow = _windowManager.ShowLevelRewardWindow();
-                levelRewardWindow.Display(LevelResult.Successful);
+                levelRewardWindow.Display(LevelResultType.Successful);
             }
             else
             {

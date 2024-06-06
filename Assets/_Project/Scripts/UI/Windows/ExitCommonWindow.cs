@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Extensions;
+using UnityEngine;
 using UnityEngine.Events;
 using UnityEngine.UI;
 
@@ -10,7 +11,8 @@ namespace UI
 
         public void OnExit(UnityAction exit)
         {
-            _exitButton.onClick.AddListener(exit);
+            _exitButton.Add(AudioPlayer.PlayButtonSound);
+            _exitButton.Add(exit);
         }
     }
 }

@@ -49,8 +49,11 @@ namespace UI
             EnablePauseMode();
 
             CloseButton.Add(ReturnInGame);
+            CloseButton.Add(AudioPlayer.PlayButtonSound);
             _restartLevelButton.Add(RestartLevel);
+            _restartLevelButton.Add(AudioPlayer.PlayButtonSound);
             _returnToLobbyButton.Add(ReturnToLobby);
+            _returnToLobbyButton.Add(AudioPlayer.PlayButtonSound);
         }
 
         protected override void OnDisable()
@@ -58,8 +61,11 @@ namespace UI
             DisablePauseMode();
 
             CloseButton.Remove(ReturnInGame);
+            CloseButton.Remove(AudioPlayer.PlayButtonSound);
             _restartLevelButton.Remove(RestartLevel);
+            _restartLevelButton.Remove(AudioPlayer.PlayButtonSound);
             _returnToLobbyButton.Remove(ReturnToLobby);
+            _returnToLobbyButton.Remove(AudioPlayer.PlayButtonSound);
         }
     }
 }
