@@ -24,6 +24,8 @@ namespace Managers
         private const string NEWS_WINDOW_KEY = "News";
         private const string CURRENCY_SHOP_WINDOW_KEY = "Currency Shop";
         private const string CONNECTION_LOST_WINDOW_KEY = "Connection Lost";
+        private const string SIGNUP_LOST_WINDOW_KEY = "Signup";
+        private const string LOGIN_LOST_WINDOW_KEY = "Login";
         
         public CommonWindow GetWindowPrefab(WindowType windowType, Transform parent = null)
         {
@@ -41,6 +43,8 @@ namespace Managers
                 WindowType.News => NEWS_WINDOW_KEY,
                 WindowType.CurrencyShop => CURRENCY_SHOP_WINDOW_KEY,
                 WindowType.ConnectionLost => CONNECTION_LOST_WINDOW_KEY,
+                WindowType.Signup => SIGNUP_LOST_WINDOW_KEY,
+                WindowType.Login => LOGIN_LOST_WINDOW_KEY,
                 _ => throw new ArgumentOutOfRangeException(nameof(windowType), windowType, null)
             };
 

@@ -7,5 +7,5 @@ public class AppStartUp : MonoBehaviour
     [Inject] private ILoadingOperation[] _operations;
 
     private async void Awake() =>
-		await _loadingScreenLoader.LoadAndDestroy(_operations);
+        await _loadingScreenLoader.LoadAndDestroy(_operations);
 }

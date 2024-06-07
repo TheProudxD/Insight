@@ -11,12 +11,8 @@ namespace UI
 
         [SerializeField] private TextMeshProUGUI _playerNickname;
 
-        private void Awake()
-        {
-            var playerName = _dataManager.GetName();
-            SetNicknameAfterLoading(playerName);
-        }
+        private void Awake() => _dataManager.DataLoaded += SetNicknameAfterLoading;
 
-        public void SetNicknameAfterLoading(string playerName) => _playerNickname.text = playerName;
+        public void SetNicknameAfterLoading(PlayerData playerData) => _playerNickname.SetText(playerData.Name);
     }
 }

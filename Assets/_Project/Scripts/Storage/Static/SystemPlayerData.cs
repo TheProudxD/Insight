@@ -1,32 +1,40 @@
-﻿using Tools;
+﻿using SimpleJSON;
+using Tools;
 
 namespace Storage.Static
 {
-    public class SystemPlayerData 
+    public class SystemPlayerData
     {
         public static SystemPlayerData Instance;
 
-        public SystemPlayerData(int uID, string key)
-        {
-            uid = uID;
-            this.key = key;
-        }
-
         public readonly int uid;
         public readonly string key;
+
+        public SystemPlayerData(int uid, string key)
+        {
+            this.uid = uid;
+            this.key = key;
+        }
 
         public void ToSingleton() => Instance = this;
         public override string ToString() => this.GiveAllFields();
 
         public override bool Equals(object obj)
         {
-            var newData = obj as SystemPlayerData;
-            if (newData == null)
+            if (obj is not SystemPlayerData newData)
                 return false;
 
             return newData.uid == uid;
         }
-        
-        public override int GetHashCode() => uid.GetHashCode()*19+key.GetHashCode()*13;
+
+        public static SystemPlayerData Parse(JSONNode data)
+        {
+            var uid = int.Parse(data["uid"]);
+            var key = data["key"].Value;
+            var systemData = new SystemPlayerData(uid, key);
+            return systemData;
+        }
+
+        public override int GetHashCode() => uid.GetHashCode() * 19 + key.GetHashCode() * 13;
     }
 }

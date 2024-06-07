@@ -1,8 +1,6 @@
 using Cysharp.Threading.Tasks;
 using System;
 using Storage;
-using UnityEngine.SceneManagement;
-using Scene = Storage.Scene;
 using SceneManager = UnityEngine.SceneManagement.SceneManager;
 
 public class GameSceneLoader : ILoadingOperation

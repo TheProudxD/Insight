@@ -14,5 +14,7 @@ namespace Managers
         News,
         CurrencyShop,
         ConnectionLost,
+        Signup,
+        Login
     }
 }

@@ -46,8 +46,10 @@ public class ProjectMonoInstallers : MonoInstaller
 
     private void Loading()
     {
+        Container.BindInterfacesTo<ConnectionChecker>().AsSingle();
+        Container.BindInterfacesTo<GoogleSheetsDownloader>().AsSingle();
+        Container.BindInterfacesTo<GameSceneLoader>().AsSingle();
         Container.BindInterfacesTo<DataLoader>().AsSingle();
-        Container.BindInterfacesTo<GameSceneLoader>().AsTransient();
         Container.Bind<LoadingScreenLoader>().AsSingle();
     }
 
