@@ -8,7 +8,7 @@ namespace UI
     {
         [Header("Language")] 
         [SerializeField] private Dropdown _languageChangeDropdown;
-        //[SerializeField] private LanguageChanger _languageChanger;
+        [SerializeField] private LanguageChanger _languageChanger;
 
         [Header("Tutorial")] 
         [SerializeField] private Button _tutorialEnableButton;
@@ -68,10 +68,10 @@ namespace UI
             _limitedTimeEventsToggle.onValueChanged.RemoveListener(ChangeLimitedTimeEventsToggle);
         }
 
-        private void ChangeLanguage(int lang)
+        private void ChangeLanguage(int langID)
         {
-            //
-            AudioPlayer.PlayButtonSound();
+            _languageChanger.SwitchLanguage(langID);
+            AudioPlayer.PlayToggleSound();
         }
 
         private void EnableTutorial()

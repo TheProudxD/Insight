@@ -1,3 +1,4 @@
+using System;
 using Objects.Powerups;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,6 +8,10 @@ namespace Enemies
 {
     public class EnemyHealth : MonoBehaviour
     {
+        private const string DEATH_ANIMATOR_KEY = "death";
+
+        private static readonly int DeathHashID = Animator.StringToHash(DEATH_ANIMATOR_KEY);
+
         [Inject(Id = "static log")] private LogEntitySpecs _specs;
         [Inject(Id = "enemyDeathEffect")] private Animator _deathAnimator;
         [Inject] private PowerupFactory _powerupFactory;
@@ -15,6 +20,8 @@ namespace Enemies
         [SerializeField] private LootTable _lootTable;
 
         private float _health;
+
+        public event Action Died;
 
         private void Start()
         {
@@ -35,9 +42,9 @@ namespace Enemies
 
         private void MakeLoot()
         {
-            if (_lootTable == null) 
+            if (_lootTable == null)
                 return;
-            
+
             var powerup = _lootTable.LootPowerup();
             _powerupFactory.Create(powerup, transform.position);
         }
@@ -45,11 +52,11 @@ namespace Enemies
         private void Die()
         {
             // + sound
+            Died?.Invoke();
             MakeLoot();
-            _deathAnimator.gameObject.transform.position = gameObject.transform.position;
-            _deathAnimator.SetTrigger("death");
+            _deathAnimator.gameObject.transform.position = transform.position;
+            _deathAnimator.SetTrigger(DeathHashID);
             _healthBar.gameObject.SetActive(false);
-            gameObject.SetActive(false);
         }
     }
 }

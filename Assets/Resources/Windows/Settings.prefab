@@ -2174,8 +2174,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3769031928701984007}
   m_HandleRect: {fileID: 2636304833350291902}
   m_Direction: 2
-  m_Value: 1
-  m_Size: 0.95
+  m_Value: 1.0000013
+  m_Size: 0.9357143
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2558,6 +2558,7 @@ GameObject:
   - component: {fileID: 184626814828993180}
   - component: {fileID: 2189547472348166058}
   - component: {fileID: 3580454329939089582}
+  - component: {fileID: 8371067535729406114}
   m_Layer: 5
   m_Name: Language
   m_TagString: Untagged
@@ -2662,6 +2663,18 @@ MonoBehaviour:
   m_EffectColor: {r: 0, g: 0, b: 0, a: 0.29803923}
   m_EffectDistance: {x: 0, y: -6}
   m_UseGraphicAlpha: 1
+--- !u!114 &8371067535729406114
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2281855231745368800}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 69df3445b49bb63499fc7d11418379b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &2377312719930261408
 GameObject:
   m_ObjectHideFlags: 0
@@ -4099,6 +4112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CloseButton: {fileID: 1781006916257209432}
   _languageChangeDropdown: {fileID: 274720651087506252}
+  _languageChanger: {fileID: 8371067535729406114}
   _tutorialEnableButton: {fileID: 251567864119505205}
   _tutorialDisableButton: {fileID: 251567865177815462}
   _lowQualityToggle: {fileID: 593514051445635363}
@@ -8931,33 +8945,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4504469621671821303, guid: a46a69fefd6426343a6c8dc25c0b1671, type: 3}
-      propertyPath: m_Options.m_Options.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4504469621671821303, guid: a46a69fefd6426343a6c8dc25c0b1671, type: 3}
-      propertyPath: m_Options.m_Options.Array.data[0].m_Text
-      value: English
-      objectReference: {fileID: 0}
-    - target: {fileID: 4504469621671821303, guid: a46a69fefd6426343a6c8dc25c0b1671, type: 3}
-      propertyPath: m_Options.m_Options.Array.data[1].m_Text
-      value: Russian
-      objectReference: {fileID: 0}
-    - target: {fileID: 4504469621671821303, guid: a46a69fefd6426343a6c8dc25c0b1671, type: 3}
-      propertyPath: m_Options.m_Options.Array.data[2].m_Text
-      value: Spanish
-      objectReference: {fileID: 0}
-    - target: {fileID: 4504469621671821303, guid: a46a69fefd6426343a6c8dc25c0b1671, type: 3}
-      propertyPath: m_Options.m_Options.Array.data[3].m_Text
-      value: German
-      objectReference: {fileID: 0}
-    - target: {fileID: 4504469621671821303, guid: a46a69fefd6426343a6c8dc25c0b1671, type: 3}
-      propertyPath: m_Options.m_Options.Array.data[4].m_Text
-      value: French
-      objectReference: {fileID: 0}
     - target: {fileID: 4504469622360754772, guid: a46a69fefd6426343a6c8dc25c0b1671, type: 3}
       propertyPath: m_Text
       value: English
+      objectReference: {fileID: 0}
+    - target: {fileID: 4504469622360754772, guid: a46a69fefd6426343a6c8dc25c0b1671, type: 3}
+      propertyPath: m_FontData.m_FontSize
+      value: 72
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

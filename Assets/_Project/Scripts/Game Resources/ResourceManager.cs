@@ -23,6 +23,7 @@ namespace ResourceService
         {
             _dynamicStorageService = dynamicStorageService;
             dataManager.DataLoaded += Initialize;
+            ResourceChanged += OnResourceChanged;
         }
 
         public float MaxEnergyAmount => 50;
@@ -40,8 +41,11 @@ namespace ResourceService
 
             _resources = resources.ToDictionary(r => r.Type);
 
-            ResourceChanged += OnResourceChanged;
+            SubscriptOnResources(resources);
+        }
 
+        private void SubscriptOnResources(IEnumerable<Resource> resources)
+        {
             foreach (var resource in resources)
             {
                 resource.Changed += (oldValue, newValue) =>
@@ -50,7 +54,7 @@ namespace ResourceService
                 };
             }
         }
-
+        
         private void OnResourceChanged(ResourceType resType, int oldV, int newV)
         {
             switch (resType)
@@ -77,10 +81,7 @@ namespace ResourceService
                 throw new ArgumentException("Value cannot be negative");
 
             var resource = _resources[type];
-            var before = resource.Amount;
             resource.Amount += value;
-
-            ResourceChanged?.Invoke(type, before, resource.Amount);
         }
 
         public void Spend(ResourceType type, int value)
@@ -93,10 +94,7 @@ namespace ResourceService
             if (resource.Amount - value < 0)
                 throw new ArgumentException("You can't spend more than is in current amount");
 
-            var before = resource.Amount;
             resource.Amount -= value;
-
-            ResourceChanged?.Invoke(type, before, resource.Amount);
         }
 
         private async void SaveSoftCurrency(int newValue)

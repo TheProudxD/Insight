@@ -1,86 +1,52 @@
 using System.Collections;
 using UnityEngine;
-using System.Collections.Generic;
 using Zenject;
 
 namespace Enemies
 {
-    public class PatrolLog : Log
+    public class PatrolLog : MovableEnemy
     {
         [Inject(Id = "dynamic log")] private LogEntitySpecs _specs;
-        [SerializeField] private List<Transform> _waypoints;
 
-        private Transform CurrentPoint => _waypoints[_currentPointIndex];
-        private int _currentPointIndex;
-        private readonly float _roundingDistance = 0.1f;
+        protected override string IdleAnimatorKey => "wakeUp";
+        protected override string MoveAnimatorKey { get; }
+        protected override string AttackAnimatorKey { get; }
+        protected override string DeadAnimatorKey { get; }
 
-        protected new void Awake()
-        {
-            base.Awake();
-            _waypoints.ForEach(x => x.parent = null);
-        }
+        protected override void Attack() => StartCoroutine(AttackCo());
 
-        protected override void CheckDistance()
-        {
-            var distance = Vector3.Distance(Target.position, transform.position);
-            if (distance <= _specs.ChaseRadius && distance > _specs.AttackRadius)
-            {
-                if (CurrentState is EnemyState.Idle or EnemyState.Walk and not EnemyState.Idle)
-                {
-                    var targetDirection = Vector3.MoveTowards(
-                        transform.position,
-                        Target.position,
-                        _specs.MoveSpeed * Time.deltaTime);
-                   
-                    Move(targetDirection);
-                    
-                    ChangeAnimation(targetDirection - transform.position);
-                    SetAnimationBool(AnimationConst.wakeUp, true);
-                    ChangeState(EnemyState.Walk);
-                }
-            }
-            else if (distance <= _specs.AttackRadius)
-            {
-                if (CurrentState == EnemyState.Walk
-                    && CurrentState != EnemyState.Stagger)
-                {
-                    var targetDirection = Vector3.MoveTowards(
-                        transform.position,
-                        Target.position,
-                        _specs.MoveSpeed * Time.deltaTime);
-                    Move(targetDirection);
-                    //StartCoroutine(AttackCo());
-                }
-            }
-            else if (distance > _specs.ChaseRadius)
-            {
-                if (Vector3.Distance(transform.position, CurrentPoint.position) > _roundingDistance)
-                {
-                    var direction = Vector3.MoveTowards(transform.position, CurrentPoint.position,
-                        _specs.MoveSpeed * Time.deltaTime);
-                    ChangeAnimation(direction - transform.position);
-                    Move(direction);
-                }
-                else
-                {
-                    ChangeWaypointIndex();
-                }
-            }
-        }
-        
         public IEnumerator AttackCo()
         {
+            Damager.enabled = true;
+            Animator.SetBool(AttackAnimatorKey, true);
             ChangeState(EnemyState.Attack);
             yield return new WaitForSeconds(1f);
             ChangeState(EnemyState.Walk);
+            Damager.enabled = false;
         }
 
-        private void ChangeWaypointIndex()
+        protected override void Move(Vector2 direction)
         {
-            if (_currentPointIndex >= _waypoints.Count - 1)
-                _currentPointIndex = 0;
-            else
-                _currentPointIndex++;
+            EnemyRigidbody.MovePosition(direction * _specs.MoveSpeed);
+            ChangeState(EnemyState.Walk);
         }
+
+        protected override void PlayMoveAnimation(Vector2 direction)
+        {
+            direction -= (Vector2)transform.position;
+
+            Vector2 dir;
+            if (Mathf.Abs(direction.x) > Mathf.Abs(direction.y))
+                dir = direction.x > 0 ? Vector2.right : Vector2.left;
+            else
+                dir = direction.y > 0 ? Vector2.up : Vector2.down;
+
+            Animator.SetFloat("moveX", dir.x);
+            Animator.SetFloat("moveY", dir.y);
+        }
+
+        protected override bool IsEnoughToChase(float distanceToTarget) => distanceToTarget <= _specs.ChaseRadius;
+
+        protected override bool IsEnoughToAttack(float distanceToTarget) => distanceToTarget <= _specs.AttackRadius;
     }
 }

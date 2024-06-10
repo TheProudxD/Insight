@@ -148,8 +148,6 @@ namespace StorageService
             {
                 //_windowManager.ShowLoginWindow();
                 
-                Debug.Log(SceneManager.GetActiveScene().name);
-                
                 var localJsonFile = await File.ReadAllTextAsync(localPath);
                 var jsonNode = JSONNode.Parse(localJsonFile);
                 var localData = SystemPlayerData.Parse(jsonNode);

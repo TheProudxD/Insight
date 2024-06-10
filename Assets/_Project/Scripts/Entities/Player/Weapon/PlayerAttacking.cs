@@ -11,7 +11,7 @@ namespace Player
     [RequireComponent(typeof(PlayerHealth))]
     [RequireComponent(typeof(PlayerMana))]
     [RequireComponent(typeof(Rigidbody2D))]
-    public class PlayerAttacking : MonoBehaviour, IKnockbackable
+    public class PlayerAttacking : MonoBehaviour, IDamageable
     {
         [Inject] protected PlayerEntitySpecs PlayerEntitySpecs;
         [Inject] protected HitAudioPlayer HitAudioPlayer;

@@ -477,6 +477,7 @@ GameObject:
   - component: {fileID: 8909068300085641725}
   - component: {fileID: 3878598730540321433}
   - component: {fileID: 4873682833966098629}
+  - component: {fileID: 2745771768328270148}
   m_Layer: 7
   m_Name: Dynamic Log
   m_TagString: Untagged
@@ -703,7 +704,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd4f86101a32ae448bdb8530abb65a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _waypoints:
+  Waypoints:
   - {fileID: 7641847987549256942}
   - {fileID: 9134021240630625174}
 --- !u!114 &3878598730540321433
@@ -721,6 +722,7 @@ MonoBehaviour:
   _thrust: 1
   _knockTime: 0.15
   _damage: 0.05
+  _attackCooldown: 1.5
 --- !u!114 &4873682833966098629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -735,6 +737,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _healthBar: {fileID: 5009070913515056206}
   _lootTable: {fileID: 11400000, guid: a9209af93ee36f64095f5610c454932d, type: 2}
+--- !u!114 &2745771768328270148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6231422567762838360}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63cd7489149340d7990d08d8dc2c6f4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _hitParticles:
+  - {fileID: 5373061118796645098, guid: 2e860dbf01010ba428d8b4e12f164bec, type: 3}
 --- !u!1 &7096255090561047047
 GameObject:
   m_ObjectHideFlags: 0

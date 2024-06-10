@@ -1,4 +1,3 @@
-using Objects;
 using UnityEngine;
 using Zenject;
 
@@ -7,7 +6,8 @@ namespace Enemies
     public class TurretLog : Log
     {
         [SerializeField] private RockProjectile _projectile;
-        [Inject(Id = "turret log")] private LogEntitySpecs Specs;
+        [Inject(Id = "turret log")] private LogEntitySpecs _specs;
+
         private readonly float _fireDelay = 2;
         private float _fireDelayTimer;
         private bool _canFire;
@@ -25,24 +25,26 @@ namespace Enemies
         protected override void CheckDistance()
         {
             var distance = Vector3.Distance(Target.position, transform.position);
-            if (distance <= Specs.ChaseRadius && distance > Specs.AttackRadius)
+            if (distance <= _specs.ChaseRadius && distance > _specs.AttackRadius)
             {
                 if (CurrentState is EnemyState.Idle or EnemyState.Walk and not EnemyState.Idle)
                 {
-                    if (!_canFire) 
+                    if (!_canFire)
                         return;
 
-                    var delta = Target.transform.position - transform.position;
-                    var currentProjectile = Instantiate(_projectile, transform.position, Quaternion.identity);
+                    var position = transform.position;
+                    var delta = Target.transform.position - position;
+                    var currentProjectile = Instantiate(_projectile, position, Quaternion.identity);
                     currentProjectile.Launch(delta);
                     _canFire = false;
-                    SetAnimationBool(AnimationConst.wakeUp, true);
+                    SetAnimationBool(IdleAnimatorKey, true);
                     ChangeState(EnemyState.Walk);
                 }
             }
-            else if (distance > Specs.ChaseRadius)
+            else if (distance > _specs.ChaseRadius)
             {
-                SetAnimationBool(AnimationConst.wakeUp, false);
+                SetAnimationBool(IdleAnimatorKey, false);
+                ChangeState(EnemyState.Idle);
             }
         }
     }

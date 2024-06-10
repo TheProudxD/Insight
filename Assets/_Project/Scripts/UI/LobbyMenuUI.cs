@@ -21,9 +21,9 @@ namespace UI
         [Inject]
         private void Construct(Camera uiCamera, WindowManager windowManager, UIAudioPlayer audioPlayer)
         {
+            GetComponent<Canvas>().worldCamera = uiCamera;
             _windowManager = windowManager;
             _audioPlayer = audioPlayer;
-            GetComponent<Canvas>().worldCamera = uiCamera;
         }
 
         private void OnEnable()

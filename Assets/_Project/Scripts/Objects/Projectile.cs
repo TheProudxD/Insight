@@ -28,7 +28,9 @@ namespace Objects
 
         private void OnTriggerEnter2D(Collider2D other)
         {
-            if (other.isTrigger) return;
+            if (other.isTrigger)
+                return;
+            
             GetComponent<Animator>().SetTrigger("Brake");
             _rigidbody.velocity = Vector2.zero;
             Destroy(gameObject, 0.75F);

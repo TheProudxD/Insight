@@ -1,6 +1,7 @@
+using Objects;
 using UnityEngine;
 
-namespace Objects
+namespace Enemies
 {
     public class RockProjectile : Projectile
     {
