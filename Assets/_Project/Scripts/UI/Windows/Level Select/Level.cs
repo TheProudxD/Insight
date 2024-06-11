@@ -20,19 +20,18 @@ namespace UI
         [SerializeField] private LevelSelectWindow _levelSelectWindow;
         [SerializeField] private LevelSelectPopup _levelSelectPopup;
 
-        [SerializeField] private Scene _scene;
         [SerializeField] private Image[] _starImages;
         [SerializeField] private Image _lock;
         [SerializeField] private TextMeshProUGUI _requireLevelText;
         [SerializeField] private int _energyPrice;
-
         [SerializeField, Range(0, 3)] private int _starPassedAmount;
-
-        private Button _openPopupButton;
+        
+        [field: SerializeField] public Scene Scene { get; private set; }
+        public Button OpenPopupButton { get; private set; }
 
         private void Awake()
         {
-            _openPopupButton = GetComponent<Button>();
+            OpenPopupButton = GetComponent<Button>();
             if (_starImages.Length > 3)
                 Debug.LogError(nameof(_starImages));
         }
@@ -45,11 +44,11 @@ namespace UI
 
         private void InitializeOpenButton()
         {
-            _openPopupButton.onClick.AddListener(() =>
+            OpenPopupButton.onClick.AddListener(() =>
             {
                 _audioPlayer.PlayButtonSound();
                 _levelSelectPopup.gameObject.SetActive(true);
-                _levelSelectPopup.Activate(_scene.ToString());
+                _levelSelectPopup.Activate(Scene);
                 _levelSelectPopup.StartLevelButton.RemoveAll();
                 
                 if (_resourceManager.IsEnough(ResourceType.Energy, _energyPrice))
@@ -70,13 +69,13 @@ namespace UI
                 _audioPlayer.PlayButtonSound();
                 _resourceManager.Spend(ResourceType.Energy, _energyPrice);
                 _windowManager.CloseLevelSelectWindow();
-                _sceneManager.LoadScene(_scene);
+                _sceneManager.LoadScene(Scene);
             });
         }
 
         private void InitializeUI()
         {
-            var isOpen = _sceneManager.MaxPassedLevel >= (int)_scene;
+            var isOpen = _sceneManager.MaxPassedLevel >= (int)Scene;
             if (isOpen)
             {
                 for (var i = 0; i < _starImages.Length; i++)
@@ -89,7 +88,7 @@ namespace UI
                     starImage.gameObject.SetActive(true);
                 }
 
-                _openPopupButton.interactable = true;
+                OpenPopupButton.interactable = true;
                 _requireLevelText.gameObject.SetActive(false);
                 _lock.gameObject.SetActive(false);
             }
@@ -100,11 +99,11 @@ namespace UI
                     starImage.gameObject.SetActive(false);
                 }
 
-                _openPopupButton.interactable = false;
+                OpenPopupButton.interactable = false;
 
                 _lock.gameObject.SetActive(true);
                 _requireLevelText.gameObject.SetActive(true);
-                _requireLevelText.SetText("Required level " + _sceneManager.GetLevelId(_scene));
+                _requireLevelText.SetText("Required level " + _sceneManager.GetLevelId(Scene));
             }
         }
     }

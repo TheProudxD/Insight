@@ -12,27 +12,30 @@ namespace Enemies
 
         private static readonly int DeathHashID = Animator.StringToHash(DEATH_ANIMATOR_KEY);
 
-        [Inject(Id = "static log")] private LogEntitySpecs _specs;
         [Inject(Id = "enemyDeathEffect")] private Animator _deathAnimator;
         [Inject] private PowerupFactory _powerupFactory;
 
-        [SerializeField] private Slider _healthBar;
         [SerializeField] private LootTable _lootTable;
 
+        private Slider _healthBar;
         private float _health;
+        private bool _initialized;
 
         public event Action Died;
 
-        private void Start()
+        public void Initialize(float health)
         {
-            _health = _specs.Hp;
+            _health = health;
+            _healthBar = GetComponentInChildren<Slider>();
             _healthBar.maxValue = _health;
             _healthBar.value = _health;
             _healthBar.gameObject.SetActive(false);
+            _initialized = true;
         }
 
         public void TakeDamage(float damage)
         {
+            CheckInit();
             _health -= damage;
             _healthBar.value = _health;
             _healthBar.gameObject.SetActive(true);
@@ -42,8 +45,10 @@ namespace Enemies
 
         private void MakeLoot()
         {
+            CheckInit();
+
             if (_lootTable == null)
-                return;
+                throw new NullReferenceException(nameof(_lootTable));
 
             var powerup = _lootTable.LootPowerup();
             _powerupFactory.Create(powerup, transform.position);
@@ -57,6 +62,12 @@ namespace Enemies
             _deathAnimator.gameObject.transform.position = transform.position;
             _deathAnimator.SetTrigger(DeathHashID);
             _healthBar.gameObject.SetActive(false);
+        }
+
+        private void CheckInit()
+        {
+            if (_initialized == false)
+                throw new NullReferenceException(nameof(EnemyHealth) + "is not initialized");
         }
     }
 }

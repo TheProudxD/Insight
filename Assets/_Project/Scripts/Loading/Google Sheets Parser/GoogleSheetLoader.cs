@@ -47,6 +47,9 @@ public class GoogleSheetLoader
                 case NPCEntitySpecs NPCEntitySpecs:
                     ProjectContext.Instance.Container.BindInstance(NPCEntitySpecs).WithId(NPCEntitySpecs.Id);
                     break;
+                case OrcEntitySpecs orcEntitySpecs:
+                    ProjectContext.Instance.Container.BindInstance(orcEntitySpecs).WithId(orcEntitySpecs.Id);
+                    break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(entity));
             }

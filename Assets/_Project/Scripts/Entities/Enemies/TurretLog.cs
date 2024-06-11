@@ -3,7 +3,7 @@ using Zenject;
 
 namespace Enemies
 {
-    public class TurretLog : Log
+    public class TurretLog : StaticEnemy
     {
         [SerializeField] private RockProjectile _projectile;
         [Inject(Id = "turret log")] private LogEntitySpecs _specs;
@@ -37,13 +37,13 @@ namespace Enemies
                     var currentProjectile = Instantiate(_projectile, position, Quaternion.identity);
                     currentProjectile.Launch(delta);
                     _canFire = false;
-                    SetAnimationBool(IdleAnimatorKey, true);
+                    Animator.SetBool(IdleAnimatorKey, true);
                     ChangeState(EnemyState.Walk);
                 }
             }
             else if (distance > _specs.ChaseRadius)
             {
-                SetAnimationBool(IdleAnimatorKey, false);
+                Animator.SetBool(IdleAnimatorKey, false);
                 ChangeState(EnemyState.Idle);
             }
         }

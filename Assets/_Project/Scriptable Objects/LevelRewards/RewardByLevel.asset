@@ -20,11 +20,11 @@ MonoBehaviour:
   - Scene: 5
     SoftCurrencyAmount: 200
     HardCurrencyAmount: 2
-    EnergyAmount: 5
+    EnergyAmount: 7
   - Scene: 6
     SoftCurrencyAmount: 300
     HardCurrencyAmount: 3
-    EnergyAmount: 5
+    EnergyAmount: 7
   - Scene: 7
     SoftCurrencyAmount: 500
     HardCurrencyAmount: 4

@@ -1,3 +1,4 @@
+using System;
 using System.Threading.Tasks;
 using Storage;
 using Tools;
@@ -9,7 +10,7 @@ namespace Objects
     [RequireComponent(typeof(LoadingAnimation))]
     public class LevelChanger : MonoBehaviour
     {
-        private readonly int _waitPause = 1000;
+        private readonly int _waitPause = 1500;
 
         [Inject] private SceneManager _sceneManager;
         [Inject(Id = "fade animator")] private Animator _fadeAnimator;
@@ -21,17 +22,17 @@ namespace Objects
             _loadingAnimation = GetComponent<LoadingAnimation>();
         }
 
-        private void OnCollisionEnter2D(Collision2D collision)
+        private void OnTriggerEnter2D(Collider2D other)
         {
-            if (InsightUtils.IsItPlayer(collision.collider) == false)
+            if (InsightUtils.IsItPlayer(other) == false)
                 return;
             
             StartTransition();
         }
 
-        private void OnCollisionExit2D(Collision2D collision)
+        private void OnTriggerExit2D(Collider2D other)
         {
-            if (InsightUtils.IsItPlayer(collision.collider) == false)
+            if (InsightUtils.IsItPlayer(other) == false)
                 return;
             
             StopTransition();
@@ -39,7 +40,7 @@ namespace Objects
 
         private void StopTransition() => _loadingAnimation.Reset();
 
-        private void StartTransition() => _loadingAnimation.Animate(Transit);
+        private void StartTransition() => _loadingAnimation.Animate(Transit, 0.25f);
 
         private async void Transit()
         {

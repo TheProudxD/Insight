@@ -8,16 +8,14 @@ namespace Objects
 {
     public class LoadingAnimation : MonoBehaviour
     {
-        private readonly float _loadingSpeed = 0.5f;
-        
         [Inject(Id = "loading image")] private Image _loadingImage;
         private Coroutine _coroutine;
 
-        private IEnumerator Load(Action callback = null)
+        private IEnumerator Load(Action callback = null, float loadingSpeed = 0.5f)
         {
             while (_loadingImage.fillAmount < 1f)
             {
-                _loadingImage.fillAmount +=  _loadingSpeed*Time.deltaTime;
+                _loadingImage.fillAmount += loadingSpeed * Time.deltaTime;
                 yield return null;
             }
 
@@ -36,6 +34,7 @@ namespace Objects
             _coroutine = null;
         }
 
-        public void Animate(Action callback = null) => _coroutine ??= StartCoroutine(Load(callback));
+        public void Animate(Action callback = null, float loadingSpeed = 0.5f) =>
+            _coroutine ??= StartCoroutine(Load(callback, loadingSpeed));
     }
 }

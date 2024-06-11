@@ -43,20 +43,27 @@ namespace UI
             }
         }
 
+        public virtual void Show()
+        {
+            GetAllChildren();
+            _children.ForEach(x => x.SetActive(true));
+        }
+
         public virtual void Close()
         {
+            GetAllChildren();
             _children.ForEach(x => x.SetActive(false));
         }
 
-        public virtual void Show()
+        private void GetAllChildren()
         {
+            if (_children.Count != 0) 
+                return;
             var childCount = transform.childCount;
             for (int i = 0; i < childCount; i++)
             {
                 _children.Add(transform.GetChild(i).gameObject);
             }
-
-            _children.ForEach(x => x.SetActive(true));
         }
     }
 }

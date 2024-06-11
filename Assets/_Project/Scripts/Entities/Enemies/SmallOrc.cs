@@ -1,16 +1,14 @@
 ﻿using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace Enemies
 {
     public class SmallOrc : MovableEnemy
     {
-        //[Inject] private SmallOrcEntitySpecs _specs;
+        [Inject(Id = "small orc")] private OrcEntitySpecs _specs;
 
         private bool _faceRight = true;
-        private float _maxspeed = 2f;
-        private float _attackRadius = 1f;
-        private float _chaseRadius = 3;
 
         protected override string IdleAnimatorKey => "idle";
         protected override string AttackAnimatorKey => "attack";
@@ -22,6 +20,12 @@ namespace Enemies
         private void OnEnable() => EnemyHealth.Died += OnDied;
 
         private void OnDisable() => EnemyHealth.Died -= OnDied;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            EnemyHealth.Initialize(_specs.Hp);
+        }
 
         private IEnumerator AttackCo()
         {
@@ -57,13 +61,13 @@ namespace Enemies
             }
         }
 
-        protected override bool IsEnoughToChase(float distanceToTarget) => distanceToTarget <= _chaseRadius;
+        protected override bool IsEnoughToChase(float distanceToTarget) => distanceToTarget <= _specs.ChaseRadius;
 
-        protected override bool IsEnoughToAttack(float distanceToTarget) => distanceToTarget <= _attackRadius;
+        protected override bool IsEnoughToAttack(float distanceToTarget) => distanceToTarget <= _specs.AttackRadius;
 
         protected override void Move(Vector2 direction)
         {
-            EnemyRigidbody.velocity = direction * _maxspeed;
+            EnemyRigidbody.velocity = direction * _specs.MoveSpeed;
             TryFlipSprite(direction);
             ChangeState(EnemyState.Walk);
         }
@@ -80,7 +84,7 @@ namespace Enemies
         private void OnDied()
         {
             Animator.SetBool(DeadAnimatorKey, true);
-            Destroy(gameObject, 1);
+            Destroy(gameObject, _specs.DestroyTimeAfterDying);
             //gameObject.SetActive(false);
         }
 

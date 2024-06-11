@@ -1,17 +1,17 @@
 using Extensions;
 using Managers;
 using TMPro;
+using UI;
 using UnityEngine;
 using UnityEngine.UI;
 using Zenject;
 
 namespace Storage
 {
-    public abstract class ResultWindowPlaceholder : MonoBehaviour
+    public abstract class ResultWindowPlaceholder : CommonWindow
     {
         [Inject] protected SceneManager SceneManager;
         [Inject] protected WindowManager WindowManager;
-        [Inject] protected UIAudioPlayer AudioPlayer;
 
         [SerializeField] private LevelResultWindow _levelResultWindow;
         [SerializeField] private TextMeshProUGUI _currentScoreText;
@@ -40,11 +40,7 @@ namespace Storage
 
         protected int CountHighScore() => 1000;
 
-        protected void Close() => _levelResultWindow.gameObject.SetActive(false);
-        
-        protected void Show() => _levelResultWindow.gameObject.SetActive(true);
-
-        protected virtual void OnEnable()
+        protected new virtual void OnEnable()
         {
             RestartButton.Add(RestartLevel);
             RestartButton.Add(AudioPlayer.PlayButtonSound);
@@ -55,7 +51,7 @@ namespace Storage
             _highScoreText.SetText($"Best score: {CountHighScore()}");
         }
 
-        protected virtual void OnDisable()
+        protected new virtual void OnDisable()
         {
             RestartButton.Remove(RestartLevel);
             RestartButton.Remove(AudioPlayer.PlayButtonSound);

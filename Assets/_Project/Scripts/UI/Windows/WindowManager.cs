@@ -81,14 +81,17 @@ namespace Managers
 
         public ConnectionLostWindow ShowConnectionLostWindow() =>
             (ConnectionLostWindow)TryShow(WindowType.ConnectionLost);
+
         public void CloseConnectionLostWindow() => TryClose(WindowType.ConnectionLost);
 
         public LoginWindow ShowLoginWindow() =>
             (LoginWindow)TryShow(WindowType.Login);
+
         public void CloseLoginWindow() => TryClose(WindowType.Login);
 
         public SignupWindow ShowSignupWindow() =>
             (SignupWindow)TryShow(WindowType.Signup);
+
         public void CloseSignupWindow() => TryClose(WindowType.Signup);
     }
 }
