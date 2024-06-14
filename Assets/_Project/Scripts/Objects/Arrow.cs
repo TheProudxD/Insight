@@ -1,3 +1,6 @@
+using System;
+using Managers;
+using Tools;
 using UnityEngine;
 
 public class Arrow : PlayerProjectile
@@ -6,5 +9,13 @@ public class Arrow : PlayerProjectile
     {
         Rigidbody.velocity = velocity.normalized * Speed;
         transform.rotation = Quaternion.Euler(direction);
+    }
+
+    private void OnTriggerEnter2D(Collider2D other)
+    {
+        if (InsightUtils.IsItPlayer(other))
+            return;
+        Destroy(gameObject);
+        //play anim
     }
 }

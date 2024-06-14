@@ -1,4 +1,4 @@
-using Extensions;
+﻿using Extensions;
 using Managers;
 using UnityEngine;
 using UnityEngine.UI;
@@ -39,7 +39,7 @@ namespace UI
         private void OpenVk()
         {
             _audioPlayer.PlayButtonSound();
-            Application.OpenURL("https://vk.com/callmeproud");
+            Application.OpenURL("https://t.me/callmeproud");
         }
 
         private void OpenDiscord()

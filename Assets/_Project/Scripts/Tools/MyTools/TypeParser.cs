@@ -3,18 +3,18 @@ using UnityEngine;
 
 namespace Tools
 {
-	public static class TypeParser
-	{
+    public static class TypeParser
+    {
         private const char _inCellSeporator = ';';
 
         private static readonly Dictionary<string, Color> _colors = new Dictionary<string, Color>()
         {
-            {"white", Color.white},
-            {"black", Color.black},
-            {"yellow", Color.yellow},
-            {"red", Color.red},
-            {"green", Color.green},
-            {"blue", Color.blue},
+            { "white", Color.white },
+            { "black", Color.black },
+            { "yellow", Color.yellow },
+            { "red", Color.red },
+            { "green", Color.green },
+            { "blue", Color.blue },
         };
 
         public static Color ParseColor(string color)
@@ -42,7 +42,8 @@ namespace Tools
         public static int ParseInt(string s)
         {
             int result = -1;
-            if (!int.TryParse(s, System.Globalization.NumberStyles.Integer, System.Globalization.CultureInfo.GetCultureInfo("en-US"), out result))
+            if (!int.TryParse(s, System.Globalization.NumberStyles.Integer,
+                    System.Globalization.CultureInfo.GetCultureInfo("en-US"), out result))
             {
                 Debug.LogError("Can't parse int, wrong text: " + s);
             }
@@ -53,9 +54,10 @@ namespace Tools
         public static float ParseFloat(string s)
         {
             float result = -1;
-            if (!float.TryParse(s, System.Globalization.NumberStyles.Any, System.Globalization.CultureInfo.GetCultureInfo("en-US"), out result))
+            if (!float.TryParse(s, System.Globalization.NumberStyles.Any,
+                    System.Globalization.CultureInfo.GetCultureInfo("en-US"), out result))
             {
-                Debug.LogError("Can't pars float,wrong text: " +s);
+                Debug.LogError("Can't pars float,wrong text: " + s);
             }
 
             return result;

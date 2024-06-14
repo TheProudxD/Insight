@@ -1,5 +1,4 @@
 using Tools;
-using UnityEngine;
 
 public class CoinPowerupEntitySpecs : EntitySpecs
 {

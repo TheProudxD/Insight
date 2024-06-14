@@ -15,12 +15,14 @@ namespace Player
     {
         [Inject] protected PlayerEntitySpecs PlayerEntitySpecs;
         [Inject] protected HitAudioPlayer HitAudioPlayer;
-        
+        [Inject(Id = "player")] private DamagerSpecs _damagerSpecs;
+
+        [SerializeField] private Damager[] _damagers;
         [SerializeField] private Signal _playerHitSignal;
         [SerializeField] private HitAnimation _hitAnimation;
         [SerializeField] private BowShooting _bowShooting;
         [SerializeField] private SwordShooting _swordShooting;
-        
+
         private HitParticleAnimation _hitParticleAnimation;
         private PlayerAnimation _playerAnimation;
         private PlayerMovement _playerMovement;
@@ -29,12 +31,17 @@ namespace Player
 
         private void Awake()
         {
+            foreach (var damager in _damagers)
+            {
+                damager.Initialize(_damagerSpecs);
+            }
+
             _hitParticleAnimation = GetComponent<HitParticleAnimation>();
             _playerMovement = GetComponent<PlayerMovement>();
             _playerAnimation = GetComponent<PlayerAnimation>();
             _playerHealth = GetComponent<PlayerHealth>();
             _playerMana = GetComponent<PlayerMana>();
-            
+
             _bowShooting.Initialize();
             _swordShooting.Initialize(_playerAnimation);
         }

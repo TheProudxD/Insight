@@ -9,6 +9,7 @@ namespace Objects
     public class TreasureChest : Interactable
     {
         private const string OPEN_STATE = "opened";
+        private static readonly int Opened = Animator.StringToHash(OPEN_STATE);
 
         [Inject] private PlayerInteraction _playerInteraction;
         [SerializeField] private InventoryItem[] _items;
@@ -16,10 +17,14 @@ namespace Objects
         private Animator _animator;
         private readonly float _openDuration = 1f;
         private bool _opened;
-            
-        private void Start()
+
+        private void Awake()
         {
             _animator = GetComponent<Animator>();
+        }
+
+        private void OnEnable()
+        {
             if (_opened)
                 OpenAnimation();
         }
@@ -31,20 +36,20 @@ namespace Objects
             Context.Raise();
             yield return new WaitForSeconds(_openDuration);
             Context.Raise();
-            
+
             var dialogWindow = WindowManager.ShowDialogBox();
             foreach (var item in _items)
             {
-                dialogWindow.Text.SetText(item.Description);            
+                dialogWindow.Text.SetText(item.Description);
                 _playerInteraction.DisplayPickupItem(item);
                 yield return new WaitUntil(() => Input.anyKey);
             }
-            
+
             WindowManager.CloseDialogBox();
             _playerInteraction.RemovePickupItem();
         }
 
-        private void OpenAnimation() => _animator.SetBool(OPEN_STATE, true);
+        private void OpenAnimation() => _animator.SetBool(Opened, true);
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
@@ -53,7 +58,7 @@ namespace Objects
 
             if (InsightUtils.IsItPlayer(other) == false)
                 return;
-            
+
             StartCoroutine(OpenChest());
         }
 

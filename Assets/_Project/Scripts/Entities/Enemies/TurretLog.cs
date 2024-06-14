@@ -7,10 +7,19 @@ namespace Enemies
     {
         [SerializeField] private RockProjectile _projectile;
         [Inject(Id = "turret log")] private LogEntitySpecs _specs;
+        [Inject(Id = "turret log")] private DamagerSpecs _damagerSpecs;
+        [Inject(Id = "75% coin")] private LootTable _lootTable;
 
         private readonly float _fireDelay = 2;
         private float _fireDelayTimer;
         private bool _canFire;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            Damager.Initialize(_damagerSpecs);
+            EnemyHealth.Initialize(_specs.Hp, _lootTable);
+        }
 
         private void Update()
         {

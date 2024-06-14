@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using UnityEngine;
 using Zenject;
 
 public class GoogleSheetLoader
@@ -33,10 +34,12 @@ public class GoogleSheetLoader
             switch (entity)
             {
                 case CoinPowerupEntitySpecs coinPowerupEntitySpecs:
-                    ProjectContext.Instance.Container.BindInstance(coinPowerupEntitySpecs).WithId(coinPowerupEntitySpecs.Id);
+                    ProjectContext.Instance.Container.BindInstance(coinPowerupEntitySpecs)
+                        .WithId(coinPowerupEntitySpecs.Id);
                     break;
                 case HeartPowerupEntitySpecs heartPowerupEntitySpecs:
-                    ProjectContext.Instance.Container.BindInstance(heartPowerupEntitySpecs).WithId(heartPowerupEntitySpecs.Id);
+                    ProjectContext.Instance.Container.BindInstance(heartPowerupEntitySpecs)
+                        .WithId(heartPowerupEntitySpecs.Id);
                     break;
                 case LogEntitySpecs logEntitySpecs:
                     ProjectContext.Instance.Container.BindInstance(logEntitySpecs).WithId(logEntitySpecs.Id);
@@ -49,6 +52,14 @@ public class GoogleSheetLoader
                     break;
                 case OrcEntitySpecs orcEntitySpecs:
                     ProjectContext.Instance.Container.BindInstance(orcEntitySpecs).WithId(orcEntitySpecs.Id);
+                    break;
+                case RewardByLevelSpecs levelSpecs:
+                    var rewards = ProjectContext.Instance.Container.Resolve<List<RewardByLevelSpecs>>();
+                    rewards.Add(levelSpecs);
+                    ProjectContext.Instance.Container.Rebind<List<RewardByLevelSpecs>>().FromInstance(rewards);
+                    break;
+                case DamagerSpecs damagerSpecs:
+                    ProjectContext.Instance.Container.BindInstance(damagerSpecs).WithId(damagerSpecs.Id);
                     break;
                 default:
                     throw new ArgumentOutOfRangeException(nameof(entity));

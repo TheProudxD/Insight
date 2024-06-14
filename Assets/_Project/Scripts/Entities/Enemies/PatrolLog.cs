@@ -7,6 +7,8 @@ namespace Enemies
     public class PatrolLog : MovableEnemy
     {
         [Inject(Id = "dynamic log")] private LogEntitySpecs _specs;
+        [Inject(Id = "dynamic log")] private DamagerSpecs _damagerSpecs;
+        [Inject(Id = "100% heart")] private LootTable _lootTable;
 
         protected override string IdleAnimatorKey => "wakeUp";
         protected override string MoveAnimatorKey { get; }
@@ -16,7 +18,8 @@ namespace Enemies
         protected override void Awake()
         {
             base.Awake();
-            EnemyHealth.Initialize(_specs.Hp);
+            EnemyHealth.Initialize(_specs.Hp, _lootTable);
+            Damager.Initialize(_damagerSpecs);
         }
 
         private IEnumerator AttackCo()

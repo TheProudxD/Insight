@@ -7,6 +7,8 @@ namespace Enemies
     public class SmallOrc : MovableEnemy
     {
         [Inject(Id = "small orc")] private OrcEntitySpecs _specs;
+        [Inject(Id = "small orc")] private DamagerSpecs _damagerSpecs;
+        [Inject(Id = "100% coin")] private LootTable _lootTable;
 
         private bool _faceRight = true;
 
@@ -24,7 +26,8 @@ namespace Enemies
         protected override void Awake()
         {
             base.Awake();
-            EnemyHealth.Initialize(_specs.Hp);
+            EnemyHealth.Initialize(_specs.Hp, _lootTable);
+            Damager.Initialize(_damagerSpecs);
         }
 
         private IEnumerator AttackCo()

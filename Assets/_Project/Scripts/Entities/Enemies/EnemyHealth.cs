@@ -15,17 +15,18 @@ namespace Enemies
         [Inject(Id = "enemyDeathEffect")] private Animator _deathAnimator;
         [Inject] private PowerupFactory _powerupFactory;
 
-        [SerializeField] private LootTable _lootTable;
-
+        private LootTable _lootTable;
         private Slider _healthBar;
         private float _health;
         private bool _initialized;
 
         public event Action Died;
 
-        public void Initialize(float health)
+        public void Initialize(float health, LootTable lootTable)
         {
             _health = health;
+            _lootTable = lootTable;
+            
             _healthBar = GetComponentInChildren<Slider>();
             _healthBar.maxValue = _health;
             _healthBar.value = _health;

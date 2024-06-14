@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b38b10d9df97347baa15b9a2f2b525, type: 3}
   m_Name: 100% Coin Loot
   m_EditorClassIdentifier: 
-  _chanceSumLimitedBy100Percent: 1
   Loots:
   - Powerup: {fileID: 1362095853930651174, guid: 0abeb1db93fba6544b35548cf43b7ce2, type: 3}
     Chance: 100

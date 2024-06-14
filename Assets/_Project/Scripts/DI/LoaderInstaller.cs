@@ -37,7 +37,8 @@ public class LoaderInstaller : MonoInstaller
         _projectContainer.Bind<Canvas>().FromInstance(_hud.GetComponent<Canvas>()).AsSingle().NonLazy();
         _projectContainer.Bind<Animator>().WithId("fade animator").FromInstance(_fadeAnimator).AsSingle().NonLazy();
         _projectContainer.Bind<Joystick>().FromInstance(joystick).NonLazy();
-
+        
+        _projectContainer.BindInterfacesAndSelfTo<RewardsByLevelManager>().AsSingle();
         BindAbilitySystem();
         BindAbilityReactions();
         BindPowerupFactory();

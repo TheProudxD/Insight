@@ -14,43 +14,43 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectionHistory:
     _history:
+    - reference: {fileID: -612439316, guid: 471bd7c38c081f548ac20abe73b0997d, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
     - reference: {fileID: 0}
-      sceneName: Dungeon 1
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 1.unity
-      globalObjectId: GlobalObjectId_V1-2-4ad72a19855ceec4fa3f89bb67b00746-1675366700-0
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-3978382952052549687-548505730
     - reference: {fileID: 0}
-      sceneName: Dungeon 1
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 1.unity
-      globalObjectId: GlobalObjectId_V1-2-4ad72a19855ceec4fa3f89bb67b00746-703767223-0
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-3301357808624528133-548505730
     - reference: {fileID: 0}
-      sceneName: Dungeon 1
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 1.unity
-      globalObjectId: GlobalObjectId_V1-2-4ad72a19855ceec4fa3f89bb67b00746-686505886-0
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-1873653754008877028-548505730
     - reference: {fileID: 0}
-      sceneName: Dungeon 1
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 1.unity
-      globalObjectId: GlobalObjectId_V1-2-4ad72a19855ceec4fa3f89bb67b00746-2014124917-0
+      sceneName: DontDestroyOnLoad
+      scenePath: DontDestroyOnLoad
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-1556003616572200212-0
     - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-1485802123-0
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-512799961492829575-548505730
     - reference: {fileID: 0}
-      sceneName: Dungeon Boss
-      scenePath: Assets/_Project/Scenes/Game/Dungeon Boss.unity
-      globalObjectId: GlobalObjectId_V1-2-7ef06463d7d375f4882cec7bbf9a67f9-2136194370-0
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-518008204326305304-548505730
     - reference: {fileID: 0}
-      sceneName: Dungeon Boss
-      scenePath: Assets/_Project/Scenes/Game/Dungeon Boss.unity
-      globalObjectId: GlobalObjectId_V1-2-7ef06463d7d375f4882cec7bbf9a67f9-630750543756662266-2573504456657585112
+      sceneName: Lobby
+      scenePath: Assets/_Project/Scenes/Game/Lobby.unity
+      globalObjectId: GlobalObjectId_V1-2-548a32481bc0ba5408e7b3d4513dd008-94359005-0
     - reference: {fileID: 0}
-      sceneName: Dungeon Boss
-      scenePath: Assets/_Project/Scenes/Game/Dungeon Boss.unity
-      globalObjectId: GlobalObjectId_V1-2-7ef06463d7d375f4882cec7bbf9a67f9-1888732461-0
-    - reference: {fileID: 0}
-      sceneName: Dungeon Boss
-      scenePath: Assets/_Project/Scenes/Game/Dungeon Boss.unity
-      globalObjectId: GlobalObjectId_V1-2-7ef06463d7d375f4882cec7bbf9a67f9-1626267892-0
-    - reference: {fileID: 0}
-      sceneName: Dungeon Boss
-      scenePath: Assets/_Project/Scenes/Game/Dungeon Boss.unity
-      globalObjectId: GlobalObjectId_V1-2-7ef06463d7d375f4882cec7bbf9a67f9-701298300-0
+      sceneName: Loader
+      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
+      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-3151361361751652840-548505730
+    - reference: {fileID: 6997482929803977021, guid: 02e88d0b2d4f13f498c93a39c7b43e08, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-1-02e88d0b2d4f13f498c93a39c7b43e08-6997482929803977021-0

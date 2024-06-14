@@ -97,9 +97,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100835e75b91fac439b2f22eda658a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrust: 1.5
-  _knockTime: 0.2
-  _damage: 1
 --- !u!1 &1540547484364060274
 GameObject:
   m_ObjectHideFlags: 0
@@ -338,9 +335,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100835e75b91fac439b2f22eda658a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrust: 1.5
-  _knockTime: 0.2
-  _damage: 1
 --- !u!1 &4089513838718564017
 GameObject:
   m_ObjectHideFlags: 0
@@ -810,9 +804,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100835e75b91fac439b2f22eda658a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrust: 1.5
-  _knockTime: 0.2
-  _damage: 1
 --- !u!1 &6862430986373083787
 GameObject:
   m_ObjectHideFlags: 0
@@ -1114,6 +1105,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c8c75e5d50ad61847bd7f0ca704603e6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _damagers:
+  - {fileID: 3163663697484281662}
+  - {fileID: 7790385815675680331}
+  - {fileID: 5898893768228825378}
+  - {fileID: 7135538709761151459}
   _playerHitSignal: {fileID: 11400000, guid: e1bbe0cf26eebed4d98948c11fef725c, type: 2}
   _hitAnimation: {fileID: 8332397854503055776}
   _bowShooting: {fileID: 7322271775358175047}
@@ -1384,9 +1380,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100835e75b91fac439b2f22eda658a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrust: 1.5
-  _knockTime: 0.2
-  _damage: 1
 --- !u!1 &9047230829255976445
 GameObject:
   m_ObjectHideFlags: 0

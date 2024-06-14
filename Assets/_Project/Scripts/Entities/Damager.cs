@@ -5,12 +5,10 @@ namespace Managers
 {
     public class Damager : MonoBehaviour
     {
-        [SerializeField] private float _thrust = 4f;
-        [SerializeField] private float _knockTime = 0.4f;
-        [SerializeField] private float _damage = 1f;
-        [SerializeField] private float _attackCooldown = 1.5f;
-        
         private float _attackTimer;
+        private DamagerSpecs _damagerSpecs;
+
+        public void Initialize(DamagerSpecs damagerSpecs) => _damagerSpecs = damagerSpecs;
 
         private void OnTriggerEnter2D(Collider2D collision)
         {
@@ -19,7 +17,7 @@ namespace Managers
 
         private void OnTriggerStay2D(Collider2D collision)
         {
-            if (_attackTimer >= _attackCooldown)
+            if (_attackTimer >= _damagerSpecs.AttackCooldown)
             {
                 Hit(collision);
             }
@@ -36,7 +34,7 @@ namespace Managers
                 if (damageable is PlayerAttacking && PlayerStateMachine.Current == PlayerState.Stagger)
                     return;
 
-                damageable.Hit(collision.transform.position, _knockTime, _damage);
+                damageable.Hit(collision.transform.position, _damagerSpecs.KnockTime, _damagerSpecs.Damage);
                 Move((Component)damageable);
                 _attackTimer = 0;
             }
@@ -47,7 +45,7 @@ namespace Managers
             var entityRB = component.GetComponent<Rigidbody2D>();
 
             Vector2 difference = entityRB.transform.position - transform.position;
-            difference = difference.normalized * _thrust;
+            difference = difference.normalized * _damagerSpecs.Thrust;
             //difference.DOMove(entityRB.transform.position + difference, _knockTime);
             entityRB.AddForce(difference, ForceMode2D.Impulse);
         }

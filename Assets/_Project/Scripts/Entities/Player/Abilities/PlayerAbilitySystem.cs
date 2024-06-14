@@ -66,7 +66,7 @@ public class PlayerAbilitySystem : MonoBehaviour
         return duration;
     }
 
-    public float UseShield() // полное поглощение всего дамага на некоторое время
+    public float UseShield() // полное поглощение всего дамага на некоторое время + ПОГЛАЩАЕТ ДАМАГ на КАКОЙ ТО ПРОЦЕНТ в течение времени
     {
         throw new System.NotImplementedException();
     }

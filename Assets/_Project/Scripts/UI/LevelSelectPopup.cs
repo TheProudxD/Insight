@@ -3,6 +3,7 @@ using Storage;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
+using Zenject;
 
 namespace UI
 {
@@ -16,20 +17,20 @@ namespace UI
         [SerializeField] private TextMeshProUGUI _softCurrencyText;
         [SerializeField] private TextMeshProUGUI _hardCurrencyText;
         [SerializeField] private TextMeshProUGUI _energyText;
-        [SerializeField] private RewardByLevel _rewardByLevel;
+        [Inject] private RewardsByLevelManager _rewardsByLevelManager;
 
         private void SetLevelTitle(string title) => _titleText.SetText(title);
 
         private void DisplayRewards(Scene displayedScene)
         {
-            var reward = _rewardByLevel.Get[displayedScene];
+            var reward = _rewardsByLevelManager.Get[displayedScene];
 
             TryToDisplayReward(reward.SoftCurrencyAmount, _softCurrencyText);
             TryToDisplayReward(reward.HardCurrencyAmount, _hardCurrencyText);
             TryToDisplayReward(reward.EnergyAmount, _energyText);
         }
 
-        private void TryToDisplayReward(float reward, TextMeshProUGUI text)
+        private void TryToDisplayReward(float reward, TMP_Text text)
         {
             if (reward > 0)
             {

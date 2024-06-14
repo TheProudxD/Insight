@@ -1,10 +1,12 @@
 using System.Collections;
 using UnityEngine;
+using Zenject;
 
 namespace Player
 {
     public class BowShooting : Shooting
     {
+        [Inject(Id = "player")] private DamagerSpecs _damagerSpecs;
         [SerializeField] private PlayerProjectile _arrowProjectile;
         protected override float TimeBeforeLastAttackCounter { get; set; }
 
@@ -33,7 +35,7 @@ namespace Player
         private void ArrowSpawn(Vector3 position)
         {
             var arrow = Instantiate(_arrowProjectile, transform.position, Quaternion.identity);
-
+            arrow.Initialize(_damagerSpecs);
             var directionZ = Mathf.Atan2(position.y, position.x) * Mathf.Rad2Deg;
             var direction = new Vector3(0, 0, directionZ);
             arrow.Setup(position, direction);

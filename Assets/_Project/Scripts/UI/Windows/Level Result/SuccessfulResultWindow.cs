@@ -10,6 +10,7 @@ namespace Storage
     public class SuccessfulResultWindow : ResultWindowPlaceholder
     {
         [Inject] private ResourceManager _resourceManager;
+        [Inject] private RewardsByLevelManager _rewards;
 
         [SerializeField] private Button _levelSelectButton;
         [SerializeField] private Sprite _starFilled;
@@ -18,9 +19,7 @@ namespace Storage
         [Header("Rewards")] [SerializeField] private TextMeshProUGUI _softCurrencyAmountText;
         [SerializeField] private TextMeshProUGUI _hardCurrencyAmountText;
         [SerializeField] private TextMeshProUGUI _energyAmountText;
-
-        [SerializeField] private RewardByLevel _rewards;
-
+        
         private void Awake()
         {
             if (_stars.Length != 3)

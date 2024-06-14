@@ -53,6 +53,7 @@ namespace Enemies
                 if (CurrentState != EnemyState.Stagger)
                 {
                     Attack();
+                    Move(GetDirectionToTarget());
                     //PlayShieldMode(true);
                 }
             }

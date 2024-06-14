@@ -6,11 +6,14 @@ namespace Enemies
     public class StaticLog : StaticEnemy
     {        
         [Inject(Id = "static log")] private LogEntitySpecs _specs;
+        [Inject(Id = "static log")] private DamagerSpecs _damagerSpecs;
+        [Inject(Id = "50% 50%")] private LootTable _lootTable;
 
         protected override void Awake()
         {
             base.Awake();
-            EnemyHealth.Initialize(_specs.Hp);
+            EnemyHealth.Initialize(_specs.Hp, _lootTable);
+            Damager.Initialize(_damagerSpecs);
             Animator.SetBool(IdleAnimatorKey, true);
         }
 
