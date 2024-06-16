@@ -25,6 +25,7 @@ namespace ResourceService
         {
             _dynamicStorageService = dynamicStorageService;
             dataManager.PlayerDataLoaded += Initialize;
+            dataManager.GameDataLoaded += Initialize;
             ResourceChanged += OnResourceChanged;
         }
 

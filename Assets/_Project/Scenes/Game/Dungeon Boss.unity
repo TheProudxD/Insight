@@ -7475,6 +7475,10 @@ PrefabInstance:
       propertyPath: m_SortingLayerID
       value: -1703751193
       objectReference: {fileID: 0}
+    - target: {fileID: 2352172100546837961, guid: dda967a6cec5dd7418b1c956dd7c3b77, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -10033,11 +10037,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4528713014940896940, guid: 0b797af3376278d47aa1afbd37deeb03, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -37.7
+      value: -33.74
       objectReference: {fileID: 0}
     - target: {fileID: 4528713014940896940, guid: 0b797af3376278d47aa1afbd37deeb03, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -3.85
+      value: -11.28
       objectReference: {fileID: 0}
     - target: {fileID: 4528713014940896940, guid: 0b797af3376278d47aa1afbd37deeb03, type: 3}
       propertyPath: m_LocalPosition.z

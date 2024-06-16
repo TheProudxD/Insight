@@ -16,6 +16,7 @@ namespace Storage
         private readonly WindowManager _windowManager;
 
         private PlayerData _playerData;
+        private GameData _gameData;
         private readonly int _minLevel;
 
         public int MaxPassedLevel { get; private set; }
@@ -29,8 +30,9 @@ namespace Storage
         {
             _dynamicStorageService = dynamicStorageService;
             _windowManager = windowManager;
-            _minLevel = (int)Scene.Lobby + 1;
+            _minLevel = (int)Scene.LovelyHome;
             dataManager.PlayerDataLoaded += Initialize;
+            dataManager.GameDataLoaded += Initialize;
         }
 
         private void Initialize(PlayerData playerData)
@@ -45,6 +47,8 @@ namespace Storage
 
             _playerData = playerData;
         }
+
+        private void Initialize(GameData gameData) => _gameData = gameData;
 
         private int GetNextLevelId() => CurrentLevel + 1;
 
@@ -75,7 +79,7 @@ namespace Storage
         public void StartNextLevel()
         {
             var newLevel = GetNextLevelId();
-            
+
             if (newLevel > (int)Scene.Lobby && newLevel > MaxPassedLevel)
             {
                 Save(newLevel);
@@ -101,6 +105,6 @@ namespace Storage
 
         public void RestartLevel() => LoadScene((Scene)CurrentLevel);
 
-        public int GetLevelId(Scene scene) => (int)scene - SceneIDConstants.LEVEL_ID_OFFSET;
+        public int GetLevelId(Scene scene) => (int)scene - ((int)Scene.LovelyHome - (int)Scene.Downloader);
     }
 }

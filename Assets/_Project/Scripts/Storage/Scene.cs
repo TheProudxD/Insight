@@ -9,6 +9,7 @@ namespace Storage
 
         // game levels:
         LovelyHome,
+        WayFromHome,
         WayToDungeon,
         Dungeon1Floor,
         Dungeon2Floor,

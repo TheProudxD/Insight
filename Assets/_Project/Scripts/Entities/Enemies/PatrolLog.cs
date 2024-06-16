@@ -46,7 +46,7 @@ namespace Enemies
         private void OnDied()
         {
             //Animator.SetBool(DeadAnimatorKey, true);
-            Destroy(gameObject, _specs.DestroyTimeAfterDying);
+            Destroy(gameObject);
             //gameObject.SetActive(false);
         }
 
