@@ -10,6 +10,8 @@ namespace StorageService
         public int AmountEnergy;
         public string Name;
 
+        public long DifferenceLastPlay; // in minutes
+        
         public override string ToString() => this.GiveAllFields();
     }
 }

@@ -1,5 +1,3 @@
-using System;
-using Managers;
 using Tools;
 using UnityEngine;
 
@@ -13,8 +11,9 @@ public class Arrow : PlayerProjectile
 
     private void OnTriggerEnter2D(Collider2D other)
     {
-        if (InsightUtils.IsItPlayer(other))
+        if (InsightUtils.IsItPlayer(other) || other.isTrigger)
             return;
+        
         Destroy(gameObject);
         //play anim
     }

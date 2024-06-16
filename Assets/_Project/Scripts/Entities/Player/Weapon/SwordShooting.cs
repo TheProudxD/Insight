@@ -42,6 +42,7 @@ namespace Player
 
         protected override bool CanAttack() => PlayerStateMachine.Current != PlayerState.Attack &&
                                                PlayerStateMachine.Current != PlayerState.Stagger &&
-                                               TimeBeforeLastAttackCounter >= PlayerEntitySpecs.SwordAttackCooldown;
+                                               TimeBeforeLastAttackCounter >= PlayerEntitySpecs.SwordAttackCooldown&&
+                                               PlayerMana.Enough(PlayerEntitySpecs.SwordShootingPrice);
     }
 }

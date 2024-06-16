@@ -102,12 +102,12 @@ namespace Zenject
 #if !NOT_UNITY3D
         [NotNull]
 #endif
-        public virtual TValue Create(TParam1 param1, TParam2 param2, TParam3 param3)
+        public virtual TValue Create(TParam1 projectilePrefab, TParam2 param2, TParam3 param3)
         {
             return CreateInternal(
                 new List<TypeValuePair>
                 {
-                    InjectUtil.CreateTypePair(param1),
+                    InjectUtil.CreateTypePair(projectilePrefab),
                     InjectUtil.CreateTypePair(param2),
                     InjectUtil.CreateTypePair(param3)
                 });

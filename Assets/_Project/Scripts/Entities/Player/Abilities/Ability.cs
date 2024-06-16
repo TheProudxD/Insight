@@ -21,6 +21,6 @@ public abstract class Ability : MonoBehaviour
         }
     }
     
-    public abstract float Use(); // return duration
+    public abstract float Use(); // returns duration
     public abstract bool CanUse();
 }

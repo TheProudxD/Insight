@@ -18,15 +18,15 @@ namespace Player
             TimeBeforeLastAttackCounter = PlayerEntitySpecs.BowAttackDuration;
             _attackDuration = PlayerEntitySpecs.BowAttackDuration;
             _destroyArrowTime = PlayerEntitySpecs.DestroyArrowTime;
+            _arrowProjectile.Initialize(_damagerSpecs);
         }
 
         public override bool TryShoot(Vector3 position = default, Vector3 direction = default)
         {
-            if (!CanAttack())
+            if (CanAttack() == false)
                 return false;
 
-            var playerPos = position;
-            ArrowSpawn(playerPos.sqrMagnitude != 0 ? playerPos : direction);
+            ArrowSpawn(direction);
             StartCoroutine(BowAttackCo());
             CharacterAudioPlayer.PlayAttack(AttackType.Bow);
             return true;
@@ -55,6 +55,7 @@ namespace Player
 
         protected override bool CanAttack() => PlayerStateMachine.Current != PlayerState.Attack &&
                                                PlayerStateMachine.Current != PlayerState.Stagger &&
-                                               TimeBeforeLastAttackCounter >= PlayerEntitySpecs.BowAttackCooldown;
+                                               TimeBeforeLastAttackCounter >= PlayerEntitySpecs.BowAttackCooldown &&
+                                               PlayerMana.Enough(PlayerEntitySpecs.BowShootingPrice);
     }
 }

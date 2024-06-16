@@ -23,7 +23,7 @@ public class PlayerAbilitySystem : MonoBehaviour
         }
 
         _playerMana.Decrease(ability.MagicCost);
-        PlayerStateMachine.Current = PlayerState.Ability;
+        //PlayerStateMachine.Current = PlayerState.Ability;
         duration = ability.Use();
         return true;
     }

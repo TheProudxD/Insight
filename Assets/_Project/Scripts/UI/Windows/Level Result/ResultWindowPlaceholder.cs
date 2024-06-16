@@ -13,15 +13,15 @@ namespace Storage
         [Inject] protected SceneManager SceneManager;
         [Inject] protected WindowManager WindowManager;
 
-        [SerializeField] private LevelResultWindow _levelResultWindow;
         [SerializeField] private TextMeshProUGUI _currentScoreText;
         [SerializeField] private TextMeshProUGUI _highScoreText;
         [SerializeField] protected Button ReturnToLobbyButton;
         [SerializeField] protected Button RestartButton;
+        private Scene _scene;
 
         private void RestartLevel()
         {
-            SceneManager.RestartLevel();
+            SceneManager.LoadScene(_scene);
             Close();
         }
 
@@ -42,6 +42,7 @@ namespace Storage
 
         protected new virtual void OnEnable()
         {
+            _scene = SceneManager.CurrentScene;
             RestartButton.Add(RestartLevel);
             RestartButton.Add(AudioPlayer.PlayButtonSound);
             ReturnToLobbyButton.Add(ReturnToLobby);

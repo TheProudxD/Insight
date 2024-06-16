@@ -17,7 +17,10 @@ namespace Storage.Static
         }
 
         public void ToSingleton() => Instance = this;
+
         public override string ToString() => this.GiveAllFields();
+
+        public override int GetHashCode() => uid.GetHashCode() * 19 + key.GetHashCode() * 13;
 
         public override bool Equals(object obj)
         {
@@ -34,7 +37,5 @@ namespace Storage.Static
             var systemData = new SystemPlayerData(uid, key);
             return systemData;
         }
-
-        public override int GetHashCode() => uid.GetHashCode() * 19 + key.GetHashCode() * 13;
     }
 }

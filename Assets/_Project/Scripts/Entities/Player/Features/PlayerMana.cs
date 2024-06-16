@@ -17,7 +17,7 @@ namespace Player
             Amount = PlayerEntitySpecs.ManaAmount;
             _recoverySpeed = PlayerEntitySpecs.ManaRecoverySpeed;
             _timeAfterAttack = PlayerEntitySpecs.TimeAfterAttackManaIncrease;
-            
+
             Signal.Raise(-MaxAmount);
         }
 
@@ -34,6 +34,8 @@ namespace Player
                 _timerRecovery -= _recoverySpeed;
             }
         }
+
+        public bool Enough(float amount) => Amount >= amount;
 
         public override bool TryIncrease(float amount)
         {

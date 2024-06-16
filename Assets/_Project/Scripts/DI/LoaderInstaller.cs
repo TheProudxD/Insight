@@ -1,5 +1,6 @@
 using System.Linq;
 using System.Reflection;
+using Objects;
 using Objects.Powerups;
 using Player;
 using Storage;
@@ -43,6 +44,7 @@ public class LoaderInstaller : MonoInstaller
         BindAbilityReactions();
         BindPowerupFactory();
         BindAudioPlayers();
+        BindProjectileFactory();
     }
 
     private void BindAudioPlayers()
@@ -78,6 +80,9 @@ public class LoaderInstaller : MonoInstaller
 
     private void BindPowerupFactory() =>
         _projectContainer.BindFactory<Powerup, Vector3, Powerup, PowerupFactory>().ToSelf().NonLazy();
+    
+    private void BindProjectileFactory() =>
+        _projectContainer.BindFactory<Projectile, Vector3, Quaternion, Projectile, ProjectileFactory>().ToSelf().NonLazy();
 
     public override void Start() => _projectContainer.Resolve<SceneManager>().LoadScene(Scene.Menu);
 }

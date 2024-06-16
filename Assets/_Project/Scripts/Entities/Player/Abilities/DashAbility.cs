@@ -1,6 +1,4 @@
 using DG.Tweening;
-using DG.Tweening.Core;
-using DG.Tweening.Plugins.Options;
 using Player;
 using UnityEngine;
 
@@ -10,19 +8,23 @@ public class DashAbility : Ability
     [SerializeField] private Rigidbody2D _playerRigidbody;
     [SerializeField] private PlayerMovement _playerMovement;
 
-    private TweenerCore<Vector2, Vector2, VectorOptions> _tweener;
+    private Tweener _tweener;
 
     public override float Use()
     {
         ReloadingDurationTimer = 0;
-        AbilityAudioPlayer.PlayDashAbilitySound();
+
+        _playerRigidbody.AddForce(_playerMovement.GetFaceDirection() * _dashForce, ForceMode2D.Force);
+        print(_playerMovement.GetFaceDirection());
+        /*
         var dashVector = (Vector2)_playerRigidbody.transform.position + _playerMovement.GetFaceDirection() * _dashForce;
         _tweener = _playerRigidbody.DOMove(dashVector, Duration).OnComplete(() =>
         {
-            PlayerStateMachine.Current = PlayerState.Idle;
+            //PlayerStateMachine.Current = PlayerState.Idle;
             _tweener = null;
         });
-
+        */
+        AbilityAudioPlayer.PlayDashAbilitySound();
         return ReloadingDuration;
     }
 

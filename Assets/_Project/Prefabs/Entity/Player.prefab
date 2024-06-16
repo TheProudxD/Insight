@@ -230,9 +230,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ef4fff77db9428a4bafde86d2464fcdc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  <MagicCost>k__BackingField: 0
-  <Duration>k__BackingField: 0
-  <ReloadingDuration>k__BackingField: 0
+  <MagicCost>k__BackingField: 5
+  <Duration>k__BackingField: 3
+  <ReloadingDuration>k__BackingField: 10
+  _playerMovement: {fileID: 7696137166542938749}
+  _projectile: {fileID: 1933090502277590224, guid: 24261e11d6561504e85007d3d108e46f, type: 3}
+  _numberOfProjectiles: 3
+  _spread: 80
 --- !u!1 &2456884960003284675
 GameObject:
   m_ObjectHideFlags: 0

@@ -131,9 +131,9 @@ namespace Zenject
             // Optional
         }
 
-        TValue IFactory<TParam1, TParam2, TParam3, TValue>.Create(TParam1 p1, TParam2 p2, TParam3 p3)
+        TValue IFactory<TParam1, TParam2, TParam3, TValue>.Create(TParam1 projectilePrefab, TParam2 p2, TParam3 p3)
         {
-            return Spawn(p1, p2, p3);
+            return Spawn(projectilePrefab, p2, p3);
         }
     }
 

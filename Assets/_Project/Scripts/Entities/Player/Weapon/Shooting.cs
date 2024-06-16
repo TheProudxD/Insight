@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using Zenject;
 
@@ -7,12 +8,18 @@ namespace Player
     {
         [Inject] protected PlayerEntitySpecs PlayerEntitySpecs;
         [Inject] protected CharacterAudioPlayer CharacterAudioPlayer;
+        protected PlayerMana PlayerMana;
 
         protected abstract float TimeBeforeLastAttackCounter { get; set; }
         protected abstract bool CanAttack();
 
         public abstract bool TryShoot(Vector3 position = default, Vector3 direction = default);
-        
+
+        private void Awake()
+        {
+            PlayerMana = GetComponent<PlayerMana>();
+        }
+
         private void Update()
         {
             if (PlayerStateMachine.Current == PlayerState.Interact)

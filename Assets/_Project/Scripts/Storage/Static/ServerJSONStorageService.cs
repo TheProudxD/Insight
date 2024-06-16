@@ -38,7 +38,7 @@ namespace StorageService
 
                 var serverJsonFile = await wc.DownloadStringTaskAsync(_url + "/" + key);
                 var serverData = JsonUtility.FromJson<GameData>(serverJsonFile);
-                var localPath = InsightUtils.BuildPath(DataManager.MAX_LEVEL_DATA_KEY);
+                var localPath = InsightUtils.BuildPath(DataManager.GAME_DATA_KEY);
 
                 if (!File.Exists(localPath))
                 {

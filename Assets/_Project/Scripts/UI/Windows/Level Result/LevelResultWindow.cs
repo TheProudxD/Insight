@@ -18,12 +18,14 @@ namespace Storage
             {
                 case LevelResultType.Successful:
                     _successfulResultWindow.gameObject.SetActive(true);
+                    _successfulResultWindow.Show();
                     _failedResultWindow.gameObject.SetActive(false);
                     _audioPlayer.PlayLevelCompleted();
                     break;
                 case LevelResultType.Failed:
                     _successfulResultWindow.gameObject.SetActive(false);
                     _failedResultWindow.gameObject.SetActive(true);
+                    _failedResultWindow.Show();
                     _audioPlayer.PlayLevelFailed();
                     break;
                 default:

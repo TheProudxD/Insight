@@ -29,7 +29,7 @@ public class DataLoader : ILoadingOperation
         InsightUtils.IsCorrectShopItemsId();
         onProcess?.Invoke(0.5f);
 
-        await _dataManager.DownloadMaxLevel();
+        await _dataManager.GetGameData();
         onProcess?.Invoke(0.75f);
 
         await _dataManager.GetPlayerData();

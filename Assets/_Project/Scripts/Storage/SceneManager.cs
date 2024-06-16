@@ -30,7 +30,7 @@ namespace Storage
             _dynamicStorageService = dynamicStorageService;
             _windowManager = windowManager;
             _minLevel = (int)Scene.Lobby + 1;
-            dataManager.DataLoaded += Initialize;
+            dataManager.PlayerDataLoaded += Initialize;
         }
 
         private void Initialize(PlayerData playerData)

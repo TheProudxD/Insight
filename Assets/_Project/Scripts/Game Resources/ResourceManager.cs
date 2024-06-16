@@ -19,14 +19,14 @@ namespace ResourceService
         private Dictionary<ResourceType, Resource> _resources;
         private PlayerData _playerData;
 
+        public int MaxEnergyAmount { get; private set; }
+
         private ResourceManager(IDynamicStorageService dynamicStorageService, DataManager dataManager)
         {
             _dynamicStorageService = dynamicStorageService;
-            dataManager.DataLoaded += Initialize;
+            dataManager.PlayerDataLoaded += Initialize;
             ResourceChanged += OnResourceChanged;
         }
-
-        public float MaxEnergyAmount => 50;
 
         private void Initialize(PlayerData playerData)
         {
@@ -42,6 +42,18 @@ namespace ResourceService
             _resources = resources.ToDictionary(r => r.Type);
 
             SubscriptOnResources(resources);
+            CalculateEnergy(playerData.DifferenceLastPlay);
+        }
+
+        private void Initialize(GameData gameData)
+        {
+            MaxEnergyAmount = gameData.MaxEnergy;
+        }
+
+        private void CalculateEnergy(long playerDataLastPlay)
+        {
+            var addedEnergy = Mathf.Clamp((int)(playerDataLastPlay / 60 * 5), 0, MaxEnergyAmount);
+            Add(ResourceType.Energy, addedEnergy);
         }
 
         private void SubscriptOnResources(IEnumerable<Resource> resources)
@@ -54,7 +66,7 @@ namespace ResourceService
                 };
             }
         }
-        
+
         private void OnResourceChanged(ResourceType resType, int oldV, int newV)
         {
             switch (resType)
@@ -142,7 +154,7 @@ namespace ResourceService
                 }
             });
         }
-        
+
         private async void SaveEnergy(int newValue)
         {
             var uploadParams = new Dictionary<string, string>
@@ -172,7 +184,9 @@ namespace ResourceService
         public int GetResourceValue(ResourceType type) =>
             _resources[type].Amount;
 
-        ~ResourceManager() =>
+        ~ResourceManager()
+        {
             ResourceChanged -= OnResourceChanged;
+        }
     }
 }
