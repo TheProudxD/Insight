@@ -16,9 +16,9 @@ MonoBehaviour:
   <Name>k__BackingField: Blue Potion
   <Description>k__BackingField: Give mana
   <Amount>k__BackingField: 1
-  <Image>k__BackingField: {fileID: 21300000, guid: bee99074e3aaa4f10b57618376e3c07a, type: 3}
+  <Image>k__BackingField: {fileID: 21300000, guid: 68cb970f21d581a4c9199025cdde3b18, type: 3}
   <Usable>k__BackingField: 1
   <Unique>k__BackingField: 0
-  <ItemReaction>k__BackingField: {fileID: 0}
+  <ItemReaction>k__BackingField: {fileID: 291529447372961112, guid: 30ee3f3085b06f842ae2e33096683d6e, type: 3}
   <Rarity>k__BackingField: 3
   <Category>k__BackingField: 2

@@ -15,42 +15,42 @@ MonoBehaviour:
   selectionHistory:
     _history:
     - reference: {fileID: 0}
-      sceneName: DontDestroyOnLoad
-      scenePath: DontDestroyOnLoad
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-1873653754540539750-0
+      sceneName: Slot_Blank
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-0-00000000000000000000000000000000-0-0
     - reference: {fileID: 0}
-      sceneName: DontDestroyOnLoad
-      scenePath: DontDestroyOnLoad
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-8417584867340619541-0
+      sceneName: Slot_Item
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-7158357035976049738-0
     - reference: {fileID: 0}
-      sceneName: DontDestroyOnLoad
-      scenePath: DontDestroyOnLoad
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-3151361361224184170-0
+      sceneName: Slot_Item
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-1625234080432509681-0
     - reference: {fileID: 0}
-      sceneName: DontDestroyOnLoad
-      scenePath: DontDestroyOnLoad
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-518008203782059674-0
+      sceneName: Slot_Item
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-2032669109635841484-0
     - reference: {fileID: 0}
-      sceneName: DontDestroyOnLoad
-      scenePath: DontDestroyOnLoad
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-4095236180639050871-0
+      sceneName: Slot_Item
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-591932476156831722-0
     - reference: {fileID: 0}
-      sceneName: DontDestroyOnLoad
-      scenePath: DontDestroyOnLoad
-      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-5825105545943352920-0
-    - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-8417584866798536599-548505730
-    - reference: {fileID: 0}
+      sceneName: Slot_Blank
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-2408527410274159522-0
+    - reference: {fileID: 2408527410274159522, guid: 733ae2d8aa21e7441b797f4589aee063, type: 3}
       sceneName: 
       scenePath: 
-      globalObjectId: 
+      globalObjectId: GlobalObjectId_V1-1-733ae2d8aa21e7441b797f4589aee063-2408527410274159522-0
+    - reference: {fileID: 7158357035976049738, guid: 11634e242e8180d40aaf49951c4840e7, type: 3}
+      sceneName: 
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-1-11634e242e8180d40aaf49951c4840e7-7158357035976049738-0
     - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-4095236181185324277-548505730
+      sceneName: Slot_Item
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-7158357035976049738-0
     - reference: {fileID: 0}
-      sceneName: Loader
-      scenePath: Assets/_Project/Scenes/Infrastructure/Loader.unity
-      globalObjectId: GlobalObjectId_V1-2-1271a5eb1de92bf4eb6b2a093ec144e3-5825105546489695962-548505730
+      sceneName: Slot_Item
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-1625234080432509681-0

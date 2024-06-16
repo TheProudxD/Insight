@@ -14,11 +14,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 2
   <Name>k__BackingField: Some Potion
-  <Description>k__BackingField: Give  shield
-  <Amount>k__BackingField: 2
-  <Image>k__BackingField: {fileID: 21300000, guid: 0e2f4307e2b46440d8b1018c7ed04849, type: 3}
+  <Description>k__BackingField: Give shield
+  <Amount>k__BackingField: 1
+  <Image>k__BackingField: {fileID: 21300000, guid: 0f34091a1dd7a17418e8de5ca93bd825, type: 3}
   <Usable>k__BackingField: 1
   <Unique>k__BackingField: 0
   <ItemReaction>k__BackingField: {fileID: 4719729699742724765, guid: d3a3d1608572fca429d411a147cda03e, type: 3}
   <Rarity>k__BackingField: 2
-  <Category>k__BackingField: 2
+  <Category>k__BackingField: 1

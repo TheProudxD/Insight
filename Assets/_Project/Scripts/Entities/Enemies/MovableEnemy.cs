@@ -7,7 +7,7 @@ namespace Enemies
     {
         [SerializeField] protected List<Transform> Waypoints;
 
-        private readonly float _roundingDistance = 0.05f;
+        private readonly float _roundingDistance = 1f;
 
         protected Transform CurrentPoint => Waypoints[CurrentPointIndex];
         protected int CurrentPointIndex;
@@ -54,7 +54,6 @@ namespace Enemies
                 {
                     Attack();
                     Move(GetDirectionToTarget());
-                    //PlayShieldMode(true);
                 }
             }
             else

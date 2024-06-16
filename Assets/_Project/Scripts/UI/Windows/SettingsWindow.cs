@@ -6,6 +6,8 @@ namespace UI
 {
     public class SettingsWindow : CommonWindow
     {
+        [SerializeField] private Button _applyButton;
+        
         [Header("Language")] 
         [SerializeField] private Dropdown _languageChangeDropdown;
         [SerializeField] private LanguageChanger _languageChanger;
@@ -32,6 +34,8 @@ namespace UI
         {
             base.OnEnable();
 
+            _applyButton.onClick.AddListener(Close);
+            
             _languageChangeDropdown.onValueChanged.AddListener(ChangeLanguage);
 
             _tutorialEnableButton.onClick.AddListener(EnableTutorial);
@@ -52,6 +56,8 @@ namespace UI
         {
             base.OnDisable();
 
+            _applyButton.onClick.RemoveListener(Close);
+            
             _languageChangeDropdown.onValueChanged.RemoveListener(ChangeLanguage);
 
             _tutorialEnableButton.onClick.RemoveListener(EnableTutorial);

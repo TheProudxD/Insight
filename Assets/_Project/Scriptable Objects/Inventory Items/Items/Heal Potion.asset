@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: Heal Potion
   m_EditorClassIdentifier: 
   <ID>k__BackingField: 1
-  <Name>k__BackingField: Red Potion
-  <Description>k__BackingField: Give  heal
+  <Name>k__BackingField: Apple
+  <Description>k__BackingField: Give heal
   <Amount>k__BackingField: 1
-  <Image>k__BackingField: {fileID: 21300000, guid: 5a0d82360083945039a386d0b8ed300f, type: 3}
+  <Image>k__BackingField: {fileID: 21300000, guid: b1698ce191a2c704cbbe4d813e07db2f, type: 3}
   <Usable>k__BackingField: 1
   <Unique>k__BackingField: 0
   <ItemReaction>k__BackingField: {fileID: 4719729699742724765, guid: d3a3d1608572fca429d411a147cda03e, type: 3}

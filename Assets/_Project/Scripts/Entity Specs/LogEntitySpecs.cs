@@ -6,6 +6,7 @@ public class LogEntitySpecs : EntitySpecs
     public float MoveSpeed { get; private set; }
     public float AttackRadius { get; private set; }
     public float ChaseRadius { get; private set; }
+    public float DestroyTimeAfterDying { get; private set; }
 
     public override void Initialize(string[] cells)
     {

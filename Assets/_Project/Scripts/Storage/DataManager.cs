@@ -181,7 +181,7 @@ namespace StorageService
             {
                 var delta = DateTime.Now - dateTime;
                 Debug.Log($"Difference between last play: {delta.TotalMinutes:N} minutes");
-                return (long)delta.TotalMinutes;
+                return (long)Math.Round(delta.TotalMinutes);
             }
 
             throw new Exception("Error while parsing last play");

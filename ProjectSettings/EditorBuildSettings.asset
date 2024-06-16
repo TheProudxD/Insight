@@ -21,7 +21,7 @@ EditorBuildSettings:
     path: Assets/_Project/Scenes/Game/Home.unity
     guid: b914e47369eb2d644bd3faca312bd94a
   - enabled: 1
-    path: Assets/_Project/Scenes/Game/WayToHome.unity
+    path: Assets/_Project/Scenes/Game/WayFromHome.unity
     guid: d96e0a399321ac745a3db61109e7b46c
   - enabled: 1
     path: Assets/_Project/Scenes/Game/Dungeon 1.unity

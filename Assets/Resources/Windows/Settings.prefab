@@ -2174,8 +2174,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3769031928701984007}
   m_HandleRect: {fileID: 2636304833350291902}
   m_Direction: 2
-  m_Value: 1.0000013
-  m_Size: 0.9357143
+  m_Value: 1.0000024
+  m_Size: 0.9285715
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4110,7 +4110,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1258901377efef64787e9c0688eb9c26, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CloseButton: {fileID: 1781006916257209432}
+  CloseButton: {fileID: 6136641564879836021}
+  _applyButton: {fileID: 7654777528268176435}
   _languageChangeDropdown: {fileID: 274720651087506252}
   _languageChanger: {fileID: 8371067535729406114}
   _tutorialEnableButton: {fileID: 251567864119505205}
@@ -4640,7 +4641,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &5468430241522992508
 RectTransform:
   m_ObjectHideFlags: 0
