@@ -105,6 +105,6 @@ namespace Storage
 
         public void RestartLevel() => LoadScene((Scene)CurrentLevel);
 
-        public int GetLevelId(Scene scene) => (int)scene - ((int)Scene.LovelyHome - (int)Scene.Downloader);
+        public int GetLevelId(Scene scene) => (int)scene - SceneIDConstants.LEVEL_ID_OFFSET;
     }
 }

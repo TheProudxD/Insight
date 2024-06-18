@@ -25,7 +25,7 @@ namespace UI
         [SerializeField] private TextMeshProUGUI _requireLevelText;
         [SerializeField] private int _energyPrice;
         [SerializeField, Range(0, 3)] private int _starPassedAmount;
-        
+
         [field: SerializeField] public Scene Scene { get; private set; }
         public Button OpenPopupButton { get; private set; }
 
@@ -39,6 +39,7 @@ namespace UI
         private void OnEnable()
         {
             InitializeOpenButton();
+            InitializeSkipLevelButton();
             InitializeUI();
         }
 
@@ -50,7 +51,7 @@ namespace UI
                 _levelSelectPopup.gameObject.SetActive(true);
                 _levelSelectPopup.Activate(Scene);
                 _levelSelectPopup.StartLevelButton.RemoveAll();
-                
+
                 if (_resourceManager.IsEnough(ResourceType.Energy, _energyPrice))
                 {
                     InitializeStartLevelButton();
@@ -70,6 +71,16 @@ namespace UI
                 _resourceManager.Spend(ResourceType.Energy, _energyPrice);
                 _windowManager.CloseLevelSelectWindow();
                 _sceneManager.LoadScene(Scene);
+            });
+        }
+
+        private void InitializeSkipLevelButton()
+        {
+            _levelSelectPopup.SkipLevelButton.Add(() =>
+            {
+                _audioPlayer.PlayButtonSound();
+                _windowManager.CloseLevelSelectWindow();
+                _sceneManager.LoadScene(Scene + 1);
             });
         }
 

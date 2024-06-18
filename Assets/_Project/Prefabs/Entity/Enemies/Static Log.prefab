@@ -251,8 +251,8 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingLayerID: 1908569749
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &529447318814779069
 MonoBehaviour:
@@ -792,10 +792,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 100835e75b91fac439b2f22eda658a05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _thrust: 6
-  _knockTime: 0.15
-  _damage: 2
-  _attackCooldown: 1.5
 --- !u!114 &9134907469416325736
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -808,8 +804,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9437df11c1ee4829a80496d639943c53, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _healthBar: {fileID: 2678873999552141039}
-  _lootTable: {fileID: 11400000, guid: f704792488d7e75429adb03a6f2c51d1, type: 2}
 --- !u!114 &7496982207401897191
 MonoBehaviour:
   m_ObjectHideFlags: 0

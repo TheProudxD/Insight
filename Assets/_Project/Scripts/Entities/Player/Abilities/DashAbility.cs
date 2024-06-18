@@ -15,7 +15,6 @@ public class DashAbility : Ability
         ReloadingDurationTimer = 0;
 
         _playerRigidbody.AddForce(_playerMovement.GetFaceDirection() * _dashForce, ForceMode2D.Force);
-        print(_playerMovement.GetFaceDirection());
         /*
         var dashVector = (Vector2)_playerRigidbody.transform.position + _playerMovement.GetFaceDirection() * _dashForce;
         _tweener = _playerRigidbody.DOMove(dashVector, Duration).OnComplete(() =>

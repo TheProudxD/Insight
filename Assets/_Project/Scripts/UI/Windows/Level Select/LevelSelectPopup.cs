@@ -13,10 +13,10 @@ namespace UI
         [field: SerializeField] public Button SkipLevelButton { get; set; }
 
         [SerializeField] private TextMeshProUGUI _titleText;
-
         [SerializeField] private TextMeshProUGUI _softCurrencyText;
         [SerializeField] private TextMeshProUGUI _hardCurrencyText;
         [SerializeField] private TextMeshProUGUI _energyText;
+        
         [Inject] private RewardsByLevelManager _rewardsByLevelManager;
 
         private void SetLevelTitle(string title) => _titleText.SetText(title);

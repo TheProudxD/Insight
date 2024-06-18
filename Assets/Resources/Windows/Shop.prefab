@@ -9196,10 +9196,10 @@ RectTransform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 648756062171652578}
-  - {fileID: 8619074550503292697}
   - {fileID: 4136226139857238256}
   - {fileID: 6081050351651515737}
   - {fileID: 8411997144583394954}
+  - {fileID: 8619074550503292697}
   m_Father: {fileID: 3721108680207674189}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
