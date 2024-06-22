@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: dedc0c11ab5511b4d98be5bc40c03fdf, type: 3}
+  m_Name: CollectApplesQuests
+  m_EditorClassIdentifier: 
+  <DisplayName>k__BackingField: Collect Apples
+  <LevelRequirement>k__BackingField: 1
+  <QuestPrerequisites>k__BackingField: []
+  <QuestStepPrefabs>k__BackingField:
+  - {fileID: 3241923709553699799, guid: 5314a7f989c5eaa4887a54c17c640e3b, type: 3}

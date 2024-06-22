@@ -9,16 +9,15 @@ namespace Objects
 {
     public abstract class Interactable : MonoBehaviour
     {
-        [Inject] protected WindowManager WindowManager;
         [SerializeField] protected Signal Context;
 
         protected bool PlayerInRange;
-        
+
         protected virtual void OnTriggerEnter2D(Collider2D other)
         {
             if (InsightUtils.IsItPlayer(other) == false)
                 return;
-            
+
             Context.Raise();
             PlayerInRange = true;
         }
@@ -27,7 +26,7 @@ namespace Objects
         {
             if (InsightUtils.IsItPlayer(other) == false)
                 return;
-            
+
             Context.Raise();
             PlayerInRange = false;
         }

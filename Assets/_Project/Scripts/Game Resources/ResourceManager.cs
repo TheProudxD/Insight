@@ -54,7 +54,7 @@ namespace ResourceService
         private void CalculateEnergy(long playerDataLastPlay)
         {
             var currentAmount = _resources[ResourceType.Energy].Amount;
-            var calculatedAmount = (int)(playerDataLastPlay / 60 * 3);
+            var calculatedAmount = (int)(playerDataLastPlay / 60f * 3f);
             var addedEnergy = Mathf.Clamp(currentAmount + calculatedAmount, 0, MaxEnergyAmount);
 
             Spend(ResourceType.Energy, currentAmount);

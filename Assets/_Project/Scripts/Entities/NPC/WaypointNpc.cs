@@ -3,7 +3,7 @@ using Objects;
 using Tools;
 using UnityEngine;
 
-public class WaypointNpc : Interactable
+public class WaypointNpc : QuestPoint
 {
     [SerializeField] private List<Transform> _waypoints;
     [SerializeField] private Animator _animator;
@@ -19,8 +19,10 @@ public class WaypointNpc : Interactable
     private float _waitTimeSeconds;
     private int _indexWp;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         _moveTimeSeconds = Random.Range(_minMoveTime, _maxMoveTime);
         _waitTimeSeconds = Random.Range(_minWaitTime, _maxWaitTime);
 

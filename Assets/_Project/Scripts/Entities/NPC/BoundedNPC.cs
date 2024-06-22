@@ -2,12 +2,12 @@
 using UnityEngine;
 using Zenject;
 
-public class BoundedNPC : Interactable
+public class BoundedNPC : QuestPoint
 {
     [SerializeField] private Collider2D _bounds;
     [SerializeField] private Animator _animator;
     [SerializeField] private Rigidbody2D _rigidbody;
-    [Inject(Id ="lizard")] private NPCEntitySpecs _NPCEntitySpecs;
+    [Inject(Id = "lizard")] private NPCEntitySpecs _NPCEntitySpecs;
 
     private float _speed;
     private float _minMoveTime;
@@ -20,8 +20,10 @@ public class BoundedNPC : Interactable
     private float _moveTimeSeconds;
     private float _waitTimeSeconds;
 
-    private void Awake()
+    protected override void Awake()
     {
+        base.Awake();
+        
         _speed = _NPCEntitySpecs.MoveSpeed;
         _minMoveTime = _NPCEntitySpecs.MinMoveTime;
         _maxMoveTime = _NPCEntitySpecs.MaxMoveTime;
@@ -81,7 +83,7 @@ public class BoundedNPC : Interactable
             _rigidbody.MovePosition(temp);
         }
         else
-        { 
+        {
             ChangeDirection();
         }
     }

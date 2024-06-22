@@ -1,4 +1,5 @@
 using System.Collections;
+using Managers;
 using Player;
 using Tools;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace Objects
         private const string OPEN_STATE = "opened";
         private static readonly int Opened = Animator.StringToHash(OPEN_STATE);
 
+        [Inject] protected WindowManager WindowManager;
         [Inject] private PlayerInteraction _playerInteraction;
         [SerializeField] private InventoryItem[] _items;
 
@@ -18,15 +20,15 @@ namespace Objects
         private readonly float _openDuration = 1f;
         private bool _opened;
 
-        private void Awake()
-        {
-            _animator = GetComponent<Animator>();
-        }
-
         private void OnEnable()
         {
             if (_opened)
                 OpenAnimation();
+        }
+
+        private void Awake()
+        {
+            _animator = GetComponent<Animator>();
         }
 
         private IEnumerator OpenChest()

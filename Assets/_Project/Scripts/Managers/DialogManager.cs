@@ -7,6 +7,7 @@ namespace Managers
 {
     public class DialogManager : Interactable
     {
+        [Inject] private WindowManager _windowManager;
         [Inject] private DialogAudioPlayer _dialogAudioPlayer;
         [SerializeField] private string _dialog;
 
@@ -15,7 +16,7 @@ namespace Managers
             if (InsightUtils.IsItPlayer(other) == false)
                 return;
 
-            var dialogBox = WindowManager.ShowDialogBox();
+            var dialogBox = _windowManager.ShowDialogBox();
             dialogBox.Text.SetText(_dialog);
             _dialogAudioPlayer.Play();
             PlayerInRange = true;
@@ -28,7 +29,7 @@ namespace Managers
 
             PlayerInRange = false;
             _dialogAudioPlayer.Stop();
-            WindowManager.CloseDialogBox();
+            _windowManager.CloseDialogBox();
         }
     }
 }
