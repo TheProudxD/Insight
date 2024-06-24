@@ -1055,6 +1055,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apple (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 4159434986636051336, guid: b10d9129f23ad7a479a5cbeeb0b620f1, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6800011446690916539, guid: b10d9129f23ad7a479a5cbeeb0b620f1, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -33609,6 +33613,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Apple (5)
       objectReference: {fileID: 0}
+    - target: {fileID: 4159434986636051336, guid: b10d9129f23ad7a479a5cbeeb0b620f1, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 6800011446690916539, guid: b10d9129f23ad7a479a5cbeeb0b620f1, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -34315,6 +34323,10 @@ PrefabInstance:
     - target: {fileID: 4125966545965480206, guid: b10d9129f23ad7a479a5cbeeb0b620f1, type: 3}
       propertyPath: m_Name
       value: Apple (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159434986636051336, guid: b10d9129f23ad7a479a5cbeeb0b620f1, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6800011446690916539, guid: b10d9129f23ad7a479a5cbeeb0b620f1, type: 3}
       propertyPath: m_RootOrder
@@ -37516,6 +37528,10 @@ PrefabInstance:
     - target: {fileID: 4125966545965480206, guid: b10d9129f23ad7a479a5cbeeb0b620f1, type: 3}
       propertyPath: m_Name
       value: Apple (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 4159434986636051336, guid: b10d9129f23ad7a479a5cbeeb0b620f1, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6800011446690916539, guid: b10d9129f23ad7a479a5cbeeb0b620f1, type: 3}
       propertyPath: m_RootOrder

@@ -18,20 +18,20 @@ public class Room : MonoBehaviour
 
         _enemies = GetOnlyEnemies(_objects);
         _objects = GetAllExceptEnemies(_objects).ToList();
-        _objects.ForEach(x => x.SetActive(false));
+        //_objects.ForEach(x => x.SetActive(false));
     }
 
     private IEnumerable<Enemy> GetOnlyEnemies(IEnumerable<GameObject> objects) => objects
-        .Where(g => g !=null && g.TryGetComponent(out Enemy enemy)).Select(x => x.GetComponent<Enemy>());
+        .Where(g => g != null && g.TryGetComponent(out Enemy enemy)).Select(x => x.GetComponent<Enemy>());
 
     private IEnumerable<GameObject> GetAllExceptEnemies(IEnumerable<GameObject> objects) =>
-        objects.Where(g => g !=null && !g.TryGetComponent(out Enemy enemy)).Select(x => x);
+        objects.Where(g => g != null && !g.TryGetComponent(out Enemy enemy)).Select(x => x);
 
     protected virtual void OnTriggerEnter2D(Collider2D collision)
     {
         if (InsightUtils.IsItPlayer(collision) == false)
             return;
-        
+
         foreach (var enemy in _enemies)
         {
             ChangeActivation(enemy, true);
@@ -47,7 +47,7 @@ public class Room : MonoBehaviour
     {
         if (InsightUtils.IsItPlayer(collision) == false)
             return;
-        
+
         foreach (var enemy in _enemies)
         {
             ChangeActivation(enemy, false);

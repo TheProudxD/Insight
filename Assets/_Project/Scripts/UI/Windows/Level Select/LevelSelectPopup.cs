@@ -9,8 +9,9 @@ namespace UI
 {
     public class LevelSelectPopup : MonoBehaviour
     {
-        [field: SerializeField] public Button StartLevelButton { get; set; }
-        [field: SerializeField] public Button SkipLevelButton { get; set; }
+        [field: SerializeField] public Button StartLevelButton { get; private set; }
+        [field: SerializeField] public Button SkipLevelButton { get; private set; }
+        [field: SerializeField] public TextMeshProUGUI EnergyPriceText { get; private set; }
 
         [SerializeField] private TextMeshProUGUI _titleText;
         [SerializeField] private TextMeshProUGUI _softCurrencyText;

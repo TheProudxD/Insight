@@ -14,11 +14,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   selectionHistory:
     _history:
-    - reference: {fileID: 11500000, guid: af9f595ff32b4f8b8d19a31a9743ed12, type: 3}
-      sceneName: 
+    - reference: {fileID: 0}
+      sceneName: Level Select
       scenePath: 
-      globalObjectId: 
-    - reference: {fileID: 102900000, guid: 94e5aebcd8ca5b44881f96e06455c6b9, type: 3}
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-386299408331307995-0
+    - reference: {fileID: 0}
+      sceneName: Level Select
+      scenePath: 
+      globalObjectId: GlobalObjectId_V1-2-00000000000000000000000000000000-1102009344201378523-0
+    - reference: {fileID: 102900000, guid: 9b746533a3d3139429ae6e608e50d8c5, type: 3}
       sceneName: 
       scenePath: 
       globalObjectId: 
@@ -27,25 +31,9 @@ MonoBehaviour:
       scenePath: 
       globalObjectId: 
     - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-1252860438-0
-    - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-4125966545965480206-1529629574
-    - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-4125966545965480206-1097393362
-    - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-728494317-0
-    - reference: {fileID: 0}
-      sceneName: Dungeon 2
-      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
-      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-4125966545965480206-878475300
+      sceneName: 
+      scenePath: 
+      globalObjectId: 
     - reference: {fileID: 0}
       sceneName: Dungeon 2
       scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
@@ -54,3 +42,15 @@ MonoBehaviour:
       sceneName: Dungeon 2
       scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
       globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-5300181306123711014-338899548804777358
+    - reference: {fileID: 0}
+      sceneName: Dungeon 2
+      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
+      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-1252860438-0
+    - reference: {fileID: 0}
+      sceneName: Dungeon 2
+      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
+      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-1764016773-0
+    - reference: {fileID: 0}
+      sceneName: Dungeon 2
+      scenePath: Assets/_Project/Scenes/Game/Dungeon 2.unity
+      globalObjectId: GlobalObjectId_V1-2-32d67f6809c42884ea15c2dd55cfd2e0-372390269-0

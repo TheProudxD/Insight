@@ -50,11 +50,13 @@ namespace UI
                 _audioPlayer.PlayButtonSound();
                 _levelSelectPopup.gameObject.SetActive(true);
                 _levelSelectPopup.Activate(Scene);
+                _levelSelectPopup.EnergyPriceText.SetText(_energyPrice.ToString());
                 _levelSelectPopup.StartLevelButton.RemoveAll();
 
                 if (_resourceManager.IsEnough(ResourceType.Energy, _energyPrice))
                 {
                     InitializeStartLevelButton();
+                    _levelSelectPopup.StartLevelButton.interactable = true;
                 }
                 else
                 {

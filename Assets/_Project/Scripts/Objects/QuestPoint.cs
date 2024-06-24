@@ -4,18 +4,32 @@ using UnityEngine;
 
 namespace Objects
 {
+    [RequireComponent(typeof(QuestIcon))]
     [RequireComponent(typeof(Collider2D))]
     public class QuestPoint : Interactable
     {
         [SerializeField] private QuestInfo _questInfo;
         [SerializeField] private bool _startPoint = true;
         [SerializeField] private bool _finishPoint = true;
+        
         private QuestState _currentState;
         private QuestManager _questManager;
+        private QuestIcon _questIcon;
 
         protected virtual void Awake()
         {
             _questManager = FindObjectOfType<QuestManager>();
+            _questIcon = GetComponent<QuestIcon>();
+        }
+
+        private void OnEnable()
+        {
+            _questManager.QuestStateChanged += ChangeQuestState;
+        }
+
+        private void OnDisable()
+        {
+            _questManager.QuestStateChanged -= ChangeQuestState;
         }
 
         public void ChangeQuestState(Quest quest)
@@ -23,6 +37,7 @@ namespace Objects
             if (quest.Info.ID == _questInfo.ID)
             {
                 _currentState = quest.State;
+                _questIcon.SetState(quest.State, _startPoint, _finishPoint);
             }
         }
 

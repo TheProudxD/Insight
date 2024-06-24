@@ -1,3 +1,4 @@
+using System;
 using ResourceService;
 using UnityEngine;
 
@@ -11,7 +12,7 @@ namespace QuestSystem
         [field: SerializeField] public int LevelRequirement { get; private set; }
         [field: SerializeField] public QuestInfo[] QuestPrerequisites { get; private set; }
         [field: SerializeField] public QuestStep[] QuestStepPrefabs { get; private set; }
-        [SerializeField] private Resource[] _rewards;
+        [field: SerializeField] public QuestRewards[] Rewards { get; private set; }
 
         private void OnValidate()
         {
@@ -20,5 +21,12 @@ namespace QuestSystem
             UnityEditor.EditorUtility.SetDirty(this);
 #endif
         }
+    }
+
+    [Serializable]
+    public class QuestRewards
+    {
+        public ResourceType Type;
+        public int Amount;
     }
 }

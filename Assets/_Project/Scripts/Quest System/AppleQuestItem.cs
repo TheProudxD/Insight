@@ -13,7 +13,6 @@ namespace QuestSystem
 
         private void Awake()
         {
-            _collectApplesQuest = FindObjectOfType<CollectApplesQuestStep>();
             _circleCollider = GetComponent<CircleCollider2D>();
             //_visual = GetComponentInChildren<SpriteRenderer>();
         }
@@ -27,9 +26,13 @@ namespace QuestSystem
 
         private void OnTriggerEnter2D(Collider2D otherCollider)
         {
-            if (otherCollider.TryGetComponent<PlayerInteraction>(out var player))
+            if (otherCollider.TryGetComponent<PlayerInteraction>(out var player) && _collectApplesQuest != null)
             {
                 Collect();
+            }
+            else
+            {
+                _collectApplesQuest = FindObjectOfType<CollectApplesQuestStep>();
             }
         }
     }

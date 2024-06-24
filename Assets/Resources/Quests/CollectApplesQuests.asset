@@ -13,7 +13,14 @@ MonoBehaviour:
   m_Name: CollectApplesQuests
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Collect Apples
-  <LevelRequirement>k__BackingField: 1
+  <LevelRequirement>k__BackingField: 0
   <QuestPrerequisites>k__BackingField: []
   <QuestStepPrefabs>k__BackingField:
-  - {fileID: 3241923709553699799, guid: 5314a7f989c5eaa4887a54c17c640e3b, type: 3}
+  - {fileID: 4664385734222672518, guid: 5314a7f989c5eaa4887a54c17c640e3b, type: 3}
+  <Rewards>k__BackingField:
+  - Type: 0
+    Amount: 1000
+  - Type: 1
+    Amount: 10
+  - Type: 2
+    Amount: 50
