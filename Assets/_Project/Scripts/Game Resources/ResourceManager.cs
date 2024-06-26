@@ -53,12 +53,11 @@ namespace ResourceService
 
         private void CalculateEnergy(long playerDataLastPlay)
         {
+            var reboundSpeed = 5f / 60f;
             var currentAmount = _resources[ResourceType.Energy].Amount;
-            var calculatedAmount = (int)(playerDataLastPlay / 60f * 3f);
-            var addedEnergy = Mathf.Clamp(currentAmount + calculatedAmount, 0, MaxEnergyAmount);
-
-            Spend(ResourceType.Energy, currentAmount);
-            Add(ResourceType.Energy, addedEnergy);
+            var calculatedAmount = (int)(playerDataLastPlay * reboundSpeed);
+            _resources[ResourceType.Energy].Amount = Mathf.Clamp(currentAmount + calculatedAmount, 0, MaxEnergyAmount);
+            SaveEnergy(_resources[ResourceType.Energy].Amount);
         }
 
         private void SubscriptOnResources(IEnumerable<Resource> resources)
