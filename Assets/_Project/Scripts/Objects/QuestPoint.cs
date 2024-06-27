@@ -1,36 +1,29 @@
 using System;
 using QuestSystem;
+using Tools;
 using UnityEngine;
 
 namespace Objects
 {
-    [RequireComponent(typeof(QuestIcon))]
     [RequireComponent(typeof(Collider2D))]
     public class QuestPoint : Interactable
     {
         [SerializeField] private QuestInfo _questInfo;
+        [SerializeField] private QuestIcon _questIcon;
         [SerializeField] private bool _startPoint = true;
         [SerializeField] private bool _finishPoint = true;
-        
+
         private QuestState _currentState;
         private QuestManager _questManager;
-        private QuestIcon _questIcon;
 
         protected virtual void Awake()
         {
             _questManager = FindObjectOfType<QuestManager>();
-            _questIcon = GetComponent<QuestIcon>();
         }
 
-        private void OnEnable()
-        {
-            _questManager.QuestStateChanged += ChangeQuestState;
-        }
+        private void OnEnable() => _questManager.QuestStateChanged += ChangeQuestState;
 
-        private void OnDisable()
-        {
-            _questManager.QuestStateChanged -= ChangeQuestState;
-        }
+        private void OnDisable() => _questManager.QuestStateChanged -= ChangeQuestState;
 
         public void ChangeQuestState(Quest quest)
         {
@@ -43,6 +36,9 @@ namespace Objects
 
         protected override void OnTriggerEnter2D(Collider2D other)
         {
+            if (InsightUtils.IsItPlayer(other) == false || _currentState == QuestState.Finished)
+                return;
+
             base.OnTriggerEnter2D(other);
 
             switch (_currentState)
@@ -62,6 +58,16 @@ namespace Objects
                 default:
                     throw new ArgumentOutOfRangeException();
             }
+
+            Context.Raise();
+        }
+
+        protected override void OnTriggerExit2D(Collider2D other)
+        {
+            if (InsightUtils.IsItPlayer(other) == false || _currentState == QuestState.Finished)
+                return;
+
+            PlayerInRange = false;
         }
     }
 }

@@ -52,7 +52,7 @@ public class InventoryWindow : CommonWindow
         MakeBlankInventorySlots();
         MakeInventory();
 
-        //ChangeSelectedItem(_inventorySlots.First().Key);
+        ChangeSelectedItem(_inventorySlots?.First().Key);
     }
 
     private void MakeBlankInventorySlots()

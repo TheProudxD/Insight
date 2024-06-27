@@ -44,4 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af9f595ff32b4f8b8d19a31a9743ed12, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _applesToComplete: 5
+  _applePrefab: {fileID: 4125966545965480206, guid: b10d9129f23ad7a479a5cbeeb0b620f1, type: 3}
+  _applesToComplete: {fileID: 11400000, guid: 3b8c765c094065846b35484b7762cfed, type: 2}

@@ -23,7 +23,7 @@ public class BoundedNPC : QuestPoint
     protected override void Awake()
     {
         base.Awake();
-        
+
         _speed = _NPCEntitySpecs.MoveSpeed;
         _minMoveTime = _NPCEntitySpecs.MinMoveTime;
         _maxMoveTime = _NPCEntitySpecs.MaxMoveTime;

@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8847aee13d8a4b1ea4aac8dbd4a6bde4, type: 3}
+  m_Name: ApplePositions
+  m_EditorClassIdentifier: 
+  <Positions>k__BackingField:
+  - {x: 65.51, y: 6.01, z: 0}
+  - {x: 69.48, y: 5.74, z: 0}
+  - {x: 74.64, y: 5.05, z: 0}
+  - {x: 73.5, y: 6.49, z: 0}
+  - {x: 71.34, y: 4.04, z: 0}

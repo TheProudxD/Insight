@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using ResourceService;
+using Storage;
 using UnityEngine;
 using Zenject;
 
@@ -9,7 +10,8 @@ namespace QuestSystem
     public class QuestManager : MonoBehaviour
     {
         [Inject] private ResourceManager _resourceManager;
-        
+        [Inject] private SceneManager _sceneManager;
+
         public Action<Quest> QuestStateChanged;
 
         private readonly bool _loadQuestState = true;
@@ -18,19 +20,17 @@ namespace QuestSystem
         private void Awake()
         {
             _questMap = CreateQuestMap();
-
-            //Quest quest = GetQuestByID("CollectApplesQuests");
         }
 
-        private void Start()
+        private void OnEnable()
         {
-            foreach (var quest in _questMap.Values)
-            {
-                if (quest.State == QuestState.InProgress)
-                {
-                    quest.InstantiateCurrentStepPrefab(transform);
-                }
-            }
+            _sceneManager.LevelChanged += InitializeQuests;
+            InitializeQuests();
+        }
+
+        private void OnDisable()
+        {
+            _sceneManager.LevelChanged -= InitializeQuests;
         }
 
         private void Update()
@@ -40,7 +40,23 @@ namespace QuestSystem
                 if (quest.State == QuestState.RequirementsNotMet && CheckRequirementsMet(quest))
                 {
                     ChangeQuestState(quest.Info.ID, QuestState.CanStart);
+                    print("change CanStart " + quest.Info.DisplayName);
                 }
+            }
+        }
+
+        private void InitializeQuests(Scene scene) => InitializeQuests();
+
+        private void InitializeQuests()
+        {
+            foreach (var quest in _questMap.Values)
+            {
+                if (quest.State == QuestState.InProgress)
+                {
+                    quest.InstantiateCurrentStepPrefab(transform);
+                }
+
+                QuestStateChanged?.Invoke(quest);
             }
         }
 
@@ -139,7 +155,7 @@ namespace QuestSystem
 
         private Quest LoadQuest(QuestInfo questInfo)
         {
-            Quest quest = null;
+            Quest quest;
             try
             {
                 if (PlayerPrefs.HasKey(questInfo.ID) && _loadQuestState)

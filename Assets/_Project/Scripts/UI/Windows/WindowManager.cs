@@ -49,7 +49,6 @@ namespace Managers
 
         public LevelResultWindow ShowLevelRewardWindow() =>
             (LevelResultWindow)TryShow(WindowType.LevelReward);
-
         public void CloseLevelRewardWindow() => TryClose(WindowType.LevelReward);
 
         public PauseWindow ShowPauseWindow() => (PauseWindow)TryShow(WindowType.Pause);
@@ -79,19 +78,16 @@ namespace Managers
         public CurrencyShopWindow ShowCurrencyShopWindow() => (CurrencyShopWindow)TryShow(WindowType.CurrencyShop);
         public void CloseCurrencyShopWindow() => TryClose(WindowType.CurrencyShop);
 
-        public ConnectionLostWindow ShowConnectionLostWindow() =>
-            (ConnectionLostWindow)TryShow(WindowType.ConnectionLost);
-
+        public ConnectionLostWindow ShowConnectionLostWindow() => (ConnectionLostWindow)TryShow(WindowType.ConnectionLost);
         public void CloseConnectionLostWindow() => TryClose(WindowType.ConnectionLost);
 
-        public LoginWindow ShowLoginWindow() =>
-            (LoginWindow)TryShow(WindowType.Login);
-
+        public LoginWindow ShowLoginWindow() => (LoginWindow)TryShow(WindowType.Login);
         public void CloseLoginWindow() => TryClose(WindowType.Login);
 
-        public SignupWindow ShowSignupWindow() =>
-            (SignupWindow)TryShow(WindowType.Signup);
-
+        public SignupWindow ShowSignupWindow() => (SignupWindow)TryShow(WindowType.Signup);
         public void CloseSignupWindow() => TryClose(WindowType.Signup);
+        
+        public QuestLog ShowQuestLogWindow() => (QuestLog)TryShow(WindowType.QuestLog);
+        public void CloseQuestLogWindow() => TryClose(WindowType.QuestLog);
     }
 }

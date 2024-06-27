@@ -11,11 +11,13 @@ namespace UI
         [Inject] private UIAudioPlayer _audioPlayer;
 
         [SerializeField] private Button _settingsButton;
+        [SerializeField] private Button _questLogButton;
         [SerializeField] private Button _inventoryButton;
 
         private void Awake()
         {
             _inventoryButton.onClick.AddListener(OpenInventory);
+            _questLogButton.onClick.AddListener(OpenQuestLog);
             _settingsButton.onClick.AddListener(OpenPause);
         }
 
@@ -23,6 +25,12 @@ namespace UI
         {
             _audioPlayer.PlayButtonSound();
             _windowManager.ShowInventoryWindow();
+        }
+
+        private void OpenQuestLog()
+        {
+            _audioPlayer.PlayButtonSound();
+            _windowManager.ShowQuestLogWindow();
         }
 
         private void OpenPause()

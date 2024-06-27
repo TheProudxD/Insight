@@ -15,6 +15,7 @@ namespace Managers
         CurrencyShop,
         ConnectionLost,
         Signup,
-        Login
+        Login,
+        QuestLog
     }
 }

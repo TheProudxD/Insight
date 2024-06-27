@@ -11,6 +11,17 @@ namespace UI
         [SerializeField] protected Button CloseButton;
         private readonly List<GameObject> _children = new();
 
+        private void GetAllChildren()
+        {
+            if (_children.Count != 0) 
+                return;
+            var childCount = transform.childCount;
+            for (int i = 0; i < childCount; i++)
+            {
+                _children.Add(transform.GetChild(i).gameObject);
+            }
+        }
+
         protected virtual void OnEnable()
         {
             if (this is DialogBox)
@@ -53,17 +64,6 @@ namespace UI
         {
             GetAllChildren();
             _children.ForEach(x => x.SetActive(false));
-        }
-
-        private void GetAllChildren()
-        {
-            if (_children.Count != 0) 
-                return;
-            var childCount = transform.childCount;
-            for (int i = 0; i < childCount; i++)
-            {
-                _children.Add(transform.GetChild(i).gameObject);
-            }
         }
     }
 }

@@ -26,6 +26,7 @@ namespace Managers
         private const string CONNECTION_LOST_WINDOW_KEY = "Connection Lost";
         private const string SIGNUP_LOST_WINDOW_KEY = "Signup";
         private const string LOGIN_LOST_WINDOW_KEY = "Login";
+        private const string QUEST_LOG_LOST_WINDOW_KEY = "Quests";
         
         public CommonWindow GetWindowPrefab(WindowType windowType, Transform parent = null)
         {
@@ -45,6 +46,7 @@ namespace Managers
                 WindowType.ConnectionLost => CONNECTION_LOST_WINDOW_KEY,
                 WindowType.Signup => SIGNUP_LOST_WINDOW_KEY,
                 WindowType.Login => LOGIN_LOST_WINDOW_KEY,
+                WindowType.QuestLog => QUEST_LOG_LOST_WINDOW_KEY,
                 _ => throw new ArgumentOutOfRangeException(nameof(windowType), windowType, null)
             };
 

@@ -9,6 +9,7 @@ namespace QuestSystem
     {
         [field: NaughtyAttributes.ReadOnly] public string ID { get; private set; }
         [field: SerializeField] public string DisplayName { get; private set; }
+        [field: SerializeField] public string Description { get; private set; }
         [field: SerializeField] public int LevelRequirement { get; private set; }
         [field: SerializeField] public QuestInfo[] QuestPrerequisites { get; private set; }
         [field: SerializeField] public QuestStep[] QuestStepPrefabs { get; private set; }

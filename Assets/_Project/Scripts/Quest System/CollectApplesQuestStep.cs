@@ -4,14 +4,24 @@ namespace QuestSystem
 {
     public class CollectApplesQuestStep : QuestStep
     {
+        [SerializeField] private GameObject _applePrefab;
+        [SerializeField] private ObjectPosition _applesToComplete;
+
         private int _applesCollected;
-        [SerializeField] private int _applesToComplete = 5;
+
+        private void Awake()
+        {
+            foreach (var applePosition in _applesToComplete.Positions)
+            {
+                Instantiate(_applePrefab, applePosition, Quaternion.identity);
+            }
+        }
 
         public void OnAppleCollected(int amount)
         {
             _applesCollected += amount;
             UpdateState();
-            if (_applesCollected >= _applesToComplete)
+            if (_applesCollected >= _applesToComplete.Count)
             {
                 FinishQuestStep();
             }

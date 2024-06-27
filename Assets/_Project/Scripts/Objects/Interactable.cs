@@ -1,9 +1,5 @@
-using Managers;
-using TMPro;
 using Tools;
-using UI;
 using UnityEngine;
-using Zenject;
 
 namespace Objects
 {

@@ -99,8 +99,8 @@ namespace Storage
 
         public void LoadScene(Scene scene)
         {
-            LevelChanged?.Invoke(scene);
-            UnityEngine.SceneManagement.SceneManager.LoadScene((int)scene);
+            var loadscene = UnityEngine.SceneManagement.SceneManager.LoadSceneAsync((int)scene);
+            loadscene.completed += (a) => LevelChanged?.Invoke(scene);
         }
 
         public void RestartLevel() => LoadScene((Scene)CurrentLevel);

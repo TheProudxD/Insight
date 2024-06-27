@@ -13,6 +13,7 @@ MonoBehaviour:
   m_Name: CollectApplesQuests
   m_EditorClassIdentifier: 
   <DisplayName>k__BackingField: Collect Apples
+  <Description>k__BackingField: 
   <LevelRequirement>k__BackingField: 0
   <QuestPrerequisites>k__BackingField: []
   <QuestStepPrefabs>k__BackingField:

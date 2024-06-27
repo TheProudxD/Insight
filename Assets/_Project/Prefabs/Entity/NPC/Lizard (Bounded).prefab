@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4876644533373484682}
   - component: {fileID: 1220614054970998774}
+  - component: {fileID: 8230193230904453425}
   m_Layer: 0
   m_Name: Quest Icon
   m_TagString: Untagged
@@ -70,9 +71,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1703751193
-  m_SortingLayer: 1
-  m_SortingOrder: 0
+  m_SortingLayerID: 1908569749
+  m_SortingLayer: 2
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 6e6b6b539a90d8849a8b6cbe197b72fb, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -84,6 +85,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8230193230904453425
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2205586654820221168}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e01320e28074cc5b8fd0da00ae11bdc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _exclamationIcon: {fileID: 21300000, guid: 6e6b6b539a90d8849a8b6cbe197b72fb, type: 3}
+  _questionIcon: {fileID: 21300000, guid: 3309f92ca29235a48a8e0a32a4c12737, type: 3}
+  _spriteRenderer: {fileID: 1220614054970998774}
 --- !u!1 &4134017241307937605
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +131,7 @@ Transform:
   - {fileID: 2167427883002044820}
   - {fileID: 7009253831548622329}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5300181306123711014
 GameObject:
@@ -131,7 +147,7 @@ GameObject:
   - component: {fileID: 2467378347911972863}
   - component: {fileID: 7603599120634215620}
   - component: {fileID: 1521402641980115070}
-  - component: {fileID: 3257003677562803770}
+  - component: {fileID: 7087772467609406147}
   m_Layer: 0
   m_Name: Model
   m_TagString: Untagged
@@ -287,7 +303,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -0.111332536, y: -0.06906376}
+  m_Offset: {x: -0.06250948, y: -0.062553965}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
@@ -298,7 +314,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.8187866, y: 0.49888474}
+  m_Size: {x: 0.968511, y: 0.5770016}
   m_EdgeRadius: 0
 --- !u!114 &1521402641980115070
 MonoBehaviour:
@@ -314,26 +330,57 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Context: {fileID: 11400000, guid: 81b035d109415974bb1d74f65c52c66d, type: 2}
   _questInfo: {fileID: 0}
+  _questIcon: {fileID: 8230193230904453425}
   _startPoint: 1
   _finishPoint: 1
   _bounds: {fileID: 7806307788248620443}
   _animator: {fileID: 3603852062320511342}
   _rigidbody: {fileID: 2467378347911972863}
---- !u!114 &3257003677562803770
-MonoBehaviour:
+--- !u!61 &7087772467609406147
+BoxCollider2D:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5300181306123711014}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5e01320e28074cc5b8fd0da00ae11bdc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _exclamationIcon: {fileID: 21300000, guid: 6e6b6b539a90d8849a8b6cbe197b72fb, type: 3}
-  _questionIcon: {fileID: 21300000, guid: 3309f92ca29235a48a8e0a32a4c12737, type: 3}
-  _spriteRenderer: {fileID: 1220614054970998774}
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.098671556, y: -0.03946936}
+  m_SpriteTilingProperty:
+    border: {x: 0, y: 0, z: 0, w: 0}
+    pivot: {x: 0.5, y: 0.5}
+    oldSize: {x: 2.56, y: 2.56}
+    newSize: {x: 2.56, y: 2.56}
+    adaptiveTilingThreshold: 0.5
+    drawMode: 0
+    adaptiveTiling: 0
+  m_AutoTiling: 0
+  serializedVersion: 2
+  m_Size: {x: 1.5995815, y: 1.3759258}
+  m_EdgeRadius: 0
 --- !u!1 &6273219676867262934
 GameObject:
   m_ObjectHideFlags: 0

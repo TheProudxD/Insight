@@ -42,7 +42,7 @@ MonoBehaviour:
     - {fileID: 21300000, guid: 2650407d6311724489f3256696e75bb0, type: 3}
     - {fileID: 21300000, guid: af238b260179c884b93aa3248768f90b, type: 3}
     - {fileID: 21300000, guid: d693da8ebc165674b9509bab6391e358, type: 3}
-  - SceneName: Bootstrap
+  - SceneName: Loader
     SceneAsset: {fileID: 102900000, guid: 1271a5eb1de92bf4eb6b2a093ec144e3, type: 3}
     DisplayName: Bootstrap
     Description: 
@@ -74,9 +74,49 @@ MonoBehaviour:
     LoadingType: 0
     FakeLoadingTime: 2
     Backgrounds: []
-  - SceneName: Dungeon
+  - SceneName: Dungeon 2
     SceneAsset: {fileID: 102900000, guid: 32d67f6809c42884ea15c2dd55cfd2e0, type: 3}
     DisplayName: Dungeon
+    Description: 
+    SkipType: 3
+    LoadingType: 0
+    FakeLoadingTime: 2
+    Backgrounds: []
+  - SceneName: Downloader
+    SceneAsset: {fileID: 102900000, guid: ee278986e58e37c4cbc3ea589ce05ab5, type: 3}
+    DisplayName: Downloader
+    Description: 
+    SkipType: 3
+    LoadingType: 0
+    FakeLoadingTime: 2
+    Backgrounds: []
+  - SceneName: WayFromHome
+    SceneAsset: {fileID: 102900000, guid: d96e0a399321ac745a3db61109e7b46c, type: 3}
+    DisplayName: WayFromHome
+    Description: 
+    SkipType: 3
+    LoadingType: 0
+    FakeLoadingTime: 2
+    Backgrounds: []
+  - SceneName: WayToDungeon
+    SceneAsset: {fileID: 102900000, guid: 08711641c53273c41a4e2c464c3868e9, type: 3}
+    DisplayName: WayToDungeon
+    Description: 
+    SkipType: 3
+    LoadingType: 0
+    FakeLoadingTime: 2
+    Backgrounds: []
+  - SceneName: Dungeon 1
+    SceneAsset: {fileID: 102900000, guid: 4ad72a19855ceec4fa3f89bb67b00746, type: 3}
+    DisplayName: Dungeon 1
+    Description: 
+    SkipType: 3
+    LoadingType: 0
+    FakeLoadingTime: 2
+    Backgrounds: []
+  - SceneName: Dungeon Boss
+    SceneAsset: {fileID: 102900000, guid: 7ef06463d7d375f4882cec7bbf9a67f9, type: 3}
+    DisplayName: Dungeon Boss
     Description: 
     SkipType: 3
     LoadingType: 0

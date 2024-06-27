@@ -67,6 +67,9 @@ namespace Utilites
 
         private void HandleInput()
         {
+            if (string.IsNullOrEmpty(_input))
+                return;
+            
             var properties = _input.Split(" ");
             foreach (var command in _commands.Where(command => _input.Contains(command.ID)))
             {
